@@ -1,0 +1,228 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+  {% set traineeRecord %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-l">Add previous education</h2>
+
+        <h3 class="govuk-heading-m">A levels</h3>
+        <p>Or equivalent</p>
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s">
+            Subject and grade achieved
+          </label>
+          <select class="govuk-select govuk-grid-column-two-thirds govuk-!-margin-right-1" id="subject-one" name="subject-one">
+            <option selected disabled value="">Please select</option>
+            <option value="maths">Maths</option>
+            <option value="physics">Physics</option>
+            <option value="english">English</option>
+          </select>
+          <select class="govuk-select" id="grade-one" name="grade-one">
+            <option selected disabled value=""></option>
+            <option value="a">A</option>
+            <option value="b">B</option>
+            <option value="c">C</option>
+          </select>
+        </div>
+
+        <div class="govuk-form-group">
+          <select class="govuk-select govuk-grid-column-two-thirds govuk-!-margin-right-1" id="subject-two" name="subject-two">
+            <option selected disabled value="">Please select</option>
+            <option value="maths">Maths</option>
+            <option value="physics">Physics</option>
+            <option value="english">English</option>
+          </select>
+          <select class="govuk-select" id="grade-two" name="grade-two">
+            <option selected disabled value=""></option>
+            <option value="a">A</option>
+            <option value="b">B</option>
+            <option value="c">C</option>
+          </select>
+        </div>
+        
+        <div class="govuk-form-group">
+          <select class="govuk-select govuk-grid-column-two-thirds govuk-!-margin-right-1" id="subject-one" name="subject-one">
+            <option selected disabled value="">Please select</option>
+            <option value="maths">Maths</option>
+            <option value="physics">Physics</option>
+            <option value="english">English</option>
+          </select>
+          <select class="govuk-select" id="grade-one" name="grade-one">
+            <option selected disabled value=""></option>
+            <option value="a">A</option>
+            <option value="b">B</option>
+            <option value="c">C</option>
+          </select>
+        </div>
+
+        <h3 class="govuk-heading-m">Undergraduate degree</h3>
+        {{ govukInput({
+          label: {
+            text: "Subject of undergraduate degree",
+            classes: "govuk-label--s"
+          },
+          id: "degree-subject",
+          name: "degree-subject"
+        }) }} 
+
+        {{ govukRadios({
+          idPrefix: "degree-class", 
+          name: "degree-class",
+          fieldset: {
+            legend: {
+              text: "Class of undergraduate degree",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "first",
+              text: "1st"
+            },
+            {
+              value: "two-one",
+              text: "2.1"
+            },
+            {
+              value: "two-two",
+              text: "2.2"
+            },
+            {
+              value: "third",
+              text: "3rd"
+            }
+          ]
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Undergraduate degree awarding institution",
+            classes: "govuk-label--s"
+          },
+          id: "degree-institution",
+          name: "degree-institution"
+        }) }} 
+
+        {{ govukInput({
+          label: {
+            text: "Degree type",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "For example, BA, BSc, Masters, Ph or other(please specify)"
+          },
+          id: "degree-type",
+          name: "degree-type"
+        }) }} 
+
+        <p><a href="" class="govuk-link">+Add another qualification</a></p>
+
+        {{ govukRadios({
+          idPrefix: "ske", 
+          name: "ske",
+          fieldset: {
+            legend: {
+              text: "Skill knowledge enhancement (SKE)",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "on-course",
+              text: "Currently on SKE course"
+            },
+            {
+              value: "not-required",
+              text: "SKE not required"
+            },
+            {
+              value: "completed",
+              text: "Completed SKE course"
+            }
+          ]
+        }) }}
+        
+        {{ govukRadios({
+          idPrefix: "previous-qts", 
+          name: "previous-qts",
+          fieldset: {
+            legend: {
+              text: "Previously gained QTS",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "no",
+              text: "No"
+            },
+            {
+              value: "yes",
+              text: "Yes"
+            }
+          ]
+        }) }}
+
+
+        {{ govukButton({
+          text: "Save and continue",
+          classes: "govuk-button--secondary govuk-!-margin-right-1"
+        }) }}
+
+        {{ govukButton({
+          text: "Add training information",
+          classes: "govuk-!-margin-right-1",
+          href: "/training-details.html"
+        }) }}
+
+        <p>
+          <a href="#" class="govuk-link">Cancel</a>
+        </p>
+
+      </div>
+    </div>
+    {% endset -%}
+    {% set deferralWithdrawal %}
+      <h2 class="govuk-heading-l">Deferral/Withdrawal</h2>
+      Not implemented in the prototype
+    {% endset -%}
+    {% set qtsRecommend %}
+      <h2 class="govuk-heading-l">QTS recommend</h2>
+      Not implemented in the prototype
+    {% endset -%}
+
+    {{ govukTabs({
+      items: [
+        {
+          label: "Trainee record",
+          id: "trainee-record",
+          panel: {
+            html: traineeRecord
+          }
+        },
+        {
+          label: "Deferral/Withdrawal",
+          id: "deferral-withdrawal",
+          panel: {
+            html: deferralWithdrawal
+          }
+        },
+        {
+          label: "QTS recommend",
+          id: "qts-recommend",
+          panel: {
+            html: qtsRecommend
+          }
+        }
+      ]
+    }) }}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
