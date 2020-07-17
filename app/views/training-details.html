@@ -1,0 +1,297 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+  {% set traineeRecord %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-l">Add training details</h2>
+        {{ govukInput({
+          label: {
+            text: "Trainee ID",
+            classes: "govuk-label--s"
+          },
+          id: "trainee-id",
+          name: "trainee-id"
+        }) }} 
+
+        {{ govukInput({
+          label: {
+            text: "Course title",
+            classes: "govuk-label--s"
+          },
+          id: "course-title",
+          name: "course-title"
+        }) }} 
+        
+        {{ govukInput({
+          label: {
+            text: "Course phase",
+            classes: "govuk-label--s"
+          },
+          id: "course-phase",
+          name: "course-phase"
+        }) }} 
+        
+        {{ govukDateInput({
+          id: "programme-start-date",
+          namePrefix: "programme-start-date",
+          fieldset: {
+            legend: {
+              text: "Programme start date",
+              classes: "govuk-fieldset__legend--s"
+            }
+          }
+        }) }}
+        
+        {{ govukSelect({
+          id: "programme-length",
+          name: "programme-length",
+          classes: "govuk-grid-column-full",
+          label: {
+            text: "Programme length",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "",
+              text: "Please select",
+              disabled: true,
+              selected: true
+            },
+            {
+              value: "we",
+              text: "We"
+            },
+            {
+              value: "can",
+              text: "Can"
+            },
+            {
+              value: "derive-this",
+              text: "Derive this"
+            }
+          ]
+        }) }}
+        
+        {{ govukDateInput({
+          id: "programme-end-date",
+          namePrefix: "programme-end-date",
+          fieldset: {
+            legend: {
+              text: "Programme end date",
+              classes: "govuk-fieldset__legend--s"
+            }
+          }
+        }) }}
+        
+        {{ govukDateInput({
+          id: "start-date",
+          namePrefix: "start-date",
+          fieldset: {
+            legend: {
+              text: "Start date",
+              classes: "govuk-fieldset__legend--s"
+            }
+          }
+        }) }}
+
+        <p>
+          <a class="govuk-link" href="#">Help with start date</a>
+        </p>
+        
+
+        {{ govukRadios({
+          idPrefix: "fulltime-parttime", 
+          name: "fulltime-parttime",
+          fieldset: {
+            legend: {
+              text: "Full time/Part time",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "full-time",
+              text: "Full time"
+            },
+            {
+              value: "part-time",
+              text: "Part time"
+            }
+          ]
+        }) }}
+        
+        {{ govukSelect({
+          id: "allocation-subject",
+          name: "allocation-subject",
+          classes: "govuk-grid-column-full",
+          label: {
+            text: "Allocation subject",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "",
+              text: "Please select",
+              disabled: true,
+              selected: true
+            },
+            {
+              value: "english",
+              text: "English"
+            },
+            {
+              value: "maths",
+              text: "Maths"
+            },
+            {
+              value: "Science",
+              text: "science"
+            }
+          ]
+        }) }}
+        
+        {{ govukSelect({
+          id: "itt-subject",
+          name: "itt-subject",
+          classes: "govuk-grid-column-full",
+          label: {
+            text: "ITT subject",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "",
+              text: "Please select",
+              disabled: true,
+              selected: true
+            },
+            {
+              value: "english",
+              text: "English"
+            },
+            {
+              value: "maths",
+              text: "Maths"
+            },
+            {
+              value: "Science",
+              text: "science"
+            }
+          ]
+        }) }}
+
+        <p>
+          <a class="govuk-link" href="">+Add another ITT subject</a>
+        </p>
+
+        {{ govukInput({
+          label: {
+            text: "Employing school",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "Choose employing school by name, postscode or URN number"
+          },
+          id: "employing-school",
+          name: "employing-school"
+        }) }} 
+        
+        {{ govukRadios({
+          idPrefix: "teaching-scholars", 
+          name: "teaching-scholars",
+          fieldset: {
+            legend: {
+              text: "Teaching scholars",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "no",
+              text: "No"
+            },
+            {
+              value: "yes",
+              text: "Yes"
+            }
+          ]
+        }) }}
+        
+        {{ govukInput({
+          label: {
+            text: "Placement school",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "Choose placement school by name, postscode or URN number. Placement school is not compulsory at this stage but should be updated before QTS recommendation"
+          },
+          id: "placement-school",
+          name: "placement-school"
+        }) }} 
+        
+        <p>
+          <a class="govuk-link" href="">+Add another placement school</a>
+        </p>
+
+        {{ govukButton({
+          text: "Save and continue",
+          classes: "govuk-button--secondary govuk-!-margin-right-1"
+        }) }}
+
+        {{ govukButton({
+          text: "View summary",
+          classes: "govuk-!-margin-right-1",
+          href: "/summary.html"
+        }) }}
+
+        <p>
+          <a href="#" class="govuk-link">Cancel</a>
+        </p>
+
+      </div>
+    </div>
+    {% endset -%}
+    {% set deferralWithdrawal %}
+      <h2 class="govuk-heading-l">Deferral/Withdrawal</h2>
+      Not implemented in the prototype
+    {% endset -%}
+    {% set qtsRecommend %}
+      <h2 class="govuk-heading-l">QTS recommend</h2>
+      Not implemented in the prototype
+    {% endset -%}
+
+    {{ govukTabs({
+      items: [
+        {
+          label: "Trainee record",
+          id: "trainee-record",
+          panel: {
+            html: traineeRecord
+          }
+        },
+        {
+          label: "Deferral/Withdrawal",
+          id: "deferral-withdrawal",
+          panel: {
+            html: deferralWithdrawal
+          }
+        },
+        {
+          label: "QTS recommend",
+          id: "qts-recommend",
+          panel: {
+            html: qtsRecommend
+          }
+        }
+      ]
+    }) }}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
