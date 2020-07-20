@@ -1,0 +1,238 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+  {% set traineeRecord %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-l">Training record for <name></h2>
+        <p>
+          You have completed all sections of the training record. Check
+          that the information is correct before submitting for TRN registration.
+        </p>
+      </div>
+
+      <div class="govuk-grid-column-full"> 
+        <div class="summary-panel">
+          <div class="govuk-grid-row govuk-body summary-header">
+            <h2 class="govuk-grid-column-two-thirds">Personal details</h2>
+            <div class="link-and-tag govuk-grid-column-one-third">
+              <a class="govuk-link" href="">Update</a>
+              <span class="govuk-tag">Completed</span>
+            </div>
+          </div>
+          <table class="govuk-table summary-table">
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Institution ID</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">First names</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Last name</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Gender</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Date of birth</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Nationality</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Address</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Postcode</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Phone number</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Email</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Disability</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Ethnicity</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="summary-panel">
+          <div class="govuk-grid-row govuk-body summary-header">
+            <h2 class="govuk-grid-column-two-thirds">Previous education</h2>
+            <div class="link-and-tag govuk-grid-column-one-third">
+              <a class="govuk-link" href="">Update</a>
+              <span class="govuk-tag govuk-tag--yellow">Draft</span>
+            </div>
+          </div>
+          <table class="govuk-table summary-table">
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">1 A level subject and grade</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">2 A level subject and grade</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">3 A level subject and grade</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Undergraduate degree</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Undergraduate degree level</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Knowledge enhancement?</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Previously gained QTS</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="summary-panel">
+          <div class="govuk-grid-row govuk-body summary-header">
+            <h2 class="govuk-grid-column-two-thirds">Training details</h2>
+            <div class="link-and-tag govuk-grid-column-one-third">
+              <a class="govuk-link" href="">Update</a>
+              <span class="govuk-tag">Completed</span>
+            </div>
+          </div>
+          <table class="govuk-table summary-table">
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Trainee ID</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Course title</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Course phase</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Programme start date</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Programme length</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Prgramme end date</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Commencement date</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Study mode</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Allocation subject</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">ITT subject</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Employing school</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Teaching scholars</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Placement school</th>
+                <td class="govuk-table__cell"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {{ govukButton({
+          text: "Submit for TRN",
+          classes: "govuk-!-margin-right-1",
+          href: "/summary.html"
+        }) }}
+      </div>
+    </div>
+    {% endset -%}
+    {% set deferralWithdrawal %}
+      <h2 class="govuk-heading-l">Deferral/Withdrawal</h2>
+      Not implemented in the prototype
+    {% endset -%}
+    {% set qtsRecommend %}
+      <h2 class="govuk-heading-l">QTS recommend</h2>
+      Not implemented in the prototype
+    {% endset -%}
+
+    {{ govukTabs({
+      items: [
+        {
+          label: "Trainee record",
+          id: "trainee-record",
+          panel: {
+            html: traineeRecord
+          }
+        },
+        {
+          label: "Deferral/Withdrawal",
+          id: "deferral-withdrawal",
+          panel: {
+            html: deferralWithdrawal
+          }
+        },
+        {
+          label: "QTS recommend",
+          id: "qts-recommend",
+          panel: {
+            html: qtsRecommend
+          }
+        }
+      ]
+    }) }}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

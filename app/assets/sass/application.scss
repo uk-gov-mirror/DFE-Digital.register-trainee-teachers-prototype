@@ -19,6 +19,35 @@ $govuk-assets-path: '/govuk/assets/';
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 
+div.govuk-tabs__panel {
+  border: none !important;
+}
+
+div.summary-panel {
+  border: 1px solid $govuk-border-colour;
+  padding: 15px;
+  margin-bottom: 15px;
+
+  div.summary-header {
+    margin: -15px;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: govuk-colour("light-grey");
+
+    h2 {
+      margin: 0px;
+    }
+    div.link-and-tag {
+      padding-top: 5px;
+      text-align: right;
+      span {
+        margin-left: 15px;
+      }
+    }
+
+  }
+}
+
 li.govuk-tabs__list-item--selected {
   font-weight: bold;
   border-top: 5px solid #1d70b8 !important;
