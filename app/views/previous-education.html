@@ -8,177 +8,189 @@
   {% set traineeRecord %}
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-l">Add previous education</h2>
+        <form action="/training-details" method="post">
+          <h2 class="govuk-heading-l">Add previous education</h2>
 
-        <h3 class="govuk-heading-m">A levels</h3>
-        <p>Or equivalent</p>
-        <div class="govuk-form-group">
-          <label class="govuk-label govuk-label--s">
-            Subject and grade achieved
-          </label>
-          <select class="govuk-select govuk-grid-column-two-thirds govuk-!-margin-right-1" id="subject-one" name="subject-one">
-            <option selected disabled value="">Please select</option>
-            <option value="maths">Maths</option>
-            <option value="physics">Physics</option>
-            <option value="english">English</option>
-          </select>
-          <select class="govuk-select" id="grade-one" name="grade-one">
-            <option selected disabled value=""></option>
-            <option value="a">A</option>
-            <option value="b">B</option>
-            <option value="c">C</option>
-          </select>
-        </div>
+          <h3 class="govuk-heading-m">A levels</h3>
+          <p>Or equivalent</p>
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s">
+              Subject and grade achieved
+            </label>
+            <select class="govuk-select govuk-grid-column-two-thirds govuk-!-margin-right-1" id="subject-one" name="subject-one">
+              <option {{ "subject-one" | selected("") }} disabled value="">Please select</option>
+              <option {{ "subject-one" | selected("maths") }} value="maths">Maths</option>
+              <option {{ "subject-one" | selected("physics") }} value="physics">Physics</option>
+              <option {{ "subject-one" | selected("english") }} value="english">English</option>
+            </select>
+            <select class="govuk-select" id="grade-one" name="grade-one">
+              <option {{ "grade-one" | selected("") }} disabled value=""></option>
+              <option {{ "grade-one" | selected("a") }} value="a">A</option>
+              <option {{ "grade-one" | selected("b") }} value="b">B</option>
+              <option {{ "grade-one" | selected("c") }} value="c">C</option>
+            </select>
+          </div>
 
-        <div class="govuk-form-group">
-          <select class="govuk-select govuk-grid-column-two-thirds govuk-!-margin-right-1" id="subject-two" name="subject-two">
-            <option selected disabled value="">Please select</option>
-            <option value="maths">Maths</option>
-            <option value="physics">Physics</option>
-            <option value="english">English</option>
-          </select>
-          <select class="govuk-select" id="grade-two" name="grade-two">
-            <option selected disabled value=""></option>
-            <option value="a">A</option>
-            <option value="b">B</option>
-            <option value="c">C</option>
-          </select>
-        </div>
-        
-        <div class="govuk-form-group">
-          <select class="govuk-select govuk-grid-column-two-thirds govuk-!-margin-right-1" id="subject-one" name="subject-one">
-            <option selected disabled value="">Please select</option>
-            <option value="maths">Maths</option>
-            <option value="physics">Physics</option>
-            <option value="english">English</option>
-          </select>
-          <select class="govuk-select" id="grade-one" name="grade-one">
-            <option selected disabled value=""></option>
-            <option value="a">A</option>
-            <option value="b">B</option>
-            <option value="c">C</option>
-          </select>
-        </div>
+          <div class="govuk-form-group">
+            <select class="govuk-select govuk-grid-column-two-thirds govuk-!-margin-right-1" id="subject-two" name="subject-two">
+              <option {{ "subject-two" | selected("") }} disabled value="">Please select</option>
+              <option {{ "subject-two" | selected("maths") }} value="maths">Maths</option>
+              <option {{ "subject-two" | selected("physics") }} value="physics">Physics</option>
+              <option {{ "subject-two" | selected("english") }} value="english">English</option>
+            </select>
+            <select class="govuk-select" id="grade-two" name="grade-two">
+              <option {{ "grade-two" | selected("") }} disabled value=""></option>
+              <option {{ "grade-two" | selected("a") }} value="a">A</option>
+              <option {{ "grade-two" | selected("b") }} value="b">B</option>
+              <option {{ "grade-two" | selected("c") }} value="c">C</option>
+            </select>
+          </div>
+          
+          <div class="govuk-form-group">
+            <select class="govuk-select govuk-grid-column-two-thirds govuk-!-margin-right-1" id="subject-three" name="subject-three">
+              <option {{ "subject-three" | selected("") }} disabled value="">Please select</option>
+              <option {{ "subject-three" | selected("maths") }} value="maths">Maths</option>
+              <option {{ "subject-three" | selected("physics") }} value="physics">Physics</option>
+              <option {{ "subject-three" | selected("english") }} value="english">English</option>
+            </select>
+            <select class="govuk-select" id="grade-three" name="grade-three">
+              <option {{ "grade-three" | selected("") }} disabled value=""></option>
+              <option {{ "grade-three" | selected("a") }} value="a">A</option>
+              <option {{ "grade-three" | selected("b") }} value="b">B</option>
+              <option {{ "grade-three" | selected("c") }} value="c">C</option>
+            </select>
+          </div>
 
-        <h3 class="govuk-heading-m">Undergraduate degree</h3>
-        {{ govukInput({
-          label: {
-            text: "Subject of undergraduate degree",
-            classes: "govuk-label--s"
-          },
-          id: "degree-subject",
-          name: "degree-subject"
-        }) }} 
-
-        {{ govukRadios({
-          idPrefix: "degree-class", 
-          name: "degree-class",
-          fieldset: {
-            legend: {
-              text: "Class of undergraduate degree",
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          items: [
-            {
-              value: "first",
-              text: "1st"
+          <h3 class="govuk-heading-m">Undergraduate degree</h3>
+          {{ govukInput({
+            label: {
+              text: "Subject of undergraduate degree",
+              classes: "govuk-label--s"
             },
-            {
-              value: "two-one",
-              text: "2.1"
+            id: "degree-subject",
+            name: "degree-subject",
+            value: data["degree-subject"]
+          }) }} 
+
+          {{ govukRadios({
+            idPrefix: "degree-class", 
+            name: "degree-class",
+            fieldset: {
+              legend: {
+                text: "Class of undergraduate degree",
+                classes: "govuk-fieldset__legend--s"
+              }
             },
-            {
-              value: "two-two",
-              text: "2.2"
+            items: [
+              {
+                value: "first",
+                text: "1st",
+                checked: checked("degree-class", "first")
+              },
+              {
+                value: "two-one",
+                text: "2.1",
+                checked: checked("degree-class", "two-one")
+              },
+              {
+                value: "two-two",
+                text: "2.2",
+                checked: checked("degree-class", "two-two")
+              },
+              {
+                value: "third",
+                text: "3rd",
+                checked: checked("degree-class", "third")
+              }
+            ]
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Undergraduate degree awarding institution",
+              classes: "govuk-label--s"
             },
-            {
-              value: "third",
-              text: "3rd"
-            }
-          ]
-        }) }}
+            id: "degree-institution",
+            name: "degree-institution",
+            value: data["degree-institution"]
+          }) }} 
 
-        {{ govukInput({
-          label: {
-            text: "Undergraduate degree awarding institution",
-            classes: "govuk-label--s"
-          },
-          id: "degree-institution",
-          name: "degree-institution"
-        }) }} 
-
-        {{ govukInput({
-          label: {
-            text: "Degree type",
-            classes: "govuk-label--s"
-          },
-          hint: {
-            text: "For example, BA, BSc, Masters, Ph or other(please specify)"
-          },
-          id: "degree-type",
-          name: "degree-type"
-        }) }} 
-
-        <p><a href="" class="govuk-link">+Add another qualification</a></p>
-
-        {{ govukRadios({
-          idPrefix: "ske", 
-          name: "ske",
-          fieldset: {
-            legend: {
-              text: "Skill knowledge enhancement (SKE)",
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          items: [
-            {
-              value: "on-course",
-              text: "Currently on SKE course"
+          {{ govukInput({
+            label: {
+              text: "Degree type",
+              classes: "govuk-label--s"
             },
-            {
-              value: "not-required",
-              text: "SKE not required"
+            hint: {
+              text: "For example, BA, BSc, Masters, Ph or other(please specify)"
             },
-            {
-              value: "completed",
-              text: "Completed SKE course"
-            }
-          ]
-        }) }}
-        
-        {{ govukRadios({
-          idPrefix: "previous-qts", 
-          name: "previous-qts",
-          fieldset: {
-            legend: {
-              text: "Previously gained QTS",
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          items: [
-            {
-              value: "no",
-              text: "No"
+            id: "degree-type",
+            name: "degree-type"
+          }) }} 
+
+          <p><a href="" class="govuk-link">+Add another qualification</a></p>
+
+          {{ govukRadios({
+            idPrefix: "ske", 
+            name: "ske",
+            fieldset: {
+              legend: {
+                text: "Skill knowledge enhancement (SKE)",
+                classes: "govuk-fieldset__legend--s"
+              }
             },
-            {
-              value: "yes",
-              text: "Yes"
-            }
-          ]
-        }) }}
+            items: [
+              {
+                value: "on-course",
+                text: "Currently on SKE course",
+                checked: checked("ske", "on-course")
+              },
+              {
+                value: "not-required",
+                text: "SKE not required",
+                checked: checked("ske", "not-required")
+              },
+              {
+                value: "completed",
+                text: "Completed SKE course",
+                checked: checked("ske", "completed")
+              }
+            ]
+          }) }}
+          
+          {{ govukRadios({
+            idPrefix: "previous-qts", 
+            name: "previous-qts",
+            fieldset: {
+              legend: {
+                text: "Previously gained QTS",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                value: "no",
+                text: "No",
+                checked: checked("previous-qts", "no")
+              },
+              {
+                value: "yes",
+                text: "Yes",
+                checked: checked("previous-qts", "yes")
+              }
+            ]
+          }) }}
 
 
-        {{ govukButton({
-          text: "Save and continue",
-          classes: "govuk-button--secondary govuk-!-margin-right-1"
-        }) }}
+          {{ govukButton({
+            text: "Save and continue",
+            classes: "govuk-button--secondary govuk-!-margin-right-1"
+          }) }}
 
-        {{ govukButton({
-          text: "Add training information",
-          classes: "govuk-!-margin-right-1",
-          href: "/training-details.html"
-        }) }}
+          {{ govukButton({
+            text: "Add training information",
+            classes: "govuk-!-margin-right-1"
+          }) }}
+        </form>
 
         <p>
           <a href="#" class="govuk-link">Cancel</a>
