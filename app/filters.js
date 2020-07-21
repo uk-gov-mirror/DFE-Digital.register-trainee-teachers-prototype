@@ -38,6 +38,35 @@ module.exports = function (env) {
 
   ------------------------------------------------------------------ */
 
+  filters.selected = function (dataKey, selectWhenMatchesValue) {
+    if (this.ctx.data === undefined) {
+      return ''
+    }
+
+    var dataValue = this.ctx.data[dataKey]
+
+    if (dataValue === undefined && selectWhenMatchesValue === '') {
+      return 'selected'
+    }
+
+    if (dataValue === selectWhenMatchesValue) {
+      return 'selected'
+    }
+  }
+
+  filters.dateStringFromData = function(dataKey) {
+    if (this.ctx.data === undefined) {
+      return ''
+    }
+    var day = this.ctx.data[dataKey + '-day']
+    var month = this.ctx.data[dataKey + '-month']
+    var year = this.ctx.data[dataKey + '-year']
+    var filtered = [day, month, year].filter(function(element) {
+      return element !== null && element !== ''
+    })
+    return filtered.join('/')
+  }
+
   /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */
