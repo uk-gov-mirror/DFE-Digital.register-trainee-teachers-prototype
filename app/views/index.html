@@ -5,61 +5,27 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    {% set traineeRecord %}
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
-          <h2 class="govuk-heading-l">Trainee record</h2>
-          <p class="govuk-body">Complete the training record, check it and send for TRN registration.</p>
-          <p class="govuk-body">The training record is divided into:</p>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-l">Create a trainee record</h2>
+        <p class="govuk-body">Complete the training record, check it and send for TRN registration.</p>
+        <p class="govuk-body">The training record is divided into:</p>
 
-          <ul class="govuk-list govuk-list--bullet">
-            <li>personal information</li>
-            <li>previous education</li>
-            <li>training information</li>
-          </ul>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>personal details</li>
+          <li>contact details</li>
+          <li>previous education</li>
+          <li>training details</li>
+          <li>course details</li>
+        </ul>
 
-          {{ govukButton({
-            text: "Start record",
-            href: "/personal-information.html",
-            isStartButton: true
-          }) }}
-        </div>
+        {{ govukButton({
+          text: "Start record",
+          href: "/personal-details.html",
+          isStartButton: true
+        }) }}
       </div>
-    {% endset -%}
-    {% set deferralWithdrawal %}
-      <h2 class="govuk-heading-l">Deferral/Withdrawal</h2>
-      Not implemented in the prototype
-    {% endset -%}
-    {% set qtsRecommend %}
-      <h2 class="govuk-heading-l">QTS recommend</h2>
-      Not implemented in the prototype
-    {% endset -%}
-
-    {{ govukTabs({
-      items: [
-        {
-          label: "Trainee record",
-          id: "trainee-record",
-          panel: {
-            html: traineeRecord
-          }
-        },
-        {
-          label: "Deferral/Withdrawal",
-          id: "deferral-withdrawal",
-          panel: {
-            html: deferralWithdrawal
-          }
-        },
-        {
-          label: "QTS recommend",
-          id: "qts-recommend",
-          panel: {
-            html: qtsRecommend
-          }
-        }
-      ]
-    }) }}
+    </div>
   </div>
 </div>
 
