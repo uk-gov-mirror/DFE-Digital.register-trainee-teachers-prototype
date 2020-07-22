@@ -1,0 +1,307 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l register-main-heading">
+      {{ data["first-names"] }} {{ data["last-name"] }}
+      <span class="govuk-tag govuk-tag--dark-grey">Draft record</span>
+    </h1>
+    <ul class="govuk-tabs__list">
+      <li class="govuk-tabs__list-item">
+        <a class="govuk-tabs__tab" href="/personal-details">
+          Personal details
+        </a>
+      </li>
+      <li class="govuk-tabs__list-item">
+        <a class="govuk-tabs__tab" href="/contact-details">
+          Contact details
+        </a>
+      </li>
+      <li class="govuk-tabs__list-item">
+        <a class="govuk-tabs__tab" href="/previous-education">
+          Previous education
+        </a>
+      </li>
+      <li class="govuk-tabs__list-item">
+        <a class="govuk-tabs__tab" href="/training-details">
+          Training details
+        </a>
+      </li>
+      <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+        <a class="govuk-tabs__tab" href="/course-details">
+          Course details
+        </a>
+      </li>
+    </ul>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full govuk-tabs__panel">
+        <div class="govuk-grid-column-two-thirds">
+          <form action="/summary" method="post">
+            <h2 class="govuk-heading-l">Add course details</h2>
+            {{ govukSelect({
+              id: "course-title",
+              name: "course-title",
+              classes: "govuk-grid-column-full",
+              label: {
+                text: "Course title",
+                classes: "govuk-label--s"
+              },
+              items: [
+                {
+                  value: "",
+                  text: "Please select",
+                  disabled: true,
+                  selected: data["course-title"] === undefined
+                },
+                {
+                  value: "English",
+                  text: "English primary",
+                  selected: data["course-title"] === "English primary"
+                },
+                {
+                  value: "English",
+                  text: "English",
+                  selected: data["course-title"] === "English"
+                },
+                {
+                  value: "Maths",
+                  text: "Maths",
+                  selected: data["course-title"] === "Maths"
+                }
+              ]
+            }) }}
+            
+            {{ govukSelect({
+              id: "course-phase",
+              name: "course-phase",
+              classes: "govuk-grid-column-full",
+              label: {
+                text: "Course phase",
+                classes: "govuk-label--s"
+              },
+              items: [
+                {
+                  value: "",
+                  text: "Please select",
+                  disabled: true,
+                  selected: data["course-phase"] === undefined
+                },
+                {
+                  value: "5-11 years",
+                  text: "5-11 years",
+                  selected: data["course-phase"] === "5-11 years"
+                },
+                {
+                  value: "can",
+                  text: "Can",
+                  selected: data["course-phase"] === "11-18 years"
+                }
+              ]
+            }) }}
+            
+            {{ govukDateInput({
+              id: "programme-start-date",
+              namePrefix: "programme-start-date",
+              fieldset: {
+                legend: {
+                  text: "Programme start date",
+                  classes: "govuk-fieldset__legend--s"
+                }
+              },
+              items: [
+                  {
+                    name: "day",
+                    classes: "govuk-input--width-2",
+                    value: data["programme-start-date-day"]
+                  },
+                  {
+                    name: "month",
+                    classes: "govuk-input--width-2",
+                    value: data["programme-start-date-month"]
+                  },
+                  {
+                    name: "year",
+                    classes: "govuk-input--width-4",
+                    value: data["programme-start-date-year"]
+                  }
+                ]
+            }) }}
+            
+            {{ govukSelect({
+              id: "programme-length",
+              name: "programme-length",
+              classes: "govuk-grid-column-full",
+              label: {
+                text: "Programme length",
+                classes: "govuk-label--s"
+              },
+              items: [
+                {
+                  value: "",
+                  text: "Please select",
+                  disabled: true,
+                  selected: data["programme-length"] === undefined
+                },
+                {
+                  value: "6 months",
+                  text: "6 months",
+                  selected: data["programme-length"] === "6 months"
+                },
+                {
+                  value: "1 year",
+                  text: "1 year",
+                  selected: data["programme-length"] === "1 year"
+                },
+                {
+                  value: "2 year",
+                  text: "2 year",
+                  selected: data["programme-length"] === "2 year"
+                }
+              ]
+            }) }}
+            
+            {{ govukDateInput({
+              id: "programme-end-date",
+              namePrefix: "programme-end-date",
+              fieldset: {
+                legend: {
+                  text: "Programme end date",
+                  classes: "govuk-fieldset__legend--s"
+                }
+              },
+              items: [
+                  {
+                    name: "day",
+                    classes: "govuk-input--width-2",
+                    value: data["programme-end-date-day"]
+                  },
+                  {
+                    name: "month",
+                    classes: "govuk-input--width-2",
+                    value: data["programme-end-date-month"]
+                  },
+                  {
+                    name: "year",
+                    classes: "govuk-input--width-4",
+                    value: data["programme-end-date-year"]
+                  }
+                ]
+            }) }}
+            
+            {{ govukSelect({
+              id: "allocation-subject",
+              name: "allocation-subject",
+              classes: "govuk-grid-column-full",
+              label: {
+                text: "Allocation subject",
+                classes: "govuk-label--s"
+              },
+              items: [
+                {
+                  value: "",
+                  text: "Please select",
+                  disabled: true,
+                  selected: data["allocation-subject"] === undefined
+                },
+                {
+                  value: "English",
+                  text: "English",
+                  selected: data["allocation-subject"] === "English"
+                },
+                {
+                  value: "Maths",
+                  text: "Maths",
+                  selected: data["allocation-subject"] === "Maths"
+                },
+                {
+                  value: "Science",
+                  text: "Science",
+                  selected: data["allocation-subject"] === "Science"
+                }
+              ]
+            }) }}
+
+            {{ govukSelect({
+              id: "itt-subject",
+              name: "itt-subject",
+              classes: "govuk-grid-column-full",
+              label: {
+                text: "ITT subject",
+                classes: "govuk-label--s"
+              },
+              items: [
+                {
+                  value: "",
+                  text: "Please select",
+                  disabled: true,
+                  selected: data["itt-subject"] === undefined
+                },
+                {
+                  value: "English",
+                  text: "English",
+                  selected: data["itt-subject"] === "English"
+                },
+                {
+                  value: "Maths",
+                  text: "Maths",
+                  selected: data["itt-subject"] === "Maths"
+                },
+                {
+                  value: "Science",
+                  text: "Science",
+                  selected: data["itt-subject"] === "Science"
+                }
+              ]
+            }) }}
+
+            <p>
+              <a class="govuk-link" href="">+Add another ITT subject</a>
+            </p>
+
+            {{ govukInput({
+              label: {
+                text: "Employing school",
+                classes: "govuk-label--s"
+              },
+              hint: {
+                text: "Choose employing school by name, postscode or URN number"
+              },
+              id: "employing-school",
+              name: "employing-school",
+              value: data["employing-school"]
+            }) }} 
+            
+            {{ govukInput({
+              label: {
+                text: "Placement school",
+                classes: "govuk-label--s"
+              },
+              hint: {
+                text: "Choose placement school by name, postscode or URN number. Placement school is not compulsory at this stage but should be updated before QTS recommendation"
+              },
+              id: "placement-school",
+              name: "placement-school",
+              value: data["placement-school"]
+            }) }} 
+            
+            <p>
+              <a class="govuk-link" href="">+Add another placement school</a>
+            </p>
+
+            {{ govukButton({
+              text: "Add course details to training record",
+              classes: "govuk-button--primary govuk-!-margin-right-1"
+            }) }}
+
+            <a href="/summary" class="govuk-link summary-link">View record summary</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

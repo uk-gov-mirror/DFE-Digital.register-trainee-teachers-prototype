@@ -19,6 +19,17 @@ $govuk-assets-path: '/govuk/assets/';
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 
+h1.register-main-heading {
+  font-size: 3rem;
+  .govuk-tag {
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+  .govuk-tag--dark-grey {
+    background-color: govuk-colour("dark-grey");
+  }
+}
+
 div.govuk-tabs__panel {
   border: none !important;
 }
@@ -36,7 +47,9 @@ div.summary-panel {
 
     h2 {
       margin: 0px;
+      padding-left: 9px;
     }
+
     div.link-and-tag {
       padding-top: 5px;
       text-align: right;
@@ -54,6 +67,13 @@ li.govuk-tabs__list-item--selected {
   padding-top: 10px;
 }
 
+li.govuk-tabs__list-item {
+  font-weight: bold;
+  a {
+    text-decoration: none;
+  }
+}
+
 fieldset.address {
   h2 {
     @include govuk-font($size: 19);
@@ -61,5 +81,19 @@ fieldset.address {
   }
   label.govuk-label {
     font-weight: normal;
+  }
+}
+
+a.summary-link {
+  vertical-align: middle;
+}
+
+span.summary-validation-symbol {
+  float: right;
+  &--valid {
+    color: govuk-colour("green");
+  }
+  &--invalid {
+    color: govuk-colour("red");
   }
 }
