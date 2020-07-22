@@ -14,7 +14,8 @@ module.exports = function (env) {
     filters.sayHi = function(name) {
         return 'Hi ' + name + '!'
     }
-Which in your templates would be used as:
+
+    Which in your templates would be used as:
 
     {{ 'Paul' | sayHi }} => 'Hi Paul'
 
@@ -73,10 +74,11 @@ Which in your templates would be used as:
   }
 
   filters.tick = function (value) {
+
     if (value && value !== '') {
-      return '<span class="summary-validation-symbol summary-validation-symbol--valid">&check;</span>'
+      return filters.safe('<span class="valid-symbol">&check;</span>')
     } else {
-      return '<span class="summary-validation-symbol summary-validation-symbol--invalid">&#x274C;</span>'
+      return filters.safe('<span class="invalid-symbol">x</span>')
     }
   }
 

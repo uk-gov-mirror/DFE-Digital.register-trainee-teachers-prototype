@@ -85,3 +85,13 @@ fieldset.address {
 a.summary-link {
   vertical-align: middle;
 }
+
+span.summary-validation-symbol {
+  float: right;
+  &--valid {
+    color: govuk-colour("green");
+  }
+  &--invalid {
+    color: govuk-colour("red");
+  }
+}
