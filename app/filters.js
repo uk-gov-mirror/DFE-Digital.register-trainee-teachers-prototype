@@ -54,17 +54,23 @@ module.exports = function (env) {
     }
   }
 
-  filters.dateStringFromData = function(dataKey) {
+  filters.dateStringFromData = function (dataKey) {
     if (this.ctx.data === undefined) {
       return ''
     }
     var day = this.ctx.data[dataKey + '-day']
     var month = this.ctx.data[dataKey + '-month']
     var year = this.ctx.data[dataKey + '-year']
-    var filtered = [day, month, year].filter(function(element) {
-      return element !== null && element !== ''
+    var filtered = [day, month, year].filter(function (element) {
+      return element && element !== ''
     })
     return filtered.join('/')
+  }
+
+  filters.compact = function (arr) {
+    return arr.filter(function (element) {
+      return element && element !== ''
+    })
   }
 
   /* ------------------------------------------------------------------

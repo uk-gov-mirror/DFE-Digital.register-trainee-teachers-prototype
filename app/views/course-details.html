@@ -192,6 +192,39 @@
             }) }}
             
             {{ govukSelect({
+              id: "allocation-subject",
+              name: "allocation-subject",
+              classes: "govuk-grid-column-full",
+              label: {
+                text: "Allocation subject",
+                classes: "govuk-label--s"
+              },
+              items: [
+                {
+                  value: "",
+                  text: "Please select",
+                  disabled: true,
+                  selected: data["allocation-subject"] === undefined
+                },
+                {
+                  value: "english",
+                  text: "English",
+                  selected: data["allocation-subject"] === "english"
+                },
+                {
+                  value: "maths",
+                  text: "Maths",
+                  selected: data["allocation-subject"] === "maths"
+                },
+                {
+                  value: "Science",
+                  text: "science",
+                  selected: data["allocation-subject"] === "science"
+                }
+              ]
+            }) }}
+
+            {{ govukSelect({
               id: "itt-subject",
               name: "itt-subject",
               classes: "govuk-grid-column-full",

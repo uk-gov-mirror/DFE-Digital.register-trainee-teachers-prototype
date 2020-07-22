@@ -4,7 +4,6 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-  {% set traineeRecord %}
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-l">Training record for {{ data["first-names"] }} {{ data["last-name"] }}</h2>
@@ -12,6 +11,11 @@
           You have completed all sections of the training record. Check
           that the information is correct before submitting for TRN registration.
         </p>
+
+        {{ govukButton({
+          text: "Submit for TRN registration",
+          href: "/summary.html"
+        }) }}
       </div>
 
       <div class="govuk-grid-column-full"> 
@@ -19,12 +23,12 @@
           <div class="govuk-grid-row govuk-body summary-header">
             <h2 class="govuk-grid-column-two-thirds">Personal details</h2>
             <div class="link-and-tag govuk-grid-column-one-third">
-              <a class="govuk-link" href="/personal-information">Update</a>
+              <a class="govuk-link" href="/personal-details">Update</a>
               <span class="govuk-tag">Completed</span>
             </div>
           </div>
+
           <table class="govuk-table summary-table">
-            </thead>
             <tbody class="govuk-table__body">
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header govuk-!-width-one-half">Institution ID</th>
@@ -44,14 +48,39 @@
               </tr>
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">Date of birth</th>
-                <td class="govuk-table__cell">{{ data["dob-day"] }}/{{ data["dob-month"] }}/{{ data["dob-year"] }}</td>
+                <td class="govuk-table__cell">
+                  {{ "dob" | dateStringFromData }}
+                </td>
               </tr>
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">Nationality</th>
                 <td class="govuk-table__cell">{{ data["nationality"] | title }}</td>
               </tr>
               <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Address</th>
+                <th scope="row" class="govuk-table__header">Disability</th>
+                <td class="govuk-table__cell">{{ data["disability"] }}</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Ethnicity</th>
+                <td class="govuk-table__cell">{{ data["ethnicity"] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="summary-panel">
+          <div class="govuk-grid-row govuk-body summary-header">
+            <h2 class="govuk-grid-column-two-thirds">Contact details</h2>
+            <div class="link-and-tag govuk-grid-column-one-third">
+              <a class="govuk-link" href="/contact-details">Update</a>
+              <span class="govuk-tag">Completed</span>
+            </div>
+          </div>
+
+          <table class="govuk-table summary-table">
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header govuk-!-width-one-half">Address</th>
                 <td class="govuk-table__cell">{{ data["address-line-1"] }}, {{ data["address-town"] }}. </td>
               </tr>
               <tr class="govuk-table__row">
@@ -65,14 +94,6 @@
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">Email</th>
                 <td class="govuk-table__cell">{{ data["email"] }}</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Disability</th>
-                <td class="govuk-table__cell">{{ data["disability"] }}</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Ethnicity</th>
-                <td class="govuk-table__cell">{{ data["ethnicity"] }}</td>
               </tr>
             </tbody>
           </table>
@@ -91,22 +112,28 @@
             <tbody class="govuk-table__body">
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header govuk-!-width-one-half">1 A level subject and grade</th>
-                <td class="govuk-table__cell govuk-!-width-one-half">{{ data["subject-one"] | title }} - {{ data["grade-one"] | title }}</td>
+                <td class="govuk-table__cell govuk-!-width-one-half">
+                  {{ [data["subject-one"], data["grade-one"]] | compact | join(" - ") | title }}
+                </td>
               </tr>
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">2 A level subject and grade</th>
-                <td class="govuk-table__cell">{{ data["subject-two"] | title }} - {{ data["grade-two"] | title }}</td>
+                <td class="govuk-table__cell">
+                  {{ [data["subject-two"], data["grade-two"]] | compact | join(" - ") | title }}
+                </td>
               </tr>
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">3 A level subject and grade</th>
-                <td class="govuk-table__cell">{{ data["subject-three"] | title }} - {{ data["grade-three"] | title }}</td>
+                <td class="govuk-table__cell">
+                  {{ [data["subject-three"], data["grade-three"]] | compact | join(" - ") | title }}
+                </td>
               </tr>
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">Undergraduate degree</th>
                 <td class="govuk-table__cell">{{ data["degree-subject"] | title}}</td>
               </tr>
               <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Undergraduate degree level</th>
+                <th scope="row" class="govuk-table__header">Class of undergraduate degree</th>
                 <td class="govuk-table__cell">{{ data["degree-class"] | title }}</td>
               </tr>
               <tr class="govuk-table__row">
@@ -137,7 +164,36 @@
                 <td class="govuk-table__cell govuk-!-width-one-half">{{ data["trainee-id"] }}</td>
               </tr>
               <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Course title</th>
+                <th scope="row" class="govuk-table__header">Trainee start date</th>
+                <td class="govuk-table__cell">
+                  {{ "start-date" | dateStringFromData }}
+                </td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Study mode</th>
+                <td class="govuk-table__cell">{{ data["fulltime-parttime"] | title }}</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Teaching scholars</th>
+                <td class="govuk-table__cell">{{ data["teaching-scholars"] | title }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="summary-panel">
+          <div class="govuk-grid-row govuk-body summary-header">
+            <h2 class="govuk-grid-column-two-thirds">Course details</h2>
+            <div class="link-and-tag govuk-grid-column-one-third">
+              <a class="govuk-link" href="/course-details">Update</a>
+              <span class="govuk-tag">Completed</span>
+            </div>
+          </div>
+          <table class="govuk-table summary-table">
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header govuk-table__header govuk-!-width-one-half">Course title</th>
                 <td class="govuk-table__cell">{{ data["course-title"]  }}</td>
               </tr>
               <tr class="govuk-table__row">
@@ -161,16 +217,6 @@
                 </td>
               </tr>
               <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Commencement date</th>
-                <td class="govuk-table__cell">
-                  {{ "start-date" | dateStringFromData }}
-                </td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Study mode</th>
-                <td class="govuk-table__cell">{{ data["fulltime-parttime"] | title }}</td>
-              </tr>
-              <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">Allocation subject</th>
                 <td class="govuk-table__cell">{{ data["allocation-subject"] | title }}</td>
               </tr>
@@ -183,10 +229,6 @@
                 <td class="govuk-table__cell">{{ data["employing-school"] | title }} </td>
               </tr>
               <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Teaching scholars</th>
-                <td class="govuk-table__cell">{{ data["teaching-scholars"] | title }}</td>
-              </tr>
-              <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">Placement school</th>
                 <td class="govuk-table__cell">{{ data["placement-school"] | title}}</td>
               </tr>
@@ -195,47 +237,11 @@
         </div>
 
         {{ govukButton({
-          text: "Submit for TRN",
+          text: "Submit for TRN registration",
           classes: "govuk-!-margin-right-1",
           href: "/summary.html"
         }) }}
       </div>
-    </div>
-    {% endset -%}
-    {% set deferralWithdrawal %}
-      <h2 class="govuk-heading-l">Deferral/Withdrawal</h2>
-      Not implemented in the prototype
-    {% endset -%}
-    {% set qtsRecommend %}
-      <h2 class="govuk-heading-l">QTS recommend</h2>
-      Not implemented in the prototype
-    {% endset -%}
-
-    {{ govukTabs({
-      items: [
-        {
-          label: "Trainee record",
-          id: "trainee-record",
-          panel: {
-            html: traineeRecord
-          }
-        },
-        {
-          label: "Deferral/Withdrawal",
-          id: "deferral-withdrawal",
-          panel: {
-            html: deferralWithdrawal
-          }
-        },
-        {
-          label: "QTS recommend",
-          id: "qts-recommend",
-          panel: {
-            html: qtsRecommend
-          }
-        }
-      ]
-    }) }}
     </div>
   </div>
 </div>
