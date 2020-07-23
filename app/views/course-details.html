@@ -95,8 +95,8 @@
                   selected: data["course-phase"] === "5-11 years"
                 },
                 {
-                  value: "can",
-                  text: "Can",
+                  value: "11-18 years",
+                  text: "11-18 years",
                   selected: data["course-phase"] === "11-18 years"
                 }
               ]
@@ -112,22 +112,22 @@
                 }
               },
               items: [
-                  {
-                    name: "day",
-                    classes: "govuk-input--width-2",
-                    value: data["programme-start-date-day"]
-                  },
-                  {
-                    name: "month",
-                    classes: "govuk-input--width-2",
-                    value: data["programme-start-date-month"]
-                  },
-                  {
-                    name: "year",
-                    classes: "govuk-input--width-4",
-                    value: data["programme-start-date-year"]
-                  }
-                ]
+                {
+                  name: "day",
+                  classes: "govuk-input--width-2",
+                  value: data["programme-start-date-day"]
+                },
+                {
+                  name: "month",
+                  classes: "govuk-input--width-2",
+                  value: data["programme-start-date-month"]
+                },
+                {
+                  name: "year",
+                  classes: "govuk-input--width-4",
+                  value: data["programme-start-date-year"]
+                }
+              ]
             }) }}
             
             {{ govukSelect({
