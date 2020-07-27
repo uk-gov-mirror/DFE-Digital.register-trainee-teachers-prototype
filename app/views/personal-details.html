@@ -171,44 +171,6 @@
             }) }}
 
             {{ govukSelect({
-              id: "disability",
-              name: "disability",
-              classes: "govuk-grid-column-full",
-              label: {
-                text: "Disability",
-                classes: "govuk-label--s"
-              },
-              items: [
-                {
-                  value: "",
-                  text: "Please select",
-                  disabled: true,
-                  selected: data["disability"] === undefined
-                },
-                {
-                  value: "None",
-                  text: "None",
-                  selected: data["disability"] === "None"
-                },
-                {
-                  value: "With allowance",
-                  text: "With allowance",
-                  selected: data["disability"] === "With allowance"
-                },
-                {
-                  value: "Without allowance",
-                  text: "Without allowance",
-                  selected: data["disability"] === "Without allowance"
-                },
-                {
-                  value: "Allowance unknown",
-                  text: "Allowance unknown",
-                  selected: data["disability"] === "Allowance unknown"
-                }
-              ]
-            }) }}
-            
-            {{ govukSelect({
               id: "ethnicity",
               name: "ethnicity",
               classes: "govuk-grid-column-full",
@@ -341,6 +303,79 @@
               ]
             }) }}
 
+            {{ govukSelect({
+              id: "disability",
+              name: "disability",
+              classes: "govuk-grid-column-full",
+              label: {
+                text: "Disability",
+                classes: "govuk-label--s"
+              },
+              items: [
+                {
+                  value: "",
+                  text: "Please select",
+                  disabled: true,
+                  selected: data["disability"] === undefined
+                },
+                {
+                  value: "None",
+                  text: "None",
+                  selected: data["disability"] === "None"
+                },
+                {
+                  value: "Not known",
+                  text: "Not known",
+                  selected: data["disability"] === "Not known"
+                },
+                {
+                  value: "Deaf or a serious hearing impairment",
+                  text: "Deaf or a serious hearing impairment",
+                  selected: data["disability"] === "Deaf or a serious hearing impairment"
+                },
+                {
+                  value: "Blind or a serious visual impairment",
+                  text: "Blind or a serious visual impairment",
+                  selected: data["disability"] === "Blind or a serious visual impairment"
+                },
+                {
+                  value: "A specific learning difficulty",
+                  text: "A specific learning difficulty",
+                  selected: data["disability"] === "A specific learning difficulty"
+                },
+                {
+                  value: "A social/communication impairment",
+                  text: "A social/communication impairment",
+                  selected: data["disability"] === "A social/communication impairment"
+                },
+                {
+                  value: "A physical impairment or mobility issues",
+                  text: "A physical impairment or mobility issues",
+                  selected: data["disability"] === "A physical impairment or mobility issues"
+                },
+                {
+                  value: "A mental health condition",
+                  text: "A mental health condition",
+                  selected: data["disability"] === "A mental health condition"
+                },
+                {
+                  value: "A long standing illness",
+                  text: "A long standing illness",
+                  selected: data["disability"] === "A long standing illness"
+                },
+                {
+                  value: "Multiple issues",
+                  text: "Multiple issues",
+                  selected: data["disability"] === "Multiple issues"
+                },
+                {
+                  value: "Other",
+                  text: "Other",
+                  selected: data["disability"] === "Other"
+                }
+              ]
+            }) }}
+            
             {{ govukButton({
               text: "Add personal details to training record",
               classes: "govuk-button govuk-button--primary govuk-!-margin-right-1"
