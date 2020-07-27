@@ -14,7 +14,7 @@
 
         {{ govukButton({
           text: "Submit for TRN registration",
-          href: "/trainees"
+          href: "/success"
         }) }}
       </div>
 
@@ -31,8 +31,8 @@
           <table class="govuk-table summary-table">
             <tbody class="govuk-table__body">
               <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header govuk-!-width-one-half">Institution ID</th>
-                <td class="govuk-table__cell govuk-!-width-one-half"></td>
+                <th scope="row" class="govuk-table__header govuk-!-width-one-half">Trainee ID</th>
+                <td class="govuk-table__cell govuk-!-width-one-half">{{ data["trainee-id"] }}{{ data["trainee-id"] | tick | safe }}</td>
               </tr>
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">First names</th>
@@ -187,13 +187,6 @@
             </thead>
             <tbody class="govuk-table__body">
               <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header govuk-!-width-one-half">Trainee ID</th>
-                <td class="govuk-table__cell govuk-!-width-one-half">
-                  {{ data["trainee-id"] }}
-                  {{ data["trainee-id"] | tick | safe }}
-                </td>
-              </tr>
-              <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">Trainee start date</th>
                 <td class="govuk-table__cell">
                   {{ "start-date" | dateStringFromData }}
@@ -299,7 +292,7 @@
         {{ govukButton({
           text: "Submit for TRN registration",
           classes: "govuk-!-margin-right-1",
-          href: "/trainees"
+          href: "/success"
         }) }}
       </div>
     </div>

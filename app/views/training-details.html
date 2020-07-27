@@ -41,17 +41,6 @@
         <div class="govuk-grid-column-two-thirds">
           <form action="/course-details" method="post">
             <h2 class="govuk-heading-l">Add training details</h2>
-            {{ govukInput({
-              label: {
-                text: "Trainee ID",
-                classes: "govuk-label--s"
-              },
-              id: "trainee-id",
-              name: "trainee-id",
-              value: data["trainee-id"],
-              classes: "govuk-input--width-10"
-            }) }} 
-            
             {{ govukDateInput({
               id: "start-date",
               namePrefix: "start-date",
