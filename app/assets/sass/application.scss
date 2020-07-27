@@ -97,3 +97,41 @@ span.summary-validation-symbol {
     color: govuk-colour("red");
   }
 }
+
+.filter-panel {
+  background-color: govuk-colour("light-grey");
+  padding-top: 10px;
+  margin-bottom: 20px;
+  button.search-button {
+    margin-bottom: 0px;
+  }
+  input.search-input {
+    width: 365px;
+  }
+  &__download-data {
+    text-align: right;
+    .govuk-button {
+      background-color: govuk-colour("mid-grey");
+      color: #000;
+    }
+  }
+}
+
+.trainees-table {
+  border-top: 1px solid $govuk-border-colour;
+  &__name-cell {
+    font-weight: bold;
+    padding-left: 5px;
+  }
+  &__dob {
+    color: govuk-colour("mid-grey");
+  }
+  &__course-type {
+    color: govuk-colour("mid-grey");
+  }
+}
+
+.trainee-count {
+  font-weight: bold;
+  font-size: 1.4em;
+}
