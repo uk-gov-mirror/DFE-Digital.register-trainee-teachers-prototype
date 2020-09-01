@@ -1,0 +1,153 @@
+{% set recordPath = "" %}
+
+{% if record.id %}
+  {% set recordPath = "/record/" + record.id %}
+{% else %}
+  {% set recordPath = "/new-record" %}
+{% endif %}
+
+{% set canAmend = true %}
+{% set nameText %}
+  {% if record.personalDetails.givenName or record.personalDetails.familyName %}
+    {{ record.personalDetails.givenName }} {{record.PersonalDetails.middleNames}} {{ record.personalDetails.familyName }}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
+{% set dateOfBirthText %}
+  {% if record.personalDetails.dateOfBirth %}
+    {{ record.personalDetails.dateOfBirth | govukDate }}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
+{# {% set nationalityText %}
+  {% set nationalities = applicationValue(["candidate", "nationality"]) | split %}
+  {% if nationalities.length >= 1 %}
+    {%- for nationality in nationalities -%}
+      {{ (" and " if loop.last else ", ") if not loop.first }}{%- if nationality == "Other" %}
+        {{ applicationValue(["candidate", "other-nationality-1"]) }}
+      {%- else -%}
+        {{ nationality }}
+      {%- endif -%}
+    {%- endfor -%}
+  {% endif %}
+{% endset %} #}
+
+{# {% set residency = applicationValue(["candidate", "residency"]) %}
+
+{% set residencyText %}
+  <p class="govuk-body">{{ applicationValue(["candidate", "residency"]) }}</p>
+  {% if applicationValue(["candidate", "residency-right-to-work"]) %}
+    {%- if applicationValue(["candidate", "residency"]) == "I have the right to work or study in the UK" -%}
+      <p class="govuk-body">{{ applicationValue(["candidate", "residency-right-to-work"]) | nl2br }}</p>
+    {% endif %}
+  {% endif %}
+{% endset %} #}
+
+{% set personalDetailsRows = [
+  {
+    key: {
+      text: "Name"
+    },
+    value: {
+      text: nameText
+    },
+    actions: {
+      items: [{
+        href: recordPath + "/personal-details?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "name"
+      }]
+    } if canAmend
+  }, {
+    key: {
+      text: "Date of birth"
+    },
+    value: {
+      text: dateOfBirthText
+    },
+    actions: {
+      items: [{
+        href: recordPath + "/personal-details?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "date of birth"
+      }]
+    } if canAmend
+  },
+  {
+    key: {
+      text: "Gender"
+    },
+    value: {
+      text: record.personalDetails.sex or 'Not entered'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/personal-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "gender"
+        }
+      ]
+    }
+  },
+  {
+    key: {
+      text: "Date of birth"
+    },
+    value: {
+      text: record.personalDetails.dateOfBirth | govukDate or 'Not entered'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/personal-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "date of birth"
+        }
+      ]
+    }
+  },
+  {
+    key: {
+      text: "Nationality"
+    },
+    value: {
+      text: record.personalDetails.nationality | removeArrayItem("Other") | joinify or 'Not entered'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/personal-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "nationality"
+        }
+      ]
+    }
+  }
+] %}
+
+{% set personalDetailsHtml %}
+  {{ govukSummaryList({
+    rows: personalDetailsRows
+  }) }}
+{% endset %}
+
+{# {% set complete = "true" if applicationValue(["completed", "personal-details"]) %} #}
+
+{# {% if showIncomplete and complete != "true" %}
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "candidate" %}
+  {% set incompleteText = "Personal details are not marked as completed" %}
+  {% set incompleteLink = "/personal-details/review?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
+{% else %} #}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    titleText: "Personal details",
+    html: personalDetailsHtml
+  }) }}
+{# {% endif %} #}
