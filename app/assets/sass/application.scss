@@ -18,7 +18,11 @@ $govuk-assets-path: '/govuk/assets/';
 @import "components/autocomplete";
 
 // Components that aren't in Frontend
+@import "components/application-card";
+@import "components/applications-header";
 @import "components/cookie-banner";
+// Overrides
+@import "overrides/moj-filter";
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 
