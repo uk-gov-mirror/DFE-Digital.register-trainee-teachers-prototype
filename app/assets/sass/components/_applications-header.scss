@@ -1,0 +1,15 @@
+// Application screen header
+
+.applications-header {
+  @include govuk-media-query($from: tablet) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.applications-header .govuk-button {
+  @include govuk-media-query($from: tablet) {
+    align-self: flex-start;
+    margin-top: auto;
+  }
+}
