@@ -33,6 +33,10 @@
 {% from "_components/summary-card/macro.njk"   import appSummaryCard %}
 {% from "_components/task-list/macro.njk"   import appTaskList %}
 
+{# moj components #}
+{%- from "moj/components/filter/macro.njk" import mojFilter -%}
+{%- from "moj/components/button-menu/macro.njk" import mojButtonMenu -%}
+
 {% block head %}
   {% include "_includes/head.html" %}
 {% endblock %}

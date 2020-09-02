@@ -1,27 +1,22 @@
 <div class="app-application-card">
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-quarter">
+    <div class="app-application-card_col">
       <h3 class="govuk-heading-m govuk-!-margin-bottom-3">
         <a href="/record/{{ record.id }}" class="govuk-link govuk-link--no-visited-state">
           {{ record.personalDetails.givenName }} {{ record.personalDetails.familyName }}
         </a>
       </h3>
+      <p class="govuk-caption-m govuk-!-font-size-16 govuk-!-margin-bottom-0">DOB: {{record.personalDetails.dateOfBirth | govukDate}}</p>
+      <p class="govuk-caption-m govuk-!-font-size-16 app-application-card__id govuk-!-margin-bottom-0">ID: {{record.id}}</p>
     </div>
-    <div class="govuk-grid-column-one-quarter">
-      <p class="govuk-body">DOB: {{record.personalDetails.dateOfBirth | govukDate}}</p>
-      <p class="govuk-body">Submitted {{record.submittedDate | govukDate}}</p>
+    <div class="app-application-card_col">
+      <p class="govuk-body govuk-!-margin-bottom-0">Assessment only</p>
+      <p class="govuk-body govuk-!-margin-bottom-0">{{record.assessmentDetails.subject}}</p>
     </div>
-    <div class="govuk-grid-column-one-quarter">
-      <p class="govuk-body">{{record.assessmentDetails.subject}}</p>
-    </div>
-    <div class="govuk-grid-column-one-quarter">
+    <div class="app-application-card_col">
       {{govukTag({
         text: record.status
       })}}
-      <p class="govuk-body">{{record.id}}</p>
+      <p class="govuk-caption-m govuk-!-font-size-16 govuk-!-margin-top-2 app-application-card__submitted">Submitted: <span>{{record.submittedDate | govukDate}}</span></p>
     </div>
-
-  </div>
-
 </div>
