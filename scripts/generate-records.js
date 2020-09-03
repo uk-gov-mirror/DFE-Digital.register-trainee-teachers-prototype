@@ -3,6 +3,7 @@ const path = require('path')
 const faker = require('faker')
 faker.locale = 'en_GB'
 const moment = require('moment')
+const _ = require('lodash')
 
 const sortBySubmittedDate = (x, y) => {
   return new Date(y.submittedDate) - new Date(x.submittedDate);
@@ -39,20 +40,22 @@ const generateFakeApplication = (params = {}) => {
     moment(),
     moment().subtract(100, 'days'))
 
-  const personalDetails = { ...generatePersonalDetails(faker), ...params.personalDetails }
+  const personalDetails = (params.personalDetails === null) ? null : { ...generatePersonalDetails(faker), ...params.personalDetails }
 
-  const diversity = { ...generateDiversity(faker), ...params.diversity }
+  const diversity = (params.diversity === null) ? null : { ...generateDiversity(faker), ...params.diversity }
 
   const isInternationalCandidate = !(personalDetails.nationality.includes('British') || personalDetails.nationality.includes('Irish'))
   let person = Object.assign({}, personalDetails)
   person.isInternationalCandidate = isInternationalCandidate
-  const contactDetails = params.contactDetails || generateContactDetails(faker, person)
+  const contactDetails = (params.contactDetails === null) ? null : { ...generateContactDetails(faker, person), ...params.contactDetails }
 
-  const assessmentDetails = { ...generateAssessmentDetails(faker), ...params.assessmentDetails }
+
+
+  const assessmentDetails = (params.assessmentDetails === null) ? null : { ...generateAssessmentDetails(faker), ...params.assessmentDetails }
 
   let trn
 
-  if (!status.includes('Incomplete') && !status.includes('Submitted')){
+  if (!status.includes('Draft') && !status.includes('Pending TRN')){
     trn = params.trn || faker.random.number({
       'min': 1000000,
       'max': 9999999
@@ -95,7 +98,7 @@ const generateFakeApplications = () => {
 
   // Manually create specific applications
   applications.push(generateFakeApplication({
-    status: 'Submitted',
+    status: 'Pending TRN',
     submittedDate: new Date(),
     personalDetails: {
       givenName: "Becky",
@@ -111,10 +114,35 @@ const generateFakeApplications = () => {
     }
   }))
 
-  // Draft applications
-  for (var i = 0; i < 5; i++) {
+  // Incomplete draft applications
+  for (var i = 0; i < 3; i++) {
     const application = generateFakeApplication({
       status: 'Draft',
+      personalDetails: {
+        status: 'Completed'
+      },
+      diversity: null,
+      contactDetails: null,
+      submittedDate: faker.date.between(
+        moment(),
+        moment().subtract(16, 'days'))
+    })
+    applications.push(application)
+  }
+
+  // Complete draft applications
+  for (var i = 0; i < 3; i++) {
+    const application = generateFakeApplication({
+      status: 'Draft',
+      personalDetails: {
+        status: 'Completed'
+      },
+      contactDetails: {
+        status: 'Completed'
+      },
+      diversity: {
+        status: 'Completed'
+      },
       submittedDate: faker.date.between(
         moment(),
         moment().subtract(16, 'days'))
