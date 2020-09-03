@@ -1,9 +1,10 @@
+{% extends "_templates/_page.html" %}
+{% set pageHeading = "Trainee teachers" %}
 
-{% extends "layout.html" %}
 
 {% block content %}
 
-<h1 class="govuk-heading-l">Applications</h1>
+<h1 class="govuk-heading-xl">{{pageHeading}}</h1>
 <div class="applications-header">
 
   {{ govukButton({

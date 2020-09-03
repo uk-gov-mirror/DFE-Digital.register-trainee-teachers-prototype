@@ -1,0 +1,26 @@
+{% extends "_templates/_new-record.html" %}
+
+{% set pageHeading = "Trainee submitted for TRN" %}
+
+{# {% set formAction = "./save" %} #}
+
+{% set hideReturnLink = true %}
+{% set backLink = 'false' %}
+
+
+{% block formContent %}
+{{ govukPanel({
+  titleText: "Trainee submitted for TRN",
+  html: "Your reference number<br><strong>HDJ2123F</strong>"
+}) }}
+
+{{record | log}}
+
+{{ govukButton({
+  text: "View record",
+  href: "/record/" + data.recordId
+}) }}
+
+
+{% endblock %}
+
