@@ -39,42 +39,50 @@
   ] %}
 
 {% set ethnicGroup = record.diversity.ethnicGroup %}
+{% set ethnicBackground = record.diversity.ethnicBackground %}
+
+{% if ethnicBackground and ethnicGroup != 'Not provided' and ethnicBackground != 'Not provided' %}
+  {% set ethnicGroup %}
+  {{ethnicGroup}}
+  ({{ethnicBackground}})
+  {% endset %}
+{% endif %}
 
 {% set ethnicGroupRow = {
-    key: {
-      text: "Ethnic group"
-    },
-    value: {
-      text: ethnicGroup
-    },
-    actions: {
-      items: [
-        {
-          href: recordPath + "/ethnic-group?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "ethnic group"
-        }
-      ]
-    }
-  } %}
+  key: {
+    text: "Ethnic group"
+  },
+  value: {
+    text: ethnicGroup
+  },
+  actions: {
+    items: [
+      {
+        href: recordPath + "/ethnic-group?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "ethnic group"
+      }
+    ]
+  }
+} %}
 
 {% if diversityInformationDisclosed and ethnicGroup %}
   {% set diversityRows = diversityRows | push(ethnicGroupRow) %}
 {% endif %}
 
-{% set ethnicGroupSpecific = record.diversity.ethnicGroupSpecific %}
 
-{% set ethnicGroupSpecificRow = {
+
+{# {% set ethnicBackgroundRow = {
   key: {
     text: "Ethnic group background"
   },
   value: {
-    text: ethnicGroupSpecific
+    text: ethnicBackground
   },
   actions: {
     items: [
       {
-        href: recordPath + "/ethnic-group-specific?referrer=" + referrer,
+        href: recordPath + "/ethnic-background?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "ethnic group background"
       }
@@ -82,9 +90,10 @@
   }
 } %}
 
-{% if diversityInformationDisclosed and ethnicGroupSpecific %}
-  {% set diversityRows = diversityRows | push(ethnicGroupSpecificRow) %}
-{% endif %}
+{{ethnicBackground | log}}
+{% if diversityInformationDisclosed and ethnicBackground %}
+  {% set diversityRows = diversityRows | push(ethnicBackgroundRow) %}
+{% endif %} #}
 
 {% set disabilitiesAnswerRow = {
     key: {
