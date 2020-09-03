@@ -1,0 +1,230 @@
+
+{% set ethnicGroup = record.diversity.ethnicGroup %}
+
+{# {% set asianOtherHtml %}
+  {{ govukInput({
+    classes: "govuk-!-width-two-thirds",
+    label: {
+      text: "Your Asian background (optional)"
+    }
+  } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
+{% endset -%}
+
+{% set blackOtherHtml %}
+  {{ govukInput({
+    classes: "govuk-!-width-two-thirds",
+    label: {
+      text: "Your Black background (optional)"
+    }
+  } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
+{% endset -%}
+
+{% set mixedOtherHtml %}
+  {{ govukInput({
+    classes: "govuk-!-width-two-thirds",
+    label: {
+      text: "Your Mixed background (optional)"
+    }
+  } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
+{% endset -%}
+
+{% set whiteOtherHtml %}
+  {{ govukInput({
+    classes: "govuk-!-width-two-thirds",
+    label: {
+      text: "Your White background (optional)"
+    }
+  } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
+{% endset -%}
+
+{% set otherOtherHtml %}
+  {{ govukInput({
+    classes: "govuk-!-width-two-thirds",
+    label: {
+      text: "Describe your ethnic background (optional)"
+    }
+  } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
+{% endset -%} #}
+
+  {% if ethnicGroup == "Asian or Asian British" %}
+    {{ govukRadios({
+      name: "record[diversity][ethnicBackground]",
+      fieldset: {
+        legend: {
+          text: pageHeading,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [{
+        text: "Bangladeshi",
+        value: "Bangladeshi",
+        checked: checked(record.diversity.ethnicBackground, "Bangladeshi")
+      }, {
+        text: "Chinese",
+        value: "Chinese",
+        checked: checked(record.diversity.ethnicBackground, "Chinese")
+      }, {
+        text: "Indian",
+        value: "Indian",
+        checked: checked(record.diversity.ethnicBackground, "Indian")
+      }, {
+        text: "Pakistani",
+        value: "Pakistani",
+        checked: checked(record.diversity.ethnicBackground, "Pakistani")
+      }, {
+        text: "Another Asian background",
+        value: "Another Asian background",
+        checked: checked(record.diversity.ethnicBackground, "Another Asian background"),
+        conditional: {
+          html: asianOtherHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        text: "Not provided",
+        value: "Not provided",
+        checked: checked(record.diversity.ethnicBackground, "Not provided")
+      }]
+    }) }}
+  {% elif ethnicGroup == "Black, African, Black British or Caribbean" %}
+    {{ govukRadios({
+      name: "record[diversity][ethnicBackground]",
+      fieldset: {
+        legend: {
+          text: pageHeading,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [{
+        text: "African",
+        value: "African",
+        checked: checked(record.diversity.ethnicBackground, "African")
+      }, {
+        text: "Caribbean",
+        value: "Caribbean",
+        checked: checked(record.diversity.ethnicBackground, "Caribbean")
+      }, {
+        text: "Another Black background",
+        value: "Another Black background",
+        checked: checked(record.diversity.ethnicBackground, "Another Black background"),
+        conditional: {
+          html: blackOtherHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        text: "Not provided",
+        value: "Not provided",
+        checked: checked(record.diversity.ethnicBackground, "Not provided")
+      }]
+    }) }}
+  {% elif ethnicGroup == "Mixed or multiple ethnic groups" %}
+    {{ govukRadios({
+      name: "record[diversity][ethnicBackground]",
+      fieldset: {
+        legend: {
+          text: pageHeading,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [{
+        text: "Asian and White",
+        value: "Asian and White",
+        checked: checked(record.diversity.ethnicBackground, "Asian and White")
+      }, {
+        text: "Black African and White",
+        value: "Black African and White",
+        checked: checked(record.diversity.ethnicBackground, "Black African and White")
+      }, {
+        text: "Black Caribbean and White",
+        value: "Black Caribbean and White",
+        checked: checked(record.diversity.ethnicBackground, "Black Caribbean and White")
+      }, {
+        text: "Another Mixed background",
+        value: "Another Mixed background",
+        checked: checked(record.diversity.ethnicBackground, "Another Mixed background"),
+        conditional: {
+          html: mixedOtherHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        text: "Not provided",
+        value: "Not provided",
+        checked: checked(record.diversity.ethnicBackground, "Not provided")
+      }]
+    }) }}
+  {% elif ethnicGroup == "White" %}
+    {{ govukRadios({
+      name: "record[diversity][ethnicBackground]",
+      fieldset: {
+        legend: {
+          text: pageHeading,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [{
+        text: "British, English, Northern Irish, Scottish, or Welsh",
+        value: "British, English, Northern Irish, Scottish, or Welsh",
+        checked: checked(record.diversity.ethnicBackground, "British, English, Northern Irish, Scottish, or Welsh")
+      }, {
+        text: "Irish",
+        value: "Irish",
+        checked: checked(record.diversity.ethnicBackground, "Irish")
+      }, {
+        text: "Irish Traveller or Gypsy",
+        value: "Irish Traveller or Gypsy",
+        checked: checked(record.diversity.ethnicBackground, "Irish Traveller or Gypsy")
+      }, {
+        text: "Another White background",
+        value: "Another White background",
+        checked: checked(record.diversity.ethnicBackground, "Another White background"),
+        conditional: {
+          html: whiteOtherHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        text: "Not provided",
+        value: "Not provided",
+        checked: checked(record.diversity.ethnicBackground, "Not provided")
+      }]
+    }) }}
+  {% else %}
+    {{ govukRadios({
+      name: "record[diversity][ethnicBackground]",
+      fieldset: {
+        legend: {
+          text: pageHeading,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [{
+        text: "Arab",
+        value: "Arab",
+        checked: checked(record.diversity.ethnicBackground, "Arab")
+      }, {
+        text: "Another ethnic background",
+        value: "Another ethnic background",
+        checked: checked(record.diversity.ethnicBackground, "Another ethnic background"),
+        conditional: {
+          html: otherOtherHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        text: "Not provided",
+        value: "Not provided",
+        checked: checked(record.diversity.ethnicBackground, "Not provided")
+      }]
+    }) }}
+  {% endif %}
+
+
+{{ govukButton({
+  text: "Continue"
+}) }}
+
+
+

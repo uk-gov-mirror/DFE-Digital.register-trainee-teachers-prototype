@@ -125,7 +125,7 @@ const generateFakeApplications = () => {
   // Submitted applications
   for (var i = 0; i < 5; i++) {
     const application = generateFakeApplication({
-      status: 'Submitted',
+      status: 'Pending TRN',
       submittedDate: faker.date.between(
         moment(),
         moment().subtract(6, 'days'))
@@ -153,10 +153,20 @@ const generateFakeApplications = () => {
     applications.push(application)
   }
 
+  for (var i = 0; i < 10; i++) {
+    const application = generateFakeApplication({
+      status: 'Pending QTS',
+      submittedDate: faker.date.between(
+        moment().subtract(400, 'days'),
+        moment().subtract(600, 'days'))
+    })
+    applications.push(application)
+  }
+
   // Submitted applications
   for (var i = 0; i < 15; i++) {
     const application = generateFakeApplication({
-      status: 'QTS complete',
+      status: 'QTS awarded',
       submittedDate: faker.date.between(
         moment().subtract(300, 'days'),
         moment().subtract(800, 'days'))
@@ -168,6 +178,17 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 3; i++) {
     const application = generateFakeApplication({
       status: 'Withdrawn',
+      submittedDate: faker.date.between(
+        moment().subtract(50, 'days'),
+        moment().subtract(300, 'days'))
+    })
+    applications.push(application)
+  }
+
+  // Submitted applications
+  for (var i = 0; i < 3; i++) {
+    const application = generateFakeApplication({
+      status: 'Deferred',
       submittedDate: faker.date.between(
         moment().subtract(50, 'days'),
         moment().subtract(300, 'days'))

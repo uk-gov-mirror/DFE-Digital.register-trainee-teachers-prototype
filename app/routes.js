@@ -4,6 +4,11 @@ const faker = require('faker')
 const path = require('path')
 const _ = require('lodash')
 
+const getRecordPath = req => {
+  let recordType = req.params.recordtype
+  return (recordType == 'record') ? ('/record/' + req.params.uuid) : '/new-record'
+}
+
 router.get('/record/:uuid', function (req, res) {
   let records = req.session.data.records
   const record = records.find(record => record.id == req.params.uuid)
@@ -39,14 +44,6 @@ router.post('/record/:uuid/:page/update', (req, res) => {
   }
   else {
     delete data.record
-
-    // if (_.get(newRecord, "diversity.diversityDisclosed") == 'false'){
-    //   delete newRecord.diversity.ethnicGroup
-    //   delete newRecord.diversity.ethnicGroupSpecific
-    //   delete newRecord.diversity.disabledAnswer
-    //   delete newRecord.diversity.disabilities
-    // }
-    console.log('record is', newRecord)
     const records = data.records
     const recordIndex = records.findIndex(record => record.id == req.params.uuid)
     records[recordIndex] = newRecord
@@ -56,20 +53,12 @@ router.post('/record/:uuid/:page/update', (req, res) => {
 })
 
 // Delete data when starting new
-router.get('/new-record/new', function (req, res) {
+router.get(['/new-record/new', '/new-record'], function (req, res) {
   const data = req.session.data
   delete data.record
   res.redirect('/new-record/overview')
 })
 
-const getRecordPath = req => {
-  let recordType = req.params.recordType
-  let recordPath = '/new-record'
-  if (recordType == 'record'){
-    recordPath = '/record/' + req.params.uuid
-  }
-  return recordPath
-}
 // Delete data when starting new
 router.post(['/:recordtype/:uuid/diversity-disclosed','/:recordtype/diversity-disclosed'], function (req, res) {
   let data = req.session.data
@@ -97,8 +86,7 @@ router.post(['/:recordtype/:uuid/ethnic-group','/:recordtype/ethnic-group'], fun
     res.redirect(recordPath + '/disabilities')
   }
   else {
-    res.redirect(recordPath + '/disabilities')
-    // res.redirect(recordPath + '/ethnic-background')
+    res.redirect(recordPath + '/ethnic-background')
   }
 })
 
@@ -128,8 +116,10 @@ router.post('/new-record/save', (req, res) => {
     record.id = faker.random.uuid()
     record.status = "Incomplete"
     record.submittedDate = new Date()
+    res.locals.record = record
+    req.session.data.recordId = record.id
     data.records.push(record)
-    res.redirect('/records')
+    res.redirect('/new-record/submitted')
   }
 
 })

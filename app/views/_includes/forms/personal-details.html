@@ -10,7 +10,8 @@
   },
   id: "first-names",
   name: "record[personalDetails][givenName]",
-  value: record.personalDetails["givenName"]
+  value: record.personalDetails["givenName"],
+  classes: "govuk-!-width-two-thirds"
 }) }}
 
 {{ govukInput({
@@ -20,7 +21,8 @@
   },
   id: "middle-name",
   name: "record[personalDetails][middleNames]",
-  value: record.personalDetails['middleNames']
+  value: record.personalDetails['middleNames'],
+  classes: "govuk-!-width-two-thirds"
 }) }}
 
 {{ govukInput({
@@ -33,7 +35,8 @@
   },
   id: "last-name",
   name: "record[personalDetails][familyName]",
-  value: record.personalDetails['familyName']
+  value: record.personalDetails['familyName'],
+  classes: "govuk-!-width-two-thirds"
 }) }}
 
 {# Date of birth may be a date object #}
@@ -107,19 +110,32 @@
     {% set nationalityOther = nationalityOther[0] %}
   {% endif %}
 
+  {# Make sure there's enough inputs to cover existing nationalities #}
   {% for nationality in otherNationalities %}
     {% set nationalityIndex = loop.index0 + 3 %}
     {{ govukInput({
       label: {
-        text: "Nationality",
-        classes: "govuk-label--s"
+        text: "Nationality"
       },
       id: "nationality-other" + loop.index0,
       name: "record[personalDetails][nationality][" + nationalityIndex + "]",
-      value: nationality
+      value: nationality,
+      classes: "govuk-!-width-two-thirds"
     }) }}
   {% endfor %}
 
+  {# Make sure there's at least one extra input #}
+  {% if not otherNationalities | length %}
+    {{ govukInput({
+      label: {
+        text: "Other nationality"
+      },
+      id: "nationality-other",
+      name: "record[personalDetails][nationality][3]",
+      value: nationality,
+      classes: "govuk-!-width-two-thirds"
+    }) }}
+  {% endif %}
 
 
   <div class="govuk-form-group">
