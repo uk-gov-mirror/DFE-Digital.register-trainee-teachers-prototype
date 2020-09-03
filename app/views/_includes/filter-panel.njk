@@ -11,8 +11,8 @@
     }) }} #}
 
     {{ govukCheckboxes({
-      idPrefix: "status",
-      name: "status",
+      idPrefix: "filterStatus",
+      name: "filterStatus",
       classes: "govuk-checkboxes--small",
       fieldset: {
         legend: {
@@ -23,14 +23,39 @@
       },
       items: [
         {
-          value: "Deferred",
-          text: "Deferred",
-          checked: checked("status", "Deferred")
+          value: "Draft",
+          text: "Draft",
+          checked: checked(data.filterStatus, "Draft")
         },
         {
-          value: "TRN requested",
-          text: "TRN requested",
-          checked: checked("status", "TRN requested")
+          value: "Pending TRN",
+          text: "Pending TRN",
+          checked: checked(data.filterStatus, "Pending TRN")
+        },
+        {
+          value: "TRN received",
+          text: "TRN received",
+          checked: checked(data.filterStatus, "TRN received")
+        },
+        {
+          value: "Pending QTS",
+          text: "Pending QTS",
+          checked: checked(data.filterStatus, "Pending QTS")
+        },
+        {
+          value: "QTS awarded",
+          text: "QTS awarded",
+          checked: checked(data.filterStatus, "QTS awarded")
+        },
+        {
+          value: "Deferred",
+          text: "Deferred",
+          checked: checked(data.filterStatus, "Deferred")
+        },
+        {
+          value: "Withdrawn",
+          text: "Withdrawn",
+          checked: checked(data.filterStatus, "Withdrawn")
         }
       ]
     }) }}
@@ -69,7 +94,7 @@
         </div>
       {% endif %}
       <div class="moj-filter__options">
-        <form method="get" action="/">
+        <form method="get" action="">
           <button class="govuk-button" data-module="govuk-button">
             Apply filters
           </button>
