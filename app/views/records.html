@@ -13,7 +13,7 @@
     href: "./new-record/new"
   }) }}
 
-  {{ govukSelect({
+  {# {{ govukSelect({
     id: "sort",
     name: "sort",
     label: {
@@ -30,7 +30,7 @@
         selected: true
       }
     ]
-  }) }}
+  }) }} #}
 
 </div>
 
@@ -39,6 +39,7 @@
   <div class="govuk-grid-column-full">
 
     <div class="moj-filter-layout">
+       
       <div class="moj-filter-layout__filter">
         {% include "_includes/filter-panel.njk" %}
       </div>
@@ -48,21 +49,19 @@
         <div class="moj-action-bar">
           <div class="moj-action-bar__filter"></div>
         </div>
-
         <div>
-          {% if data.records.length %}
-
-
-
-            {{records | log}}
+          {% if filteredRecords.length %}
 
             <div class="app-application-cards">
-              {% set records = data.records | sort(attribute="submittedDate") | reverse %}
+              {% set sortedFilterRecords = filteredRecords | sort(attribute="submittedDate") | reverse %}
 
-              {% set draftRecords = records | filterAttr("status", "Draft") %}
+              {% set draftRecords = sortedFilterRecords | filterAttr("status", "Draft") %}
 
-              {% if draftRecords %}
+              {{data.filterStatus | log}}
+             
+              {% if (draftRecords | length) %}
                 <div class="govuk-!-margin-bottom-8">
+                  
                   <h2 class="govuk-heading-m">Draft records</h2>
                   {% for record in draftRecords %}
                     {% include "_includes/trainee-record-card.njk" %}
@@ -70,13 +69,15 @@
                 </div>
               {% endif %}
 
-              {% set nonDraftRecords = records | removeAttr("status", "Draft") %}
-              <h2 class="govuk-heading-m">Submitted records</h2>
-              {% for record in nonDraftRecords %}
+              {% set nonDraftRecords = sortedFilterRecords | removeAttr("status", "Draft") %}
+              {% if (nonDraftRecords | length) %} 
+                <h2 class="govuk-heading-m">Submitted records</h2>
+                {% for record in nonDraftRecords %}
 
-                  {% include "_includes/trainee-record-card.njk" %}
+                    {% include "_includes/trainee-record-card.njk" %}
 
-              {% endfor %}
+                {% endfor %}
+              {% endif %}
             </div>
 
           {% endif %}

@@ -124,5 +124,25 @@ router.post('/new-record/save', (req, res) => {
 
 })
 
+// Filters
+router.get('/records', function (req, res) {
+  const data = req.session.data
+  let filterStatus = data.filterStatus
+  if (!filterStatus) {
+    filterStatus = []
+  }
+  let records = data.records
+  let filteredRecords = []
+  if (filterStatus.length) {
+    filteredRecords = records.filter(record => {
+      let statusMatch = filterStatus.includes(record.status)      
+      return statusMatch
+    })
+  } else {
+    filteredRecords = records
+  }
+  res.render('records', {filteredRecords})
+})
+
 
 module.exports = router
