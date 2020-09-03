@@ -6,8 +6,8 @@
 
 
 {% block formContent %}
-<span class="govuk-caption-l">New record</span>
-<h1 class="govuk-heading-l">{{pageHeading}}</h1>
+<span class="govuk-caption-l">{{'New record' if not record.id else 'Draft record'}}</span>
+<h1 class="govuk-heading-l">{{pageHeading if not record.id else (record.personalDetails.givenName + " " + record.personalDetails.familyName)}}</h1>
 {{ appTaskList({
   classes: "govuk-!-margin-bottom-8",
   items: [{
@@ -60,6 +60,7 @@
   href: "check-record"
 }) }}
 
+<p class="govuk-body"><a href="./save-as-draft" class="govuk-link">Save as draft</a></p>
 
 {% endblock %}
 
