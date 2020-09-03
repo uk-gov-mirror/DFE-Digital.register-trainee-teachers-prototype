@@ -44,14 +44,23 @@ filters.getStatusClass = (status) => {
       return 'govuk-tag--grey'
     case 'Completed':
       return 'govuk-tag--blue'
+
+    // Record statuses
     case 'Draft':
       return 'govuk-tag--yellow'
+    case 'Pending TRN':
+      return 'govuk-tag--turquoise'
+    case 'TRN received':
+      return 'govuk-tag--blue'
+    case 'Pending QTS':
+      return 'govuk-tag--green'
+    case 'QTS awarded':
+      return 'govuk-tag--purple'
+    case 'Deferred':
+      return 'govuk-tag--orange'
     case 'Withdrawn':
       return 'govuk-tag--red'
-    case 'QTS complete':
-      return 'govuk-tag--purple'
-    case 'Submitted':
-      return 'govuk-tag--turquoise'
+
     default:
       return 'govuk-tag--blue'
   }
