@@ -50,6 +50,59 @@ filters.addIndexCount = array => {
   return array;
 }
 
+// Add name, value, id, idPrefix and checked attributes to GOVUK form inputs
+// Generate the attributes based on the application ID and the section they’re in
+
+// Copied from Apply, but modified to work with data directly
+filters.decorateAttributes = (obj, data, value) => {
+
+  // Map dot or bracket notation to path parts
+  pathParts = _.toPath(value)
+  // Path parts includes the string name of data, which we don't need
+  let storedValue = _.get(data, [...pathParts].splice(1) )
+
+  // Strip data from path as autodata store auto-adds it.
+  if (pathParts[0] === 'data'){
+    pathParts.shift(1)
+  }
+
+  if (obj.items !== undefined) {
+    obj.items = obj.items.map(item => {
+      var checked = storedValue ? '' : item.checked
+      var selected = storedValue ? '' : item.selected
+      if (typeof item.value === 'undefined') {
+        item.value = item.text
+      }
+
+      // If data is an array, check it exists in the array
+      if (Array.isArray(storedValue)) {
+        if (storedValue.indexOf(item.value) !== -1) {
+          checked = 'checked'
+          selected = 'selected'
+        }
+      } else {
+        // The data is just a simple value, check it matches
+        if (storedValue === item.value) {
+          checked = 'checked'
+          selected = 'selected'
+        }
+      }
+
+      item.checked = checked
+      item.selected = selected
+      return item
+    })
+
+    obj.idPrefix = pathParts.join('-')
+  } else {
+    obj.value = storedValue
+  }
+
+  obj.id = pathParts.join('-')
+  obj.name = pathParts.map(s => `[${s}]`).join('')
+  return obj
+}
+
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app
 // -------------------------------------------------------------------
