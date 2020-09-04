@@ -1,6 +1,6 @@
 {% extends "_templates/_new-record.html" %}
 
-{% set pageHeading = "Overview" %}
+{% set pageHeading = "Overview" if not data.record.id else (data.record.personalDetails | getShortName) %}
 
 {% set hideReturnLink = true %}
 {% set backLink = '/records' %}
@@ -8,9 +8,10 @@
 
 
 {% block formContent %}
-{{data.record | log}}
+
 <span class="govuk-caption-l">{{'New record' if not record.id else 'Draft record'}}</span>
-<h1 class="govuk-heading-l">{{pageHeading if not record.id else (record.personalDetails.givenName + " " + record.personalDetails.familyName)}}</h1>
+<h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
 {{ appTaskList({
   classes: "govuk-!-margin-bottom-8",
   items: [{
@@ -30,7 +31,7 @@
   items: [{
     text: "Personal details",
     href: "personal-details" | reviewIfInProgress(record.personalDetails),
-    id: "application-type",
+    id: "personal-details",
     tag: {
       classes: record.personalDetails | getStatusText | getStatusClass,
       text: record.personalDetails | getStatusText
@@ -39,7 +40,7 @@
   {
     text: "Contact details",
     href: "contact-details" | reviewIfInProgress(record.contactDetails),
-    id: "application-type",
+    id: "contact-details",
     tag: {
       classes: record.contactDetails | getStatusText | getStatusClass,
       text: record.contactDetails | getStatusText
@@ -48,10 +49,49 @@
   {
     text: "Diversity information",
     href: "diversity-disclosed" | reviewIfInProgress(record.diversity, 'diversity'),
-    id: "application-type",
+    id: "diversity",
     tag: {
       classes: record.diversity | getStatusText | getStatusClass,
       text: record.diversity | getStatusText
+    }
+  }]
+}) if not closed }}
+
+<h2 class="govuk-heading-m">Education</h2>
+{{ appTaskList({
+  classes: "govuk-!-margin-bottom-8",
+  items: [
+  {
+    text: "GCSE",
+    href: "gcse" | reviewIfInProgress(record.qualifications.gcse),
+    id: "qualification-gcse",
+    tag: {
+      classes: record.qualifications.gcse | getStatusText | getStatusClass,
+      text: record.qualifications.gcse | getStatusText
+    }
+  },
+  {
+    text: "Degree",
+    href: "degree" | reviewIfInProgress(record.qualifications.degree),
+    id: "qualification-degree",
+    tag: {
+      classes: record.qualifications.degree | getStatusText | getStatusClass,
+      text: record.qualifications.degree | getStatusText
+    }
+  }]
+}) if not closed }}
+
+<h2 class="govuk-heading-m">Assessment</h2>
+{{ appTaskList({
+  classes: "govuk-!-margin-bottom-8",
+  items: [
+  {
+    text: "Assessment details",
+    href: "assessment-details" | reviewIfInProgress(record.qualifications.assessmentDetails),
+    id: "assessment-details",
+    tag: {
+      classes: record.assessmentDetails | getStatusText | getStatusClass,
+      text: record.assessmentDetails | getStatusText
     }
   }]
 }) if not closed }}

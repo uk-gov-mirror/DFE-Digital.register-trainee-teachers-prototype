@@ -6,8 +6,8 @@
 
 {% set hideReturnLink = true %}
 
-
 {% block formContent %}
+
 <span class="govuk-caption-l">New record</span>
 <h1 class="govuk-heading-l">Check before submitting for TRN</h1>
 
@@ -19,9 +19,16 @@
 
 {% include "_includes/summary-cards/diversity.html" %}
 
-<h2 class="govuk-heading-m">Education / qualifications</h2>
+<h2 class="govuk-heading-m">Education</h2>
+
+<h3 class="govuk-heading-s">{{ "Degree" | pluralise(record.qualifications.degree | length)}}</h3>
+{% for degree in record.qualifications.degree %}
+  {% include "_includes/summary-cards/degree-details.html" %}
+{% endfor %}
 
 <h2 class="govuk-heading-m">Assessment details</h2>
+{% include "_includes/summary-cards/assessment-details.html" %}
+
 
 {{ govukButton({
   text: "Submit for TRN"

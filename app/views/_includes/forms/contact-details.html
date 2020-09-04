@@ -1,18 +1,16 @@
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
-{# Force UK addresses #}
-{# Todo: think about how to handle international addresses #}
-{# {% set record.isInternationalCandidate = false %} #}
-{{record | log}}
 
-{# {{amazingTest}} #}
-{% if record.isInternationalCandidate %}
+{# Todo: think about how to handle international addresses #}
+
+{# {% if record.isInternationalCandidate %}
   {{ govukTextarea({
     label: {
       text: "Enter your address"
     },
     autocomplete: "street-address"
   }) }}
-{% else %}
+{% else %} #}
+
   {% call govukFieldset({
     legend: {
       text: "Address",
@@ -52,7 +50,7 @@
       value: record.contactDetails.address["level2"]
     }) }}
 
-    {{ govukInput({
+    {# {{ govukInput({
       label: {
         text: "County"
       },
@@ -61,7 +59,7 @@
       id: "address-level1",
       name: "record[contactDetails][address][level1]",
       value: record.contactDetails.address["level1"]
-    }) }}
+    }) }} #}
 
     {{ govukInput({
       label: {
@@ -75,14 +73,15 @@
     }) }}
 
   {% endcall %}
-{% endif %}
+{# {% endif %} #}
 
 {% set internationalAddressInputHtml %}
   {{ govukTextarea({
     label: {
       text: "Enter the address"
     },
-    autocomplete: "street-address"
+    autocomplete: "street-address",
+    classes: "govuk-!-margin-bottom-0"
   }) }}
 {% endset %}
 

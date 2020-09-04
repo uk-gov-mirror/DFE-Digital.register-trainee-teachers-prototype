@@ -6,31 +6,13 @@
   {% set recordPath = "/new-record" %}
 {% endif %}
 
-{# {% set canAmend = true %} #}
-{% set nameText %}
-  {% if record.personalDetails.givenName or record.personalDetails.familyName %}
-    {{ record.personalDetails.givenName }} {{record.personalDetails.middleNames}} {{ record.personalDetails.familyName }}
-  {% else %}
-    Not entered
-  {% endif %}
-{% endset %}
-
-{# {% set dateOfBirthText %}
-  {% if record.personalDetails.dateOfBirth %}
-    {{ record.personalDetails.dateOfBirth | govukDate }}
-  {% else %}
-    Not entered
-  {% endif %}
-{% endset %}
- #}
-
 {% set personalDetailsRows = [
   {
     key: {
       text: "Name"
     },
     value: {
-      text: nameText
+      text: record.personalDetails | getFullName or 'Not entered'
     },
     actions: {
       items: [{
@@ -44,7 +26,7 @@
       text: "Date of birth"
     },
     value: {
-      text: ""| govukDate or "Not entered"
+      text: record.personalDetails.dateOfBirth | govukDate or "Not entered"
     },
     actions: {
       items: [{
