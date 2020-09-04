@@ -1,0 +1,108 @@
+{% set recordPath = "" %}
+
+{% if record.id %}
+  {% set recordPath = "/record/" + record.id %}
+{% else %}
+  {% set recordPath = "/new-record" %}
+{% endif %}
+
+{% set expectedDuration = 'Not provided' %}
+{% if record.assessmentDetails.duration | falsify %}
+  {% set expectedDuration = record.assessmentDetails.duration + " years" %}
+{% endif %}
+
+{% set studentRecordRows = [
+  {
+    key: {
+      text: "Candidate ID"
+    },
+    value: {
+      text: record.candidateId or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/degree-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "candidate ID"
+        }
+      ]
+    } if canAmend
+  }
+  ] %}
+
+{% if record.status == "Pending TRN" %}
+  {% set submittedAge = record.submittedDate | formatDate('relative') %}
+
+  {% set submittedDate %}
+    <p class="govuk-body">{{record.submittedDate | govukDate}}</p>
+    <span class="govuk-hint">{{submittedAge}}</span>
+  {% endset %}
+
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: "Submitted for TRN"
+    },
+    value: {
+      text: submittedDate | safe
+    }
+  }) %}
+{% endif %}
+
+{% if record.trn %}
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: "TRN"
+    },
+    value: {
+      text: record.trn or 'Not provided'
+    }
+  }) %}
+{% endif %}
+
+{% if record.status == "QTS awarded" %}
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: "QTS"
+    },
+    value: {
+      text: "Awarded - 2 September 2020"
+    }
+  }) %}
+{% endif %}
+
+
+{% set datesRows = [{
+  key: {
+    text: "Last updated"
+  },
+  value: {
+    text: record.submittedDate | govukDate or 'Not provided'
+  }
+},
+{
+  key: {
+    text: "Record created"
+  },
+  value: {
+    text: record.submittedDate | govukDate or 'Not provided'
+  }
+}] %}
+
+{% set studentRecordRows = studentRecordRows | combineArrays(datesRows) %}
+
+
+
+{% set studentRecordHtml %}
+  {{ govukSummaryList({
+    rows: studentRecordRows
+  }) }}
+{% endset %}
+
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  titleText: "Contact details",
+  html: studentRecordHtml
+}) }}
+

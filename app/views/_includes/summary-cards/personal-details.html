@@ -6,7 +6,7 @@
   {% set recordPath = "/new-record" %}
 {% endif %}
 
-{% set canAmend = true %}
+{# {% set canAmend = true %} #}
 {% set nameText %}
   {% if record.personalDetails.givenName or record.personalDetails.familyName %}
     {{ record.personalDetails.givenName }} {{record.personalDetails.middleNames}} {{ record.personalDetails.familyName }}
@@ -15,37 +15,14 @@
   {% endif %}
 {% endset %}
 
-{% set dateOfBirthText %}
+{# {% set dateOfBirthText %}
   {% if record.personalDetails.dateOfBirth %}
     {{ record.personalDetails.dateOfBirth | govukDate }}
   {% else %}
     Not entered
   {% endif %}
 {% endset %}
-
-{# {% set nationalityText %}
-  {% set nationalities = applicationValue(["candidate", "nationality"]) | split %}
-  {% if nationalities.length >= 1 %}
-    {%- for nationality in nationalities -%}
-      {{ (" and " if loop.last else ", ") if not loop.first }}{%- if nationality == "Other" %}
-        {{ applicationValue(["candidate", "other-nationality-1"]) }}
-      {%- else -%}
-        {{ nationality }}
-      {%- endif -%}
-    {%- endfor -%}
-  {% endif %}
-{% endset %} #}
-
-{# {% set residency = applicationValue(["candidate", "residency"]) %}
-
-{% set residencyText %}
-  <p class="govuk-body">{{ applicationValue(["candidate", "residency"]) }}</p>
-  {% if applicationValue(["candidate", "residency-right-to-work"]) %}
-    {%- if applicationValue(["candidate", "residency"]) == "I have the right to work or study in the UK" -%}
-      <p class="govuk-body">{{ applicationValue(["candidate", "residency-right-to-work"]) | nl2br }}</p>
-    {% endif %}
-  {% endif %}
-{% endset %} #}
+ #}
 
 {% set personalDetailsRows = [
   {
@@ -67,7 +44,7 @@
       text: "Date of birth"
     },
     value: {
-      text: dateOfBirthText
+      text: ""| govukDate or "Not entered"
     },
     actions: {
       items: [{
@@ -92,7 +69,7 @@
           visuallyHiddenText: "gender"
         }
       ]
-    }
+    } if canAmend
   },
   {
     key: {
@@ -109,7 +86,7 @@
           visuallyHiddenText: "nationality"
         }
       ]
-    }
+    } if canAmend
   }
 ] %}
 

@@ -84,6 +84,15 @@ filters.reviewIfInProgress = (url, data, path) => {
   }
 }
 
+filters.getAmendsAllowed = status => {
+  let statusesThatCanAmend = [
+    'Draft',
+    'Pending TRN',
+    'TRN received',
+    'Deferred'
+  ]
+  return statusesThatCanAmend.includes(status)
+}
 
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app

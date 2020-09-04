@@ -149,16 +149,14 @@ router.get('/new-record/save-as-draft', (req, res) => {
 
 // Submit for TRN
 router.post('/new-record/save', (req, res) => {
-  const data = req.session.data
+  let data = req.session.data
   let records = data.records
-  let newRecord = data.record
+  let newRecord = _.get(data, 'record') // copy record
   // No data, return to page
   if (!newRecord){
     res.redirect('/new-record/overview')
   }
   else {
-    delete data.record
-    // console.log('new record is', newRecord)
     newRecord.status = "Pending TRN"
     newRecord.lastUpdated = new Date()
     newRecord.submittedDate = new Date()
@@ -172,6 +170,7 @@ router.post('/new-record/save', (req, res) => {
       newRecord.id = faker.random.uuid()
       data.records.push(newRecord)
     }
+    delete data.record
     // res.locals.record = record
     req.session.data.recordId = newRecord.id //temp store for id to link to the record
     res.redirect('/new-record/submitted')

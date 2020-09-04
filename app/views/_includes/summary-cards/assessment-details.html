@@ -1,0 +1,99 @@
+{% set recordPath = "" %}
+
+{% if record.id %}
+  {% set recordPath = "/record/" + record.id %}
+{% else %}
+  {% set recordPath = "/new-record" %}
+{% endif %}
+
+{% set expectedDuration = 'Not provided' %}
+{% if record.assessmentDetails.duration | falsify %}
+  {% set expectedDuration = record.assessmentDetails.duration + " years" %}
+{% endif %}
+
+{% set assessmentDetailsRows = [
+  {
+    key: {
+      text: "Age range"
+    },
+    value: {
+      text: record.assessmentDetails.ageRange or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/assessment-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "age range"
+        }
+      ]
+    } if canAmend
+  },
+  {
+    key: {
+      text: "Assessment start date"
+    },
+    value: {
+      text: record.assessmentDetails.startDate | govukDate or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/assessment-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "assessment start date"
+        }
+      ]
+    } if canAmend
+  },
+  {
+    key: {
+      text: "Expected assessment end date"
+    },
+    value: {
+      text: record.assessmentDetails.endDate | govukDate or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/assessment-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "assessment end date"
+        }
+      ]
+    } if canAmend
+  },
+  {
+    key: {
+      text: "Expected duration"
+    },
+    value: {
+      text: expectedDuration
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/assessment-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "expected duration"
+        }
+      ]
+    } if canAmend
+  }
+  ] %}
+
+
+
+{% set assessmentDetailsHtml %}
+  {{ govukSummaryList({
+    rows: assessmentDetailsRows
+  }) }}
+{% endset %}
+
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  titleText: "Contact details",
+  html: assessmentDetailsHtml
+}) }}
+
