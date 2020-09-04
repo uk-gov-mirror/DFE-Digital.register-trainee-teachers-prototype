@@ -33,6 +33,9 @@
 {% endblock %}
 
 {% set record = data.record %}
+{% if not record %}
+  {% set record = {} %}
+{% endif %}
 
 {# {% if record.id %} #}
   {% set recordPath = "/record/" + record.id %}

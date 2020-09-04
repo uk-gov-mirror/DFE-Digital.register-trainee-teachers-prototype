@@ -65,7 +65,6 @@ router.post('/record/:uuid/:page/update', (req, res) => {
 router.get(['/new-record/new', '/new-record'], function (req, res) {
   const data = req.session.data
   delete data.record
-  data.record.status = "Draft"
   res.redirect('/new-record/overview')
 })
 
@@ -76,13 +75,13 @@ router.post(['/:recordtype/:uuid/diversity-disclosed','/:recordtype/diversity-di
   let recordPath = getRecordPath(req)
   // No data, return to page
   if (!diversityDisclosed){
-    res.redirect(recordPath + '/diversity-disclosed')
+    res.redirect(`${recordPath}/diversity-disclosed`)
   }
   else if (diversityDisclosed == true || diversityDisclosed == "true"){
-    res.redirect(recordPath + '/ethnic-group')
+    res.redirect(`${recordPath}/ethnic-group`)
   }
   else {
-    res.redirect(recordPath + '/diversity/confirm')
+    res.redirect(`${recordPath}/diversity/confirm`)
   }
 })
 
@@ -93,13 +92,13 @@ router.post(['/:recordtype/:uuid/ethnic-group','/:recordtype/ethnic-group'], fun
   let recordPath = getRecordPath(req)
   // No data, return to page
   if (!ethnicGroup){
-    res.redirect(recordPath + '/ethnic-group')
+    res.redirect(`${recordPath}/ethnic-group`)
   }
   else if (ethnicGroup.includes("Not provided")){
-    res.redirect(recordPath + '/disabilities')
+    res.redirect(`${recordPath}/disabilities`)
   }
   else {
-    res.redirect(recordPath + '/ethnic-background')
+    res.redirect(`${recordPath}/ethnic-background`)
   }
 })
 
@@ -110,13 +109,13 @@ router.post(['/:recordtype/:uuid/disabilities','/:recordtype/disabilities'], fun
   let recordPath = getRecordPath(req)
   // No data, return to page
   if (!hasDisabilities){
-    res.redirect(recordPath + '/disabilities')
+    res.redirect(`${recordPath}/disabilities`)
   }
   else if (hasDisabilities == "Yes"){
-    res.redirect(recordPath + '/candidate-disabilities')
+    res.redirect(`${recordPath}/candidate-disabilities`)
   }
   else {
-    res.redirect(recordPath + '/diversity/confirm')
+    res.redirect(`${recordPath}/diversity/confirm`)
   }
 })
 
