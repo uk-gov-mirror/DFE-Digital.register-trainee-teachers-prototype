@@ -10,12 +10,12 @@
 
   <div class="govuk-grid-column-full">
     {% if record.trn %}
-      <span class="govuk-caption-l">TRN: {{record.trn}}{{govukTag({
-        text: record.status,
-        classes: "govuk-!-margin-left-4 " +record.status | getStatusClass
-      })}}
+      <span class="govuk-caption-l">TRN: {{record.trn}}
       </span>
-    {% endif %}
+    {% endif %}{{govukTag({
+        text: record.status,
+        classes: record.status | getStatusClass
+      })}}
     <h1 class="govuk-heading-l">{{record.personalDetails.givenName}} {{record.personalDetails.familyName}}</h1>
     <h2 class="govuk-heading-m">Candidate details</h2>
 

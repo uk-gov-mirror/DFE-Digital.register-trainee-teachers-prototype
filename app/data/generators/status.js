@@ -6,6 +6,7 @@ module.exports = (faker) => {
     'TRN received',
     'Pending QTS',
     'QTS awarded',
-    'Deferred'
+    'Deferred',
+    'Withdrawn'
   ])
 }
