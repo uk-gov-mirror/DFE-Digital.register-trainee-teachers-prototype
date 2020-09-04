@@ -42,16 +42,16 @@ const generateFakeApplication = (params = {}) => {
 
   const personalDetails = (params.personalDetails === null) ? null : { ...generatePersonalDetails(faker), ...params.personalDetails }
 
-  const diversity = (params.diversity === null) ? null : { ...generateDiversity(faker), ...params.diversity }
+  const diversity = (params.diversity === null) ? undefined : { ...generateDiversity(faker), ...params.diversity }
 
   const isInternationalCandidate = !(personalDetails.nationality.includes('British') || personalDetails.nationality.includes('Irish'))
   let person = Object.assign({}, personalDetails)
   person.isInternationalCandidate = isInternationalCandidate
-  const contactDetails = (params.contactDetails === null) ? null : { ...generateContactDetails(faker, person), ...params.contactDetails }
+  const contactDetails = (params.contactDetails === null) ? undefined : { ...generateContactDetails(faker, person), ...params.contactDetails }
 
 
 
-  const assessmentDetails = (params.assessmentDetails === null) ? null : { ...generateAssessmentDetails(faker), ...params.assessmentDetails }
+  const assessmentDetails = (params.assessmentDetails === null) ? undefined : { ...generateAssessmentDetails(faker), ...params.assessmentDetails }
 
   let trn
 
