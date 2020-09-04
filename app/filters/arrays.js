@@ -113,6 +113,12 @@ const joinArray = (array, options={}) => {
   // Set to be options.delimiter if it doesn't already exist
   options.lastDelimiter = options.lastDelimiter || options.delimiter
 
+  // Strip trailing space from delimiters and add breaks
+  if (options.newlines){
+    options.delimiter = options.delimiter.replace(/\s+$/g, '') + "<br>"
+    options.lastDelimiter = options.lastDelimiter.replace(/\s+$/g, '') + "<br>"
+  }
+
   // console.log('Input array is', array)
   // Clean up array
   array = filters.cleanArray(array)
@@ -143,6 +149,12 @@ filters.oxfordComma = (items) => filters.joinArray(items, {delimiter:', ', lastD
 
 //  A, B, C, D
 filters.commaSeparate = (items) => filters.joinArray(items, {delimiter:', '})
+
+//  A,
+//  B,
+//  C,
+//  D
+filters.commaSeparateLines = (items) => filters.joinArray(items, {delimiter:', ', newlines: true })
 
 // A and B and C and D
 filters.andSeparate = (items)=> filters.joinArray(items, {delimiter: ' and '})
