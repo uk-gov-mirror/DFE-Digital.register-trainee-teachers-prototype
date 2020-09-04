@@ -1,6 +1,4 @@
 {{ govukRadios({
-  idPrefix: "diversity-disclosed",
-  name: "record[diversity][diversityDisclosed]",
   fieldset: {
     legend: {
       text: pageHeading,
@@ -14,19 +12,16 @@
   items: [
     {
       value: "true",
-      text: "Yes",
-      checked: checked(record.diversity.diversityDisclosed, "true")
+      text: "Yes"
     },
     {
       value: "false",
-      text: "No",
-      checked: checked(record.diversity.diversityDisclosed, "false")
+      text: "No"
     }
   ]
-}) }}
-
-{{record.diversity.diversityDisclosed | log}}
+} | decorateAttributes(record, 'record.diversity.diversityDisclosed') )}}
 
 {{ govukButton({
   text: "Continue"
 }) }}
+

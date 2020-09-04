@@ -5,6 +5,7 @@
 
 {% block content %}
 
+{% set canAmend = record.status | getAmendsAllowed %}
 
 <div class="govuk-grid-row">
 
@@ -17,6 +18,9 @@
         classes: record.status | getStatusClass
       })}}
     <h1 class="govuk-heading-l">{{record.personalDetails.givenName}} {{record.personalDetails.familyName}}</h1>
+    <h2 class="govuk-heading-m">Trainee record</h2>
+    {% include "_includes/summary-cards/student-record.html" %}
+
     <h2 class="govuk-heading-m">Candidate details</h2>
 
     {% include "_includes/summary-cards/personal-details.html" %}
@@ -25,10 +29,15 @@
 
     {% include "_includes/summary-cards/diversity.html" %}
 
-    <h2 class="govuk-heading-m">Education / qualifications</h2>
+    <h2 class="govuk-heading-m">Education</h2>
+    {{record.qualifications.degree | log}}
+    <h3 class="govuk-heading-s">{{ "Degree" | pluralise(record.qualifications.degree | length)}}</h3>
+    {% for degree in record.qualifications.degree %}
+      {% include "_includes/summary-cards/degree-details.html" %}
+    {% endfor %}
 
     <h2 class="govuk-heading-m">Assessment details</h2>
-
+    {% include "_includes/summary-cards/assessment-details.html" %}
 
     {# {% include "_includes/summaryCards/contactDetails.njk" %} #}
   </div>

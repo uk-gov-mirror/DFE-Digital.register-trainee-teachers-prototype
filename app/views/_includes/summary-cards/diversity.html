@@ -6,14 +6,6 @@
   {% set recordPath = "/new-record" %}
 {% endif %}
 
-{% set canAmend = true %}
-{% set nameText %}
-  {% if record.personalDetails.givenName or record.personalDetails.familyName %}
-    {{ record.personalDetails.givenName }} {{record.personalDetails.middleNames}} {{ record.personalDetails.familyName }}
-  {% else %}
-    Not entered
-  {% endif %}
-{% endset %}
 
 {% set diversityInformationDisclosed = (record.diversity.diversityDisclosed | falsify) %}
 {% set diversityDisclosedText = 'Information disclosed' if diversityInformationDisclosed else 'Not disclosed' %}
@@ -34,7 +26,7 @@
           visuallyHiddenText: "diversity disclosed"
         }
       ]
-    }
+    } if canAmend
   }
   ] %}
 
@@ -63,7 +55,7 @@
         visuallyHiddenText: "ethnic group"
       }
     ]
-  }
+  } if canAmend
 } %}
 
 {% if diversityInformationDisclosed and ethnicGroup %}
@@ -110,7 +102,7 @@
           visuallyHiddenText: "disabilities answer"
         }
       ]
-    }
+    } if canAmend
   } %}
 
 {% if diversityInformationDisclosed %}
@@ -132,7 +124,7 @@
           visuallyHiddenText: "candidate disabilities"
         }
       ]
-    }
+    } if canAmend
   } %}
 {{record.diversity.disabledAnswer | falsify | log}}
 {% if diversityInformationDisclosed and record.diversity.disabledAnswer == "Yes" %}

@@ -1,5 +1,10 @@
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
-{# {% set record.isInternationalCandidate = true %} #}
+{# Force UK addresses #}
+{# Todo: think about how to handle international addresses #}
+{# {% set record.isInternationalCandidate = false %} #}
+{{record | log}}
+
+{# {{amazingTest}} #}
 {% if record.isInternationalCandidate %}
   {{ govukTextarea({
     label: {
@@ -72,7 +77,19 @@
   {% endcall %}
 {% endif %}
 
-{{record.contactDetails | log}}
+{% set internationalAddressInputHtml %}
+  {{ govukTextarea({
+    label: {
+      text: "Enter the address"
+    },
+    autocomplete: "street-address"
+  }) }}
+{% endset %}
+
+{{ govukDetails({
+  summaryText: "Add an international address",
+  html: internationalAddressInputHtml
+}) }}
 
 {{ govukInput({
   id: "phone-number",

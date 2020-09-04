@@ -62,6 +62,15 @@ filters.objectArrayToArray = array => {
   return newArray
 }
 
+filters.objectToArray = object => {
+  if (!object) return []
+  let newArray = []
+  Object.keys(object).forEach(key => {
+    newArray.push(object[key])
+  })
+  return newArray
+}
+
 // Keep only whitelisted keys from object or array of objects
 filters.keepAttributes = (array, keysToKeep) => {
   const keepKeys = theObject => {

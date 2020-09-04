@@ -65,7 +65,6 @@ router.post('/record/:uuid/:page/update', (req, res) => {
 router.get(['/new-record/new', '/new-record'], function (req, res) {
   const data = req.session.data
   delete data.record
-  data.record.status = "Draft"
   res.redirect('/new-record/overview')
 })
 
@@ -76,13 +75,13 @@ router.post(['/:recordtype/:uuid/diversity-disclosed','/:recordtype/diversity-di
   let recordPath = getRecordPath(req)
   // No data, return to page
   if (!diversityDisclosed){
-    res.redirect(recordPath + '/diversity-disclosed')
+    res.redirect(`${recordPath}/diversity-disclosed`)
   }
   else if (diversityDisclosed == true || diversityDisclosed == "true"){
-    res.redirect(recordPath + '/ethnic-group')
+    res.redirect(`${recordPath}/ethnic-group`)
   }
   else {
-    res.redirect(recordPath + '/diversity/confirm')
+    res.redirect(`${recordPath}/diversity/confirm`)
   }
 })
 
@@ -93,13 +92,13 @@ router.post(['/:recordtype/:uuid/ethnic-group','/:recordtype/ethnic-group'], fun
   let recordPath = getRecordPath(req)
   // No data, return to page
   if (!ethnicGroup){
-    res.redirect(recordPath + '/ethnic-group')
+    res.redirect(`${recordPath}/ethnic-group`)
   }
   else if (ethnicGroup.includes("Not provided")){
-    res.redirect(recordPath + '/disabilities')
+    res.redirect(`${recordPath}/disabilities`)
   }
   else {
-    res.redirect(recordPath + '/ethnic-background')
+    res.redirect(`${recordPath}/ethnic-background`)
   }
 })
 
@@ -110,13 +109,13 @@ router.post(['/:recordtype/:uuid/disabilities','/:recordtype/disabilities'], fun
   let recordPath = getRecordPath(req)
   // No data, return to page
   if (!hasDisabilities){
-    res.redirect(recordPath + '/disabilities')
+    res.redirect(`${recordPath}/disabilities`)
   }
   else if (hasDisabilities == "Yes"){
-    res.redirect(recordPath + '/candidate-disabilities')
+    res.redirect(`${recordPath}/candidate-disabilities`)
   }
   else {
-    res.redirect(recordPath + '/diversity/confirm')
+    res.redirect(`${recordPath}/diversity/confirm`)
   }
 })
 
@@ -150,16 +149,14 @@ router.get('/new-record/save-as-draft', (req, res) => {
 
 // Submit for TRN
 router.post('/new-record/save', (req, res) => {
-  const data = req.session.data
+  let data = req.session.data
   let records = data.records
-  let newRecord = data.record
+  let newRecord = _.get(data, 'record') // copy record
   // No data, return to page
   if (!newRecord){
     res.redirect('/new-record/overview')
   }
   else {
-    delete data.record
-    // console.log('new record is', newRecord)
     newRecord.status = "Pending TRN"
     newRecord.lastUpdated = new Date()
     newRecord.submittedDate = new Date()
@@ -173,6 +170,7 @@ router.post('/new-record/save', (req, res) => {
       newRecord.id = faker.random.uuid()
       data.records.push(newRecord)
     }
+    delete data.record
     // res.locals.record = record
     req.session.data.recordId = newRecord.id //temp store for id to link to the record
     res.redirect('/new-record/submitted')

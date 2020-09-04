@@ -6,17 +6,12 @@
   {% set recordPath = "/new-record" %}
 {% endif %}
 
-{% set canAmend = true %}
 
-{% set addressCombined %}
-  {% for item, value in record.contactDetails.address %}
-    {% if value | falsify %}
-      {{value}}{% if not loop.last -%}
-        ,<br>
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-{% endset %}
+
+{# Merge fields and strip empty #}
+{% set addressCombined = record.contactDetails.address | objectToArray | commaSeparateLines %}
+{% set addressCombined = addressCombined or 'Not provided' %}
+
 
 {% set contactDetailsRows = [
   {
@@ -34,14 +29,14 @@
           visuallyHiddenText: "address"
         }
       ]
-    }
+    } if canAmend
   },
   {
     key: {
       text: "Phone number"
     },
     value: {
-      text: record.contactDetails.phoneNumber
+      text: record.contactDetails.phoneNumber or 'Not provided'
     },
     actions: {
       items: [
@@ -51,14 +46,14 @@
           visuallyHiddenText: "phone number"
         }
       ]
-    }
+    } if canAmend
   },
   {
     key: {
       text: "Email address"
     },
     value: {
-      text: record.contactDetails.email
+      text: record.contactDetails.email or 'Not provided'
     },
     actions: {
       items: [
@@ -68,7 +63,7 @@
           visuallyHiddenText: "email"
         }
       ]
-    }
+    } if canAmend
   }
   ] %}
 

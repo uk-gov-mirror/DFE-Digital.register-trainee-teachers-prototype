@@ -101,7 +101,9 @@
   ]
 }) }}
 
-{% set otherNationalities = record.personalDetails.nationality | removeArrayItems(['British','Irish','Other'])%}
+{% set otherNationalities = record.personalDetails.nationality | removeArrayItems(['British','Irish','Other'] | removeEmpty )%}
+
+{% set otherNationalities = otherNationalities | removeEmpty %}
 {% set hasOtherNationality = otherNationalities | length > 0 %}
 
 {% set nationalityOtherHtml %}

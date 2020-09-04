@@ -34,8 +34,10 @@
 
 {% set record = data.record %}
 
-{{'record' | log}}
-{{ record | log }}
+{% if not record %}
+  {% set record = {} %}
+{% endif %}
+
 
 {% block content %}
   {% block beforePageTitle %}{% endblock %}
