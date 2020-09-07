@@ -14,6 +14,23 @@
 {% set assessmentDetailsRows = [
   {
     key: {
+      text: "Subject"
+    },
+    value: {
+      text: record.assessmentDetails.subject or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/assessment-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "subject"
+        }
+      ]
+    } if canAmend
+  },
+  {
+    key: {
       text: "Age range"
     },
     value: {
