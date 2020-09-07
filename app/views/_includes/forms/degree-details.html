@@ -1,0 +1,191 @@
+<h1 class="govuk-heading-l">{{pageHeading}}</h1>
+{# {{data.subjects | log}} #}
+
+{% set isInternationalDegree = (record.degree.country == 'United Kingdom') %}
+
+{% set isInternationalDegree = true %}
+
+International degree: {{isInternationalDegree}}
+
+{{ appAutocomplete({
+  label: {
+    text: "Degree subject",
+    classes: "govuk-label--s"
+  },
+  id: 'subject',
+  name: "record[degree][subject]",
+  items: data.subjects,
+  classes: "govuk-!-width-two-thirds",
+  value: record.degree.subject
+  }
+) }}
+
+
+{% if isInternationalDegree %}
+
+  {{ govukInput({
+  label: {
+    text: "Institution",
+    classes: "govuk-label--s"
+  },
+  hint: {
+    text: "Or given names"
+  } if false,
+  id: "degree-institution",
+  name: "record[degree][org]",
+  value: record.degree["org"],
+  classes: "govuk-!-width-two-thirds"
+}) }}
+
+  {{ appAutocomplete({
+    label: {
+      text: "In which country is this institution based?",
+      classes: "govuk-label--s"
+    },
+    id: 'degree-country',
+    name: "record[degree][country]",
+    items: data.countries,
+    classes: "govuk-!-width-two-thirds",
+    value: record.degree.country
+    }
+  ) }}
+
+{% else %}
+
+  {{ appAutocomplete({
+  label: {
+    text: "Institution",
+    classes: "govuk-label--s"
+  },
+  id: 'degree-organisations',
+  name: "record[degree][org]",
+  items: data.degreeOrganisations,
+  classes: "govuk-!-width-two-thirds",
+  value: record.degree.org
+  }
+) }}
+{% endif %}
+
+{{ govukInput({
+  label: {
+    text: "Graduation year",
+    classes: "govuk-label--s"
+  },
+  id: "degree-start-date",
+  name: "record[degree][endDate]",
+  value: record.degree.endDate,
+  classes: "govuk-!-width-one-quarter"
+}) }}
+
+{% if isInternationalDegree %}
+  {% set internationalDegreeGradeOtherHtml %}
+    {{ govukInput({
+      label: {
+        text: "Enter the degree grade"
+      },
+      hint: {
+        text: "For example, ‘A’, ‘4.5’, ‘94%’, ‘Distinction’"
+      },
+      id: "degree-start-date",
+      classes: "govuk-!-width-two-thirds"
+    }| decorateAttributes(record, "record.qualifications.degree.degreeGradeOther"))}}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Degree grade",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: ""
+    },
+    items: [
+      {
+        text: "Not applicable"
+      },
+      {
+        text: "Unknown"
+      },
+      {
+        text: "Other",
+        conditional: {
+          html: internationalDegreeGradeOtherHtml
+        }
+      },
+      {
+        divider: "or"
+      },
+      {
+        text: "The candidate is still studying for their degree"
+      }
+    ]
+  } | decorateAttributes(record, "record.qualifications.degree.foo")) }}
+
+{% else %}
+  
+  {% set degreeGradeOtherHtml %}
+    {{ govukInput({
+      label: {
+        text: "Enter the degree grade"
+      },
+      id: "degree-start-date",
+      classes: "govuk-!-width-two-thirds"
+    }| decorateAttributes(record, "record.qualifications.degree.degreeGradeOther"))}}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Degree grade",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: ""
+    },
+    items: [
+      {
+        text: "First-class honours"
+      },
+      {
+        text: "Upper second-class honours (2:1)"
+      },
+      {
+        text: "Lower second-class honours (2:2)"
+      },
+      {
+        text: "Third-class honours"
+      },
+      {
+        text: "Pass"
+      },
+      {
+        text: "Other",
+        conditional: {
+          html: degreeGradeOtherHtml
+        }
+      },
+      {
+        divider: "or"
+      },
+      {
+        text: "The candidate is still studying for their degree"
+      }
+    ]
+  } | decorateAttributes(record, "record.qualifications.degree.foo")) }}
+
+{% endif %}
+
+
+
+{{ govukButton({
+  text: "Continue"
+}) }}
+
+
+
+
+
+

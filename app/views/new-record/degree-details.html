@@ -1,0 +1,10 @@
+{% extends "_templates/_new-record.html" %}
+
+{% set pageHeading = "Degree details" %}
+
+{% set formAction = "./degree/confirm" %}
+
+{% block formContent %}
+  {% include "_includes/forms/degree-details.html" %}
+{% endblock %}
+

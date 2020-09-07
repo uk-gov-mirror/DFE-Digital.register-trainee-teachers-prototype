@@ -72,14 +72,19 @@
   },
   {
     text: "Degree",
-    href: "degree" | reviewIfInProgress(record.qualifications.degree),
+    href: "degree/confirm" if (record.qualifications.degree | length) else "degree-details",
     id: "qualification-degree",
     tag: {
-      classes: record.qualifications.degree | getStatusText | getStatusClass,
-      text: record.qualifications.degree | getStatusText
+      classes: (record.qualifications.degreeStatus.status or (record.qualifications.degree | getStatusText)) | getStatusClass,
+      text: record.qualifications.degreeStatus.status or (record.qualifications.degree | getStatusText)
     }
   }]
 }) if not closed }}
+
+    {#   classes: record.qualifications.degreeStatus | getStatusText | getStatusClass,
+      text: record.qualifications.degreeStatus | getStatusText #}
+{{ record | log}}
+{{record.qualifications | log}}
 
 <h2 class="govuk-heading-m">Assessment</h2>
 {{ appTaskList({
@@ -96,7 +101,6 @@
   }]
 }) if not closed }}
 
-{{record.diversity | log}}
 
 {{ govukButton({
   text: "Check and submit for TRN",

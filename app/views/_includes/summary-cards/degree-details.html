@@ -103,7 +103,7 @@
         }
       ]
     } if canAmend
-  },
+  } if false,
   {
     key: {
       text: "Graduation year"
@@ -151,10 +151,22 @@
   }) }}
 {% endset %}
 
+{% if degree.country == "United Kingdom" %}
+  {% set titleText = degree.type + " " + degree.subject %}
+{% else %}
+  {% set titleText = degree.type + ": " + degree.subject %}
+{% endif %}
+
 
 {{ appSummaryCard({
   classes: "govuk-!-margin-bottom-6",
-  titleText: "Contact details",
+  titleText: titleText,
+  actions: {
+    items: [{
+      href: recordpath + "/degree/" + item.id + "/delete?referrer=" + referrer,
+      text: "Delete degree"
+    }]
+  } if canAmend,
   html: degreeDetailsHtml
 }) }}
 

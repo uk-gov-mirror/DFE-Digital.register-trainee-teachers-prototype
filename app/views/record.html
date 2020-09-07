@@ -38,6 +38,12 @@
       {% include "_includes/summary-cards/degree-details.html" %}
     {% endfor %}
 
+    {{record | log}}
+    {{ govukButton({
+      "text": "Add another degree",
+      classes: "govuk-button--secondary"
+    }) }}
+
     <h2 class="govuk-heading-m">Assessment details</h2>
     {% include "_includes/summary-cards/assessment-details.html" %}
 

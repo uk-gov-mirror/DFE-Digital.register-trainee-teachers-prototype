@@ -1,0 +1,80 @@
+<h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
+{% set degreeCount = record.qualifications.degree | length %}
+
+{% if degreeCount < 1 %}
+{# {% if degreeCount < 1 and action == "add" %} #}
+  {% set ukHintText = "For example, BA, BSc or other (please specify)" %}
+{% else %}
+  {% set ukHintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
+{% endif %}
+{% set intHintHtml = "For example, Bachelor degree, Bachelor of Arts, <span lang=\"fr\">Diplôme</span>, <span lang=\"es\">Licenciatura</span>" %}
+
+
+<p class="govuk-body">Enter the details of the degree as they appear on the certificate, translating them into English if necessary</p>
+
+<p class="govuk-body">If the candidate has further postgraduate degrees, you’ll be able to add them next.</p>
+
+{% set ukConditionalHtml %}
+  {{ appAutocomplete({
+    label: {
+      text: "Enter degree type"
+    },
+    hint: {
+      text: ukHintText
+    },
+    id: 'degree-type',
+    name: "record[degree][type]",
+    items: data.degreeTypes,
+    classes: "govuk-!-width-two-thirds",
+    value: record.degree.type
+    }
+  ) }}
+{% endset %}
+
+{{degreeCount | log}}
+
+{% set internationalConditionalHtml %}
+  {{ govukInput({
+    label: {
+      text: "Type of qualification"
+    },
+    hint: {
+      html: intHintHtml
+    }
+  } | decorateAttributes(record, "record.qualifications.degree.foo.isInternational")) }}
+{% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "What type of degree are you adding?",
+        classes: "govuk-fieldset__legend--s govuk-visually-hidden"
+      }
+    },
+    items: [{
+      value: "domestic",
+      text: "UK degree",
+      conditional: {
+        html: ukConditionalHtml
+      }
+    }, {
+      value: "international",
+      text: "Non-UK degree",
+      conditional: {
+        html: internationalConditionalHtml
+      }
+    }]
+  } | decorateAttributes(record, "record.qualifications.degree.foo.isInternational")) }}
+
+
+
+{{ govukButton({
+  text: "Continue"
+}) }}
+
+
+
+
+
+
