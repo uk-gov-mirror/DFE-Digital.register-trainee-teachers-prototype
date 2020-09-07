@@ -63,29 +63,28 @@
   defaultValue = '{{params.value}}';
 
   // Conditional not used
-  confirmFunction = function(val) {
-    {% if params.conditional %}
+  // confirmFunction = function(val) {
+  //   {% if params.conditional %}
 
-      if (val == 'Other'){
-        $('.{{params.idPrefix}}-conditional-container').removeClass("hidden")
-        console.log('removing hidden class')
-      }
-      else if (typeof(val) != 'undefined') {
-        $('.{{params.idPrefix}}-conditional-container').addClass("hidden")
-        console.log('adding hidden class')
-      }
-    {% endif %}
-  }
+  //     if (val == 'Other'){
+  //       $('.{{params.idPrefix}}-conditional-container').removeClass("hidden")
+  //       console.log('removing hidden class')
+  //     }
+  //     else if (typeof(val) != 'undefined') {
+  //       $('.{{params.idPrefix}}-conditional-container').addClass("hidden")
+  //       console.log('adding hidden class')
+  //     }
+  //   {% endif %}
+  // }
 
   accessibleAutocomplete.enhanceSelectElement({
     selectElement: element,
-    name: "{{params.name}}",
     showAllValues: true,
     source: values,
-    defaultValue: defaultValue,
-    onConfirm: confirmFunction
-  });
+    defaultValue: defaultValue
 
+  });
+    // onConfirm: confirmFunction
 
 
 </script>

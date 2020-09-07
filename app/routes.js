@@ -128,13 +128,13 @@ router.post(['/:recordtype/:uuid/assessment-details','/:recordtype/assessment-de
   let recordPath = getRecordPath(req)
   // No data, return to page
   if (!assessmentDetails){
-    res.redirect(`${recordPath}/assessment-dteails`)
+    res.redirect(`${recordPath}/assessment-details`)
   }
-  console.log('assesment is', assessmentDetails)
-  console.log('body is', req.body)
-  // assessmentDetails.subject = req.body.record.assessmentDetails.subject
+  
+  // Merge autocomplete and radio answers
   if (assessmentDetails.ageRange == 'Other age range'){
     assessmentDetails.ageRange = assessmentDetails.ageRangeOther
+    delete assessmentDetails.ageRangeOther
   }
 
   record.assessmentDetails = assessmentDetails
