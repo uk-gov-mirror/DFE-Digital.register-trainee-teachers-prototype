@@ -36,9 +36,30 @@ const generateFakeApplication = (params = {}) => {
 
   const status = params.status || generateStatus(faker)
 
-  const submittedDate = params.submittedDate || faker.date.between(
-    moment(),
-    moment().subtract(100, 'days'))
+  let updatedDate, submittedDate
+
+  // Make sure updated is after submitted
+  if (params.submittedDate){
+    updatedDate = params.updatedDate || faker.date.between(
+      moment(),
+      moment(params.submittedDate))
+  }
+  else {
+    // Updated at some point in last 500 days
+    updatedDate = params.updatedDate || faker.date.between(
+      moment(),
+      moment().subtract(500, 'days'))
+  }
+
+
+
+  // Submitted some time before it was updated
+  if (status != 'Draft'){
+    submittedDate = params.submittedDate || faker.date.between(
+    moment(updatedDate),
+    moment().subtract(500, 'days'))
+  }
+
 
   const personalDetails = (params.personalDetails === null) ? null : { ...generatePersonalDetails(faker), ...params.personalDetails }
 
@@ -69,6 +90,7 @@ const generateFakeApplication = (params = {}) => {
     candidateId: params.candidateId || faker.random.alphaNumeric(8).toUpperCase(),
     status,
     trn,
+    updatedDate,
     submittedDate,
     personalDetails,
     diversity,
@@ -123,7 +145,8 @@ const generateFakeApplications = () => {
       },
       diversity: null,
       contactDetails: null,
-      submittedDate: faker.date.between(
+
+      updatedDate: faker.date.between(
         moment(),
         moment().subtract(16, 'days'))
     })
@@ -143,7 +166,7 @@ const generateFakeApplications = () => {
       diversity: {
         status: 'Completed'
       },
-      submittedDate: faker.date.between(
+      updatedDate: faker.date.between(
         moment(),
         moment().subtract(16, 'days'))
     })
@@ -152,11 +175,13 @@ const generateFakeApplications = () => {
 
   // Submitted applications
   for (var i = 0; i < 5; i++) {
-    const application = generateFakeApplication({
-      status: 'Pending TRN',
-      submittedDate: faker.date.between(
+    let updatedDate = faker.date.between(
         moment(),
         moment().subtract(6, 'days'))
+    const application = generateFakeApplication({
+      status: 'Pending TRN',
+      updatedDate,
+      submittedDate: updatedDate
     })
     applications.push(application)
   }
@@ -164,7 +189,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 5; i++) {
     const application = generateFakeApplication({
       status: 'TRN received',
-      submittedDate: faker.date.between(
+      updatedDate: faker.date.between(
         moment().subtract(2, 'days'),
         moment().subtract(6, 'days'))
     })
@@ -174,7 +199,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 15; i++) {
     const application = generateFakeApplication({
       status: 'TRN received',
-      submittedDate: faker.date.between(
+      updatedDate: faker.date.between(
         moment().subtract(2, 'days'),
         moment().subtract(600, 'days'))
     })
@@ -184,7 +209,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 10; i++) {
     const application = generateFakeApplication({
       status: 'Pending QTS',
-      submittedDate: faker.date.between(
+      updatedDate: faker.date.between(
         moment().subtract(400, 'days'),
         moment().subtract(600, 'days'))
     })
@@ -195,7 +220,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 15; i++) {
     const application = generateFakeApplication({
       status: 'QTS awarded',
-      submittedDate: faker.date.between(
+      updatedDate: faker.date.between(
         moment().subtract(300, 'days'),
         moment().subtract(800, 'days'))
     })
@@ -206,7 +231,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 3; i++) {
     const application = generateFakeApplication({
       status: 'Withdrawn',
-      submittedDate: faker.date.between(
+      updatedDate: faker.date.between(
         moment().subtract(50, 'days'),
         moment().subtract(300, 'days'))
     })
@@ -217,7 +242,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 3; i++) {
     const application = generateFakeApplication({
       status: 'Deferred',
-      submittedDate: faker.date.between(
+      updatedDate: faker.date.between(
         moment().subtract(50, 'days'),
         moment().subtract(300, 'days'))
     })

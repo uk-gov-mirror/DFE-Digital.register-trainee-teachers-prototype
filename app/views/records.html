@@ -53,7 +53,7 @@
           {% if filteredRecords.length %}
 
             <div class="app-application-cards">
-              {% set sortedFilterRecords = filteredRecords | sort(attribute="submittedDate") | reverse %}
+              {% set sortedFilterRecords = filteredRecords | sort(attribute="updatedDate") | reverse %}
 
               {% set draftRecords = sortedFilterRecords | filterAttr("status", "Draft") %}
 
