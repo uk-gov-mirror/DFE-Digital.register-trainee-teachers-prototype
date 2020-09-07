@@ -1,0 +1,170 @@
+<h1 class="govuk-heading-l">{{pageHeading}}</h1>
+{# {{data.subjects | log}} #}
+
+{{record.assessmentDetails | log}}
+{{ appAutocomplete({
+  label: {
+    text: "Subject",
+    classes: "govuk-label--s"
+  },
+  id: 'subject',
+  name: "tempSubject",
+  items: data.subjects,
+  value: record.assessmentDetails.subject
+  }
+) }}
+
+{# These account for 91% of choices #}
+{% set commonAgeRanges = [
+  "3 - 11 Programme",
+  "5 - 11 Programme",
+  "11 - 16 Programme",
+  "11 - 19 Programme"
+  ] %}
+
+{# Create radio items for each #}
+{% set ageRangeRadioItems = [] %}
+{% for ageRange in commonAgeRanges %}
+  {% set ageRangeRadioItems = ageRangeRadioItems | push({
+    text: ageRange
+  }) %}
+{% endfor %}
+
+{% set uncommonAgeRanges = data.assessmentOnlyAgeRanges | removeArrayItems(commonAgeRanges) %}
+
+{# Prefil existing answer #}
+{% set ageRangeExistingValue = record.assessmentDetails.ageRange %}
+{% if ageRangeExistingValue in commonAgeRanges %}
+  {% set ageRangeExistingValue = undefined %}
+{% endif %}
+
+{% set ageRangeAutocomplete %}
+  {{ appAutocomplete({
+    label: {
+      text: "Other age range",
+      classes: "govuk-label--s"
+    },
+    id: 'age-range',
+    name: "record[assessmentDetails][ageRangeOther]",
+    items: uncommonAgeRanges,
+    value: ageRangeExistingValue
+    }
+  ) }}
+{% endset %}
+{{ageRangeExistingValue | log}}
+{% set ageRangeRadioItems = ageRangeRadioItems | combineArrays(
+  [{
+    divider: 'or'
+  },
+  {
+    text: "Other age range",
+    checked: 'checked' if ageRangeExistingValue,
+    conditional: {
+      html: ageRangeAutocomplete
+    }
+  }]
+) %}
+
+{{ govukRadios({
+  fieldset: {
+    legend: {
+      text: "Age range",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: ""
+  },
+  items: ageRangeRadioItems
+} | decorateAttributes(record, "record.assessmentDetails.ageRange")) }}
+
+{% set assessmentStartDateArray = record.assessmentDetails.startDate | toDateArray %}
+
+{{ govukDateInput({
+  id: "assessment-start-date",
+  namePrefix: "record[assessmentDetails][startDate]",
+  fieldset: {
+    legend: {
+      text: "Assessment start date",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "For example, 31 3 1921"
+  },
+  items: [
+      {
+        name: "day",
+        classes: "govuk-input--width-2",
+        value: assessmentStartDateArray["0"]
+      },
+      {
+        name: "month",
+        classes: "govuk-input--width-2",
+        value: assessmentStartDateArray["1"]
+      },
+      {
+        name: "year",
+        classes: "govuk-input--width-4",
+        value: assessmentStartDateArray["2"]
+      }
+    ]
+}) }}
+
+{% set assessmentEndDateArray = record.assessmentDetails.endDate | toDateArray %}
+
+{{ govukDateInput({
+  id: "assessment-end-date",
+  namePrefix: "record[assessmentDetails][endDate]",
+  fieldset: {
+    legend: {
+      text: "Assessment end date",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "For example, 31 3 1921"
+  },
+  items: [
+      {
+        name: "day",
+        classes: "govuk-input--width-2",
+        value: assessmentEndDateArray["0"]
+      },
+      {
+        name: "month",
+        classes: "govuk-input--width-2",
+        value: assessmentEndDateArray["1"]
+      },
+      {
+        name: "year",
+        classes: "govuk-input--width-4",
+        value: assessmentEndDateArray["2"]
+      }
+    ]
+}) }}
+
+{{ govukInput({
+  label: {
+    text: "Assessment duration in years",
+    classes: "govuk-label--s"
+  },
+  hint: {
+    text: "Or given names"
+  } if false,
+  id: "assessment-duration",
+  name: "record[assessmentDetails][duration]",
+  value: record.assessmentDetails["duration"],
+  classes: "govuk-!-width-two-thirds"
+}) }}
+
+
+{{ govukButton({
+  text: "Continue"
+}) }}
+
+
+
+
+
+

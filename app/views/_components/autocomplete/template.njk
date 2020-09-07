@@ -1,9 +1,17 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
+
+{% set defaultSelected = true %}
+{% if params.value %}
+  {% if params.value in params.items %}
+    {% set defaultSelected = false %}
+  {% endif %}
+{% endif %}
+
 {% set selectItems = [{
   value: "",
   text: "Please select",
   disabled: true,
-  selected: params.value === undefined
+  selected: defaultSelected
 }] %}
 
 {% for item in params.items %}
@@ -51,9 +59,10 @@
   var values = [{% for value in params.items %}"{{value}}",{% endfor %}];
 
   element = document.querySelector('#{{params.id}}');
-  id = '{{params.id}}-autocomplete';
+  // id = '{{params.id}}--autocomplete';
   defaultValue = '{{params.value}}';
 
+  // Conditional not used
   confirmFunction = function(val) {
     {% if params.conditional %}
 

@@ -43,6 +43,9 @@
   {% set recordPath = "/new-record" %}
 {% endif %} #}
 
+{% set canAmend = record.status | getAmendsAllowed %}
+
+
 {% block content %}
   {% block beforePageTitle %}{% endblock %}
   <form{% if formAction %} action="{{ formAction }}"{% endif %} method="post">

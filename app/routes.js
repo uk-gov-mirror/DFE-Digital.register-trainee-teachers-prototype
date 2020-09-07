@@ -65,6 +65,7 @@ router.post('/record/:uuid/:page/update', (req, res) => {
 router.get(['/new-record/new', '/new-record'], function (req, res) {
   const data = req.session.data
   delete data.record
+  data.record = { status: 'Draft' }
   res.redirect('/new-record/overview')
 })
 
@@ -117,6 +118,28 @@ router.post(['/:recordtype/:uuid/disabilities','/:recordtype/disabilities'], fun
   else {
     res.redirect(`${recordPath}/diversity/confirm`)
   }
+})
+
+// Diversity branching
+router.post(['/:recordtype/:uuid/assessment-details','/:recordtype/assessment-details'], function (req, res) {
+  const data = req.session.data
+  let record = data.record
+  let assessmentDetails = _.get(data, 'record.assessmentDetails')
+  let recordPath = getRecordPath(req)
+  // No data, return to page
+  if (!assessmentDetails){
+    res.redirect(`${recordPath}/assessment-dteails`)
+  }
+  console.log('assesment is', assessmentDetails)
+  console.log('body is', req.body)
+  // assessmentDetails.subject = req.body.record.assessmentDetails.subject
+  if (assessmentDetails.ageRange == 'Other age range'){
+    assessmentDetails.ageRange = assessmentDetails.ageRangeOther
+  }
+
+  record.assessmentDetails = assessmentDetails
+
+  res.redirect(`${recordPath}/assessment-details/confirm`)
 })
 
 // Save a record and put in data store
