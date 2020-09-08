@@ -1,9 +1,17 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
+
+{% set defaultSelected = true %}
+{% if params.value %}
+  {% if params.value in params.items %}
+    {% set defaultSelected = false %}
+  {% endif %}
+{% endif %}
+
 {% set selectItems = [{
   value: "",
   text: "Please select",
   disabled: true,
-  selected: params.value === undefined
+  selected: defaultSelected
 }] %}
 
 {% for item in params.items %}
@@ -51,32 +59,32 @@
   var values = [{% for value in params.items %}"{{value}}",{% endfor %}];
 
   element = document.querySelector('#{{params.id}}');
-  id = '{{params.id}}-autocomplete';
+  // id = '{{params.id}}--autocomplete';
   defaultValue = '{{params.value}}';
 
-  confirmFunction = function(val) {
-    {% if params.conditional %}
+  // Conditional not used
+  // confirmFunction = function(val) {
+  //   {% if params.conditional %}
 
-      if (val == 'Other'){
-        $('.{{params.idPrefix}}-conditional-container').removeClass("hidden")
-        console.log('removing hidden class')
-      }
-      else if (typeof(val) != 'undefined') {
-        $('.{{params.idPrefix}}-conditional-container').addClass("hidden")
-        console.log('adding hidden class')
-      }
-    {% endif %}
-  }
+  //     if (val == 'Other'){
+  //       $('.{{params.idPrefix}}-conditional-container').removeClass("hidden")
+  //       console.log('removing hidden class')
+  //     }
+  //     else if (typeof(val) != 'undefined') {
+  //       $('.{{params.idPrefix}}-conditional-container').addClass("hidden")
+  //       console.log('adding hidden class')
+  //     }
+  //   {% endif %}
+  // }
 
   accessibleAutocomplete.enhanceSelectElement({
     selectElement: element,
-    name: "{{params.name}}",
     showAllValues: true,
     source: values,
-    defaultValue: defaultValue,
-    onConfirm: confirmFunction
-  });
+    defaultValue: defaultValue
 
+  });
+    // onConfirm: confirmFunction
 
 
 </script>

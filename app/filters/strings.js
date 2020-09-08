@@ -7,8 +7,6 @@ const _ = require('lodash');
 var filters = {}
 
 
-
-
 // Create url / slugs from text
 // This is a heading => this-is-a-heading
 filters.slugify = (input) => {
