@@ -2,33 +2,49 @@
 {% extends "layout.html" %}
 {% set bodyClasses = "start-page" %}
 
-{% block content %}
-
-<div class="start-page-banner">
-
+{% block main %}
   <div class="govuk-width-container">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
+    {{ govukPhaseBanner({
+      tag: {
+        text: "prototype"
+      },
+      html: 'This is a prototype of a new service. Some parts of this prototype do not work yet. '
+    }) }}
+    {# this overrides the default phase banner from layout.html #}
+    {% block beforeContent %}
+    {% endblock %}
+  </div>
+  <div class="start-page-banner">
 
-        <h1 class="start-page-banner__text start-page-banner__heading govuk-heading-xl">Register trainee teachers</h1>
-        <p class="start-page-banner__text start-page-banner__description govuk-body govuk-!-font-size-27">A service for collecting and maintaining trainee teacher registration data.</p>
-        <div class="start-page-banner__actions">
-          {{ govukButton({
-            text: "Get started",
-            href: "/records.html",
-            classes: "start-page-banner__button",
-            isStartButton: true
-          }) }}
-          <p class="govuk-body start-page-banner__text">or   
-          <a class="govuk-link govuk-link--no-visited-state" href="/records">sign in</a> 
-          if you’ve used it before</p>
+    <div class="govuk-width-container">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+
+          <h1 class="start-page-banner__text start-page-banner__heading govuk-heading-xl">Register trainee teachers</h1>
+          <p class="start-page-banner__text start-page-banner__description govuk-body govuk-!-font-size-27">A service for collecting and maintaining trainee teacher registration data.</p>
+          <div class="start-page-banner__actions">
+            {{ govukButton({
+              text: "Get started",
+              href: "/records.html",
+              classes: "start-page-banner__button",
+              isStartButton: true
+            }) }}
+            <p class="govuk-body start-page-banner__text">or   
+            <a class="govuk-link govuk-link--no-visited-state" href="/records">sign in</a> 
+            if you’ve used it before</p>
+          </div>
+
         </div>
-
       </div>
-    </div>
-  </div>  
+    </div>  
 
-</div>
+    </div>
+
+  {# pulls in default gov uk template #}
+  {{super()}}
+{% endblock %}
+
+{% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">

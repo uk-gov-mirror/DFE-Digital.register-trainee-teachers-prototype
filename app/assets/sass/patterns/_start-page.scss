@@ -15,15 +15,9 @@
 .start-page-banner {
   padding-top: govuk-spacing(7);
   padding-bottom: govuk-spacing(7);
-  margin-bottom: govuk-spacing(7);
   background-color: govuk-colour("blue");
   color: #fff;
   overflow: hidden;
-  // Full bleed from Andy Bell
-  // https://hankchizljaw.com/wrote/creating-a-full-bleed-css-utility/
-  width: 100vw;
-  margin-left: 50%;
-  transform: translateX(-50%);
 }
 
 .start-page-banner__heading,
