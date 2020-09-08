@@ -6,20 +6,25 @@
 var filters = {}
 
 // Return firstname + lastname
-filters.getShortName = person => {
+filters.getShortName = ({
+  givenName="", 
+  familyName=""} = false) => {
   let names = []
-  if (person.givenName) names.push(person.givenName)
-  if (person.familyName) names.push(person.familyName)
-  return names.join(' ')
+  names.push(givenName)
+  names.push(familyName)
+  return names.filter(Boolean).join(' ')
 }
 
 // Return full name with middle names if present
-filters.getFullName = person => {
+filters.getFullName = ({
+  givenName="", 
+  middleNames="", 
+  familyName=""} = false) => {
   let names = []
-  if (person.givenName) names.push(person.givenName)
-  if (person.middleNames) names.push(person.middleNames)
-  if (person.familyName) names.push(person.familyName)
-  return names.join(' ')
+  names.push(givenName)
+  names.push(middleNames)
+  names.push(familyName)
+  return names.filter(Boolean).join(' ')
 }
 
 // -------------------------------------------------------------------

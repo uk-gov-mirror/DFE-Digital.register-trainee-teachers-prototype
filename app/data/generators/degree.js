@@ -12,6 +12,7 @@ module.exports = (faker, isInternationCandidate) => {
       return {
         type: 'Diplôme',
         subject,
+        isInternational: "true",
         org: 'University of Paris',
         country: 'France',
         grade: 'Pass',
@@ -41,6 +42,7 @@ module.exports = (faker, isInternationCandidate) => {
       return {
         type: type.value + (grade.includes('honours') ? ' (Hons)' : ''),
         subject,
+        isInternational: "false",
         org: faker.helpers.randomize(degreeData().orgs),
         country: 'United Kingdom',
         grade,

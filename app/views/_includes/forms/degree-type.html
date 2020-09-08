@@ -2,6 +2,12 @@
 
 {% set degreeCount = record.qualifications.degree | length %}
 
+{# Get degree (if it exists) from existing data #}
+{% set degree = record.qualifications.degree[itemIndex] %}
+{# Merge with temp store (temp store has) #}
+{% set degreeTemp = degree | mergeObjects(data.degreeTemp) %}
+{% set isInternational = degreeTemp.isInternational | falsify %}
+
 {% if degreeCount < 1 %}
 {# {% if degreeCount < 1 and action == "add" %} #}
   {% set ukHintText = "For example, BA, BSc or other (please specify)" %}
@@ -9,7 +15,6 @@
   {% set ukHintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
 {% endif %}
 {% set intHintHtml = "For example, Bachelor degree, Bachelor of Arts, <span lang=\"fr\">Diplôme</span>, <span lang=\"es\">Licenciatura</span>" %}
-
 
 <p class="govuk-body">Enter the details of the degree as they appear on the certificate, translating them into English if necessary</p>
 
@@ -24,15 +29,14 @@
       text: ukHintText
     },
     id: 'degree-type',
-    name: "record[degree][type]",
+    name: "degreeTemp[type]",
     items: data.degreeTypes,
     classes: "govuk-!-width-two-thirds",
-    value: record.degree.type
+    value: degreeTemp.type
     }
   ) }}
 {% endset %}
 
-{{degreeCount | log}}
 
 {% set internationalConditionalHtml %}
   {{ govukInput({
@@ -42,31 +46,30 @@
     hint: {
       html: intHintHtml
     }
-  } | decorateAttributes(record, "record.qualifications.degree.foo.isInternational")) }}
+  } | decorateAttributes(degreeTemp, "degreeTemp.type")) }}
 {% endset %}
 
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "What type of degree are you adding?",
-        classes: "govuk-fieldset__legend--s govuk-visually-hidden"
-      }
-    },
-    items: [{
-      value: "domestic",
-      text: "UK degree",
-      conditional: {
-        html: ukConditionalHtml
-      }
-    }, {
-      value: "international",
-      text: "Non-UK degree",
-      conditional: {
-        html: internationalConditionalHtml
-      }
-    }]
-  } | decorateAttributes(record, "record.qualifications.degree.foo.isInternational")) }}
-
+{{ govukRadios({
+  fieldset: {
+    legend: {
+      text: "What type of degree are you adding?",
+      classes: "govuk-fieldset__legend--s govuk-visually-hidden"
+    }
+  },
+  items: [{
+    value: "false",
+    text: "UK degree",
+    conditional: {
+      html: ukConditionalHtml
+    }
+  }, {
+    value: "true",
+    text: "Non-UK degree",
+    conditional: {
+      html: internationalConditionalHtml
+    }
+  }]
+} | decorateAttributes(degreeTemp, "degreeTemp.isInternational")) }}
 
 
 {{ govukButton({

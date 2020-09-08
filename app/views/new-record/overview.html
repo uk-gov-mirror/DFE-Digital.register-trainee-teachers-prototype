@@ -72,7 +72,7 @@
   },
   {
     text: "Degree",
-    href: "degree/confirm" if (record.qualifications.degree | length) else "degree-details",
+    href: "degree/confirm" if (record.qualifications.degree | length) else "degree/add",
     id: "qualification-degree",
     tag: {
       classes: (record.qualifications.degreeStatus.status or (record.qualifications.degree | getStatusText)) | getStatusClass,

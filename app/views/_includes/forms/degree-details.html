@@ -1,11 +1,10 @@
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
-{# {{data.subjects | log}} #}
 
-{% set isInternationalDegree = (record.degree.country == 'United Kingdom') %}
-
-{% set isInternationalDegree = true %}
-
-International degree: {{isInternationalDegree}}
+{# Get degree (if it exists) from existing data #}
+{% set degree = record.qualifications.degree[itemIndex] %}
+{# Merge with temp store (temp store has) #}
+{% set degreeTemp = degree | mergeObjects(data.degreeTemp) %}
+{% set isInternational = degreeTemp.isInternational | falsify %}
 
 {{ appAutocomplete({
   label: {
@@ -13,29 +12,29 @@ International degree: {{isInternationalDegree}}
     classes: "govuk-label--s"
   },
   id: 'subject',
-  name: "record[degree][subject]",
+  name: "degreeTemp[subject]",
   items: data.subjects,
   classes: "govuk-!-width-two-thirds",
-  value: record.degree.subject
+  value: degreeTemp.subject
   }
 ) }}
 
 
-{% if isInternationalDegree %}
+{% if isInternational %}
 
   {{ govukInput({
-  label: {
-    text: "Institution",
-    classes: "govuk-label--s"
-  },
-  hint: {
-    text: "Or given names"
-  } if false,
-  id: "degree-institution",
-  name: "record[degree][org]",
-  value: record.degree["org"],
-  classes: "govuk-!-width-two-thirds"
-}) }}
+    label: {
+      text: "Institution",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "Or given names"
+    } if false,
+    id: "degree-institution",
+    name: "degreeTemp[org]",
+    value: degreeTemp.org,
+    classes: "govuk-!-width-two-thirds"
+  }) }}
 
   {{ appAutocomplete({
     label: {
@@ -43,10 +42,10 @@ International degree: {{isInternationalDegree}}
       classes: "govuk-label--s"
     },
     id: 'degree-country',
-    name: "record[degree][country]",
+    name: "degreeTemp[country]",
     items: data.countries,
     classes: "govuk-!-width-two-thirds",
-    value: record.degree.country
+    value: degreeTemp.country
     }
   ) }}
 
@@ -58,10 +57,10 @@ International degree: {{isInternationalDegree}}
     classes: "govuk-label--s"
   },
   id: 'degree-organisations',
-  name: "record[degree][org]",
+  name: "degreeTemp[org]",
   items: data.degreeOrganisations,
   classes: "govuk-!-width-two-thirds",
-  value: record.degree.org
+  value: degreeTemp.org
   }
 ) }}
 {% endif %}
@@ -72,12 +71,12 @@ International degree: {{isInternationalDegree}}
     classes: "govuk-label--s"
   },
   id: "degree-start-date",
-  name: "record[degree][endDate]",
-  value: record.degree.endDate,
+  name: "degreeTemp[endDate]",
+  value: degreeTemp.endDate,
   classes: "govuk-!-width-one-quarter"
 }) }}
 
-{% if isInternationalDegree %}
+{% if isInternational %}
   {% set internationalDegreeGradeOtherHtml %}
     {{ govukInput({
       label: {
@@ -88,7 +87,7 @@ International degree: {{isInternationalDegree}}
       },
       id: "degree-start-date",
       classes: "govuk-!-width-two-thirds"
-    }| decorateAttributes(record, "record.qualifications.degree.degreeGradeOther"))}}
+    }| decorateAttributes(degreeTemp, "degreeTemp.grade"))}}
   {% endset %}
 
   {{ govukRadios({
@@ -121,7 +120,7 @@ International degree: {{isInternationalDegree}}
         text: "The candidate is still studying for their degree"
       }
     ]
-  } | decorateAttributes(record, "record.qualifications.degree.foo")) }}
+  } | decorateAttributes(degreeTemp, "degreeTemp.grade")) }}
 
 {% else %}
   
@@ -132,7 +131,7 @@ International degree: {{isInternationalDegree}}
       },
       id: "degree-start-date",
       classes: "govuk-!-width-two-thirds"
-    }| decorateAttributes(record, "record.qualifications.degree.degreeGradeOther"))}}
+    }| decorateAttributes(degreeTemp, "degreeTemp.grade"))}}
   {% endset %}
 
   {{ govukRadios({
@@ -174,10 +173,9 @@ International degree: {{isInternationalDegree}}
         text: "The candidate is still studying for their degree"
       }
     ]
-  } | decorateAttributes(record, "record.qualifications.degree.foo")) }}
+  } | decorateAttributes(degreeTemp, "degreeTemp.grade")) }}
 
 {% endif %}
-
 
 
 {{ govukButton({
