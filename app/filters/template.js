@@ -23,7 +23,15 @@ var filters = {}
 
 */
 
-
+filters.getStatusesForQtsTabs = status => {
+  let statusesThatShowQtsTabs = [
+    'TRN received',
+    'Pending QTS',
+    'Deferred',
+    'Withdrawn'
+  ]
+  return statusesThatShowQtsTabs.includes(status)
+}
 
 
 // -------------------------------------------------------------------
