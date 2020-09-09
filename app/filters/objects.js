@@ -6,20 +6,10 @@ const _ = require('lodash');
 // Leave this filters line
 var filters = {}
 
-
-/*
-  ====================================================================
-  filterName
-  --------------------------------------------------------------------
-  Short description for the filter
-  ====================================================================
-
-  Usage:
-
-  [Usage here]
-
-
-*/
+// Combine objects without mutating original
+filters.mergeObjects = (...items) => {
+  return Object.assign({}, ...items)
+}
 
 
 /*

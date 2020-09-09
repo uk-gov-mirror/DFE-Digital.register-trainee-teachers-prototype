@@ -6,13 +6,14 @@
           {{ record.personalDetails | getShortName }}
         </a>
       </h3>
-      {# <p class="govuk-caption-m govuk-!-font-size-16 govuk-!-margin-bottom-0">DOB: {{record.personalDetails.dateOfBirth | govukDate}}</p> #}
       <p class="govuk-caption-m govuk-!-font-size-16 app-application-card__id govuk-!-margin-bottom-0">Candidate ID: {{record.candidateId}}</p>
+      {% if record.trn %}
+        <p class="govuk-caption-m govuk-!-font-size-16 app-application-card__id govuk-!-margin-bottom-0">TRN: {{record.trn}}</p>
+      {% endif %}
     </div>
     <div class="app-application-card_col">
       <p class="govuk-body govuk-!-margin-bottom-0">{{record.assessmentDetails.subject}}</p>
       <p class="govuk-body govuk-hint govuk-!-margin-bottom-0">Assessment only</p>
-      
     </div>
     <div class="app-application-card_col">
       {{govukTag({

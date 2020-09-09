@@ -20,6 +20,7 @@
 {% include "_includes/summary-cards/diversity.html" %}
 
 <h2 class="govuk-heading-m">Education</h2>
+{% include "_includes/summary-cards/gcse-details.html" %}
 
 <h3 class="govuk-heading-s">{{ "Degree" | pluralise(record.qualifications.degree | length)}}</h3>
 {% for degree in record.qualifications.degree %}
