@@ -24,8 +24,7 @@ const generateAssessmentDetails = require('../app/data/generators/assessment-det
 const generateDegree = require('../app/data/generators/degree')
 
 const generateGce = require('../app/data/generators/gce')
-
-// const generateGcse = require('../app/data/generators/gcse')
+const generateGcse = require('../app/data/generators/gcse')
 // const generateEnglishLanguageQualification = require('../app/data/generators/english-language-qualification')
 // const generateOtherQualifications = require('../app/data/generators/other-qualifications')
 // const generateWorkHistory = require('../app/data/generators/work-history')
@@ -100,6 +99,7 @@ const generateFakeApplication = (params = {}) => {
     qualifications: {
       degree: params.degree || generateDegree(faker, isInternationalCandidate),
       gce: params.gce || generateGce(faker, isInternationalCandidate),
+      gcse: params.gcse || generateGcse(faker, isInternationalCandidate)
     }
 
     // gcse: params.gcse || generateGcse(faker, personalDetails.isInternationalCandidate),

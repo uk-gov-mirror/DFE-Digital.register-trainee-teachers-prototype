@@ -34,13 +34,19 @@
     {% include "_includes/summary-cards/diversity.html" %}
 
     <h2 class="govuk-heading-m">Education</h2>
-    {{record.qualifications.degree | log}}
+
+    {{ record.qualifications.gcse | log  }}
+    {# {% for subject, gcse in record.qualifications.gcse %} #}
+      {% include "_includes/summary-cards/gcse-details.html" %}
+    {# {% endfor %} #}
+
+    {# {{record.qualifications.degree | log}} #}
     <h3 class="govuk-heading-s">{{ "Degree" | pluralise(record.qualifications.degree | length)}}</h3>
     {% for degree in record.qualifications.degree %}
       {% include "_includes/summary-cards/degree-details.html" %}
     {% endfor %}
 
-    {{record | log}}
+    {# {{record | log}} #}
     {% set degreeCount = record.qualifications.degree | length %}
 
      <div class="govuk-form-group">
