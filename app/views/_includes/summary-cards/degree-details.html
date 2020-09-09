@@ -1,11 +1,3 @@
-{% set recordPath = "" %}
-
-{% if record.id %}
-  {% set recordPath = "/record/" + record.id %}
-{% else %}
-  {% set recordPath = "/new-record" %}
-{% endif %}
-
 
 {% set expectedDuration = 'Not provided' %}
 {% if record.assessmentDetails.duration | falsify %}
@@ -114,7 +106,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/degree" + loop.index0 + "/details?referrer=" + referrer,
+          href: recordPath + "/degree/" + loop.index0 + "/details?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "degree graduation year"
         }

@@ -30,17 +30,7 @@ router.get('/record/:uuid', function (req, res) {
   }
 })
 
-// Existing record pages
-router.get('/record/:uuid/:page*', function (req, res) {
-  let records = req.session.data.records
-  const record = records.find(record => record.id == req.params.uuid)
-  if (!record){
-    res.redirect('/records')
-  }
-  else {
-    res.render(path.join('record', req.params.page, req.params[0]))
-  }
-})
+
 
 // Copy temp record back to real record
 router.post('/record/:uuid/:page/update', (req, res) => {
@@ -148,6 +138,7 @@ router.get(['/:recordtype/:uuid/degree/:index/delete','/:recordtype/degree/:inde
 // Forward degree requests to the right template, including the index
 router.get(['/:recordtype/:uuid/degree/:index/:page','/:recordtype/degree/:index/:page'], function (req, res) {
   let recordPath = getRecordPath(req)
+  console.log('here')
   // res.render(`${recordPath}/degree/${req.params.index}/${req.params.page}`, {itemIndex: req.params.index})
   res.render(`${req.params.recordtype}/degree/${req.params.page}`, {itemIndex: req.params.index})
 })
@@ -157,6 +148,8 @@ router.post(['/:recordtype/:uuid/degree/:index/confirm','/:recordtype/degree/:in
   const data = req.session.data
   let newDegree = data.degreeTemp
   delete data.degreeTemp
+  if (newDegree.grade && _.isArray(newDegree.grade)) newDegree.grade = _(newDegree.grade).uniq().compact().value()
+  if (newDegree.type && _.isArray(newDegree.type)) newDegree.type = _(newDegree.type).uniq().compact().value()
   let existingDegrees = _.get(data, "record.qualifications.degree")
   let degreeIndex = req.params.index
   let recordPath = getRecordPath(req)
@@ -254,6 +247,18 @@ router.post('/new-record/save', (req, res) => {
     res.redirect('/new-record/submitted')
   }
 
+})
+
+// Existing record pages
+router.get('/record/:uuid/:page*', function (req, res) {
+  let records = req.session.data.records
+  const record = records.find(record => record.id == req.params.uuid)
+  if (!record){
+    res.redirect('/records')
+  }
+  else {
+    res.render(path.join('record', req.params.page, req.params[0]))
+  }
 })
 
 // Filters
