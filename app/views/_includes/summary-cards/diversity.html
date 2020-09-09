@@ -1,11 +1,3 @@
-{% set recordPath = "" %}
-
-{% if record.id %}
-  {% set recordPath = "/record/" + record.id %}
-{% else %}
-  {% set recordPath = "/new-record" %}
-{% endif %}
-
 
 {% set diversityInformationDisclosed = (record.diversity.diversityDisclosed | falsify) %}
 {% set diversityDisclosedText = 'Information disclosed' if diversityInformationDisclosed else 'Not disclosed' %}
@@ -114,7 +106,7 @@
       text: "Disabilities"
     },
     value: {
-      text: record.diversity.disabilities | joinify | lower | sentenceCase
+      text: record.diversity.disabilities | joinify | lower | sentenceCase or "Not provided"
     },
     actions: {
       items: [

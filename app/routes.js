@@ -9,8 +9,15 @@ const getRecordPath = req => {
   return (recordType == 'record') ? ('/record/' + req.params.uuid) : '/new-record'
 }
 
+const deleteTempData = (req) => {
+  const data = req.session.data
+  delete data.degreeTemp
+  delete data.record
+}
+
 // Set up data when viewing a record
 router.get('/record/:uuid', function (req, res) {
+  deleteTempData(req)
   const records = req.session.data.records
   const record = records.find(record => record.id == req.params.uuid)
   if (!record){
@@ -30,17 +37,7 @@ router.get('/record/:uuid', function (req, res) {
   }
 })
 
-// Existing record pages
-router.get('/record/:uuid/:page*', function (req, res) {
-  let records = req.session.data.records
-  const record = records.find(record => record.id == req.params.uuid)
-  if (!record){
-    res.redirect('/records')
-  }
-  else {
-    res.render(path.join('record', req.params.page, req.params[0]))
-  }
-})
+
 
 // Copy temp record back to real record
 router.post('/record/:uuid/:page/update', (req, res) => {
@@ -53,7 +50,7 @@ router.post('/record/:uuid/:page/update', (req, res) => {
   }
   else {
     // Delete temp data
-    delete data.record
+    deleteTempData(req)
     const recordIndex = records.findIndex(record => record.id == req.params.uuid)
     // Overwrite record with temp record
     records[recordIndex] = newRecord
@@ -118,6 +115,87 @@ router.post(['/:recordtype/:uuid/disabilities','/:recordtype/disabilities'], fun
   else {
     res.redirect(`${recordPath}/diversity/confirm`)
   }
+})
+
+// Add a degree - sends you to index one greater than current number of degrees
+router.get(['/:recordtype/:uuid/degree/add','/:recordtype/degree/add'], function (req, res) {
+  const data = req.session.data
+  let degrees = _.get(data, "record.qualifications.degree")
+  let degreeCount = (degrees) ? degrees.length : 0
+  let recordPath = getRecordPath(req)
+  res.redirect(`${recordPath}/degree/${degreeCount}/type`)
+})
+
+// Delete degree at index
+router.get(['/:recordtype/:uuid/degree/:index/delete','/:recordtype/degree/:index/delete'], function (req, res) {
+  const data = req.session.data
+  let recordPath = getRecordPath(req)
+  degreeIndex = req.params.index
+  if (_.get(data, "record.qualifications.degree[" + degreeIndex + "]")){
+    _.pullAt(data.record.qualifications.degree, [degreeIndex]) //delete item at index
+    // Clear data if there are no more degrees - so the task list thinks the section is not started
+    if (data.record.qualifications.degree.length == 0){
+      delete data.record.qualifications.degree
+      delete data.record.qualifications.degreeStatus
+    }
+  }
+  res.redirect(`${recordPath}/degree/confirm`)
+})
+
+// Forward degree requests to the right template, including the index
+router.get(['/:recordtype/:uuid/degree/:index/:page','/:recordtype/degree/:index/:page'], function (req, res) {
+  let recordPath = getRecordPath(req)
+  res.render(`${req.params.recordtype}/degree/${req.params.page}`, {itemIndex: req.params.index})
+})
+
+// Save degree data from temporary store
+router.post(['/:recordtype/:uuid/degree/:index/confirm','/:recordtype/degree/:index/confirm'], function (req, res) {
+  const data = req.session.data
+  let newDegree = data.degreeTemp
+  delete data.degreeTemp
+
+  // Save the correct type
+  if (newDegree.isInternational == "true" && newDegree.typeInt){
+    newDegree.type = newDegree.typeInt
+    delete newDegree.typeUK
+    delete newDegree.typeInt
+  }
+  if (newDegree.isInternational == "false" && newDegree.typeUK){
+    newDegree.type = newDegree.typeUK
+    delete newDegree.typeUK
+    delete newDegree.typeInt
+  }
+
+  // Combine radio and text inputs
+  if (newDegree.baseGrade){
+    if (newDegree.baseGrade == "Other"){
+      newDegree.grade = newDegree.otherGrade
+      delete newDegree.baseGrade
+      delete newDegree.otherGrade
+    }
+    else {
+      newDegree.grade = newDegree.baseGrade
+      delete newDegree.baseGrade
+      delete newDegree.otherGrade
+    }
+  }
+
+  let existingDegrees = _.get(data, "record.qualifications.degree")
+  let degreeIndex = req.params.index
+  let recordPath = getRecordPath(req)
+
+  if (existingDegrees && existingDegrees[degreeIndex]) {
+    // Might be a partial update, so merge the new with the old
+    existingDegrees[degreeIndex] = Object.assign({}, existingDegrees[degreeIndex], newDegree)
+  }
+  else {
+    existingDegrees = (!existingDegrees) ? [] : existingDegrees
+    existingDegrees.push(newDegree)
+  }
+
+  _.set(data, 'record.qualifications.degree', existingDegrees)
+
+  res.redirect(`${recordPath}/degree/confirm`)
 })
 
 // Diversity branching
@@ -199,6 +277,18 @@ router.post('/new-record/save', (req, res) => {
     res.redirect('/new-record/submitted')
   }
 
+})
+
+// Existing record pages
+router.get('/record/:uuid/:page*', function (req, res) {
+  let records = req.session.data.records
+  const record = records.find(record => record.id == req.params.uuid)
+  if (!record){
+    res.redirect('/records')
+  }
+  else {
+    res.render(path.join('record', req.params.page, req.params[0]))
+  }
 })
 
 // Filters

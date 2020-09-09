@@ -1,7 +1,5 @@
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
-{# {{data.subjects | log}} #}
 
-{{record.assessmentDetails | log}}
 {{ appAutocomplete({
   label: {
     text: "Subject",
@@ -144,7 +142,8 @@
     ]
 }) }}
 
-{{ govukInput({
+{# Possibly not needed #}
+{# {{ govukInput({
   label: {
     text: "Assessment duration in years",
     classes: "govuk-label--s"
@@ -157,7 +156,7 @@
   value: record.assessmentDetails["duration"],
   classes: "govuk-!-width-two-thirds"
 }) }}
-
+ #}
 
 {{ govukButton({
   text: "Continue"

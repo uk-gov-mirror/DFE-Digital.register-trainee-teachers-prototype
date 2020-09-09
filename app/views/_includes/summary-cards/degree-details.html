@@ -1,11 +1,3 @@
-{% set recordPath = "" %}
-
-{% if record.id %}
-  {% set recordPath = "/record/" + record.id %}
-{% else %}
-  {% set recordPath = "/new-record" %}
-{% endif %}
-
 
 {% set expectedDuration = 'Not provided' %}
 {% if record.assessmentDetails.duration | falsify %}
@@ -23,7 +15,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/degree-details?referrer=" + referrer,
+          href: recordPath + "/degree/" + loop.index0 + "/type?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "degree type"
         }
@@ -40,7 +32,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/degree-details?referrer=" + referrer,
+          href: recordPath + "/degree/" + loop.index0 + "/details?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "degree subject"
         }
@@ -57,7 +49,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/degree-details?referrer=" + referrer,
+          href: recordPath + "/degree/" + loop.index0 + "/details?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "degree institution"
         }
@@ -75,7 +67,7 @@
   actions: {
     items: [
       {
-        href: recordPath + "/degree-details?referrer=" + referrer,
+        href: recordPath + "/degree/" + loop.index0 + "/details?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "degree country"
       }
@@ -97,13 +89,13 @@
     actions: {
       items: [
         {
-          href: recordPath + "/degree-details?referrer=" + referrer,
+          href: recordPath + "/degree/" + loop.index0 + "/details?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "degree start year"
         }
       ]
     } if canAmend
-  },
+  } if false,
   {
     key: {
       text: "Graduation year"
@@ -114,7 +106,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/degree-details?referrer=" + referrer,
+          href: recordPath + "/degree/" + loop.index0 + "/details?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "degree graduation year"
         }
@@ -134,7 +126,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/degree-details?referrer=" + referrer,
+          href: recordPath + "/degree/" + loop.index0 + "/details?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "degree grade"
         }
@@ -151,10 +143,22 @@
   }) }}
 {% endset %}
 
+{% if degree.country == "United Kingdom" %}
+  {% set titleText = degree.type + " " + degree.subject %}
+{% else %}
+  {% set titleText = degree.type + ": " + degree.subject %}
+{% endif %}
+
 
 {{ appSummaryCard({
   classes: "govuk-!-margin-bottom-6",
-  titleText: "Contact details",
+  titleText: titleText,
+  actions: {
+    items: [{
+      href: recordPath + "/degree/" + loop.index0 + "/delete?referrer=" + referrer,
+      text: "Delete degree"
+    }]
+  } if canAmend,
   html: degreeDetailsHtml
 }) }}
 

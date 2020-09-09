@@ -38,7 +38,10 @@
   {% set record = {} %}
 {% endif %}
 
-{% set canAmend = record.status | getAmendsAllowed %}
+{% set canAmend = (record.status or 'Draft') | getAmendsAllowed %}
+
+{# Used by summary cards #}
+{% set recordPath = "/new-record" %}
 
 {% block content %}
   {% block beforePageTitle %}{% endblock %}

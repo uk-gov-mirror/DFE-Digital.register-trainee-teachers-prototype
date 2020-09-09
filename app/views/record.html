@@ -9,6 +9,8 @@
 
 {% set canAmend = record.status | getAmendsAllowed %}
 
+{% set recordPath = "/record/" + record.id %}
+
 <div class="govuk-grid-row">
 
   <div class="govuk-grid-column-full">
@@ -37,6 +39,17 @@
     {% for degree in record.qualifications.degree %}
       {% include "_includes/summary-cards/degree-details.html" %}
     {% endfor %}
+
+    {{record | log}}
+    {% set degreeCount = record.qualifications.degree | length %}
+
+     <div class="govuk-form-group">
+      {{ govukButton({
+        "text": "Add another degree" if degreeCount > 0 else "Add a degree",
+        href: recordPath + "/degree/add",
+        classes: "govuk-button--secondary"
+      }) }}
+    </div>
 
     <h2 class="govuk-heading-m">Assessment details</h2>
     {% include "_includes/summary-cards/assessment-details.html" %}

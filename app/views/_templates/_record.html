@@ -37,14 +37,10 @@
   {% set record = {} %}
 {% endif %}
 
-{# {% if record.id %} #}
-  {% set recordPath = "/record/" + record.id %}
-{# {% else %}
-  {% set recordPath = "/new-record" %}
-{% endif %} #}
-
 {% set canAmend = record.status | getAmendsAllowed %}
 
+{# Used by summary cards #}
+{% set recordPath = "/record/" + record.id %}
 
 {% block content %}
   {% block beforePageTitle %}{% endblock %}
