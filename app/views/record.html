@@ -3,11 +3,12 @@
 
 {% set backLink = '/records' %}
 {% set pageHeading = record.personalDetails | getShortName %}
-
+{% set navActive = 'record' %}
 
 {% block content %}
 
 {% set canAmend = record.status | getAmendsAllowed %}
+{% set qtsTabsShouldShow = record.status | getStatusesForQtsTabs %}
 
 <div class="govuk-grid-row">
 
@@ -20,6 +21,11 @@
         classes: record.status | getStatusClass
       })}}
     <h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
+    {% if qtsTabsShouldShow %}
+      {% include "_includes/tabs.njk" %}
+    {% endif %}
+
     <h2 class="govuk-heading-m">Trainee record</h2>
     {% include "_includes/summary-cards/student-record.html" %}
 
