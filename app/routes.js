@@ -9,8 +9,15 @@ const getRecordPath = req => {
   return (recordType == 'record') ? ('/record/' + req.params.uuid) : '/new-record'
 }
 
+const deleteTempData = (req) => {
+  const data = req.session.data
+  delete data.degreeTemp
+  delete data.record
+}
+
 // Set up data when viewing a record
 router.get('/record/:uuid', function (req, res) {
+  deleteTempData(req)
   const records = req.session.data.records
   const record = records.find(record => record.id == req.params.uuid)
   if (!record){
@@ -43,7 +50,7 @@ router.post('/record/:uuid/:page/update', (req, res) => {
   }
   else {
     // Delete temp data
-    delete data.record
+    deleteTempData(req)
     const recordIndex = records.findIndex(record => record.id == req.params.uuid)
     // Overwrite record with temp record
     records[recordIndex] = newRecord
@@ -138,8 +145,6 @@ router.get(['/:recordtype/:uuid/degree/:index/delete','/:recordtype/degree/:inde
 // Forward degree requests to the right template, including the index
 router.get(['/:recordtype/:uuid/degree/:index/:page','/:recordtype/degree/:index/:page'], function (req, res) {
   let recordPath = getRecordPath(req)
-  console.log('here')
-  // res.render(`${recordPath}/degree/${req.params.index}/${req.params.page}`, {itemIndex: req.params.index})
   res.render(`${req.params.recordtype}/degree/${req.params.page}`, {itemIndex: req.params.index})
 })
 
@@ -148,8 +153,33 @@ router.post(['/:recordtype/:uuid/degree/:index/confirm','/:recordtype/degree/:in
   const data = req.session.data
   let newDegree = data.degreeTemp
   delete data.degreeTemp
-  if (newDegree.grade && _.isArray(newDegree.grade)) newDegree.grade = _(newDegree.grade).uniq().compact().value()
-  if (newDegree.type && _.isArray(newDegree.type)) newDegree.type = _(newDegree.type).uniq().compact().value()
+
+  // Save the correct type
+  if (newDegree.isInternational == "true" && newDegree.typeInt){
+    newDegree.type = newDegree.typeInt
+    delete newDegree.typeUK
+    delete newDegree.typeInt
+  }
+  if (newDegree.isInternational == "false" && newDegree.typeUK){
+    newDegree.type = newDegree.typeUK
+    delete newDegree.typeUK
+    delete newDegree.typeInt
+  }
+
+  // Combine radio and text inputs
+  if (newDegree.baseGrade){
+    if (newDegree.baseGrade == "Other"){
+      newDegree.grade = newDegree.otherGrade
+      delete newDegree.baseGrade
+      delete newDegree.otherGrade
+    }
+    else {
+      newDegree.grade = newDegree.baseGrade
+      delete newDegree.baseGrade
+      delete newDegree.otherGrade
+    }
+  }
+
   let existingDegrees = _.get(data, "record.qualifications.degree")
   let degreeIndex = req.params.index
   let recordPath = getRecordPath(req)

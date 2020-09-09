@@ -40,7 +40,7 @@ module.exports = (faker, isInternationCandidate) => {
       ])
 
       return {
-        type: type.value + (grade.includes('honours') ? ' (Hons)' : ''),
+        type: type.text,
         subject,
         isInternational: "false",
         org: faker.helpers.randomize(degreeData().orgs),

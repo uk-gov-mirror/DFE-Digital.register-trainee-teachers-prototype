@@ -19,6 +19,8 @@
 <p class="govuk-body">Enter the details of the degree as they appear on the certificate, translating them into English if necessary</p>
 
 <p class="govuk-body">If the candidate has further postgraduate degrees, you’ll be able to add them next.</p>
+{{degreeTemp |log}}
+{{degreeTemp.type | log}}
 
 {% set ukConditionalHtml %}
   {{ appAutocomplete({
@@ -29,10 +31,10 @@
       text: ukHintText
     },
     id: 'degree-type',
-    name: "degreeTemp[type]",
+    name: "degreeTemp[typeUK]",
     items: data.degreeTypes,
     classes: "govuk-!-width-two-thirds",
-    value: degreeTemp.type
+    value: (degreeTemp.type or degreeTemp.typeUK) if not isInternational
     }
   ) }}
 {% endset %}
@@ -40,13 +42,14 @@
 
 {% set internationalConditionalHtml %}
   {{ govukInput({
+    value: (degreeTemp.type or degreeTemp.typeUK) if isInternational,
     label: {
       text: "Type of qualification"
     },
     hint: {
       html: intHintHtml
     }
-  } | decorateAttributes(degreeTemp, "degreeTemp.type")) }}
+  } | decorateAttributes(degreeTemp, "degreeTemp.typeInt")) }}
 {% endset %}
 
 {{ govukRadios({

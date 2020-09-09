@@ -6,6 +6,9 @@
 {% set degreeTemp = degree | mergeObjects(data.degreeTemp) %}
 {% set isInternational = degreeTemp.isInternational | falsify %}
 
+{{data.degreeTemp | log}}
+{{degreeTemp | log}}
+
 {{ appAutocomplete({
   label: {
     text: "Degree subject",
@@ -77,6 +80,17 @@
 }) }}
 
 {% if isInternational %}
+
+  {% set storedGrade = degreeTemp.grade %}
+  {% set storedGradeOther = false %}
+
+  {% if not storedGrade in [
+    "Not applicable",
+    "Unknown",
+    "The candidate is still studying for their degree"] %}
+    {% set storedGradeOther = true %}
+    
+  {% endif %}
   {% set internationalDegreeGradeOtherHtml %}
     {{ govukInput({
       label: {
@@ -86,7 +100,9 @@
         text: "For example, ‘A’, ‘4.5’, ‘94%’, ‘Distinction’"
       },
       id: "degree-start-date",
-      classes: "govuk-!-width-two-thirds"
+      classes: "govuk-!-width-two-thirds",
+      name: "degreeTemp[otherGrade]",
+      value: degreeTemp.grade if storedGradeOther
     }| decorateAttributes(degreeTemp, "degreeTemp.grade"))}}
   {% endset %}
 
@@ -97,6 +113,7 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
+    name: "degreeTemp[baseGrade]",
     hint: {
       text: ""
     },
@@ -109,6 +126,7 @@
       },
       {
         text: "Other",
+        checked: storedGradeOther,
         conditional: {
           html: internationalDegreeGradeOtherHtml
         }
@@ -123,14 +141,28 @@
   } | decorateAttributes(degreeTemp, "degreeTemp.grade")) }}
 
 {% else %}
-  
+
+  {% set storedGrade = degreeTemp.grade %}
+  {{storedGrade | log}}
+  {% set storedGradeOther = false %}
+  {% if not storedGrade in [
+    "First-class honours",
+    "Upper second-class honours (2:1)",
+    "Lower second-class honours (2:2)",
+    "Third-class honours",
+    "Pass",
+    "The candidate is still studying for their degree"] %}
+    {% set storedGradeOther = true %}
+  {% endif %}
   {% set degreeGradeOtherHtml %}
     {{ govukInput({
       label: {
         text: "Enter the degree grade"
       },
       id: "degree-start-date",
-      classes: "govuk-!-width-two-thirds"
+      classes: "govuk-!-width-two-thirds",
+      name: "degreeTemp[otherGrade]",
+      value: degreeTemp.grade if storedGradeOther
     }| decorateAttributes(degreeTemp, "degreeTemp.grade"))}}
   {% endset %}
 
@@ -141,6 +173,7 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
+    name: "degreeTemp[baseGrade]",
     hint: {
       text: ""
     },
@@ -162,6 +195,7 @@
       },
       {
         text: "Other",
+        checked: storedGradeOther,
         conditional: {
           html: degreeGradeOtherHtml
         }
