@@ -3,24 +3,11 @@
 {% set pageHeading = data.record.personalDetails | getShortName %}
 {% set pageSubHeading = "QTS recommend" %}
 {% set isPageQtsRecommend = true %}
-{% set qtsTabsShouldShow = data.record.status | getStatusesForQtsTabs %}
 {% set formAction = "./personal-details/confirm" %}
   
-  {% block formContent %}
+{% block tabContent %}
 
-    {% if record.trn %}
-      <span class="govuk-caption-l">TRN: {{record.trn}}
-      </span>
-    {% endif %}
-    {{govukTag({
-        text: record.status,
-        classes: record.status | getStatusClass
-    })}}
-    <h1 class="govuk-heading-l">{{pageHeading}}</h1>
-
-    {% if qtsTabsShouldShow %}
-      {% include "_includes/tabs.njk" %}
-    {% endif %}
+    
 
   {% include "_includes/forms/qts-recommend.html" %}
 
