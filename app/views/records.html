@@ -6,7 +6,7 @@
 
 <h1 class="govuk-heading-xl">{{pageHeading}}</h1>
 
-<div class="applications-header">
+<div class="records-header">
 
   {{ govukButton({
     text: "Add a trainee",
@@ -52,7 +52,7 @@
             <div class="moj-action-bar__filter"></div>
           </div>
           
-          <div class="filter-layout__search ">
+          <div class="records-search">
             {{ govukInput({
               label: {
                 html: "Search <span class='govuk-visually-hidden'>records</span> ",
@@ -60,6 +60,9 @@
               },
               id: "search-records",
               name: "search-records"
+            }) }}
+            {{ govukButton({
+              text: "Search"
             }) }}
           </div>
 
