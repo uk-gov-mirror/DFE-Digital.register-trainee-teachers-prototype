@@ -76,6 +76,27 @@ router.get('/record/:uuid', function (req, res) {
 
 
 
+// Copy qts data back to real record
+router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
+  const data = req.session.data
+  const records = data.records
+  const newRecord = data.record
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    // Delete temp data
+    deleteTempData(req)
+    newRecord.status = 'Pending QTS'
+    newRecord.updatedDate = new Date()
+    const recordIndex = records.findIndex(record => record.id == req.params.uuid)
+    // Overwrite record with temp record
+    records[recordIndex] = newRecord
+    res.redirect('/record/' + req.params.uuid)
+  }
+})
+
 // Copy temp record back to real record
 router.post('/record/:uuid/:page/update', (req, res) => {
   const data = req.session.data
@@ -88,6 +109,7 @@ router.post('/record/:uuid/:page/update', (req, res) => {
   else {
     // Delete temp data
     deleteTempData(req)
+    newRecord.updatedDate = new Date()
     const recordIndex = records.findIndex(record => record.id == req.params.uuid)
     // Overwrite record with temp record
     records[recordIndex] = newRecord
@@ -282,7 +304,7 @@ router.get('/new-record/save-as-draft', (req, res) => {
   else {
     delete data.record
     record.status = "Draft" // just in case
-    record.lastUpdated = new Date()
+    record.updatedDate = new Date()
     // Could be an existing draft
     if (record.id){
       const recordIndex = records.findIndex(record => record.id == req.params.uuid)

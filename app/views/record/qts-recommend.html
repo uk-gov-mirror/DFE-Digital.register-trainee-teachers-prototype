@@ -6,7 +6,15 @@
 {% set formAction = "./personal-details/confirm" %}
   
 {% block tabContent %}
+  <h2 class="govuk-heading-l">{{pageSubHeading}}</h1>
 
-  {% include "_includes/forms/qts-recommend.html" %}
+  <p class="govuk-body">{{pageHeading}} has not yet been recomended for QTS.</p>
+
+  <div class="govuk-form-group">
+    {{ govukButton({
+      text: "Recommend for QTS",
+      href: "recommend-for-qts"
+    }) }}
+  </div>
 
 {% endblock %}

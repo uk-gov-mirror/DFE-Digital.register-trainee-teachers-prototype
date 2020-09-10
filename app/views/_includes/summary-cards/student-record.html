@@ -53,6 +53,26 @@
   }) %}
 {% endif %}
 
+{% if record.status == "Pending QTS" %}
+
+  {% set qtsContent %}
+    {{govukTag({
+      text: "Pending QTS",
+      classes: "govuk-tag--green govuk-!-margin-bottom-2"
+    })}} <br>
+    Recommended: 2 September 2020
+  {% endset %}
+
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: "QTS"
+    },
+    value: {
+      html: qtsContent
+    }
+  }) %}
+{% endif %}
+
 {% if record.status == "QTS awarded" %}
 
   {% set qtsContent %}
