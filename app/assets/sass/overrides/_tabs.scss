@@ -1,0 +1,13 @@
+// Tab overrides
+
+li.govuk-tabs__list-item {
+  font-weight: bold;
+  a {
+    text-decoration: none;
+  }
+}
+
+li.govuk-tabs__list-item--selected {
+  border-top: 5px solid $govuk-brand-colour !important;
+  padding-top: 10px !important;
+}
