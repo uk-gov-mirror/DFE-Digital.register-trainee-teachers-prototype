@@ -243,7 +243,12 @@ router.get(['/:recordtype/:uuid/degree/:index/delete','/:recordtype/degree/:inde
       delete data.record.qualifications.degreeStatus
     }
   }
-  res.redirect(`${recordPath}/degree/confirm${referrer}`)
+  if (referrer){
+    res.redirect(req.query.referrer)
+  }
+  else {
+    res.redirect(`${recordPath}/degree/confirm${referrer}`)
+  }
 })
 
 // Forward degree requests to the right template, including the index
