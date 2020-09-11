@@ -1,0 +1,27 @@
+{% extends "_templates/_new-record.html" %}
+
+{% set pageHeading = "Route not supported" %}
+{% set hideReturnLink = true %}
+
+
+{% block formContent %}
+  <h1 class="govuk-heading-l">{{pageHeading}}</h1>
+  
+  <p class="govuk-body">Assessment only is the only route currently supported by this service. More routes will be added soon.</p>
+
+  <p class="govuk-body">You can:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>
+      <a href="{{ './record-setup' | addReferrer(referrer) }}" class="govuk-link">go back and change your answer</a>
+    </li>
+    <li>
+      <a class="govuk-link" href="#">use a different service</a>
+    </li>
+  </ul>
+
+
+{% endblock %}
+
+
+
+

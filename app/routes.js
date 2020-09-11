@@ -122,7 +122,31 @@ router.get(['/new-record/new', '/new-record'], function (req, res) {
   const data = req.session.data
   delete data.record
   data.record = { status: 'Draft' }
-  res.redirect('/new-record/overview')
+  res.redirect('/new-record/record-setup')
+})
+
+// Diversity branching
+router.post('/new-record/record-setup', function (req, res) {
+  const data = req.session.data
+  let recordType = _.get(data, 'record.route')
+  let referrer = getReferrer(req.query.referrer)
+
+  // No data, return to page
+  if (!recordType){
+    res.redirect(`/new-record/record-setup${referrer}`)
+  }
+  else if (recordType == "Assessment only"){
+    if (referrer){
+      res.redirect(req.query.referrer)
+    }
+    else {
+      res.redirect(`/new-record/overview`)
+    }  
+  }
+  else {
+
+    res.redirect(`/new-record/route-not-supported${referrer}`)
+  }
 })
 
 // Diversity branching
