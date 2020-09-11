@@ -7,6 +7,7 @@
 {% set hideReturnLink = true %}
 {% set showIncomplete = true %}
 {% set backLink = './overview' %}
+{% set backText = 'New record overview' %}
 
 
 {% block formContent %}
@@ -15,6 +16,8 @@
 
 <span class="govuk-caption-l">New record</span>
 <h1 class="govuk-heading-l">Check before submitting for TRN</h1>
+
+{% include "_includes/summary-cards/record-setup.html" %}
 
 <h2 class="govuk-heading-m">Candidate details</h2>
 
