@@ -2,10 +2,12 @@
 {% extends "_templates/_record.html" %}
 
 {% set backLink = '/records' %}
+{% set backText = 'All records' %}
 {% set pageHeading = record.personalDetails | getShortName %}
 {% set activeTab = 'record' %}
 
 {% block tabContent %}
+{% set referrer = recordPath %}
 
 {% set canAmend = record.status | getAmendsAllowed %}
 

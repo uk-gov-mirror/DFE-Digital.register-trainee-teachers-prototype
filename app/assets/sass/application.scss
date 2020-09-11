@@ -26,6 +26,8 @@ $govuk-assets-path: '/govuk/assets/';
 @import "components/cookie-banner";
 
 // Overrides
+@import "overrides/govuk-panel";
+@import "overrides/govuk-error-summary";
 @import "overrides/moj-filter";
 @import "overrides/tabs";
 
