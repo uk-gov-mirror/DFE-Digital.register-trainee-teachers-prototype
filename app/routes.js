@@ -49,6 +49,7 @@ const recordIsComplete = record => {
 router.all('*', function(req, res, next){
   const referrer = req.query.referrer
   res.locals.referrer = referrer
+  res.locals.query = req.query
   next()
 })
 
@@ -125,7 +126,7 @@ router.get(['/new-record/new', '/new-record'], function (req, res) {
   res.redirect('/new-record/record-setup')
 })
 
-// Diversity branching
+// Route branching
 router.post('/new-record/record-setup', function (req, res) {
   const data = req.session.data
   let recordType = _.get(data, 'record.route')
@@ -147,6 +148,19 @@ router.post('/new-record/record-setup', function (req, res) {
 
     res.redirect(`/new-record/route-not-supported${referrer}`)
   }
+})
+
+// Route branching
+router.get('/new-record/check-record', function (req, res) {
+  const data = req.session.data
+  let errors = req.query.errors
+  let errorList = false
+  if (errors){
+    errorList = true
+  }
+
+  res.render('new-record/check-record', {errorList})
+
 })
 
 // Diversity branching
@@ -352,7 +366,7 @@ router.post('/new-record/save', (req, res) => {
 
   if (!recordIsComplete(newRecord)){
     console.log('Record is incomplete, returning to check record')
-    res.redirect('/new-record/check-record')
+    res.redirect('/new-record/check-record?errors=true')
   }
   else {
     newRecord.status = "Pending TRN"
@@ -373,7 +387,6 @@ router.post('/new-record/save', (req, res) => {
     req.session.data.recordId = newRecord.id //temp store for id to link to the record
     res.redirect('/new-record/submitted')
   }
-
 })
 
 // Existing record pages

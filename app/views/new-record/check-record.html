@@ -13,6 +13,17 @@
 {% block formContent %}
 {% set referrer = recordPath + "/check-record" %}
 
+{% if errorList %}
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+
+    errorList: [
+      {
+        text: "You must complete all sections before submitting for TRN"
+      }
+    ]
+  }) }}
+{% endif %}
 
 <span class="govuk-caption-l">New record</span>
 <h1 class="govuk-heading-l">Check before submitting for TRN</h1>
