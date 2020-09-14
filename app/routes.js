@@ -75,106 +75,11 @@ router.all('*', function(req, res, next){
   next()
 })
 
-// Set up data when viewing a record
-router.get('/record/:uuid', function (req, res) {
-  const data = req.session.data
+// =============================================================================
+// Edit routes - add / edit record data
+// =============================================================================
 
-  deleteTempData(data)
-  const records = req.session.data.records
-  const record = records.find(record => record.id == req.params.uuid)
-  if (!record){
-    res.redirect('/records')
-  }
-  // Save record to session to be used by views
-  req.session.data.record = record
-
-  // Redirect to task list journey if still a draft
-  if (record.status == 'Draft'){
-    res.redirect('/new-record/overview')
-  }
-  // Only submitted records
-  else {
-    res.locals.record = record
-    res.render('record')
-  }
-})
-
-
-
-// Copy qts data back to real record
-router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
-  const data = req.session.data
-  const newRecord = data.record
-  // Update failed or no data
-  if (!newRecord){
-    res.redirect('/record/:uuid')
-  }
-  else {
-    newRecord.status = 'Pending QTS'
-    updateRecord(data, newRecord)
-    deleteTempData(data)
-    res.redirect('/record/' + req.params.uuid)
-  }
-})
-
-// Copy temp record back to real record
-router.post('/record/:uuid/:page/update', (req, res) => {
-  const data = req.session.data
-  const newRecord = data.record
-  // Update failed or no data
-  if (!newRecord){
-    res.redirect('/record/:uuid')
-  }
-  else {
-    updateRecord(data, newRecord)
-    deleteTempData(data)
-    res.redirect('/record/' + req.params.uuid)
-  }
-})
-
-// Delete data when starting new
-router.get(['/new-record/new', '/new-record'], function (req, res) {
-  const data = req.session.data
-  delete data.record
-  data.record = { status: 'Draft' }
-  res.redirect('/new-record/record-setup')
-})
-
-// Route branching
-router.post('/new-record/record-setup', function (req, res) {
-  const data = req.session.data
-  let recordType = _.get(data, 'record.route')
-  let referrer = getReferrer(req.query.referrer)
-
-  // No data, return to page
-  if (!recordType){
-    res.redirect(`/new-record/record-setup${referrer}`)
-  }
-  else if (recordType == "Assessment only"){
-    if (referrer){
-      res.redirect(req.query.referrer)
-    }
-    else {
-      res.redirect(`/new-record/overview`)
-    }  
-  }
-  else {
-
-    res.redirect(`/new-record/route-not-supported${referrer}`)
-  }
-})
-
-// Pass errors to page
-router.get('/new-record/check-record', function (req, res) {
-  const data = req.session.data
-  let errors = req.query.errors
-  let errorList = false
-  if (errors){
-    errorList = true
-  }
-  res.render('new-record/check-record', {errorList})
-
-})
+// Match against 'new-record' and 'uuid record' paths and work for both.
 
 // Diversity branching
 router.post(['/:recordtype/:uuid/diversity-disclosed','/:recordtype/diversity-disclosed'], function (req, res) {
@@ -347,6 +252,54 @@ router.post(['/:recordtype/:uuid/assessment-details','/:recordtype/assessment-de
   res.redirect(`${recordPath}/assessment-details/confirm${referrer}`)
 })
 
+
+// =============================================================================
+// New records
+// =============================================================================
+
+// Delete data when starting new
+router.get(['/new-record/new', '/new-record'], function (req, res) {
+  const data = req.session.data
+  deleteTempData(data)
+  data.record = _.set(data, record, { status: 'Draft' })
+  res.redirect('/new-record/record-setup')
+})
+
+// Show error if route is not assessment only
+router.post('/new-record/record-setup', function (req, res) {
+  const data = req.session.data
+  let recordType = _.get(data, 'record.route') // Assessment only or not
+  let referrer = getReferrer(req.query.referrer)
+
+  // No data, return to page
+  if (!recordType){
+    res.redirect(`/new-record/record-setup${referrer}`)
+  }
+  else if (recordType === "Assessment only"){
+    if (referrer){
+      res.redirect(req.query.referrer)
+    }
+    else {
+      res.redirect(`/new-record/overview`)
+    }  
+  }
+  else {
+    res.redirect(`/new-record/route-not-supported${referrer}`)
+  }
+})
+
+// Task list confirmation page - pass errors to page
+// Todo: use flash messages or something to pass real errors in
+router.get('/new-record/check-record', function (req, res) {
+  const data = req.session.data
+  let errors = req.query.errors
+  let errorList = false
+  if (errors){
+    errorList = true
+  }
+  res.render('new-record/check-record', {errorList})
+})
+
 // Save a record and put in data store
 router.get('/new-record/save-as-draft', (req, res) => {
   const data = req.session.data
@@ -382,6 +335,75 @@ router.post('/new-record/save', (req, res) => {
     res.redirect('/new-record/submitted')
   }
 })
+
+
+
+// =============================================================================
+// Existing records
+// =============================================================================
+
+// Set up data when viewing a record
+router.get('/record/:uuid', function (req, res) {
+  const data = req.session.data
+
+  deleteTempData(data)
+  const records = req.session.data.records
+  const record = records.find(record => record.id == req.params.uuid)
+  if (!record){
+    res.redirect('/records')
+  }
+  // Save record to session to be used by views
+  req.session.data.record = record
+
+  // Redirect to task list journey if still a draft
+  if (record.status == 'Draft'){
+    res.redirect('/new-record/overview')
+  }
+  // Only submitted records
+  else {
+    res.locals.record = record
+    res.render('record')
+  }
+})
+
+// Copy qts data back to real record
+router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    newRecord.status = 'Pending QTS'
+    updateRecord(data, newRecord)
+    deleteTempData(data)
+    res.redirect('/record/' + req.params.uuid)
+  }
+})
+
+// Copy temp record back to real record
+router.post('/record/:uuid/:page/update', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    updateRecord(data, newRecord)
+    deleteTempData(data)
+    res.redirect('/record/' + req.params.uuid)
+  }
+})
+
+
+
+
+
+
+
+
 
 // Existing record pages
 router.get('/record/:uuid/:page*', function (req, res) {
