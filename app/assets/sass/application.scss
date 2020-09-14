@@ -30,6 +30,7 @@ $govuk-assets-path: '/govuk/assets/';
 @import "overrides/govuk-panel";
 @import "overrides/govuk-error-summary";
 @import "overrides/moj-filter";
+@import "overrides/moj-pagination";
 @import "overrides/tabs";
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
