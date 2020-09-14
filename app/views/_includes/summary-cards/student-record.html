@@ -1,10 +1,3 @@
-{% set recordPath = "" %}
-
-{% if record.id %}
-  {% set recordPath = "/record/" + record.id %}
-{% else %}
-  {% set recordPath = "/new-record" %}
-{% endif %}
 
 {% set expectedDuration = 'Not provided' %}
 {% if record.assessmentDetails.duration | falsify %}
@@ -22,7 +15,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/degree-details?referrer=" + referrer,
+          href: recordPath + "/degree-details" | addReferrer(referrer),
           text: "Change",
           visuallyHiddenText: "candidate ID"
         }
@@ -60,13 +53,42 @@
   }) %}
 {% endif %}
 
-{% if record.status == "QTS awarded" %}
+{% if record.status == "Pending QTS" %}
+
+  {% set qtsContent %}
+    {{govukTag({
+      text: "Pending QTS",
+      classes: "govuk-tag--green govuk-!-margin-bottom-2"
+    })}} <br>
+    Recommended: 2 September 2020
+  {% endset %}
+
   {% set studentRecordRows = studentRecordRows | push({
     key: {
       text: "QTS"
     },
     value: {
-      text: "Awarded - 2 September 2020"
+      html: qtsContent
+    }
+  }) %}
+{% endif %}
+
+{% if record.status == "QTS awarded" %}
+
+  {% set qtsContent %}
+    {{govukTag({
+      text: "QTS awarded",
+      classes: "govuk-tag--purple govuk-!-margin-bottom-2"
+    })}} <br>
+    2 September 2020
+  {% endset %}
+
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: "QTS"
+    },
+    value: {
+      html: qtsContent
     }
   }) %}
 {% endif %}

@@ -1,0 +1,224 @@
+<h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
+{# Get degree (if it exists) from existing data #}
+{% set degree = record.qualifications.degree[itemIndex] %}
+{# Merge with temp store (temp store has) #}
+{% set degreeTemp = degree | mergeObjects(data.degreeTemp) %}
+{% set isInternational = degreeTemp.isInternational | falsify %}
+
+{{data.degreeTemp | log}}
+{{degreeTemp | log}}
+
+{{ appAutocomplete({
+  label: {
+    text: "Degree subject",
+    classes: "govuk-label--s"
+  },
+  id: 'subject',
+  name: "degreeTemp[subject]",
+  items: data.subjects,
+  classes: "govuk-!-width-two-thirds",
+  value: degreeTemp.subject
+  }
+) }}
+
+
+{% if isInternational %}
+
+  {{ govukInput({
+    label: {
+      text: "Institution",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "Or given names"
+    } if false,
+    id: "degree-institution",
+    name: "degreeTemp[org]",
+    value: degreeTemp.org,
+    classes: "govuk-!-width-two-thirds"
+  }) }}
+
+  {{ appAutocomplete({
+    label: {
+      text: "In which country is this institution based?",
+      classes: "govuk-label--s"
+    },
+    id: 'degree-country',
+    name: "degreeTemp[country]",
+    items: data.countries,
+    classes: "govuk-!-width-two-thirds",
+    value: degreeTemp.country
+    }
+  ) }}
+
+{% else %}
+
+  {{ appAutocomplete({
+  label: {
+    text: "Institution",
+    classes: "govuk-label--s"
+  },
+  id: 'degree-organisations',
+  name: "degreeTemp[org]",
+  items: data.degreeOrganisations,
+  classes: "govuk-!-width-two-thirds",
+  value: degreeTemp.org
+  }
+) }}
+{% endif %}
+
+{{ govukInput({
+  label: {
+    text: "Graduation year",
+    classes: "govuk-label--s"
+  },
+  id: "degree-start-date",
+  name: "degreeTemp[endDate]",
+  value: degreeTemp.endDate,
+  classes: "govuk-!-width-one-quarter"
+}) }}
+
+{% if isInternational %}
+
+  {% set storedGrade = degreeTemp.grade %}
+  {{storedGrade | log('stored grade')}}
+  {% set storedGradeOther = false %}
+
+  {% if storedGrade and not storedGrade in [
+    "Not applicable",
+    "Unknown",
+    "The candidate is still studying for their degree"] %}
+    {% set storedGradeOther = true %}
+    
+  {% endif %}
+  {% set internationalDegreeGradeOtherHtml %}
+    {{ govukInput({
+      label: {
+        text: "Enter the degree grade"
+      },
+      hint: {
+        text: "For example, ‘A’, ‘4.5’, ‘94%’, ‘Distinction’"
+      },
+      id: "degree-start-date",
+      classes: "govuk-!-width-two-thirds",
+      name: "degreeTemp[otherGrade]",
+      value: degreeTemp.grade if storedGradeOther
+    }| decorateAttributes(degreeTemp, "degreeTemp.grade"))}}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Degree grade",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    name: "degreeTemp[baseGrade]",
+    hint: {
+      text: ""
+    },
+    items: [
+      {
+        text: "Not applicable"
+      },
+      {
+        text: "Unknown"
+      },
+      {
+        text: "Other",
+        checked: storedGradeOther,
+        conditional: {
+          html: internationalDegreeGradeOtherHtml
+        }
+      },
+      {
+        divider: "or"
+      },
+      {
+        text: "The candidate is still studying for their degree"
+      }
+    ]
+  } | decorateAttributes(degreeTemp, "degreeTemp.grade")) }}
+
+{% else %}
+
+  {% set storedGrade = degreeTemp.grade %}
+  {{storedGrade | log}}
+  {% set storedGradeOther = false %}
+  {% if storedGrade and not storedGrade in [
+    "First-class honours",
+    "Upper second-class honours (2:1)",
+    "Lower second-class honours (2:2)",
+    "Third-class honours",
+    "Pass",
+    "The candidate is still studying for their degree"] %}
+    {% set storedGradeOther = true %}
+  {% endif %}
+  {% set degreeGradeOtherHtml %}
+    {{ govukInput({
+      label: {
+        text: "Enter the degree grade"
+      },
+      id: "degree-start-date",
+      classes: "govuk-!-width-two-thirds",
+      name: "degreeTemp[otherGrade]",
+      value: degreeTemp.grade if storedGradeOther
+    }| decorateAttributes(degreeTemp, "degreeTemp.grade"))}}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Degree grade",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    name: "degreeTemp[baseGrade]",
+    hint: {
+      text: ""
+    },
+    items: [
+      {
+        text: "First-class honours"
+      },
+      {
+        text: "Upper second-class honours (2:1)"
+      },
+      {
+        text: "Lower second-class honours (2:2)"
+      },
+      {
+        text: "Third-class honours"
+      },
+      {
+        text: "Pass"
+      },
+      {
+        text: "Other",
+        checked: storedGradeOther,
+        conditional: {
+          html: degreeGradeOtherHtml
+        }
+      },
+      {
+        divider: "or"
+      },
+      {
+        text: "The candidate is still studying for their degree"
+      }
+    ]
+  } | decorateAttributes(degreeTemp, "degreeTemp.grade")) }}
+
+{% endif %}
+
+
+{{ govukButton({
+  text: "Continue"
+}) }}
+
+
+
+
+
+

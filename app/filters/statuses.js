@@ -94,6 +94,15 @@ filters.getAmendsAllowed = status => {
   return statusesThatCanAmend.includes(status)
 }
 
+filters.getCanRecommendForQts = status => {
+  let statusesThatShowQtsTabs = [
+    'TRN received',
+    'Deferred'
+  ]
+  return statusesThatShowQtsTabs.includes(status)
+}
+
+
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app
 // -------------------------------------------------------------------

@@ -30,9 +30,12 @@
 {% from "govuk/components/warning-text/macro.njk"     import govukWarningText %}
 
 {# custom components #}
+{# Most of these copied from the Apply for teacher training prototype #}
 {% from "_components/autocomplete/macro.njk"   import appAutocomplete %}
+{% from "_components/banner/macro.njk"         import appBanner %}
 {% from "_components/summary-card/macro.njk"   import appSummaryCard %}
 {% from "_components/task-list/macro.njk"   import appTaskList %}
+{% from "_components/footer/macro.njk"   import appFooter %}
 
 {# moj components #}
 {%- from "moj/components/filter/macro.njk" import mojFilter -%}
@@ -52,7 +55,7 @@
   {{ govukHeader({
     homepageUrl: "/",
     serviceName: serviceName,
-    serviceUrl: "/",
+    serviceUrl: "/records",
     containerClasses: "govuk-width-container",
     navigation: [
       {
@@ -86,16 +89,41 @@
 
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
 
+{% set metaHtml %}
+  <ul class="govuk-footer__meta-custom govuk-list govuk-!-font-size-16">
+    <li>Email: <a class="govuk-link govuk-footer__link" href="mailto:registerateacher@digital.education.gov.uk">registerateacher<wbr>@digital.education.gov.uk</a></li>
+    <li>Monday to Friday (except public holidays)</li>
+    <li>We aim to respond within 5 working days, or one working day for more urgent&nbsp;queries</li>
+  </ul>
+  <p class="govuk-body govuk-!-font-size-16"><a href="#" class="govuk-link govuk-footer__link">How to use Register trainee teachers</a></p>
+{% endset %}
+
 {% if useAutoStoreData %}
   {% block footer %}
-    {{ govukFooter({
+    {{ appFooter({
+      classes: "govuk-footer--app",
       meta: {
-        items: [
-          {
-            href: "/prototype-admin/clear-data",
-            text: "Clear data"
-          }
-        ]
+        title: "Get support",
+        html: metaHtml,
+        items: [{
+          href: "/privacy-policy",
+          text: "Privacy policy"
+        }, {
+          href: "/admin",
+          text: "Prototype admin"
+        }, {
+          href: "/admin/clear-data",
+          text: "Clear data"
+        }, {
+          href: "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true&variant=1",
+          text: "v1"
+        } if providerCode and courseCode, {
+          href: "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true&variant=2",
+          text: "v2"
+        } if providerCode and courseCode, {
+          href: "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true&variant=3",
+          text: "v3"
+        } if providerCode and courseCode]
       }
     }) }}
   {% endblock %}

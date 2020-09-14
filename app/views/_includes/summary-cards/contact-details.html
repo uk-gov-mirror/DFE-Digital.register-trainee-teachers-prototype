@@ -1,12 +1,3 @@
-{% set recordPath = "" %}
-
-{% if record.id %}
-  {% set recordPath = "/record/" + record.id %}
-{% else %}
-  {% set recordPath = "/new-record" %}
-{% endif %}
-
-
 
 {# Merge fields and strip empty #}
 {% set addressCombined = record.contactDetails.address | objectToArray | commaSeparateLines %}
@@ -24,7 +15,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/contact-details?referrer=" + referrer,
+          href: recordPath + "/contact-details" | addReferrer(referrer),
           text: "Change",
           visuallyHiddenText: "address"
         }
@@ -41,7 +32,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/contact-details?referrer=" + referrer,
+          href: recordPath + "/contact-details" | addReferrer(referrer),
           text: "Change",
           visuallyHiddenText: "phone number"
         }
@@ -58,7 +49,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/contact-details?referrer=" + referrer,
+          href: recordPath + "/contact-details" | addReferrer(referrer),
           text: "Change",
           visuallyHiddenText: "email"
         }
@@ -75,10 +66,32 @@
   }) }}
 {% endset %}
 
+{% set complete = true if (record.contactDetails | sectionIsCompleted ) %}
+{% set status  = record.contactDetails | getStatusText %}
 
-{{ appSummaryCard({
-  classes: "govuk-!-margin-bottom-6",
-  titleText: "Contact details",
-  html: contactDetailsHtml
-}) }}
+{% if showIncomplete and not complete %}
+
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "contact-details" %}
+  {% if status == "In progress" %}
+    {% set incompleteText = "Contact details not marked as complete" %}
+    {% set incompleteLink = recordPath + "/contact-details/confirm" | addReferrer(referrer) %}
+    {% set incompleteLinkText = "Continue section" %}
+  {% else %}
+    {% set incompleteText = "Contact details not started" %}
+    {% set incompleteLink = recordPath + "/contact-details" | addReferrer(referrer) %}
+    {% set incompleteLinkText = "Start section" %}
+  {% endif %}
+
+  {% include "_includes/incomplete.njk" %}
+
+{% else %}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    titleText: "Contact details",
+    html: contactDetailsHtml
+  }) }}
+  
+{% endif %}
 

@@ -1,10 +1,3 @@
-{% set recordPath = "" %}
-
-{% if record.id %}
-  {% set recordPath = "/record/" + record.id %}
-{% else %}
-  {% set recordPath = "/new-record" %}
-{% endif %}
 
 {% set personalDetailsRows = [
   {
@@ -16,7 +9,7 @@
     },
     actions: {
       items: [{
-        href: recordPath + "/personal-details?referrer=" + referrer,
+        href: recordPath + "/personal-details" | addReferrer(referrer),
         text: "Change",
         visuallyHiddenText: "name"
       }]
@@ -30,7 +23,7 @@
     },
     actions: {
       items: [{
-        href: recordPath + "/personal-details?referrer=" + referrer,
+        href: recordPath + "/personal-details" | addReferrer(referrer),
         text: "Change",
         visuallyHiddenText: "date of birth"
       }]
@@ -46,7 +39,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/personal-details?referrer=" + referrer,
+          href: recordPath + "/personal-details" | addReferrer(referrer),
           text: "Change",
           visuallyHiddenText: "gender"
         }
@@ -63,7 +56,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/personal-details?referrer=" + referrer,
+          href: recordPath + "/personal-details" | addReferrer(referrer),
           text: "Change",
           visuallyHiddenText: "nationality"
         }
@@ -78,18 +71,32 @@
   }) }}
 {% endset %}
 
-{# {% set complete = "true" if applicationValue(["completed", "personal-details"]) %} #}
 
-{# {% if showIncomplete and complete != "true" %}
+{% set complete = true if (record.personalDetails | sectionIsCompleted ) %}
+{% set status  = record.personalDetails | getStatusText %}
+
+{% if showIncomplete and not complete %}
+
   {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "candidate" %}
-  {% set incompleteText = "Personal details are not marked as completed" %}
-  {% set incompleteLink = "/personal-details/review?referrer=" + referrer %}
-  {% include "_includes/review/incomplete.njk" %}
-{% else %} #}
+  {% set incompleteId = "personal-details" %}
+  {% if status == "In progress" %}
+    {% set incompleteText = "Personal details not marked as complete" %}
+    {% set incompleteLink = recordPath + "/personal-details/confirm" | addReferrer(referrer) %}
+    {% set incompleteLinkText = "Continue section" %}
+  {% else %}
+    {% set incompleteText = "Personal details not started" %}
+    {% set incompleteLink = recordPath + "/personal-details" | addReferrer(referrer) %}
+    {% set incompleteLinkText = "Start section" %}
+  {% endif %}
+
+  {% include "_includes/incomplete.njk" %}
+
+{% else %}
+
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     titleText: "Personal details",
     html: personalDetailsHtml
   }) }}
-{# {% endif %} #}
+  
+{% endif %}

@@ -31,7 +31,7 @@ filters.toDateArray = (date) => {
   if (!date) return []
   if (_.isArray(date)) return date
   else {
-    return [moment(date).date(), moment(date).month(), moment(date).year()]
+    return [moment(date).date(), moment(date).month() + 1, moment(date).year()]
   }
 }
 /*

@@ -1,3 +1,7 @@
+// To generate new records:
+
+// node scripts/generate-records.js
+
 const fs = require('fs')
 const path = require('path')
 const faker = require('faker')
@@ -5,39 +9,29 @@ faker.locale = 'en_GB'
 const moment = require('moment')
 const _ = require('lodash')
 
+// Settings
+let simpleGcseGrades = true //output pass/fail rather than full detail
+
 const sortBySubmittedDate = (x, y) => {
   return new Date(y.submittedDate) - new Date(x.submittedDate);
 }
 
-// Fake data generators: general
 const generateStatus = require('../app/data/generators/status')
-// const generateCourse = require('../app/data/generators/course')
-// const generateTrainingLocation = require('../app/data/generators/training-location')
-
-// Fake data generators: application
 const generatePersonalDetails = require('../app/data/generators/personal-details')
 const generateDiversity = require('../app/data/generators/diversity')
-
 const generateContactDetails = require('../app/data/generators/contact-details')
-
 const generateAssessmentDetails = require('../app/data/generators/assessment-details')
 const generateDegree = require('../app/data/generators/degree')
-
 const generateGce = require('../app/data/generators/gce')
-
-// const generateGcse = require('../app/data/generators/gcse')
-// const generateEnglishLanguageQualification = require('../app/data/generators/english-language-qualification')
-// const generateOtherQualifications = require('../app/data/generators/other-qualifications')
-// const generateWorkHistory = require('../app/data/generators/work-history')
-// const generateSchoolExperience = require('../app/data/generators/school-experience')
+const generateGcse = require('../app/data/generators/gcse')
 
 // Populate application data object with fake data
 const generateFakeApplication = (params = {}) => {
 
   const status = params.status || generateStatus(faker)
 
+  // Dates
   let updatedDate, submittedDate
-
   // Make sure updated is after submitted
   if (params.submittedDate){
     updatedDate = params.updatedDate || faker.date.between(
@@ -50,9 +44,6 @@ const generateFakeApplication = (params = {}) => {
       moment(),
       moment().subtract(500, 'days'))
   }
-
-
-
   // Submitted some time before it was updated
   if (status != 'Draft'){
     submittedDate = params.submittedDate || faker.date.between(
@@ -60,20 +51,33 @@ const generateFakeApplication = (params = {}) => {
     moment().subtract(500, 'days'))
   }
 
-
+  // Personal details
   const personalDetails = (params.personalDetails === null) ? null : { ...generatePersonalDetails(faker), ...params.personalDetails }
 
+  // Diversity
   const diversity = (params.diversity === null) ? undefined : { ...generateDiversity(faker), ...params.diversity }
 
+  // Contact details
   const isInternationalCandidate = !(personalDetails.nationality.includes('British') || personalDetails.nationality.includes('Irish'))
   let person = Object.assign({}, personalDetails)
   person.isInternationalCandidate = isInternationalCandidate
   const contactDetails = (params.contactDetails === null) ? undefined : { ...generateContactDetails(faker, person), ...params.contactDetails }
 
-
-
+  // Assessment details
   const assessmentDetails = (params.assessmentDetails === null) ? undefined : { ...generateAssessmentDetails(faker), ...params.assessmentDetails }
 
+  // Qualifications
+  let qualifications = {}
+  // GCSEs
+  qualifications.gcse = (params.qualifications && params.qualifications.gcse === null) ? undefined : generateGcse(faker, isInternationalCandidate, simpleGcseGrades)
+  // A Levels
+  qualifications.gce = (params.qualifications && params.qualifications.gce === null) ? undefined : generateGce(faker, isInternationalCandidate)
+  // Degrees
+  qualifications.degree = (params.qualifications && params.qualifications.degree === null) ? undefined : generateDegree(faker, isInternationalCandidate)
+
+  // Deep merge
+  qualifications = (params.qualifications) ? _.merge(qualifications, params.qualifications) : qualifications
+  
   let trn
 
   if (!status.includes('Draft') && !status.includes('Pending TRN')){
@@ -87,6 +91,7 @@ const generateFakeApplication = (params = {}) => {
 
   return {
     id: params.id || faker.random.uuid(),
+    route: "Assessment only",
     candidateId: params.candidateId || faker.random.alphaNumeric(8).toUpperCase(),
     status,
     trn,
@@ -97,10 +102,7 @@ const generateFakeApplication = (params = {}) => {
     isInternationalCandidate,
     contactDetails,
     assessmentDetails,
-    qualifications: {
-      degree: params.degree || generateDegree(faker, isInternationalCandidate),
-      gce: params.gce || generateGce(faker, isInternationalCandidate),
-    }
+    qualifications
 
     // gcse: params.gcse || generateGcse(faker, personalDetails.isInternationalCandidate),
     // englishLanguageQualification: params.englishLanguageQualification || generateEnglishLanguageQualification(faker),
@@ -153,7 +155,7 @@ const generateFakeApplications = () => {
     applications.push(application)
   }
 
-  // Complete draft applications
+  // Semi complete draft applications
   for (var i = 0; i < 3; i++) {
     const application = generateFakeApplication({
       status: 'Draft',
@@ -169,6 +171,40 @@ const generateFakeApplications = () => {
       updatedDate: faker.date.between(
         moment(),
         moment().subtract(16, 'days'))
+    })
+    applications.push(application)
+  }
+
+    // Complete draft applications
+  for (var i = 0; i < 3; i++) {
+    const application = generateFakeApplication({
+      status: 'Draft',
+      personalDetails: {
+        status: 'Completed'
+      },
+      contactDetails: {
+        status: 'Completed'
+      },
+      diversity: {
+        status: 'Completed'
+      },
+      qualifications: {
+        gceStatus: {
+          status: 'Completed'
+        },
+        gcse: {
+          status: 'Completed'
+        },
+        degreeStatus: {
+          status: 'Completed'
+        }
+      },
+      assessmentDetails: {
+        status: 'Completed'
+      },
+      updatedDate: faker.date.between(
+        moment(),
+        moment().subtract(1, 'days'))
     })
     applications.push(application)
   }
@@ -264,6 +300,7 @@ const generateFakeApplications = () => {
  */
 const generateApplicationsFile = (filePath) => {
   const applications = generateFakeApplications()
+  console.log(`Generated ${applications.length} fake records`)
   const filedata = JSON.stringify(applications, null, 2)
   fs.writeFile(
     filePath,

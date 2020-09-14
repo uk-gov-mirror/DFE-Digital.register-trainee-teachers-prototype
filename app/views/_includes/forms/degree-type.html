@@ -1,0 +1,86 @@
+<h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
+{% set degreeCount = record.qualifications.degree | length %}
+
+{# Get degree (if it exists) from existing data #}
+{% set degree = record.qualifications.degree[itemIndex] %}
+{# Merge with temp store (temp store has) #}
+{% set degreeTemp = degree | mergeObjects(data.degreeTemp) %}
+{% set isInternational = degreeTemp.isInternational | falsify %}
+
+{% if degreeCount < 1 %}
+{# {% if degreeCount < 1 and action == "add" %} #}
+  {% set ukHintText = "For example, BA, BSc or other (please specify)" %}
+{% else %}
+  {% set ukHintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
+{% endif %}
+{% set intHintHtml = "For example, Bachelor degree, Bachelor of Arts, <span lang=\"fr\">Diplôme</span>, <span lang=\"es\">Licenciatura</span>" %}
+
+<p class="govuk-body">Enter the details of the degree as they appear on the certificate, translating them into English if necessary</p>
+
+<p class="govuk-body">If the candidate has further postgraduate degrees, you’ll be able to add them next.</p>
+{{degreeTemp |log}}
+{{degreeTemp.type | log}}
+
+{% set ukConditionalHtml %}
+  {{ appAutocomplete({
+    label: {
+      text: "Enter degree type"
+    },
+    hint: {
+      text: ukHintText
+    },
+    id: 'degree-type',
+    name: "degreeTemp[typeUK]",
+    items: data.degreeTypes,
+    classes: "govuk-!-width-two-thirds",
+    value: (degreeTemp.type or degreeTemp.typeUK) if not isInternational
+    }
+  ) }}
+{% endset %}
+
+
+{% set internationalConditionalHtml %}
+  {{ govukInput({
+    value: (degreeTemp.type or degreeTemp.typeUK) if isInternational,
+    label: {
+      text: "Type of qualification"
+    },
+    hint: {
+      html: intHintHtml
+    }
+  } | decorateAttributes(degreeTemp, "degreeTemp.typeInt")) }}
+{% endset %}
+
+{{ govukRadios({
+  fieldset: {
+    legend: {
+      text: "What type of degree are you adding?",
+      classes: "govuk-fieldset__legend--s govuk-visually-hidden"
+    }
+  },
+  items: [{
+    value: "false",
+    text: "UK degree",
+    conditional: {
+      html: ukConditionalHtml
+    }
+  }, {
+    value: "true",
+    text: "Non-UK degree",
+    conditional: {
+      html: internationalConditionalHtml
+    }
+  }]
+} | decorateAttributes(degreeTemp, "degreeTemp.isInternational")) }}
+
+
+{{ govukButton({
+  text: "Continue"
+}) }}
+
+
+
+
+
+

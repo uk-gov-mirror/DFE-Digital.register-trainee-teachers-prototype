@@ -1,0 +1,74 @@
+
+
+{% set qtsDetailsRows = [
+  {
+    key: {
+      text: "Assessment outcome"
+    },
+    value: {
+      text: "Passed"
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/qts-recommend-edit" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "assessment outcome"
+        }
+      ]
+    } if canAmend
+  },
+  {
+    key: {
+      text: "Date of assessment"
+    },
+    value: {
+      text: "20 August 2020"
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/qts-recommend-edit" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "date of assessment"
+        }
+      ]
+    } if canAmend
+  }
+  ] %}
+
+
+
+{% set qtsDetailsHtml %}
+  {{ govukSummaryList({
+    rows: qtsDetailsRows
+  }) }}
+{% endset %}
+
+{% set complete = true if (record.contactDetails | sectionIsCompleted ) %}
+{% set status  = record.contactDetails | getStatusText %}
+
+{% if showIncomplete and not complete %}
+
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "contact-details" %}
+  {% if status == "In progress" %}
+    {% set incompleteText = "Contact details not marked as complete" %}
+    {% set incompleteLink = recordPath + "/contact-details/confirm" | addReferrer(referrer) %}
+  {% else %}
+    {% set incompleteText = "Contact details not started" %}
+    {% set incompleteLink = recordPath + "/contact-details" | addReferrer(referrer) %}
+  {% endif %}
+
+  {% include "_includes/incomplete.njk" %}
+
+{% else %}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    titleText: "QTS details",
+    html: qtsDetailsHtml
+  }) }}
+  
+{% endif %}
+

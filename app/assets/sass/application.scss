@@ -13,17 +13,25 @@ $govuk-assets-path: '/govuk/assets/';
 @import "patterns/step-by-step-related";
 @import "patterns/task-list";
 @import "patterns/related-items";
+@import "patterns/start-page";
 @import "components/summary-card";
 @import "components/task-list";
 @import "components/autocomplete";
+@import "components/banner";
+@import "components/footer";
+
 
 // Components that aren't in Frontend
 @import "components/application-card";
 @import "components/records-header";
 @import "components/records-search";
 @import "components/cookie-banner";
+
 // Overrides
+@import "overrides/govuk-panel";
+@import "overrides/govuk-error-summary";
 @import "overrides/moj-filter";
+@import "overrides/tabs";
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 
@@ -66,19 +74,6 @@ div.summary-panel {
       }
     }
 
-  }
-}
-
-li.govuk-tabs__list-item--selected {
-  font-weight: bold;
-  border-top: 5px solid #1d70b8 !important;
-  padding-top: 10px;
-}
-
-li.govuk-tabs__list-item {
-  font-weight: bold;
-  a {
-    text-decoration: none;
   }
 }
 

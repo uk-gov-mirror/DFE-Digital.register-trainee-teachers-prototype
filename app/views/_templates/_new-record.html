@@ -38,11 +38,24 @@
   {% set record = {} %}
 {% endif %}
 
-{% set canAmend = record.status | getAmendsAllowed %}
+{% set canAmend = (record.status or 'Draft') | getAmendsAllowed %}
+
+{# Used by summary cards #}
+{% set recordPath = "/new-record" %}
 
 {% block content %}
   {% block beforePageTitle %}{% endblock %}
-  <form{% if formAction %} action="{{ formAction }}"{% endif %} method="post">
+  {# {{referrer}} #}
+  {% set hasReferrer = '' | addReferrer(referrer) | falsify %}
+  {% set formActionHtml -%}
+  {%- if formAction -%}
+    action={{- formAction -}}
+  {%- elseif hasReferrer -%}
+    action={{- '' | addReferrer(referrer) -}}
+  {%- endif -%} 
+  {%- endset %}
+
+  <form {{formActionHtml}} method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         {% block formContent %}
@@ -53,7 +66,7 @@
           {% if returnLink %}
             <p class="govuk-body"><a href="{{returnLink.href}}" class="govuk-link">{{returnLink.text}}</a></p>
           {% else %}
-            <p class="govuk-body"><a href="/new-record/overview" class="govuk-link">Return to record</a></p>
+            <p class="govuk-body"><a href="{{ '/new-record/overview' | orReferrer(referrer)}}" class="govuk-link">Cancel</a></p>
           {% endif %}
         {% endif %}
       </div>

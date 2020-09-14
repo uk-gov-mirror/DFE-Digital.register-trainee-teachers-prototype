@@ -1,8 +1,5 @@
 {% extends "layout.html" %}
 
-{% set report = data.new.report %}
-
-
 {% if not backLink %}
     {% set backLink      = 'javascript:history.back();' %}
 {% endif %}
@@ -32,46 +29,38 @@
   {% endif %}
 {% endblock %}
 
-{% set record = data.record %}
+{# Record could be set by locals, or in session data #}
+{% set record = record or data.record %}
 {% if not record %}
   {% set record = {} %}
 {% endif %}
 
-{# {% if record.id %} #}
-  {% set recordPath = "/record/" + record.id %}
-{# {% else %}
-  {% set recordPath = "/new-record" %}
-{% endif %} #}
+
 
 {% set canAmend = record.status | getAmendsAllowed %}
 
+{# Used by summary cards #}
+{% set recordPath = "/record/" + record.id %}
 
 {% block content %}
-  {% block beforePageTitle %}{% endblock %}
-  <form{% if formAction %} action="{{ formAction }}"{% endif %} method="post">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        {% block formContent %}
 
-        {% endblock %}
-
-        {% if not hideReturnLink %}
-          {% if returnLink %}
-            <p class="govuk-body"><a href="{{returnLink.href}}" class="govuk-link">{{returnLink.text}}</a></p>
-          {% else %}
-            <p class="govuk-body"><a href="{{recordPath}}" class="govuk-link">Cancel</a></p>
-          {% endif %}
-        {% endif %}
-      </div>
-      {% if hasSecondary %}
-        <div class="govuk-grid-column-one-third">
-          {% block secondary %}{% endblock %}
-        </div>
-      {% endif %}
+  {% if record.trn %}
+    <span class="govuk-caption-l">TRN: {{record.trn}}
+    </span>
+  {% endif %}
+  {{govukTag({
+      text: record.status,
+      classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
+  })}}
+  <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
 
-    </div>
-  </form>
+  {% include "_includes/tabs.njk" %}
+
+  {% block tabContent %}
+    
+  {% endblock %}
+
 {% endblock %}
 
 

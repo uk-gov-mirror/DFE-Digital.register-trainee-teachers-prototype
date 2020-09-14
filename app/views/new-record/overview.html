@@ -5,6 +5,7 @@
 {% set hideReturnLink = true %}
 {% set backLink = '/records' %}
 {% set backText = "All records" %}
+{% set referrer = recordPath + "/overview" %}
 
 
 {% block formContent %}
@@ -15,9 +16,9 @@
 {{ appTaskList({
   classes: "govuk-!-margin-bottom-8",
   items: [{
-    text: "Record type",
-    href: "hi",
-    id: "application-type",
+    text: "Record setup",
+    href: "record-setup",
+    id: "record-type",
     tag: {
       classes: 'Completed' | getStatusClass,
       text: 'Completed'
@@ -57,29 +58,44 @@
   }]
 }) if not closed }}
 
+{{record | log}}
+{{record.qualifications.gceStatus | log}}
+
 <h2 class="govuk-heading-m">Education</h2>
 {{ appTaskList({
   classes: "govuk-!-margin-bottom-8",
   items: [
   {
+    text: "A Level",
+    href: "alevels" | reviewIfInProgress(record.qualifications.gce),
+    id: "qualification-gce",
+    tag: {
+      classes: (record.qualifications.gceStatus.status or (record.qualifications.gce | getStatusText)) | getStatusClass,
+      text: record.qualifications.gceStatus.status or (record.qualifications.gce | getStatusText)
+    }
+  } if false,
+  {
     text: "GCSE",
-    href: "gcse" | reviewIfInProgress(record.qualifications.gcse),
+    href: "gcse-details" | reviewIfInProgress(record.qualifications.gcse, 'gcse'),
     id: "qualification-gcse",
     tag: {
-      classes: record.qualifications.gcse | getStatusText | getStatusClass,
-      text: record.qualifications.gcse | getStatusText
+      classes: (record.qualifications.gcse.status or (record.qualifications.gcse | getStatusText)) | getStatusClass,
+      text: record.qualifications.gcse.status or (record.qualifications.gcse | getStatusText)
     }
   },
   {
     text: "Degree",
-    href: "degree" | reviewIfInProgress(record.qualifications.degree),
+    href: "degree/confirm" if (record.qualifications.degree | length) else "degree/add",
     id: "qualification-degree",
     tag: {
-      classes: record.qualifications.degree | getStatusText | getStatusClass,
-      text: record.qualifications.degree | getStatusText
+      classes: (record.qualifications.degreeStatus.status or (record.qualifications.degree | getStatusText)) | getStatusClass,
+      text: record.qualifications.degreeStatus.status or (record.qualifications.degree | getStatusText)
     }
   }]
 }) if not closed }}
+
+    {#   classes: record.qualifications.degreeStatus | getStatusText | getStatusClass,
+      text: record.qualifications.degreeStatus | getStatusText #}
 
 <h2 class="govuk-heading-m">Assessment</h2>
 {{ appTaskList({
@@ -87,7 +103,7 @@
   items: [
   {
     text: "Assessment details",
-    href: "assessment-details" | reviewIfInProgress(record.qualifications.assessmentDetails),
+    href: "assessment-details" | reviewIfInProgress(record.assessmentDetails),
     id: "assessment-details",
     tag: {
       classes: record.assessmentDetails | getStatusText | getStatusClass,
@@ -96,7 +112,6 @@
   }]
 }) if not closed }}
 
-{{record.diversity | log}}
 
 {{ govukButton({
   text: "Check and submit for TRN",
