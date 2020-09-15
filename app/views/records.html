@@ -5,38 +5,39 @@
 
 {% block content %}
 
-<h1 class="govuk-heading-xl">{{pageHeading}}</h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
 
-<div class="records-header">
+    <h1 class="govuk-heading-xl">{{pageHeading}}</h1>
+    <div class="records-header">
+      {{ govukButton({
+        text: "Add a trainee",
+        href: "./new-record/new"
+      }) }}
 
-  {{ govukButton({
-    text: "Add a trainee",
-    href: "./new-record/new"
-  }) }}
-
-  {# {{ govukSelect({
-    id: "sort",
-    name: "sort",
-    label: {
-      text: "Sort by"
-    },
-    items: [
-      {
-        value: "published",
-        text: "Recently added"
-      },
-      {
-        value: "updated",
-        text: "Recently updated",
-        selected: true
-      }
-    ]
-  }) }} #}
-
+      {# {{ govukSelect({
+        id: "sort",
+        name: "sort",
+        label: {
+          text: "Sort by"
+        },
+        items: [
+          {
+            value: "published",
+            text: "Recently added"
+          },
+          {
+            value: "updated",
+            text: "Recently updated",
+            selected: true
+          }
+        ]
+      }) }} #}
+    </div>
+  </div>
 </div>
 
 <div class="govuk-grid-row">
-
   <div class="govuk-grid-column-full">
 
     <div class="moj-filter-layout">
@@ -71,20 +72,17 @@
 
         <div>
 
-          {{data.records | log}}
           {% if filteredRecords.length %}
 
             <div class="app-application-cards">
               {% set sortedFilterRecords = filteredRecords | sort(attribute="updatedDate") | reverse %}
 
               {% set draftRecords = sortedFilterRecords | filterAttr("status", "Draft") %}
-
-              {{data.filterStatus | log}}
              
               {% if (draftRecords | length) %}
                 <div class="govuk-!-margin-bottom-8">
                   
-                  <h2 class="govuk-heading-m">Draft records</h2>
+                  <h2 class="govuk-heading-m">Draft records ({{draftRecords | length}})</h2>
                   {% for record in draftRecords %}
                     {% include "_includes/trainee-record-card.njk" %}
                   {% endfor %}
@@ -93,13 +91,15 @@
 
               {% set nonDraftRecords = sortedFilterRecords | removeAttr("status", "Draft") %}
               {% if (nonDraftRecords | length) %} 
-                <h2 class="govuk-heading-m">Submitted records</h2>
+                <h2 class="govuk-heading-m">Records ({{nonDraftRecords | length}})</h2>
                 {% for record in nonDraftRecords %}
 
                     {% include "_includes/trainee-record-card.njk" %}
 
                 {% endfor %}
               {% endif %}
+
+              
 
             </div>
 
@@ -138,6 +138,8 @@
               classes: 'govuk-!-margin-bottom-3'
             }) }}
 
+          {% else %}
+            <p class="govuk-body">No records found. Try <a href="#">clearing your filters</a>.</p>
           {% endif %}
 
           <p class="govuk-body"><a href="#" class="govuk-link">Export these records</a></p>

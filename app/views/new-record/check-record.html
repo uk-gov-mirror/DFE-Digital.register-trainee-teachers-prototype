@@ -14,19 +14,31 @@
 {% block formContent %}
 {% set referrer = recordPath + "/check-record" %}
 
-{% if errorList %}
-  {{ govukErrorSummary({
-    titleText: "There is a problem",
-    errorList: [
-      {
-        text: "You must complete all sections before submitting for TRN"
-      }
-    ]
-  }) }}
-{% endif %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
 
-<span class="govuk-caption-l">New record</span>
-<h1 class="govuk-heading-l">Check before submitting for TRN</h1>
+    {% if errorList %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [
+          {
+            text: "You must complete all sections before submitting for TRN"
+          }
+        ]
+      }) }}
+    {% endif %}
+
+    <span class="govuk-caption-l">New record</span>
+    <h1 class="govuk-heading-l">Check before submitting for TRN</h1>
+
+    {% if recordIsComplete %}
+      <p class="govuk-body-l">
+        You have completed all sections of the candidate’s record. Check that the information is correct before submitting for TRN registration.
+      </p>
+    {% endif %}
+
+  </div>
+</div>
 
 {% include "_includes/summary-cards/record-setup.html" %}
 
@@ -49,7 +61,7 @@
 
 
 {{ govukButton({
-  text: "Submit for TRN"
+  text: "Submit for TRN registration"
 }) }}
 
 <p class="govuk-body"><a href="./save-as-draft" class="govuk-link">Save as draft</a></p>
