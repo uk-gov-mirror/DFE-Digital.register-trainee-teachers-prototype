@@ -261,7 +261,7 @@ router.post(['/:recordtype/:uuid/assessment-details','/:recordtype/assessment-de
 router.get(['/new-record/new', '/new-record'], function (req, res) {
   const data = req.session.data
   deleteTempData(data)
-  data.record = _.set(data, record, { status: 'Draft' })
+  _.set(data, 'record', { status: 'Draft' })
   res.redirect('/new-record/record-setup')
 })
 
