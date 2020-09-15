@@ -44,16 +44,19 @@
 
 {% block content %}
 
-  {% if record.trn %}
-    <span class="govuk-caption-l">TRN: {{record.trn}}
-    </span>
-  {% endif %}
-  {{govukTag({
-      text: record.status,
-      classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
-  })}}
-  <h1 class="govuk-heading-l">{{pageHeading}}</h1>
-
+  <div class="record-header">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-0">
+      {{pageHeading}}
+      {{govukTag({
+          text: record.status,
+          classes: record.status | getStatusClass
+      })}}
+    </h1>
+    {% if record.trn %}
+      <span class="govuk-caption-l">TRN: {{record.trn}}
+      </span>
+    {% endif %}
+  </div>
 
   {% include "_includes/tabs.njk" %}
 
