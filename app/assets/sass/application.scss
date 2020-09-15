@@ -23,9 +23,10 @@ $govuk-assets-path: '/govuk/assets/';
 
 // Components that aren't in Frontend
 @import "components/application-card";
-@import "components/records-header";
-@import "components/records-search";
+@import "components/all-records-header";
+@import "components/all-records-search";
 @import "components/cookie-banner";
+@import "components/record-header";
 
 // Overrides
 @import "overrides/govuk-panel";
