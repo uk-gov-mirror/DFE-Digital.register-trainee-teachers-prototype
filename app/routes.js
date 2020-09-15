@@ -376,6 +376,7 @@ router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
   }
   else {
     newRecord.status = 'Pending QTS'
+    newRecord.recommendedDate = new Date()
     updateRecord(data, newRecord)
     deleteTempData(data)
     res.redirect('/record/' + req.params.uuid)

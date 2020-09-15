@@ -1,6 +1,6 @@
-{% set dateFinishedTrainingArray = record.personalDetails.dateOfBirth | toDateArray %}
+{# {% set dateFinishedTrainingArray = record.qtsDetails.dateOfBirth | toDateArray %} #}
 
-{{ govukDateInput({
+{# {{ govukDateInput({
   id: "date-of-birth",
   namePrefix: "date-finished-training",
   fieldset: {
@@ -29,11 +29,9 @@
         value: dateFinishedTrainingArray["2"]
       }
     ]
-}) }}
+}) }} #}
 
 {{ govukRadios({
-  idPrefix: "standards-assessed-outcome",
-  name: "standards-assessed-outcome",
   fieldset: {
     legend: {
       text: "What is the standards assessed outcome?",
@@ -42,28 +40,22 @@
   },
   items: [
     {
-      value: "Standards not taken",
-      text: "Standards not taken",
-      checked: checked(record.personalDetails.sex, "Standards not taken")
+      text: "Passed"
     },
     {
-      value: "Standards not passed",
-      text: "Standards not passed",
-      checked: checked(record.personalDetails.sex, "Standards not passed")
+      text: "Not passed"
     },
     {
-      value: "Standards passed",
-      text: "Standards passed",
-      checked: checked(record.personalDetails.sex, "Standards passed")
+      text: "Not taken"
     }
   ]
-}) }}
+} | decorateAttributes(record, "record.qtsDetails.standardsAssessedOutcome"))}}
 
-{% set dateStandardsAssessmentPassed = record.personalDetails.dateOfBirth | toDateArray %}
+{% set dateAssessmentPassedArray = record.qtsDetails.dateAssessmentPassed | toDateArray %}
 
 {{ govukDateInput({
-  id: "date-of-birth",
-  namePrefix: "date-standards-assessment-passed",
+  id: "date-standards-assessment-passed",
+  namePrefix: "record[qtsDetails][dateAssessmentPassed]",
   fieldset: {
     legend: {
       text: "Date candidate passed standards assessment",
@@ -77,21 +69,21 @@
       {
         name: "day",
         classes: "govuk-input--width-2",
-        value: dateStandardsAssessmentPassed["0"]
+        value: dateAssessmentPassedArray["0"]
       },
       {
         name: "month",
         classes: "govuk-input--width-2",
-        value: dateStandardsAssessmentPassed["1"]
+        value: dateAssessmentPassedArray["1"]
       },
       {
         name: "year",
         classes: "govuk-input--width-4",
-        value: dateStandardsAssessmentPassed["2"]
+        value: dateAssessmentPassedArray["2"]
       }
     ]
 }) }}
-
+{# 
 {{ appAutocomplete({
   label: {
     text: "What is the qualification awarded?",
@@ -103,7 +95,7 @@
   classes: "govuk-!-width-two-thirds",
   value: degreeTemp.country
   }
-) }}
+) }} #}
 
 {{ govukButton({
   text: "Continue"

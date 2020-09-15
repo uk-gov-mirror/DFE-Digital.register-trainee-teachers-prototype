@@ -1,17 +1,15 @@
-
-
 {% set qtsDetailsRows = [
   {
     key: {
       text: "Assessment outcome"
     },
     value: {
-      text: "Passed"
+      text: record.qtsDetails.standardsAssessedOutcome or 'Not provided'
     },
     actions: {
       items: [
         {
-          href: recordPath + "/qts-recommend-edit" | addReferrer(referrer),
+          href: recordPath + "/recommend-for-qts" | addReferrer(referrer),
           text: "Change",
           visuallyHiddenText: "assessment outcome"
         }
@@ -23,12 +21,12 @@
       text: "Date of assessment"
     },
     value: {
-      text: "20 August 2020"
+      text: record.qtsDetails.dateAssessmentPassed | govukDate or 'Not provided'
     },
     actions: {
       items: [
         {
-          href: recordPath + "/qts-recommend-edit" | addReferrer(referrer),
+          href: recordPath + "/recommend-for-qts" | addReferrer(referrer),
           text: "Change",
           visuallyHiddenText: "date of assessment"
         }
@@ -36,8 +34,6 @@
     } if canAmend
   }
   ] %}
-
-
 
 {% set qtsDetailsHtml %}
   {{ govukSummaryList({

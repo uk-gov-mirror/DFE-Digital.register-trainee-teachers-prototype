@@ -54,13 +54,14 @@
 {% endif %}
 
 {% if record.status == "Pending QTS" %}
+{% set recommendedDate = record.recommendedDate | formatDate('relative') %}
 
   {% set qtsContent %}
     {{govukTag({
       text: "Pending QTS",
       classes: "govuk-tag--green govuk-!-margin-bottom-2"
     })}} <br>
-    Recommended: 2 September 2020
+    Recommended: {{record.recommendedDate | govukDate}}
   {% endset %}
 
   {% set studentRecordRows = studentRecordRows | push({
@@ -80,7 +81,7 @@
       text: "QTS awarded",
       classes: "govuk-tag--purple govuk-!-margin-bottom-2"
     })}} <br>
-    2 September 2020
+    Awarded: 2 September 2020
   {% endset %}
 
   {% set studentRecordRows = studentRecordRows | push({
