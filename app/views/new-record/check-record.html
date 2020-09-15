@@ -1,6 +1,6 @@
 {% extends "_templates/_new-record.html" %}
 
-{% set pageHeading = "New record overview" %}
+{% set pageHeading = "Check record" %}
 
 {% set formAction = "./save" %}
 
@@ -29,12 +29,20 @@
     {% endif %}
 
     <span class="govuk-caption-l">New record</span>
-    <h1 class="govuk-heading-l">Check before submitting for TRN</h1>
+    <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
     {% if recordIsComplete %}
       <p class="govuk-body-l">
         You have completed all sections of the candidate’s record. Check that the information is correct before submitting for TRN registration.
       </p>
+      {% else %}
+      {% set insetTextHtml %}
+        <p class="govuk-body">This record is not complete and cannot be submitted for TRN. If you don’t have all the required information now, you can <a href="./save-as-draft" class="govuk-link">save as a draft record</a>.</p>
+      {% endset %}
+        {{ govukInsetText({
+          html: insetTextHtml
+        }) }}
+      
     {% endif %}
 
   </div>
