@@ -17,7 +17,6 @@
 
   <div class="govuk-grid-column-full">
     
-<<<<<<< HEAD
     <div class="record-actions">
       {% if record.status | getCanRecommendForQts %}
         {{ govukButton({
@@ -30,34 +29,6 @@
       <div class="record-actions__links">
         <p class="govuk-body govuk-!-margin-bottom-0"><a href="">Defer</a> or <a href="">withdraw</a> this trainee</p>
       </div>
-=======
-    <h2 class="govuk-heading-m">Trainee record</h2>
-    {% include "_includes/summary-cards/student-record.html" %}
-
-    <h2 class="govuk-heading-m">Candidate details</h2>
-
-    {% include "_includes/summary-cards/personal-details.html" %}
-
-    {% include "_includes/summary-cards/contact-details.html" %}
-
-    {% include "_includes/summary-cards/diversity.html" %}
-
-    <h2 class="govuk-heading-m">Education</h2>
-
-    {% include "_includes/summary-cards/gcse-details.html" %}
-
-    <h3 class="govuk-heading-s">{{ "Degree" | pluralise(record.degree.items | length)}}</h3>
-    {% include "_includes/summary-cards/degree-details.html" %}
-
-    {% set degreeCount = record.degree.items | length %}
-
-     <div class="govuk-form-group">
-      {{ govukButton({
-        "text": "Add another degree" if degreeCount > 0 else "Add a degree",
-        href: recordPath + "/degree/add",
-        classes: "govuk-button--secondary"
-      }) }}
->>>>>>> origin/master
     </div>
 
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
