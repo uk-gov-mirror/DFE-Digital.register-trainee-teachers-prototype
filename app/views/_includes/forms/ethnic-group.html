@@ -1,15 +1,4 @@
-{% set ethnicities = data.ethnicities | push('Prefer not to say') %}
-{# {{ appAutocomplete({
-  label: {
-    text: "Ethnicity",
-    classes: "govuk-label--s"
-  },
-  id: 'ethnicities',
-  name: "record[diversity][ethnicGroup]",
-  items: ethnicities,
-  value: record.diversity.ethnicGroup
-  }
-) }} #}
+
 
 {{ govukRadios({
     name: "record[diversity][ethnicGroup]",
