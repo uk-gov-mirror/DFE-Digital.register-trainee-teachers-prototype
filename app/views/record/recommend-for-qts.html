@@ -1,11 +1,15 @@
 {% extends "_templates/_record-form.html" %}
 
-{% set pageHeading = data.record.personalDetails | getShortName %}
-{% set pageSubHeading = "Recommend for QTS" %}
+{% set pageHeadingTraineeName = data.record.personalDetails | getShortName %}
+{% set pageHeading = "Recommend for QTS" %}
 {% set formAction = "./qts/confirm" %}
   
 {% block formContent %}
-  <h2 class="govuk-heading-l">{{pageSubHeading}}</h1>
+
+  <h1 class="govuk-heading-l">
+    <span class="govuk-caption-xl">{{pageHeadingTraineeName}}</span>
+    {{pageHeading}}
+  </h1>
 
   {% include "_includes/forms/recommend-for-qts.html" %}
 
