@@ -1,15 +1,5 @@
 {% set filterOptionsHtml %}
 
-  {# {{ govukInput({
-      id: 'keywords',
-      name: 'keywords',
-      label: {
-        text: "Candidate's name",
-        classes: 'govuk-label--m'
-      },
-      value: data.keywords
-    }) }} #}
-
     {{ govukCheckboxes({
       idPrefix: "filterStatus",
       name: "filterStatus",
@@ -67,9 +57,7 @@
       <div class="moj-filter__header-title">
         <h2 class="govuk-heading-m">Filter</h2>
       </div>
-      <div class="moj-filter__header-action">
-
-      </div>
+      <div class="moj-filter__header-action"></div>
     </div>
     <div class="moj-filter__content">
       {% if selectedFilters %}
@@ -94,12 +82,10 @@
         </div>
       {% endif %}
       <div class="moj-filter__options">
-        <form method="get" action="">
-          <button class="govuk-button" data-module="govuk-button">
-            Apply filters
-          </button>
-          {{filterOptionsHtml | safe}}
-        </form>
+        <button class="govuk-button" data-module="govuk-button">
+          Apply filters
+        </button>
+        {{filterOptionsHtml | safe}}
       </div>
     </div>
   </div>

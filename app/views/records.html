@@ -7,7 +7,7 @@
 
 <h1 class="govuk-heading-xl">{{pageHeading}}</h1>
 
-<div class="applications-header">
+<div class="records-header">
 
   {{ govukButton({
     text: "Add a trainee",
@@ -40,16 +40,35 @@
   <div class="govuk-grid-column-full">
 
     <div class="moj-filter-layout">
-       
-      <div class="moj-filter-layout__filter">
-        {% include "_includes/filter-panel.njk" %}
-      </div>
-
-      <div class="moj-filter-layout__content">
-
-        <div class="moj-action-bar">
-          <div class="moj-action-bar__filter"></div>
+      
+      <form method="get" action="">
+      
+        <div class="moj-filter-layout__filter">
+          {% include "_includes/filter-panel.njk" %}
         </div>
+
+        <div class="moj-filter-layout__content">
+
+          <div class="moj-action-bar">
+            <div class="moj-action-bar__filter"></div>
+          </div>
+          
+          <div class="records-search">
+            {{ govukInput({
+              label: {
+                html: "Search records",
+                classes: "govuk-label--s"
+              },
+              id: "search-records",
+              name: "search-records"
+            }) }}
+            {{ govukButton({
+              text: "Search"
+            }) }}
+          </div>
+
+        </form>
+
         <div>
 
           {{data.records | log}}
