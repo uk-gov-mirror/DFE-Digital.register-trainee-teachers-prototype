@@ -8,36 +8,24 @@
   hint: {
     text: "Or given names"
   },
-  id: "first-names",
-  name: "record[personalDetails][givenName]",
-  value: record.personalDetails["givenName"],
   classes: "govuk-!-width-two-thirds"
-}) }}
+}| decorateAttributes(record, "record.personalDetails.givenName"))}}
 
 {{ govukInput({
   label: {
     text: "Middle names",
     classes: "govuk-label--s"
   },
-  id: "middle-name",
-  name: "record[personalDetails][middleNames]",
-  value: record.personalDetails['middleNames'],
   classes: "govuk-!-width-two-thirds"
-}) }}
+} | decorateAttributes(record, "record.personalDetails.middleNames"))}}
 
 {{ govukInput({
   label: {
     text: "Last name",
     classes: "govuk-label--s"
   },
-  hint: {
-    text: "Or family name"
-  },
-  id: "last-name",
-  name: "record[personalDetails][familyName]",
-  value: record.personalDetails['familyName'],
   classes: "govuk-!-width-two-thirds"
-}) }}
+} | decorateAttributes(record, "record.personalDetails.familyName"))}}
 
 {# Date of birth may be a date object #}
 {% set dateOfBirthArray = record.personalDetails.dateOfBirth | toDateArray %}
@@ -74,8 +62,6 @@
 }) }}
 
 {{ govukRadios({
-  idPrefix: "gender",
-  name: "record[personalDetails][sex]",
   fieldset: {
     legend: {
       text: "Gender",
@@ -84,23 +70,18 @@
   },
   items: [
     {
-      value: "Male",
-      text: "Male",
-      checked: checked(record.personalDetails.sex, "Male")
+      text: "Male"
     },
     {
-      value: "Female",
-      text: "Female",
-      checked: checked(record.personalDetails.sex, "Female")
+      text: "Female"
     },
     {
-      value: "Other",
-      text: "Other",
-      checked: checked(record.personalDetails.sex, "Other")
+      text: "Other"
     }
   ]
-}) }}
+} | decorateAttributes(record, "record.personalDetails.sex"))}}
 
+{# Separate out nationalities #}
 {% set otherNationalities = record.personalDetails.nationality | removeArrayItems(['British','Irish','Other'] | removeEmpty )%}
 
 {% set otherNationalities = otherNationalities | removeEmpty %}
@@ -161,22 +142,14 @@
       classes: "govuk-fieldset__legend--s"
     }
   },
-  hint: {
-    text: ""
-  },
   items: [
     {
-      value: "British",
-      text: "British",
-      checked: checked(record.personalDetails.nationality, "British")
+      text: "British"
     },
     {
-      value: "Irish",
-      text: "Irish",
-      checked: checked(record.personalDetails.nationality, "Irish")
+      text: "Irish"
     },
     {
-      value: "Other",
       text: "Other",
       checked: hasOtherNationality,
       conditional: {
@@ -184,7 +157,7 @@
       }
     }
   ]
-}) }}
+} | decorateAttributes(record, "record.personalDetails.nationality"))}}
 
 {{ govukButton({
   text: "Continue"

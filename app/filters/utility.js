@@ -68,6 +68,8 @@ filters.decorateAttributes = (obj, data, value) => {
 
   if (obj.items !== undefined) {
     obj.items = obj.items.map(item => {
+      if (item.divider) return item
+
       var checked = storedValue ? '' : item.checked
       var selected = storedValue ? '' : item.selected
       if (typeof item.value === 'undefined') {
