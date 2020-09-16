@@ -199,7 +199,8 @@ filters.formatDate = (date, format, dateFormat) => {
   // No date provided.
   if (!date){
     // console.log('error for', date, 'format', format);
-    throw "Error in formatDate: no date provided";
+    return ''
+    // throw "Error in formatDate: no date provided";
   }
   // Check for valid date
   else if (dateFormat && moment(date, dateFormat).isValid()){
