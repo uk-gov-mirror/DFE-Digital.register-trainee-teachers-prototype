@@ -14,13 +14,33 @@
   html: "Your reference number<br><strong>HDJ2123F</strong>" if false
 }) }}
 
-{{record | log}}
+<p class="govuk-body">
+  We will update their record status when we receive the TRN.
+</p>
 
-{{ govukButton({
+<h2 class="govuk-heading-m">Next steps:</h2>
+<ul class="govuk-list govuk-list--bullet">
+  <li>
+    <a href="{{ '/record/' + data.recordId }}" class="govuk-link">View this record</a>
+  </li>
+  <li>
+    <a href="/records" class="govuk-link">Return to the records list</a>
+  </li>
+  <li>
+    <a href="/new-record/new" class="govuk-link">Add another trainee record</a>
+  </li>
+</ul>
+
+{# {{ govukButton({
   text: "View record",
   href: "/record/" + data.recordId
 }) }}
 
+{{ govukButton({
+  text: "Add another record",
+  href: "/new-record/new"
+}) }}
+ #}
 
 {% endblock %}
 

@@ -54,6 +54,31 @@ filters.addIndexCount = array => {
 // Generate the attributes based on the application ID and the section they’re in
 
 // Copied from Apply, but modified to work with data directly
+
+/* Usage: 
+{{ govukCheckboxes({
+  fieldset: {
+    legend: {
+      text: "Nationality",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      text: "British"
+    },
+    {
+      text: "Irish"
+    },
+    {
+      text: "Other"
+    }
+  ]
+} | decorateAttributes(data, "data.nationality"))}}
+
+Will populate name and id, and add value and checked for each item
+*/
+
 filters.decorateAttributes = (obj, data, value) => {
 
   // Map dot or bracket notation to path parts
@@ -68,6 +93,8 @@ filters.decorateAttributes = (obj, data, value) => {
 
   if (obj.items !== undefined) {
     obj.items = obj.items.map(item => {
+      if (item.divider) return item
+
       var checked = storedValue ? '' : item.checked
       var selected = storedValue ? '' : item.selected
       if (typeof item.value === 'undefined') {

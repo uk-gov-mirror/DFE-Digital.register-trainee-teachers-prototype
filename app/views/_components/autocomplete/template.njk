@@ -15,11 +15,20 @@
 }] %}
 
 {% for item in params.items %}
-  {% set selectItems = selectItems | push({
-    value: item,
-    text: item,
-    selected: params.value == item
-  }) %}
+  {% if item | isArray %}
+    {% set selectItems = selectItems | push({
+      value: item[1],
+      text: item[0],
+      selected: params.value == item[1]
+    }) %}
+  {% else %}
+    {% set selectItems = selectItems | push({
+      value: item,
+      text: item,
+      selected: params.value == item
+    }) %}
+  {% endif %}
+  
 {% endfor %}
 
 {{ govukSelect({
@@ -80,7 +89,7 @@
   accessibleAutocomplete.enhanceSelectElement({
     selectElement: element,
     showAllValues: true,
-    source: values,
+    // source: values,
     defaultValue: defaultValue
 
   });

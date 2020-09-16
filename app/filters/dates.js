@@ -254,6 +254,11 @@ filters.formatDate = (date, format, dateFormat) => {
     }
 }
 
+filters.isInLast = (date, count, units) => {
+  let compareDate = moment().subtract(count, units)
+  return moment(date).isAfter(compareDate)
+}
+
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app
 // -------------------------------------------------------------------
