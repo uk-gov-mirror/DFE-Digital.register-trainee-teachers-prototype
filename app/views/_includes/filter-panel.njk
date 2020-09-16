@@ -1,8 +1,6 @@
 {% set filterOptionsHtml %}
 
     {{ govukCheckboxes({
-      idPrefix: "filterCycle",
-      name: "filterCycle",
       classes: "govuk-checkboxes--small",
       fieldset: {
         legend: {
@@ -22,8 +20,6 @@
     } | decorateAttributes(data, "data.filterCycle"))}}
     
     {{ govukCheckboxes({
-      idPrefix: "filterStatus",
-      name: "filterStatus",
       classes: "govuk-checkboxes--small",
       fieldset: {
         legend: {
