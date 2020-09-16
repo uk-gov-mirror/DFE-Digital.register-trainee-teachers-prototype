@@ -1,15 +1,6 @@
 
-{% extends "layout.html" %}
+{% extends "_templates/_page.html" %}
 {% set backLink = '/start-page' %}
-
-{% block pageNavigation %}
-  {% if backLink %}
-    {{ govukBackLink({
-      text: backText,
-      href: backLink
-    }) }}
-  {% endif %}
-{% endblock %}
 
 {% block content %}
 
@@ -30,7 +21,7 @@
           text: "Data required for all routes"
         },
         {
-          text: "Additional data for Assessment only"
+          text: "Specific data for Assessment Only"
         }
       ],
       rows: [
@@ -110,7 +101,7 @@
                 Ethnicity
               </li>
               <li>
-                Disabilty
+                Disability
               </li>
             </ul>
             "

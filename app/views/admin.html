@@ -1,0 +1,29 @@
+
+{% extends "_templates/_page.html" %}
+
+{% set backLink = '/records' %}
+{% set backText = 'Back' %}
+{% set pageHeading = 'Prototype settings' %}
+{% set pageAction = value %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+    <h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
+      <form action="/records" method="post">
+
+        {{ govukButton({
+          "text": "Update"
+        }) }}
+   
+    </form>
+
+  </div>
+
+</div>
+
+{% endblock %}

@@ -57,7 +57,7 @@
 
   <form {{formActionHtml}} method="post">
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
+      <div class="{{ gridColumn or 'govuk-grid-column-two-thirds'}}">
         {% block formContent %}
 
         {% endblock %}

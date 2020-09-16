@@ -15,7 +15,7 @@
     actions: {
       items: [
         {
-          href: recordPath + "/degree-details" | addReferrer(referrer),
+          href: recordPath + "/candidate-id" | addReferrer(referrer),
           text: "Change",
           visuallyHiddenText: "candidate ID"
         }
@@ -94,13 +94,19 @@
   }) %}
 {% endif %}
 
+{% set updatedDate %}
+  <p class="govuk-body">{{record.updatedDate | govukDate or 'Not provided'}}</p>
+  {% if record.updatedDate | isInLast( 7, 'days') %}
+    <span class="govuk-hint">{{ record.updatedDate | formatDate('relative') }}</span>
+  {% endif %}
+{% endset %}
 
 {% set datesRows = [{
   key: {
     text: "Last updated"
   },
   value: {
-    text: record.updatedDate | govukDate or 'Not provided'
+    html: updatedDate
   }
 },
 {

@@ -54,7 +54,7 @@ const updateRecord = (data, newRecord) => {
   if (!newRecord) return false
   
   let records = data.records
-  newRecord.lastUpdated = new Date()
+  newRecord.updatedDate = new Date()
   
   if (!newRecord.id){
     newRecord.id = faker.random.uuid()
@@ -294,11 +294,13 @@ router.post('/new-record/record-setup', function (req, res) {
 router.get('/new-record/check-record', function (req, res) {
   const data = req.session.data
   let errors = req.query.errors
+  let newRecord = _.get(data, 'record') // copy record
+  let isComplete = recordIsComplete(newRecord)
   let errorList = false
   if (errors){
     errorList = true
   }
-  res.render('new-record/check-record', {errorList})
+  res.render('new-record/check-record', {errorList, recordIsComplete: isComplete})
 })
 
 // Save a record and put in data store
@@ -385,7 +387,7 @@ router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
 })
 
 // Copy temp record back to real record
-router.post('/record/:uuid/:page/update', (req, res) => {
+router.post(['/record/:uuid/:page/update', '/record/:uuid/update'], (req, res) => {
   const data = req.session.data
   const newRecord = data.record
   // Update failed or no data
