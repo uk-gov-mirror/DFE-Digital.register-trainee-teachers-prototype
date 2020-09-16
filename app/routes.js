@@ -55,6 +55,7 @@ const updateRecord = (data, newRecord) => {
   
   let records = data.records
   newRecord.updatedDate = new Date()
+  data.record = newRecord
   
   if (!newRecord.id){
     newRecord.id = faker.random.uuid()
@@ -314,8 +315,8 @@ router.get('/new-record/save-as-draft', (req, res) => {
   }
   else {
     newRecord.status = "Draft" // just in case
-    updateRecord(data, newRecord)
     deleteTempData(data)
+    updateRecord(data, newRecord)
     res.redirect('/records')
   }
 })
@@ -332,8 +333,8 @@ router.post('/new-record/save', (req, res) => {
   else {
     newRecord.status = "Pending TRN"
     newRecord.submittedDate = new Date()
-    updateRecord(data, newRecord)
     deleteTempData(data)
+    updateRecord(data, newRecord)
     req.session.data.recordId = newRecord.id //temp store for id to link to the record
     res.redirect('/new-record/submitted')
   }
@@ -379,9 +380,9 @@ router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
   }
   else {
     newRecord.status = 'Pending QTS'
-    newRecord.recommendedDate = new Date()
-    updateRecord(data, newRecord)
+    newRecord.qtsRecommendedDate = new Date()
     deleteTempData(data)
+    updateRecord(data, newRecord)
     res.redirect('/record/' + req.params.uuid)
   }
 })
@@ -395,9 +396,15 @@ router.post(['/record/:uuid/:page/update', '/record/:uuid/update'], (req, res) =
     res.redirect('/record/:uuid')
   }
   else {
-    updateRecord(data, newRecord)
     deleteTempData(data)
-    res.redirect('/record/' + req.params.uuid)
+    updateRecord(data, newRecord)
+
+    if (req.params.page && req.params.page != 'assessment-details'){
+      res.redirect(`/record/${req.params.uuid}/details-and-education`)
+    }
+    else {
+      res.redirect('/record/' + req.params.uuid)
+    }
   }
 })
 

@@ -2,7 +2,7 @@ const moment = require('moment')
 const weighted = require('weighted')
 
 
-module.exports = (faker, personalDetails) => {
+module.exports = (faker, status) => {
 
   // const ageRange = faker.helpers.randomize([
   //   "2 - 4 years",
@@ -34,9 +34,14 @@ module.exports = (faker, personalDetails) => {
     "Physics",
     "Chemistry"])
 
+  const statusesWithEndDates = [
+    "Pending QTS",
+    "QTS awarded"
+  ]
+
   const startDate = faker.date.between('2017-01-01', '2020-08-01')
   const duration = faker.helpers.randomize([1,2,3])
-  const endDate = moment(startDate).add(duration, 'years')
+  const endDate = (statusesWithEndDates.includes(status)) ? moment(startDate).add(duration, 'years') : undefined
 
   return {
     ageRange,
