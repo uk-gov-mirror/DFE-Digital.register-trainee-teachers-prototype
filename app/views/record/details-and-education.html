@@ -1,5 +1,7 @@
 {% extends "_templates/_record.html" %}
 
+{% set backLink = '/records' %}
+{% set backText = 'All records' %}
 {% set pageHeading = data.record.personalDetails | getShortName %}
 {% set activeTab = 'details-education' %}
 
