@@ -13,17 +13,13 @@
       },
       items: [
         {
-          value: "2020 to 2021 (Current)",
-          text: "2020 to 2021 (Current)",
-          checked: checked(data.filterStatus, "2020 to 2021 (Current)")
+          text: "2020 to 2021 (Current)"
         },
         {
-          value: "2019 to 2020",
-          text: "2019 to 2020",
-          checked: checked(data.filterStatus, "2019 to 2020")
+          text: "2019 to 2020"
         }
       ]
-    }) }}
+    } | decorateAttributes(data, "data.filterCycle"))}}
     
     {{ govukCheckboxes({
       idPrefix: "filterStatus",
@@ -38,42 +34,28 @@
       },
       items: [
         {
-          value: "Draft",
-          text: "Draft",
-          checked: checked(data.filterStatus, "Draft")
+          text: "Draft"
         },
         {
-          value: "Pending TRN",
-          text: "Pending TRN",
-          checked: checked(data.filterStatus, "Pending TRN")
+          text: "Pending TRN"
         },
         {
-          value: "TRN received",
-          text: "TRN received",
-          checked: checked(data.filterStatus, "TRN received")
+          text: "TRN received"
         },
         {
-          value: "Pending QTS",
-          text: "Pending QTS",
-          checked: checked(data.filterStatus, "Pending QTS")
+          text: "Pending QTS"
         },
         {
-          value: "QTS awarded",
-          text: "QTS awarded",
-          checked: checked(data.filterStatus, "QTS awarded")
+          text: "QTS awarded"
         },
         {
-          value: "Deferred",
-          text: "Deferred",
-          checked: checked(data.filterStatus, "Deferred")
+          text: "Deferred"
         },
         {
-          value: "Withdrawn",
-          text: "Withdrawn",
-          checked: checked(data.filterStatus, "Withdrawn")
+          text: "Withdrawn"
         }
       ]
-    }) }}
+    } | decorateAttributes(data, "data.filterStatus"))}}
 
   {% endset %}
 
