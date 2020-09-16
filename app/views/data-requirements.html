@@ -1,0 +1,178 @@
+
+{% extends "layout.html" %}
+{% set backLink = '/start-page' %}
+
+{% block pageNavigation %}
+  {% if backLink %}
+    {{ govukBackLink({
+      text: backText,
+      href: backLink
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">Data requirements</h1>
+    <p class="govuk-body">Data requirements for the available routes in Register teacher training.</p>
+    <p class="govuk-body">If you have any further questions contact <a class="govuk-link" href="mailto:itt.datamanagement@education.gov.uk">itt.datamanagement@education.gov.uk</a>.</p>
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    {{ govukTable({
+      caption: "Data requirements",
+      captionClasses: "govuk-visually-hidden",
+      head: [
+        {
+          text: "Data required for all routes"
+        },
+        {
+          text: "Additional data for Assessment only"
+        }
+      ],
+      rows: [
+        [
+          {
+            html: "
+            <h2 class='govuk-heading-s'>Personal details</h2>
+            <ul class='govuk-list'>
+              <li>
+                First or given names
+              </li>
+              <li>
+                Middle names
+              </li>
+              <li>
+                Last or family name
+              </li>
+              <li>
+                Date of birth
+              </li>
+              <li>
+                Gender
+              </li>
+              <li>
+                Nationality
+              </li>
+            </ul>
+            "
+          },
+          {
+            html: "
+            <h2 class='govuk-heading-s'>Assessment details</h2>
+            <ul class='govuk-list'>
+              <li>
+                Subject
+              </li>
+              <li>
+                Age range
+              </li>
+              <li>
+                Start date
+              </li>
+              <li>
+                End date
+              </li>
+            </ul>
+            "
+          }
+        ],
+        [
+          {
+            html: "
+            <h2 class='govuk-heading-s'>Contact details</h2>
+            <ul class='govuk-list'>
+              <li>
+                Address
+              </li>
+              <li>
+                Phone number
+              </li>
+              <li>
+                Email address
+              </li>
+            </ul>
+            "
+          },
+          {
+            html: ""
+          }
+        ],
+        [
+          {
+            html: "
+            <h2 class='govuk-heading-s'>Diversity information</h2>
+            <ul class='govuk-list'>
+              <li>
+                Ethnicity
+              </li>
+              <li>
+                Disabilty
+              </li>
+            </ul>
+            "
+          },
+          {
+            html: ""
+          }
+        ],
+        [
+          {
+            html: "
+            <h2 class='govuk-heading-s'>GCSE</h2>
+            <ul class='govuk-list'>
+              <li>
+                English grade
+              </li>
+              <li>
+                Maths grade
+              </li>
+              <li>
+                Science grade
+              </li>
+            </ul>
+            "
+          },
+          {
+            html: ""
+          }
+        ],
+        [
+          {
+            html: "
+            <h2 class='govuk-heading-s'>Degree</h2>
+            <ul class='govuk-list'>
+              <li>
+                UK or non-UK
+              </li>
+              <li>
+                Type, for example, BA, BSc or other
+              </li>
+              <li>
+                Subject
+              </li>
+              <li>
+                Institution
+              </li>
+              <li>
+                Graduation year
+              </li>
+              <li>
+                Grade
+              </li>
+            </ul>
+            "
+          },
+          {
+            html: ""
+          }
+        ]
+      ]
+    }) }}
+  </div>
+</div>
+
+{% endblock %}
