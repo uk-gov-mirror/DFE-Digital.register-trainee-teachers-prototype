@@ -1,6 +1,23 @@
 {% set qtsDetailsRows = [
   {
     key: {
+      text: "Assessment end date"
+    },
+    value: {
+      text: record.assessmentDetails.endDate | govukDate or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/recommend-for-qts" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "assessment end date"
+        }
+      ]
+    } if canAmend
+  },
+  {
+    key: {
       text: "Assessment outcome"
     },
     value: {

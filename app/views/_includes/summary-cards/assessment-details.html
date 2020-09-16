@@ -55,10 +55,12 @@
         }
       ]
     } if canAmend
-  },
-  {
+  }
+  ] %}
+
+{% set endDateRow = {
     key: {
-      text: "Expected assessment end date"
+      text: "Assessment end date"
     },
     value: {
       text: record.assessmentDetails.endDate | govukDate or 'Not provided'
@@ -72,27 +74,12 @@
         }
       ]
     } if canAmend
-  },
-  {
-    key: {
-      text: "Expected duration"
-    },
-    value: {
-      text: expectedDuration
-    },
-    actions: {
-      items: [
-        {
-          href: recordPath + "/assessment-details" | addReferrer(referrer),
-          text: "Change",
-          visuallyHiddenText: "expected duration"
-        }
-      ]
-    } if canAmend
-  } if false 
-  ] %}
+  }  %}
 
-
+{# End date only collected when submitting for QTS #}
+{% if record.assessmentDetails.endDate and (record.status == "Pending QTS" or record.status == "QTS Awarded" )%}
+  {% set assessmentDetailsRows = assessmentDetailsRows | push(endDateRow) %}  
+{% endif %}
 
 {% set assessmentDetailsHtml %}
   {{ govukSummaryList({

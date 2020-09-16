@@ -91,7 +91,7 @@
     }
   },
   hint: {
-    text: "For example, 31 3 1921"
+    text: "For example, " + "" | today | moment('subtract', 12, 'weeks') | toDateArray | spaceSeparate
   },
   items: [
       {
@@ -112,54 +112,43 @@
     ]
 }) }}
 
-{% set assessmentEndDateArray = record.assessmentDetails.endDate | toDateArray %}
-
-{{ govukDateInput({
-  id: "assessment-end-date",
-  namePrefix: "record[assessmentDetails][endDate]",
-  fieldset: {
-    legend: {
-      text: "Assessment end date",
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  hint: {
-    text: "For example, 31 3 1921"
-  },
-  items: [
-      {
-        name: "day",
-        classes: "govuk-input--width-2",
-        value: assessmentEndDateArray["0"]
-      },
-      {
-        name: "month",
-        classes: "govuk-input--width-2",
-        value: assessmentEndDateArray["1"]
-      },
-      {
-        name: "year",
-        classes: "govuk-input--width-4",
-        value: assessmentEndDateArray["2"]
+{# We only want to collect this once they go to submit for QTS #}
+{# Likely it can never be seen on this page, as we don't currently
+allow editing after you submit for QTS #}
+{% if record.status == "Pending QTS" or record.status == "QTS Awarded" %}
+  {% set assessmentEndDateArray = record.assessmentDetails.endDate | toDateArray %}
+  {{ govukDateInput({
+    id: "assessment-end-date",
+    namePrefix: "record[assessmentDetails][endDate]",
+    fieldset: {
+      legend: {
+        text: "Assessment end date",
+        classes: "govuk-fieldset__legend--s"
       }
-    ]
-}) }}
+    },
+    hint: {
+      text: "For example, " + "" | today | toDateArray | spaceSeparate
+    },
+    items: [
+        {
+          name: "day",
+          classes: "govuk-input--width-2",
+          value: assessmentEndDateArray["0"]
+        },
+        {
+          name: "month",
+          classes: "govuk-input--width-2",
+          value: assessmentEndDateArray["1"]
+        },
+        {
+          name: "year",
+          classes: "govuk-input--width-4",
+          value: assessmentEndDateArray["2"]
+        }
+      ]
+  }) }}
 
-{# Possibly not needed #}
-{# {{ govukInput({
-  label: {
-    text: "Assessment duration in years",
-    classes: "govuk-label--s"
-  },
-  hint: {
-    text: "Or given names"
-  } if false,
-  id: "assessment-duration",
-  name: "record[assessmentDetails][duration]",
-  value: record.assessmentDetails["duration"],
-  classes: "govuk-!-width-two-thirds"
-}) }}
- #}
+{% endif %}
 
 {{ govukButton({
   text: "Continue"

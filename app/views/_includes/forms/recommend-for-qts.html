@@ -1,40 +1,41 @@
-{# {% set dateFinishedTrainingArray = record.qtsDetails.dateOfBirth | toDateArray %} #}
+{% set assessmentEndDateArray = record.assessmentDetails.endDate | toDateArray %}
 
-{# {{ govukDateInput({
-  id: "date-of-birth",
-  namePrefix: "date-finished-training",
+{# Collected now because they won't know the date before this #}
+{{ govukDateInput({
+  id: "assessment-end-date",
+  namePrefix: "record[assessmentDetails][endDate]",
   fieldset: {
     legend: {
-      text: "Date candidate finished training placement",
+      text: "Assessment Only (AO) end date",
       classes: "govuk-fieldset__legend--s"
     }
   },
   hint: {
-    text: "For example, 31 06 2020"
+    text: "For example, " + "" | today | toDateArray | spaceSeparate
   },
   items: [
       {
         name: "day",
         classes: "govuk-input--width-2",
-        value: dateFinishedTrainingArray["0"]
+        value: assessmentEndDateArray["0"]
       },
       {
         name: "month",
         classes: "govuk-input--width-2",
-        value: dateFinishedTrainingArray["1"]
+        value: assessmentEndDateArray["1"]
       },
       {
         name: "year",
         classes: "govuk-input--width-4",
-        value: dateFinishedTrainingArray["2"]
+        value: assessmentEndDateArray["2"]
       }
     ]
-}) }} #}
+}) }}
 
 {{ govukRadios({
   fieldset: {
     legend: {
-      text: "What is the standards assessed outcome?",
+      text: "What was the standards assessed outcome?",
       classes: "govuk-fieldset__legend--s"
     }
   },
@@ -58,12 +59,12 @@
   namePrefix: "record[qtsDetails][dateAssessmentPassed]",
   fieldset: {
     legend: {
-      text: "Date candidate passed standards assessment",
+      text: "Date of standards assessment",
       classes: "govuk-fieldset__legend--s"
     }
   },
   hint: {
-    text: "For example, 31 06 2020"
+    text: "For example, " + "" | today | toDateArray | spaceSeparate
   },
   items: [
       {
@@ -100,5 +101,3 @@
 {{ govukButton({
   text: "Continue"
 }) }}
-
-

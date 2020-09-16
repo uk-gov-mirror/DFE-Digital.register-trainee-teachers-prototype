@@ -64,7 +64,7 @@ const generateFakeApplication = (params = {}) => {
   const contactDetails = (params.contactDetails === null) ? undefined : { ...generateContactDetails(faker, person), ...params.contactDetails }
 
   // Assessment details
-  const assessmentDetails = (params.assessmentDetails === null) ? undefined : { ...generateAssessmentDetails(faker), ...params.assessmentDetails }
+  const assessmentDetails = (params.assessmentDetails === null) ? undefined : { ...generateAssessmentDetails(faker, status), ...params.assessmentDetails }
 
   // Qualifications
 

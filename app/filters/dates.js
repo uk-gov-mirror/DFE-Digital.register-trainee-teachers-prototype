@@ -260,6 +260,17 @@ filters.isInLast = (date, count, units) => {
   return moment(date).isAfter(compareDate)
 }
 
+// Expose moment as a filter
+/* Usage:
+
+{{ date | moment('subtract', 1, "week") }} // return the date 1 week ago
+
+*/
+
+filters.moment = (date, name, ...args) => {
+  return moment(date)[name](...args)
+}
+
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app
 // -------------------------------------------------------------------
