@@ -1,6 +1,6 @@
 {% extends "_templates/_record-form.html" %}
 {% set pageHeadingTraineeName = data.record.personalDetails | getShortName %}
-{% set pageHeading = "Confirm QTS details" %}
+{% set pageHeading = "Check assessment details" %}
 
 {% set formAction = "./qts-recommended" %}
 
@@ -9,7 +9,7 @@
     <span class="govuk-caption-xl">{{pageHeadingTraineeName}}</span>
     {{pageHeading}}
   </h1>
-  {% include "_includes/summary-cards/qts-details.html" %}
+  {% include "_includes/summary-cards/qts-assessment-details.html" %}
 
   {# {{ govukCheckboxes({
   idPrefix: "waste",
