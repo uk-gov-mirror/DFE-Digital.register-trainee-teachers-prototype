@@ -461,21 +461,46 @@ router.get('/record/:uuid/:page*', function (req, res) {
 // Filters
 router.get('/records', function (req, res) {
   const data = req.session.data
-  let filterStatus = data.filterStatus
-  if (!filterStatus) {
-    filterStatus = []
+  let filterStatus = req.query.filterStatus
+  let searchQuery = req.query.search
+
+  if (!filterStatus || filterStatus == '_unchecked') {
+    filterStatus = false
   }
-  let records = data.records
-  let filteredRecords = []
-  if (filterStatus.length) {
-    filteredRecords = records.filter(record => {
-      let statusMatch = filterStatus.includes(record.status)
-      return statusMatch
+
+  let filteredRecords = data.records
+
+  if (searchQuery){
+    filteredRecords = filteredRecords.filter(record => {
+      let recordIdMatch = (searchQuery) ? (record.traineeId.toLowerCase().includes(searchQuery.toLowerCase())) : false
+      let nameMatch = false
+  
+        // Combine names in to one string
+        // Todo: there's probably an easier way to do this
+        let names = []
+        names.push(record.personalDetails.givenName)
+        names.push(record.personalDetails.middleNames)
+        names.push(record.personalDetails.familyName)
+        let fullName = names.filter(Boolean).join(' ').toLowerCase()
+
+        // Split query in to parts
+        let searchParts = searchQuery.toLowerCase().split(' ')
+       
+        // Check that each part exists in the trainee's name
+        nameMatch = true
+        searchParts.forEach(part => {
+          if (!fullName.includes(part)) {
+            nameMatch = false
+          }
+        })
+      return recordIdMatch || nameMatch
     })
-  } else {
-    filteredRecords = records
   }
-  res.render('records', {filteredRecords})
+
+  if ( filterStatus ) {
+    filteredRecords = filteredRecords.filter(record => filterStatus.includes(record.status))  
+  }
+  res.render('records', { filteredRecords })
 })
 
 
