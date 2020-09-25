@@ -106,6 +106,13 @@ filters.getCanRecommendForQts = status => {
   return statusesThatShowQtsTabs.includes(status)
 }
 
+filters.getCanDefer = status => {
+  let statusesThatAllowDeferral = [
+    'TRN received'
+  ]
+  return statusesThatAllowDeferral.includes(status)
+}
+
 
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app

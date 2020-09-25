@@ -32,7 +32,11 @@
       {% endif %}
 
       <div class="record-actions__links">
-        <p class="govuk-body govuk-!-margin-bottom-0"><a href="" class="govuk-link--no-visited-state">Defer</a> or <a href="" class="govuk-link--no-visited-state">withdraw</a> this trainee</p>
+        {% if record.status | getCanDefer %}
+          <p class="govuk-body govuk-!-margin-bottom-0"><a href="" class="govuk-link--no-visited-state">Defer</a> or <a href="" class="govuk-link--no-visited-state">withdraw</a> this trainee</p>
+        {% else %}
+          <p class="govuk-body govuk-!-margin-bottom-0"><a href="" class="govuk-link--no-visited-state">Withdraw</a> this trainee</p>
+        {% endif %}
       </div>
     </div>
 
