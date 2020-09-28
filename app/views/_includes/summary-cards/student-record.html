@@ -106,7 +106,7 @@
     Deferred: {{record.deferralDate | govukDate}}
   {% elseif (record.deferralDate) and (record.reinstateDate)  %}
     Reinstated: {{record.reinstateDate | govukDate}} <br>
-    <span class="govuk-hint">Deferred:{{record.deferralDate | govukDate}}</span>
+    <span class="govuk-hint">Deferred: {{record.deferralDate | govukDate}}</span>
   {% endif %}
 {% endset %}
 
