@@ -403,7 +403,7 @@ router.get('/record/:uuid/trn', (req, res) => {
   }
 })
 
-// Manually advance an application from pending to trn received
+// Manually advance an application from Pending QTS received to QTS awarded
 router.get('/record/:uuid/qts', (req, res) => {
   const data = req.session.data
   const newRecord = data.record
@@ -435,6 +435,24 @@ router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
     deleteTempData(data)
     updateRecord(data, newRecord)
     req.flash('success', 'Trainee recommended for QTS')
+    res.redirect('/record/' + req.params.uuid)
+  }
+})
+
+// Copy defer data back to real record
+router.post('/record/:uuid/defer/defer', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    newRecord.status = 'Deferred'
+    newRecord.deferDate = new Date()
+    deleteTempData(data)
+    updateRecord(data, newRecord)
+    req.flash('success', 'Trainee deferred')
     res.redirect('/record/' + req.params.uuid)
   }
 })

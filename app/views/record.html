@@ -33,7 +33,7 @@
 
       <div class="record-actions__links">
         {% if record.status | getCanDefer %}
-          <p class="govuk-body govuk-!-margin-bottom-0"><a href="" class="govuk-link--no-visited-state">Defer</a> or <a href="" class="govuk-link--no-visited-state">withdraw</a> this trainee</p>
+          <p class="govuk-body govuk-!-margin-bottom-0"><a href="{{referrer}}/defer" class="govuk-link--no-visited-state">Defer</a> or <a href="" class="govuk-link--no-visited-state">withdraw</a> this trainee</p>
         {% elseif record.status | getCanReinstate %}
           <p class="govuk-body govuk-!-margin-bottom-0"><a href="" class="govuk-link--no-visited-state">Reinstate </a> or <a href="" class="govuk-link--no-visited-state">withdraw</a> this trainee</p>
         {% else %}

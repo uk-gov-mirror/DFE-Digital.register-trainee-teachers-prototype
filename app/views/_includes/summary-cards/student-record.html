@@ -103,7 +103,7 @@
       text: "Deferred",
       classes: "govuk-tag--yellow govuk-!-margin-bottom-2"
     })}} <br>
-    Deferred: {{record.deferralDate | govukDate}}
+    Deferred: {{record.deferDate | govukDate}}
   {% endset %}
 
   {% set studentRecordRows = studentRecordRows | push({

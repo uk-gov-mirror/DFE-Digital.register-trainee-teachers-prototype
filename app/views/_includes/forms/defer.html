@@ -1,0 +1,36 @@
+{% set deferDateArray = record.deferDetails.endDate | toDateArray %}
+
+{{ govukDateInput({
+  id: "defer-date",
+  namePrefix: "record[deferDetails][endDate]",
+  fieldset: {
+    legend: {
+      text: "Deferral date",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "For example, " + "" | today | toDateArray | spaceSeparate
+  },
+  items: [
+      {
+        name: "day",
+        classes: "govuk-input--width-2",
+        value: deferDateArray["0"]
+      },
+      {
+        name: "month",
+        classes: "govuk-input--width-2",
+        value: deferDateArray["1"]
+      },
+      {
+        name: "year",
+        classes: "govuk-input--width-4",
+        value: deferDateArray["2"]
+      }
+    ]
+}) }}
+
+{{ govukButton({
+  text: "Continue"
+}) }}
