@@ -55,7 +55,7 @@
 {% endif %}
 
 {% if record.status == "Pending QTS" %}
-{% set recommendedDate = record.qtsRecommendedDate | formatDate('relative') %}
+  {% set recommendedDate = record.qtsRecommendedDate | formatDate('relative') %}
 
   {% set qtsContent %}
     {{govukTag({
@@ -133,8 +133,6 @@
   }) %}
 {% endif %}
 
-
-
 {% set updatedDate %}
   <p class="govuk-body">{{record.updatedDate | govukDate or 'Not provided'}}</p>
   {% if record.updatedDate | isInLast( 7, 'days') %}
@@ -159,8 +157,6 @@
   }
 }] %}
 
-
-
 {% set studentRecordRows = studentRecordRows | combineArrays(datesRows) %}
 
 {% set studentRecordHtml %}
@@ -169,10 +165,8 @@
   }) }}
 {% endset %}
 
-
 {{ appSummaryCard({
   classes: "govuk-!-margin-bottom-6",
   titleText: "Record details",
   html: studentRecordHtml
 }) }}
-
