@@ -1,26 +1,26 @@
-{% set deferDetailsRows = [
+{% set reinstateDetailsRows = [
   {
     key: {
-      text: "Date left the course"
+      text: "Date returned to the course"
     },
     value: {
-      text: record.deferDetails.endDate | govukDate or 'Not provided'
+      text: record.reinstateDetails.endDate | govukDate or 'Not provided'
     },
     actions: {
       items: [
         {
-          href: recordPath + "/defer" | addReferrer(referrer),
+          href: recordPath + "/reinstate" | addReferrer(referrer),
           text: "Change",
-          visuallyHiddenText: "deferral date"
+          visuallyHiddenText: "reinstate date"
         }
       ]
     } if canAmend
   }
   ] %}
 
-{% set deferDetailsHtml %}
+{% set reinstateDetailsHtml %}
   {{ govukSummaryList({
-    rows: deferDetailsRows
+    rows: reinstateDetailsRows
   }) }}
   
 {% endset %}
@@ -46,8 +46,8 @@
 
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    titleText: "Deferral details",
-    html: deferDetailsHtml
+    titleText: "Reinstate details",
+    html: reinstateDetailsHtml
   }) }}
   
 {% endif %}

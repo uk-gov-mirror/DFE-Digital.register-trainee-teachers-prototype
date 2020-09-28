@@ -449,10 +449,28 @@ router.post('/record/:uuid/defer/defer', (req, res) => {
   }
   else {
     newRecord.status = 'Deferred'
-    newRecord.deferDate = new Date()
+    newRecord.deferralDate = new Date()
     deleteTempData(data)
     updateRecord(data, newRecord)
     req.flash('success', 'Trainee deferred')
+    res.redirect('/record/' + req.params.uuid)
+  }
+})
+
+// Copy reinstate data back to real record
+router.post('/record/:uuid/reinstate/reinstate', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    newRecord.status = 'TRN received'
+    newRecord.reinstateDate = new Date()
+    deleteTempData(data)
+    updateRecord(data, newRecord)
+    req.flash('success', 'Trainee reinstated')
     res.redirect('/record/' + req.params.uuid)
   }
 })

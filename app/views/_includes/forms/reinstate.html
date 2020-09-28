@@ -1,11 +1,11 @@
-{% set deferDateArray = record.deferDetails.endDate | toDateArray %}
+{% set reinstateDateArray = record.reinstateDetails.endDate | toDateArray %}
 
 {{ govukDateInput({
-  id: "defer-date",
-  namePrefix: "record[deferDetails][endDate]",
+  id: "reinstate-date",
+  namePrefix: "record[reinstateDetails][endDate]",
   fieldset: {
     legend: {
-      text: "Date left the course",
+      text: "Date returned to the course",
       classes: "govuk-fieldset__legend--s"
     }
   },
@@ -16,17 +16,17 @@
       {
         name: "day",
         classes: "govuk-input--width-2",
-        value: deferDateArray["0"]
+        value: reinstateDateArray["0"]
       },
       {
         name: "month",
         classes: "govuk-input--width-2",
-        value: deferDateArray["1"]
+        value: reinstateDateArray["1"]
       },
       {
         name: "year",
         classes: "govuk-input--width-4",
-        value: deferDateArray["2"]
+        value: reinstateDateArray["2"]
       }
     ]
 }) }}

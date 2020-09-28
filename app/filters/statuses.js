@@ -100,8 +100,7 @@ filters.getAmendsAllowed = status => {
 
 filters.getCanRecommendForQts = status => {
   let statusesThatShowQtsTabs = [
-    'TRN received',
-    'Deferred'
+    'TRN received'
   ]
   return statusesThatShowQtsTabs.includes(status)
 }
