@@ -1,8 +1,8 @@
-{% set reinstateDateArray = record.reinstateDetails.endDate | toDateArray %}
+{% set reinstateDateArray = record.reinstateDate | toDateArray %}
 
 {{ govukDateInput({
   id: "reinstate-date",
-  namePrefix: "record[reinstateDetails][endDate]",
+  namePrefix: "record[reinstateDate]",
   fieldset: {
     legend: {
       text: "Date returned to the course",

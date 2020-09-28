@@ -449,7 +449,6 @@ router.post('/record/:uuid/defer/defer', (req, res) => {
   }
   else {
     newRecord.status = 'Deferred'
-    newRecord.deferralDate = new Date()
     deleteTempData(data)
     updateRecord(data, newRecord)
     req.flash('success', 'Trainee deferred')
@@ -458,6 +457,7 @@ router.post('/record/:uuid/defer/defer', (req, res) => {
 })
 
 // Copy reinstate data back to real record
+// Do we want to set a date here or can it be the date of the action? 
 router.post('/record/:uuid/reinstate/reinstate', (req, res) => {
   const data = req.session.data
   const newRecord = data.record
@@ -467,7 +467,7 @@ router.post('/record/:uuid/reinstate/reinstate', (req, res) => {
   }
   else {
     newRecord.status = 'TRN received'
-    newRecord.reinstateDate = new Date()
+    // newRecord.reinstateDate = new Date()
     deleteTempData(data)
     updateRecord(data, newRecord)
     req.flash('success', 'Trainee reinstated')
