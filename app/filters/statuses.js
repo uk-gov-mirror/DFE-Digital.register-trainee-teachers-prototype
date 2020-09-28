@@ -113,6 +113,13 @@ filters.getCanDefer = status => {
   return statusesThatAllowDeferral.includes(status)
 }
 
+filters.getCanReinstate = status => {
+  let statusesThatAllowReinstating = [
+    'Deferred'
+  ]
+  return statusesThatAllowReinstating.includes(status)
+}
+
 
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app
