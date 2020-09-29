@@ -448,6 +448,7 @@ router.post('/record/:uuid/defer/defer', (req, res) => {
     res.redirect('/record/:uuid')
   }
   else {
+    newRecord.previousStatus = newRecord.status
     newRecord.status = 'Deferred'
     deleteTempData(data)
     updateRecord(data, newRecord)
@@ -466,8 +467,8 @@ router.post('/record/:uuid/reinstate/reinstate', (req, res) => {
     res.redirect('/record/:uuid')
   }
   else {
-    newRecord.status = 'TRN received'
-    // newRecord.reinstateDate = new Date()
+    newRecord.status = newRecord.previousStatus || 'TRN received'
+    delete newRecord.previousStatus
     deleteTempData(data)
     updateRecord(data, newRecord)
     req.flash('success', 'Trainee reinstated')

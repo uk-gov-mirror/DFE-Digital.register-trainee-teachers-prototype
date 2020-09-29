@@ -107,6 +107,7 @@ filters.getCanRecommendForQts = status => {
 
 filters.getCanDefer = status => {
   let statusesThatAllowDeferral = [
+    'Pending TRN',
     'TRN received'
   ]
   return statusesThatAllowDeferral.includes(status)
