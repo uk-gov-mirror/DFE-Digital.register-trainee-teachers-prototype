@@ -20,7 +20,7 @@ const generateStatus = require('../app/data/generators/status')
 const generatePersonalDetails = require('../app/data/generators/personal-details')
 const generateDiversity = require('../app/data/generators/diversity')
 const generateContactDetails = require('../app/data/generators/contact-details')
-const generateAssessmentDetails = require('../app/data/generators/assessment-details')
+const generateAssessmentOnlyDetails = require('../app/data/generators/assessment-only-details')
 const generateDegree = require('../app/data/generators/degree')
 const generateGce = require('../app/data/generators/gce')
 const generateGcse = require('../app/data/generators/gcse')
@@ -71,24 +71,24 @@ const generateFakeApplication = (params = {}) => {
   const diversity = (params.diversity === null) ? undefined : { ...generateDiversity(faker), ...params.diversity }
 
   // Contact details
-  const isInternationalCandidate = !(personalDetails.nationality.includes('British') || personalDetails.nationality.includes('Irish'))
+  const isInternationalTrainee = !(personalDetails.nationality.includes('British') || personalDetails.nationality.includes('Irish'))
   let person = Object.assign({}, personalDetails)
-  person.isInternationalCandidate = isInternationalCandidate
+  person.isInternationalTrainee = isInternationalTrainee
   const contactDetails = (params.contactDetails === null) ? undefined : { ...generateContactDetails(faker, person), ...params.contactDetails }
 
   // Assessment details
-  const assessmentDetails = (params.assessmentDetails === null) ? undefined : { ...generateAssessmentDetails(faker, status), ...params.assessmentDetails }
+  const programmeDetails = (params.programmeDetails === null) ? undefined : { ...generateAssessmentOnlyDetails(faker, status), ...params.programmeDetails }
 
   // Qualifications
 
   // GCSEs
-  let gcse = (params.gcse === null) ? undefined : { ...generateGcse(faker, isInternationalCandidate, simpleGcseGrades), ...params.gcse }
+  let gcse = (params.gcse === null) ? undefined : { ...generateGcse(faker, isInternationalTrainee, simpleGcseGrades), ...params.gcse }
 
   // A Levels - not used currently
-  // qualifications.gce = (params.gce === null) ? undefined : generateGce(faker, isInternationalCandidate)
+  // qualifications.gce = (params.gce === null) ? undefined : generateGce(faker, isInternationalTrainee)
 
   // Degrees
-  let degree = (params.degree === null) ? undefined : { ...generateDegree(faker, isInternationalCandidate), ...params.degree }
+  let degree = (params.degree === null) ? undefined : { ...generateDegree(faker, isInternationalTrainee), ...params.degree }
   
   let trn
   if (!status.includes('Draft') && !status.includes('Pending TRN')){
@@ -111,13 +111,13 @@ const generateFakeApplication = (params = {}) => {
     deferralDate,
     personalDetails,
     diversity,
-    isInternationalCandidate,
+    isInternationalTrainee,
     contactDetails,
-    assessmentDetails,
+    programmeDetails,
     gcse,
     degree
 
-    // gcse: params.gcse || generateGcse(faker, personalDetails.isInternationalCandidate),
+    // gcse: params.gcse || generateGcse(faker, personalDetails.isInternationalTrainee),
     // englishLanguageQualification: params.englishLanguageQualification || generateEnglishLanguageQualification(faker),
     // otherQualifications: params.otherQualifications || generateOtherQualifications(faker),
     // schoolExperience: generateSchoolExperience(faker)
@@ -249,7 +249,7 @@ const generateFakeApplications = () => {
       degree: {
         status: 'Completed'
       },
-      assessmentDetails: {
+      programmeDetails: {
         status: 'Completed'
       },
       updatedDate: faker.date.between(

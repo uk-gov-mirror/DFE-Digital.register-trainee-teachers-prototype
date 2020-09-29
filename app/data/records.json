@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< HEAD
     "id": "cb9e6341-bbd6-480d-8595-fdf69f93ac27",
     "route": "Assessment Only",
     "traineeId": "VTDM5V36",
@@ -10,11 +11,27 @@
       "givenName": "Becky",
       "familyName": "Brothers",
       "middleNames": "Mona",
+=======
+    "id": "33dd4b78-d11c-4cf4-b060-42630cc5601a",
+    "route": "Assessment Only",
+    "traineeId": "9QJSTOB1",
+    "status": "Pending TRN",
+    "updatedDate": "2020-09-28T12:39:38.000Z",
+    "submittedDate": "2020-09-28T12:39:38.962Z",
+    "personalDetails": {
+      "givenName": "Becky",
+      "familyName": "Brothers",
+      "middleNames": "Gregg",
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1965-03-06T04:04:51.987Z"
+=======
+      "dateOfBirth": "1983-12-24T06:02:34.928Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "true",
@@ -22,8 +39,9 @@
       "ethnicGroupSpecific": "Caribbean",
       "disabledAnswer": "Not provided"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0500 737367",
       "email": "becky23@gmail.com",
       "address": {
@@ -40,6 +58,24 @@
       "subject": "Chemistry",
       "startDate": "2019-01-24T09:14:56.144Z",
       "duration": 1
+=======
+      "phoneNumber": "0990 065 8792",
+      "email": "becky.brothers@hotmail.com",
+      "address": {
+        "line1": "743 Ritchie Ways",
+        "line2": "",
+        "level2": "Torptown",
+        "level1": "Greater Manchester",
+        "postcode": "XR86 8AB"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "English",
+      "startDate": "2020-03-31T09:38:42.234Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -61,12 +97,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BArch - Bachelor of Architecture",
           "subject": "Hungarian language",
           "isInternational": "false",
           "org": "Bell College",
           "country": "United Kingdom",
           "grade": "First-class honours",
+=======
+          "type": "MBA - Master of Business Administration",
+          "subject": "French society and culture",
+          "isInternational": "false",
+          "org": "University of Plymouth",
+          "country": "United Kingdom",
+          "grade": "Distinction",
+>>>>>>> origin/master
           "predicted": false,
           "startDate": "2017",
           "endDate": "2020"
@@ -75,6 +120,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "44b0e36e-7532-40e3-bf8b-008581bdb4e8",
     "route": "Assessment Only",
     "traineeId": "9GGMJP2D",
@@ -115,20 +161,62 @@
       "subject": "Chemistry",
       "startDate": "2017-05-27T02:32:24.700Z",
       "duration": 3
+=======
+    "id": "7abb3b6b-41d8-4004-81ab-3f46261d1b3f",
+    "route": "Assessment Only",
+    "traineeId": "RBKE8WR3",
+    "status": "Pending TRN",
+    "updatedDate": "2020-09-28T10:25:40.424Z",
+    "submittedDate": "2020-09-28T10:25:40.424Z",
+    "personalDetails": {
+      "givenName": "Guillermo",
+      "familyName": "Kassulke",
+      "middleNames": "Simon",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1988-07-18T23:53:16.261Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "White",
+      "ethnicGroupSpecific": "Irish",
+      "disabledAnswer": "Not provided"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "056 4600 3492",
+      "email": "guillermo53@yahoo.com",
+      "address": {
+        "line1": "3197 Reynolds Avenue",
+        "line2": "",
+        "level2": "Alberthahaven",
+        "level1": "Cambridgeshire",
+        "postcode": "XI70 7BH"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "3 - 7 Programme",
+      "subject": "Physics",
+      "startDate": "2020-06-26T16:18:26.913Z",
+      "duration": 1
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -136,12 +224,32 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BLS - Bachelor of Librarianship and Information Studies",
           "subject": "Theatre studies",
           "isInternational": "false",
           "org": "The Liverpool Institute for Performing Arts",
           "country": "United Kingdom",
           "grade": "Pass",
+=======
+          "type": "DMus - Doctor of Music",
+          "subject": "Salman Rushdie studies",
+          "isInternational": "false",
+          "org": "The Victoria Manchester University",
+          "country": "United Kingdom",
+          "grade": "Lower second-class honours (2:2)",
+          "predicted": false,
+          "startDate": "2017",
+          "endDate": "2020"
+        },
+        {
+          "type": "BPharm - Bachelor of Pharmacy",
+          "subject": "Microbiology",
+          "isInternational": "false",
+          "org": "The National Film and Television School",
+          "country": "United Kingdom",
+          "grade": "Upper second-class honours (2:1)",
+>>>>>>> origin/master
           "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
@@ -150,6 +258,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "a0dcb079-33d0-4c47-a2b8-92f410eb11b2",
     "route": "Assessment Only",
     "traineeId": "L99I4WVG",
@@ -160,10 +269,22 @@
       "givenName": "Eloise",
       "familyName": "Ryan",
       "middleNames": "Gwen",
+=======
+    "id": "7f6d6abc-cbe9-4ffc-b6fb-59a268976f5f",
+    "route": "Assessment Only",
+    "traineeId": "V8X29NMX",
+    "status": "Pending TRN",
+    "updatedDate": "2020-09-27T03:02:25.337Z",
+    "submittedDate": "2020-09-27T03:02:25.337Z",
+    "personalDetails": {
+      "givenName": "Andrew",
+      "familyName": "Franecki",
+      "middleNames": "Danny Boyd",
+>>>>>>> origin/master
       "nationality": [
-        "French",
-        "Swiss"
+        "French"
       ],
+<<<<<<< HEAD
       "sex": "Female",
       "dateOfBirth": "1990-12-10T23:23:33.276Z"
     },
@@ -175,9 +296,19 @@
       "disabilities": [
         "Blind"
       ]
+=======
+      "sex": "Male",
+      "dateOfBirth": "1969-10-27T10:19:34.776Z"
     },
-    "isInternationalCandidate": true,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Prefer not to say",
+      "disabledAnswer": "No"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": true,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "+33 467691087",
       "email": "eloise_ryan60@gmail.com",
       "address": {
@@ -186,38 +317,64 @@
         "level2": "Le galltown",
         "level1": "Poitou-Charentes",
         "postcode": "59058",
+=======
+      "phoneNumber": "0405403160",
+      "email": "andrew.franecki47@yahoo.fr",
+      "address": {
+        "line1": "340 Dupuy Du Sommerard",
+        "line2": "",
+        "level2": "East Angelicashire",
+        "level1": "Auvergne",
+        "postcode": "98862",
+>>>>>>> origin/master
         "country": "France"
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "11 - 16 Programme",
       "subject": "Chemistry",
       "startDate": "2019-04-18T20:58:07.301Z",
       "duration": 2
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Maths",
+      "startDate": "2020-04-24T00:24:39.496Z",
+      "duration": 1
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "O level",
+        "type": "Scottish National 5",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "O level",
+        "type": "Scottish National 5",
         "subject": "English",
+<<<<<<< HEAD
         "gradeBoundary": "Not provided"
+=======
+        "gradeBoundary": "Not completed or not passed"
+>>>>>>> origin/master
       },
       "science": {
-        "type": "O level",
+        "type": "Scottish National 5",
         "subject": "Science",
-        "gradeBoundary": "3 and below"
+        "gradeBoundary": "4 and above"
       }
     },
     "degree": {
       "items": [
         {
           "type": "Diplôme",
+<<<<<<< HEAD
           "subject": "Theatre studies",
+=======
+          "subject": "Jazz composition",
+>>>>>>> origin/master
           "isInternational": "true",
           "org": "University of Paris",
           "country": "France",
@@ -234,6 +391,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "72255ab6-0427-4e5f-b594-e65fb2f3a819",
     "route": "Assessment Only",
     "traineeId": "KZG3KMJY",
@@ -244,11 +402,27 @@
       "givenName": "Félix",
       "familyName": "Gonzalez",
       "middleNames": "Michel",
+=======
+    "id": "83d1c1b1-1e11-4359-af59-4c475c066a0c",
+    "route": "Assessment Only",
+    "traineeId": "MTIW9NK7",
+    "status": "Pending TRN",
+    "updatedDate": "2020-09-27T01:06:01.026Z",
+    "submittedDate": "2020-09-27T01:06:01.026Z",
+    "personalDetails": {
+      "givenName": "Neal",
+      "familyName": "Wuckert",
+      "middleNames": "Forrest",
+>>>>>>> origin/master
       "nationality": [
         "French"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1971-01-29T01:49:20.418Z"
+=======
+      "dateOfBirth": "1987-11-18T19:32:00.948Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "true",
@@ -256,6 +430,7 @@
       "ethnicGroupSpecific": "Irish Traveller or Gypsy",
       "disabledAnswer": "No"
     },
+<<<<<<< HEAD
     "isInternationalCandidate": true,
     "contactDetails": {
       "phoneNumber": "+33 299184880",
@@ -267,14 +442,34 @@
         "level1": "Basse-Normandie",
         "postcode": "08051",
         "country": "France"
+=======
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "0800 058657",
+      "email": "neal13@yahoo.com",
+      "address": {
+        "line1": "1600 Lebsack Inlet",
+        "line2": "",
+        "level2": "Kunzehaven",
+        "level1": "Strathclyde",
+        "postcode": "ZN0 9IG"
+>>>>>>> origin/master
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "5 - 11 Programme",
       "subject": "Chemistry",
       "startDate": "2019-12-13T04:06:57.937Z",
       "duration": 1
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Physics",
+      "startDate": "2018-10-03T15:34:57.107Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -285,17 +480,18 @@
       "english": {
         "type": "GCSE",
         "subject": "English",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "science": {
         "type": "GCSE",
         "subject": "Science",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "3 and below"
       }
     },
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Intelligent systems",
           "isInternational": "true",
@@ -307,6 +503,15 @@
             "reference": "4000228363",
             "comparable": "Bachelor (Honours) degree"
           },
+=======
+          "type": "BEd - Bachelor of Education Scotland & Northern Ireland",
+          "subject": "Microwave engineering",
+          "isInternational": "false",
+          "org": "The University of St Andrews",
+          "country": "United Kingdom",
+          "grade": "Pass",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -314,6 +519,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "9f406a7c-1a52-411e-92d6-b3c0b154a3b9",
     "route": "Assessment Only",
     "traineeId": "1VPU4C0O",
@@ -325,10 +531,25 @@
       "familyName": "Rohan",
       "middleNames": "Michele",
       "nationality": [
+=======
+    "id": "338e401c-c4fd-4a87-b48a-18f66e23fb2d",
+    "route": "Assessment Only",
+    "traineeId": "M1WLIL69",
+    "status": "Pending TRN",
+    "updatedDate": "2020-09-26T09:52:34.312Z",
+    "submittedDate": "2020-09-26T09:52:34.312Z",
+    "personalDetails": {
+      "givenName": "Alicia",
+      "familyName": "Barrows",
+      "middleNames": "Shawna",
+      "nationality": [
+        "British",
+>>>>>>> origin/master
         "French",
         "Swiss"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1970-05-05T03:53:47.541Z"
     },
     "diversity": {
@@ -347,28 +568,56 @@
         "level1": "Bretagne",
         "postcode": "73275",
         "country": "France"
+=======
+      "dateOfBirth": "1979-02-25T06:45:38.783Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Black, African, Black British or Caribbean",
+      "ethnicGroupSpecific": "Caribbean",
+      "disabledAnswer": "No"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "014640 34746",
+      "email": "alicia.barrows46@yahoo.com",
+      "address": {
+        "line1": "72423 Fahey Forks",
+        "line2": "",
+        "level2": "Auerchester",
+        "level1": "Cumbria",
+        "postcode": "IM99 7GW"
+>>>>>>> origin/master
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "5 - 11 Programme",
       "subject": "Physics",
       "startDate": "2019-08-26T07:09:37.616Z",
       "duration": 2
+=======
+    "programmeDetails": {
+      "ageRange": "3 - 11 Programme",
+      "subject": "Maths",
+      "startDate": "2019-04-03T21:24:50.996Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "O level",
+        "type": "Scottish National 5",
         "subject": "Maths",
-        "gradeBoundary": "3 and below"
+        "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "O level",
+        "type": "Scottish National 5",
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
-        "type": "O level",
+        "type": "Scottish National 5",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -376,6 +625,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Highways engineering",
           "isInternational": "true",
@@ -387,6 +637,15 @@
             "reference": "4000228363",
             "comparable": "Bachelor (Honours) degree"
           },
+=======
+          "type": "MBA - Master of Business Administration",
+          "subject": "Therapeutic imaging",
+          "isInternational": "false",
+          "org": "Loughborough University",
+          "country": "United Kingdom",
+          "grade": "Upper second-class honours (2:1)",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -394,6 +653,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "c2e639e9-7772-425f-a532-325b139e4f11",
     "route": "Assessment Only",
     "traineeId": "50AEPH3K",
@@ -409,6 +669,23 @@
       ],
       "sex": "Female",
       "dateOfBirth": "1990-04-08T00:47:49.872Z"
+=======
+    "id": "beddd9a5-5265-4f1e-bfc8-a764ff6373b4",
+    "route": "Assessment Only",
+    "traineeId": "TKY0N4EJ",
+    "status": "Pending TRN",
+    "updatedDate": "2020-09-26T01:24:24.458Z",
+    "submittedDate": "2020-09-26T01:24:24.458Z",
+    "personalDetails": {
+      "givenName": "Dana",
+      "familyName": "Zulauf",
+      "middleNames": null,
+      "nationality": [
+        "British"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1980-10-08T01:16:42.760Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "true",
@@ -418,8 +695,9 @@
         "Deaf"
       ]
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0800 589 2262",
       "email": "darla24@hotmail.com",
       "address": {
@@ -436,6 +714,24 @@
       "subject": "Physics",
       "startDate": "2018-12-06T00:56:45.806Z",
       "duration": 1
+=======
+      "phoneNumber": "056 6030 7533",
+      "email": "dana.zulauf@yahoo.com",
+      "address": {
+        "line1": "9091 Mariela Creek",
+        "line2": "",
+        "level2": "McLaughlinport",
+        "level1": "Warwickshire",
+        "postcode": "BT4 5OF"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "English",
+      "startDate": "2018-05-22T21:12:49.730Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -457,6 +753,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BMet - Bachelor of Metallurgy",
           "subject": "Mentorship",
           "isInternational": "false",
@@ -464,6 +761,15 @@
           "country": "United Kingdom",
           "grade": "Upper second-class honours (2:1)",
           "predicted": true,
+=======
+          "type": "BScEng - Bachelor of Science & Engineering",
+          "subject": "Technical theatre studies",
+          "isInternational": "false",
+          "org": "Courtauld Institute of Art",
+          "country": "United Kingdom",
+          "grade": "Upper second-class honours (2:1)",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -471,6 +777,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "ce42e625-77c9-4e1e-b17a-9606eb3cfa06",
     "route": "Assessment Only",
     "traineeId": "ANKUMZE8",
@@ -487,6 +794,24 @@
       ],
       "sex": "Male",
       "dateOfBirth": "1977-06-29T18:51:03.715Z"
+=======
+    "id": "b5b60226-c93e-4595-b4f4-11775fa366c2",
+    "route": "Assessment Only",
+    "traineeId": "TLQGB1N1",
+    "status": "TRN received",
+    "trn": 8594837,
+    "updatedDate": "2020-07-04T04:26:19.269Z",
+    "submittedDate": "2020-06-28T12:37:21.384Z",
+    "personalDetails": {
+      "givenName": "Janine",
+      "familyName": "Newman",
+      "middleNames": "Stuart",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Female",
+      "dateOfBirth": "1969-05-19T12:22:38.167Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "true",
@@ -494,8 +819,9 @@
       "ethnicGroupSpecific": "Arab",
       "disabledAnswer": "Not provided"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "01614 139228",
       "email": "tom_wehner@hotmail.com",
       "address": {
@@ -512,6 +838,24 @@
       "subject": "Chemistry",
       "startDate": "2018-08-06T01:50:52.901Z",
       "duration": 1
+=======
+      "phoneNumber": "0346 462 1055",
+      "email": "janine.newman@hotmail.com",
+      "address": {
+        "line1": "563 Raymond Expressway",
+        "line2": "",
+        "level2": "Strosinborough",
+        "level1": "Hertfordshire",
+        "postcode": "IA7 1QT"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 18 Programme",
+      "subject": "Physics",
+      "startDate": "2019-01-31T00:52:11.029Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -533,6 +877,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BMet - Bachelor of Metallurgy",
           "subject": "Space science",
           "isInternational": "false",
@@ -540,6 +885,15 @@
           "country": "United Kingdom",
           "grade": "First-class honours",
           "predicted": false,
+=======
+          "type": "DSc - Doctor of Science",
+          "subject": "Biology",
+          "isInternational": "false",
+          "org": "University of Nottingham",
+          "country": "United Kingdom",
+          "grade": "Upper second-class honours (2:1)",
+          "predicted": true,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -547,6 +901,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "b7c2518d-ea5c-46b5-b7c6-be9f85a91119",
     "route": "Assessment Only",
     "traineeId": "XDQNJ0Z2",
@@ -581,20 +936,62 @@
         "level1": "Bretagne",
         "postcode": "88454",
         "country": "France"
+=======
+    "id": "edda34f6-ef5e-498f-ae54-bddf96eb0c3d",
+    "route": "Assessment Only",
+    "traineeId": "FLD38X59",
+    "status": "TRN received",
+    "trn": 8405624,
+    "updatedDate": "2020-08-04T04:26:19.269Z",
+    "submittedDate": "2020-05-28T12:37:21.384Z",
+    "personalDetails": {
+      "givenName": "Bea",
+      "familyName": "Waite",
+      "middleNames": "Minnie",
+      "nationality": [
+        "British",
+        "French",
+        "Swiss"
+      ],
+      "sex": "Female",
+      "dateOfBirth": "1986-03-31T16:12:02.477Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "false"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "0117 705 9056",
+      "email": "bea61@hotmail.com",
+      "address": {
+        "line1": "5503 Lyda Rapids",
+        "line2": "",
+        "level2": "Hannamouth",
+        "level1": "West Midlands",
+        "postcode": "GA96 9GY"
+>>>>>>> origin/master
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "11 - 16 Programme",
       "subject": "Chemistry",
       "startDate": "2020-01-02T13:26:17.236Z",
       "duration": 3
+=======
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "Maths",
+      "startDate": "2018-02-04T01:32:33.664Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
         "type": "O level",
         "subject": "Maths",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "english": {
         "type": "O level",
@@ -610,6 +1007,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Planning",
           "isInternational": "true",
@@ -631,6 +1029,14 @@
           "org": "University of Paris",
           "country": "France",
           "grade": "Pass",
+=======
+          "type": "MSocStud - Master of Social Studies",
+          "subject": "Recreation and leisure studies",
+          "isInternational": "false",
+          "org": "University of Plymouth",
+          "country": "United Kingdom",
+          "grade": "Unknown",
+>>>>>>> origin/master
           "predicted": true,
           "naric": {
             "reference": "4000228363",
@@ -643,6 +1049,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "9ae3d371-28c2-4e7d-b480-e515c9e04d9a",
     "route": "Assessment Only",
     "traineeId": "TLQGB1N1",
@@ -659,10 +1066,34 @@
       ],
       "sex": "Female",
       "dateOfBirth": "1995-03-31T11:59:20.319Z"
+=======
+    "id": "0ef69948-d24c-4ee6-857c-5c8f5601538a",
+    "route": "Assessment Only",
+    "traineeId": "K9BKXNTX",
+    "status": "TRN received",
+    "trn": 8694898,
+    "updatedDate": "2020-07-15T04:26:19.269Z",
+    "submittedDate": "2020-05-28T12:37:21.384Z",
+    "personalDetails": {
+      "givenName": "Martin",
+      "familyName": "Cable",
+      "middleNames": "Erick",
+      "nationality": [
+        "British",
+        "French",
+        "Swiss"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1969-08-27T18:22:20.650Z"
+>>>>>>> origin/master
     },
     "diversity": {
-      "diversityDisclosed": "false"
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Asian or Asian British",
+      "ethnicGroupSpecific": "Another Asian background",
+      "disabledAnswer": "Not provided"
     },
+<<<<<<< HEAD
     "isInternationalCandidate": true,
     "contactDetails": {
       "phoneNumber": "+33 363638712",
@@ -674,14 +1105,34 @@
         "level1": "Rhône-Alpes",
         "postcode": "58485",
         "country": "France"
+=======
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "01038 978859",
+      "email": "martin_cable71@yahoo.com",
+      "address": {
+        "line1": "705 Kozey Plaza",
+        "line2": "",
+        "level2": "Lake Orlandofurt",
+        "level1": "Tayside",
+        "postcode": "MW21 2NC"
+>>>>>>> origin/master
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "11 - 18 Programme",
       "subject": "Physics",
       "startDate": "2018-11-11T06:54:10.325Z",
       "duration": 1
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Physics",
+      "startDate": "2020-03-05T03:41:01.248Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -703,12 +1154,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Biology",
           "isInternational": "true",
           "org": "University of Paris",
           "country": "France",
           "grade": "Pass",
+=======
+          "type": "BAdmin - Bachelor of Administration",
+          "subject": "Architectural technology",
+          "isInternational": "false",
+          "org": "The University of Bristol",
+          "country": "United Kingdom",
+          "grade": "Lower second-class honours (2:2)",
+>>>>>>> origin/master
           "predicted": false,
           "naric": {
             "reference": "4000228363",
@@ -721,21 +1181,30 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "652f9170-f43c-4469-95ff-e1bf8b5f6d5c",
+=======
+    "id": "804738f9-f481-4ccf-b956-037d714e1206",
+>>>>>>> origin/master
     "route": "Assessment Only",
-    "traineeId": "K9BKXNTX",
-    "status": "TRN received",
-    "trn": 8694898,
-    "updatedDate": "2020-07-15T04:26:19.269Z",
-    "submittedDate": "2020-05-28T12:37:21.384Z",
+    "traineeId": "VNC0IN5A",
+    "status": "Draft",
+    "updatedDate": "2020-09-28T01:52:52.578Z",
     "personalDetails": {
+<<<<<<< HEAD
       "givenName": "Martin",
       "familyName": "Cable",
       "middleNames": "Eva",
+=======
+      "givenName": "Pete",
+      "familyName": "Rodriguez",
+      "middleNames": null,
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1987-09-12T06:26:06.795Z"
     },
     "diversity": {
@@ -761,6 +1230,17 @@
       "subject": "Physics",
       "startDate": "2017-05-26T13:32:51.153Z",
       "duration": 1
+=======
+      "dateOfBirth": "1993-05-10T23:24:17.066Z",
+      "status": "Completed"
+    },
+    "isInternationalTrainee": false,
+    "programmeDetails": {
+      "ageRange": "11 - 18 Programme",
+      "subject": "Chemistry",
+      "startDate": "2018-10-06T06:38:38.971Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -782,12 +1262,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BTech Education",
           "subject": "Intelligent systems",
           "isInternational": "false",
           "org": "Liverpool School of Tropical Medicine",
           "country": "United Kingdom",
           "grade": "Pass",
+=======
+          "type": "BSocSc - Bachelor of Social Science",
+          "subject": "Systems engineering",
+          "isInternational": "false",
+          "org": "Edge Hill University",
+          "country": "United Kingdom",
+          "grade": "Upper second-class honours (2:1)",
+>>>>>>> origin/master
           "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
@@ -796,6 +1285,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "a49f887d-a459-4db0-a3dd-f62f340977f4",
     "route": "Assessment Only",
     "traineeId": "FLD38X59",
@@ -883,10 +1373,22 @@
       "givenName": "Lindsay",
       "familyName": "Lind",
       "middleNames": "Tricia",
+=======
+    "id": "2da32502-90bf-4478-aa2b-0e2302668199",
+    "route": "Assessment Only",
+    "traineeId": "F591ZXWT",
+    "status": "Draft",
+    "updatedDate": "2020-09-24T10:19:48.323Z",
+    "personalDetails": {
+      "givenName": "Jeannette",
+      "familyName": "Hilpert",
+      "middleNames": null,
+>>>>>>> origin/master
       "nationality": [
         "Irish"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1977-10-28T18:40:33.802Z"
     },
     "diversity": {
@@ -894,9 +1396,21 @@
       "ethnicGroup": "Another ethnic group",
       "ethnicGroupSpecific": "Prefer not to say",
       "disabledAnswer": "No"
+=======
+      "dateOfBirth": "1993-07-21T06:04:01.384Z",
+      "status": "Completed"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "White",
+      "ethnicGroupSpecific": "Irish Traveller or Gypsy",
+      "disabledAnswer": "Not provided",
+      "status": "Completed"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "055 6944 1251",
       "email": "lindsay91@hotmail.com",
       "address": {
@@ -905,20 +1419,41 @@
         "level2": "Olsonmouth",
         "level1": "Cumbria",
         "postcode": "BE5 6XB"
+=======
+      "phoneNumber": "014217 02227",
+      "email": "jeannette_hilpert@gmail.com",
+      "address": {
+        "line1": "722 Catherine Tunnel",
+        "line2": "",
+        "level2": "Donberg",
+        "level1": "Tayside",
+        "postcode": "XE7 3SR"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "5 - 11 Programme",
       "subject": "Chemistry",
       "startDate": "2017-10-13T06:07:36.136Z",
+=======
+    "programmeDetails": {
+      "ageRange": "3 - 11 Programme",
+      "subject": "Maths",
+      "startDate": "2017-12-22T17:49:36.722Z",
+>>>>>>> origin/master
       "duration": 3
     },
     "gcse": {
       "maths": {
         "type": "GCSE",
         "subject": "Maths",
+<<<<<<< HEAD
         "gradeBoundary": "4 and above"
+=======
+        "gradeBoundary": "Not completed or not passed"
+>>>>>>> origin/master
       },
       "english": {
         "type": "GCSE",
@@ -934,12 +1469,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BAcc - Bachelor of Accountancy",
           "subject": "Early years teaching",
           "isInternational": "false",
           "org": "Royal Conservatoire of Scotland",
           "country": "United Kingdom",
           "grade": "First-class honours",
+=======
+          "type": "BTech - Bachelor of Technology",
+          "subject": "Programming",
+          "isInternational": "false",
+          "org": "The School of Oriental and African Studies",
+          "country": "United Kingdom",
+          "grade": "Pass",
+>>>>>>> origin/master
           "predicted": false,
           "startDate": "2017",
           "endDate": "2020"
@@ -948,6 +1492,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "434c1b7b-8354-451e-9058-6702dedb7740",
     "route": "Assessment Only",
     "traineeId": "UQCMTRPO",
@@ -970,9 +1515,34 @@
       "ethnicGroup": "Mixed or multiple ethnic groups",
       "ethnicGroupSpecific": "Black Caribbean and White",
       "disabledAnswer": "No"
+=======
+    "id": "1ee57f1a-b8ff-4a46-8bce-ed74344ba70b",
+    "route": "Assessment Only",
+    "traineeId": "G579TOVH",
+    "status": "Draft",
+    "updatedDate": "2020-09-27T23:22:16.664Z",
+    "personalDetails": {
+      "givenName": "Calvin",
+      "familyName": "Wolf",
+      "middleNames": "Jimmy Bert",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1995-12-30T15:53:57.333Z",
+      "status": "Completed"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Another ethnic group",
+      "ethnicGroupSpecific": "Another ethnic background",
+      "disabledAnswer": "Yes",
+      "status": "Completed"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "020 3295 5124",
       "email": "olive_lueilwitz@yahoo.com",
       "address": {
@@ -981,14 +1551,33 @@
         "level2": "Antonioview",
         "level1": "Surrey",
         "postcode": "VS4 5YR"
+=======
+      "phoneNumber": "0151 309 7247",
+      "email": "calvin81@yahoo.com",
+      "address": {
+        "line1": "7792 Parisian Place",
+        "line2": "",
+        "level2": "Willmsburgh",
+        "level1": "Worcestershire",
+        "postcode": "IY6 3IV"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "11 - 18 Programme",
       "subject": "Chemistry",
       "startDate": "2017-09-30T00:42:40.328Z",
       "duration": 1
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Maths",
+      "startDate": "2019-06-28T07:59:36.377Z",
+      "duration": 3,
+      "status": "Completed"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -999,23 +1588,38 @@
       "english": {
         "type": "O level",
         "subject": "English",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "science": {
         "type": "O level",
         "subject": "Science",
+<<<<<<< HEAD
         "gradeBoundary": "Not completed or not passed"
       }
+=======
+        "gradeBoundary": "4 and above"
+      },
+      "status": "Completed"
+>>>>>>> origin/master
     },
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BAO - Bachelor of the Art of Obstetrics",
           "subject": "Building surveying",
           "isInternational": "false",
           "org": "Canterbury Christ Church University",
           "country": "United Kingdom",
           "grade": "First-class honours",
+=======
+          "type": "BA - Bachelor of Arts",
+          "subject": "Byron studies",
+          "isInternational": "false",
+          "org": "Cranfield University",
+          "country": "United Kingdom",
+          "grade": "Upper second-class honours (2:1)",
+>>>>>>> origin/master
           "predicted": false,
           "startDate": "2017",
           "endDate": "2020"
@@ -1024,6 +1628,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "46b88bda-b3c5-4ee1-a458-badc9e6635ed",
     "route": "Assessment Only",
     "traineeId": "NTL7G3MM",
@@ -1035,10 +1640,24 @@
       "givenName": "Gayle",
       "familyName": "Osinski",
       "middleNames": "Pauline Theresa",
+=======
+    "id": "11f458b1-9173-4e6c-9284-28c7b161d808",
+    "route": "Assessment Only",
+    "traineeId": "6CE04Y2Y",
+    "status": "TRN received",
+    "trn": 5741209,
+    "updatedDate": "2020-09-23T01:04:54.646Z",
+    "submittedDate": "2020-05-18T14:49:55.742Z",
+    "personalDetails": {
+      "givenName": "Karla",
+      "familyName": "Marvin",
+      "middleNames": null,
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1996-08-10T21:07:10.460Z"
     },
     "diversity": {
@@ -1046,9 +1665,19 @@
       "ethnicGroup": "Another ethnic group",
       "ethnicGroupSpecific": "Another ethnic background",
       "disabledAnswer": "No"
+=======
+      "dateOfBirth": "1987-12-25T07:10:07.531Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Asian or Asian British",
+      "ethnicGroupSpecific": "Prefer not to say",
+      "disabledAnswer": "Not provided"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "020 2398 2450",
       "email": "gayle84@yahoo.com",
       "address": {
@@ -1065,12 +1694,34 @@
       "subject": "Chemistry",
       "startDate": "2020-03-27T19:42:49.939Z",
       "duration": 3
+=======
+      "phoneNumber": "0101 873 4418",
+      "email": "karla_marvin@yahoo.com",
+      "address": {
+        "line1": "4207 Feeney Pike",
+        "line2": "",
+        "level2": "West Myrtice",
+        "level1": "Cheshire",
+        "postcode": "JB00 8SN"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "Chemistry",
+      "startDate": "2018-05-24T07:58:22.893Z",
+      "duration": 1
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
         "type": "GCSE",
         "subject": "Maths",
+<<<<<<< HEAD
         "gradeBoundary": "Not completed or not passed"
+=======
+        "gradeBoundary": "3 and below"
+>>>>>>> origin/master
       },
       "english": {
         "type": "GCSE",
@@ -1086,6 +1737,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BGS - Bachelor of General Studies",
           "subject": "Transport planning",
           "isInternational": "false",
@@ -1093,6 +1745,15 @@
           "country": "United Kingdom",
           "grade": "Lower second-class honours (2:2)",
           "predicted": false,
+=======
+          "type": "BLitt - Bachelor of Literature",
+          "subject": "Computer systems engineering",
+          "isInternational": "false",
+          "org": "The University of Westminster",
+          "country": "United Kingdom",
+          "grade": "Third-class honours",
+          "predicted": true,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -1100,6 +1761,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "677b523d-e25d-4994-95f6-97da6e47752a",
     "route": "Assessment Only",
     "traineeId": "WGMNFXBB",
@@ -1111,17 +1773,41 @@
       "givenName": "Patty",
       "familyName": "Mayer",
       "middleNames": "Antonia Eileen",
+=======
+    "id": "2c8490f6-0d3c-42c1-818c-e7e37d23e601",
+    "route": "Assessment Only",
+    "traineeId": "6FIFLLHT",
+    "status": "Deferred",
+    "trn": 9833063,
+    "updatedDate": "2020-08-01T07:34:35.828Z",
+    "submittedDate": "2020-05-07T10:56:48.530Z",
+    "personalDetails": {
+      "givenName": "Melinda",
+      "familyName": "Kerluke",
+      "middleNames": "Michele",
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1985-09-12T08:53:16.393Z"
+=======
+      "dateOfBirth": "1979-03-15T21:29:13.070Z"
+>>>>>>> origin/master
     },
     "diversity": {
-      "diversityDisclosed": "false"
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Another ethnic group",
+      "ethnicGroupSpecific": "Prefer not to say",
+      "disabledAnswer": "Yes",
+      "disabilities": [
+        "Learning difficulty"
+      ]
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "01570 227948",
       "email": "patty40@gmail.com",
       "address": {
@@ -1137,21 +1823,38 @@
       "ageRange": "11 - 16 Programme",
       "subject": "Maths",
       "startDate": "2019-08-22T02:52:16.474Z",
+=======
+      "phoneNumber": "0387 092 7754",
+      "email": "melinda.kerluke@hotmail.com",
+      "address": {
+        "line1": "148 Grover Course",
+        "line2": "",
+        "level2": "Metzview",
+        "level1": "Gwynedd County",
+        "postcode": "KV98 3GL"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Maths",
+      "startDate": "2020-01-14T22:02:09.734Z",
+>>>>>>> origin/master
       "duration": 3
     },
     "gcse": {
       "maths": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "English",
         "gradeBoundary": "Not completed or not passed"
       },
       "science": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -1159,12 +1862,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BA Combined Studies/Education of the Deaf",
           "subject": "Transport policy",
           "isInternational": "false",
           "org": "London School of Economics and Political Science",
           "country": "United Kingdom",
           "grade": "Upper second-class honours (2:1)",
+=======
+          "type": "DSc - Doctor of Science",
+          "subject": "Dermatology",
+          "isInternational": "false",
+          "org": "University of Abertay Dundee",
+          "country": "United Kingdom",
+          "grade": "Pass",
+>>>>>>> origin/master
           "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
@@ -1184,6 +1896,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "6b127b91-ed41-4117-8708-d810a2b58b1b",
     "route": "Assessment Only",
     "traineeId": "78W6XHS6",
@@ -1196,10 +1909,24 @@
       "givenName": "Neil",
       "familyName": "Kihn",
       "middleNames": "Alfred",
+=======
+    "id": "255e99d9-b27d-4c47-983c-110d0da3a695",
+    "route": "Assessment Only",
+    "traineeId": "I350B24R",
+    "status": "TRN received",
+    "trn": 7292836,
+    "updatedDate": "2020-05-09T06:34:13.566Z",
+    "submittedDate": "2020-03-13T02:00:19.416Z",
+    "personalDetails": {
+      "givenName": "Nick",
+      "familyName": "Frami",
+      "middleNames": "Bob Carlos",
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1996-08-16T23:29:17.487Z"
     },
     "diversity": {
@@ -1207,9 +1934,18 @@
       "ethnicGroup": "Mixed or multiple ethnic groups",
       "ethnicGroupSpecific": "Black Caribbean and White",
       "disabledAnswer": "Yes"
+=======
+      "dateOfBirth": "1974-06-18T21:10:10.035Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Prefer not to say",
+      "disabledAnswer": "No"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0151 250 0161",
       "email": "neil78@yahoo.com",
       "address": {
@@ -1225,13 +1961,30 @@
       "ageRange": "5 - 11 Programme",
       "subject": "English",
       "startDate": "2018-04-11T20:56:14.981Z",
+=======
+      "phoneNumber": "0366 250 5626",
+      "email": "nick_frami@yahoo.com",
+      "address": {
+        "line1": "79050 DuBuque Groves",
+        "line2": "",
+        "level2": "Lamontstad",
+        "level1": "Kent",
+        "postcode": "DP41 8CI"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "3 - 7 Programme",
+      "subject": "Physics",
+      "startDate": "2018-06-02T06:48:58.254Z",
+>>>>>>> origin/master
       "duration": 1
     },
     "gcse": {
       "maths": {
         "type": "O level",
         "subject": "Maths",
-        "gradeBoundary": "3 and below"
+        "gradeBoundary": "4 and above"
       },
       "english": {
         "type": "O level",
@@ -1247,12 +2000,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BM - Bachelor of Medicine",
           "subject": "Physical chemistry",
           "isInternational": "false",
           "org": "Northern School of Contemporary Dance",
           "country": "United Kingdom",
           "grade": "Pass",
+=======
+          "type": "BPharm - Bachelor of Pharmacy",
+          "subject": "European Union politics",
+          "isInternational": "false",
+          "org": "British Postgraduate Medical Federation",
+          "country": "United Kingdom",
+          "grade": "Lower second-class honours (2:2)",
+>>>>>>> origin/master
           "predicted": false,
           "startDate": "2017",
           "endDate": "2020"
@@ -1261,6 +2023,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "df934cd2-0596-470d-87a7-d4c082743b53",
     "route": "Assessment Only",
     "traineeId": "CHHM4NZ7",
@@ -1272,20 +2035,47 @@
       "givenName": "Assomption",
       "familyName": "Michel",
       "middleNames": "Clémence Garance",
+=======
+    "id": "1cc72921-ad28-4427-9895-412b0cee2621",
+    "route": "Assessment Only",
+    "traineeId": "WJTFSRYB",
+    "status": "Withdrawn",
+    "trn": 7329351,
+    "updatedDate": "2020-03-14T05:12:32.532Z",
+    "submittedDate": "2020-02-12T17:05:41.284Z",
+    "personalDetails": {
+      "givenName": "Wilfred",
+      "familyName": "Berge",
+      "middleNames": null,
+>>>>>>> origin/master
       "nationality": [
-        "French"
+        "British"
       ],
+<<<<<<< HEAD
       "sex": "Female",
       "dateOfBirth": "1976-09-11T01:52:09.979Z"
+=======
+      "sex": "Male",
+      "dateOfBirth": "1964-01-17T17:44:11.322Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "true",
       "ethnicGroup": "Black, African, Black British or Caribbean",
+<<<<<<< HEAD
       "ethnicGroupSpecific": "African",
       "disabledAnswer": "No"
+=======
+      "ethnicGroupSpecific": "Prefer not to say",
+      "disabledAnswer": "Yes",
+      "disabilities": [
+        "Blind"
+      ]
+>>>>>>> origin/master
     },
-    "isInternationalCandidate": true,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "+33 335870864",
       "email": "assomption_michel89@yahoo.fr",
       "address": {
@@ -1295,13 +2085,30 @@
         "level1": "Rhône-Alpes",
         "postcode": "68050",
         "country": "France"
+=======
+      "phoneNumber": "0110 583 3534",
+      "email": "wilfred27@gmail.com",
+      "address": {
+        "line1": "299 Schmeler Wall",
+        "line2": "",
+        "level2": "Katlynnmouth",
+        "level1": "Warwickshire",
+        "postcode": "CK7 3JX"
+>>>>>>> origin/master
       },
-      "addressType": "international"
+      "addressType": "domestic"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "5 - 11 Programme",
       "subject": "English",
       "startDate": "2019-03-22T08:40:06.697Z",
+=======
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "Maths",
+      "startDate": "2018-08-30T05:33:30.732Z",
+>>>>>>> origin/master
       "duration": 1
     },
     "gcse": {
@@ -1324,6 +2131,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Agricultural botany",
           "isInternational": "true",
@@ -1345,11 +2153,15 @@
           "org": "University of Paris",
           "country": "France",
           "grade": "Pass",
+=======
+          "type": "BN - Bachelor of Nursing",
+          "subject": "Animal physiology",
+          "isInternational": "false",
+          "org": "University of the West of England, Bristol",
+          "country": "United Kingdom",
+          "grade": "First-class honours",
+>>>>>>> origin/master
           "predicted": false,
-          "naric": {
-            "reference": "4000228363",
-            "comparable": "Bachelor (Honours) degree"
-          },
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -1357,6 +2169,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "d64cf593-5b04-43bf-82c8-65bef7eda6a5",
     "route": "Assessment Only",
     "traineeId": "XTPOU8VH",
@@ -1368,11 +2181,28 @@
       "givenName": "Absalon",
       "familyName": "Durand",
       "middleNames": "Aubry Abelin",
+=======
+    "id": "d9d4a712-5a91-4377-990f-154f4c37b7f5",
+    "route": "Assessment Only",
+    "traineeId": "5WSZ6QIT",
+    "status": "TRN received",
+    "trn": 7260879,
+    "updatedDate": "2020-09-23T10:18:48.555Z",
+    "submittedDate": "2020-02-10T11:46:08.148Z",
+    "personalDetails": {
+      "givenName": "Ludolphe",
+      "familyName": "Leclerc",
+      "middleNames": null,
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1965-10-14T15:48:23.009Z"
+=======
+      "dateOfBirth": "1984-03-01T08:43:39.840Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "true",
@@ -1380,8 +2210,9 @@
       "ethnicGroupSpecific": "Black Caribbean and White",
       "disabledAnswer": "No"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "021 5935 0868",
       "email": "absalon44@yahoo.com",
       "address": {
@@ -1398,6 +2229,24 @@
       "subject": "English",
       "startDate": "2018-03-04T17:08:42.844Z",
       "duration": 3
+=======
+      "phoneNumber": "0800 137262",
+      "email": "ludolphe84@yahoo.com",
+      "address": {
+        "line1": "1730 Griffin Spring",
+        "line2": "",
+        "level2": "South Tannermouth",
+        "level1": "Mid Glamorgan",
+        "postcode": "TB9 4PY"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "3 - 7 Programme",
+      "subject": "Chemistry",
+      "startDate": "2019-11-07T14:36:13.387Z",
+      "duration": 1
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -1413,18 +2262,31 @@
       "science": {
         "type": "Scottish National 5",
         "subject": "Science",
+<<<<<<< HEAD
         "gradeBoundary": "3 and below"
+=======
+        "gradeBoundary": "Not completed or not passed"
+>>>>>>> origin/master
       }
     },
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BFA - Bachelor of Fine Art",
           "subject": "Pre-clinical veterinary medicine",
           "isInternational": "false",
           "org": "The Victoria Manchester University",
           "country": "United Kingdom",
           "grade": "Upper second-class honours (2:1)",
+=======
+          "type": "BSc SPT - Bachelor of Science in Speech Therapy",
+          "subject": "European business studies",
+          "isInternational": "false",
+          "org": "University College London",
+          "country": "United Kingdom",
+          "grade": "Pass",
+>>>>>>> origin/master
           "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
@@ -1433,6 +2295,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "2c892670-eaf2-4898-8baf-cc88c77df8f7",
     "route": "Assessment Only",
     "traineeId": "PU3TOME4",
@@ -1444,10 +2307,24 @@
       "givenName": "Ariane",
       "familyName": "Julien",
       "middleNames": "Rachel",
+=======
+    "id": "d4f3cc22-6a8f-4f50-9116-79c7ba2d0d1d",
+    "route": "Assessment Only",
+    "traineeId": "IDYTR7OM",
+    "status": "TRN received",
+    "trn": 2255010,
+    "updatedDate": "2020-09-25T04:21:15.169Z",
+    "submittedDate": "2019-12-27T13:43:29.539Z",
+    "personalDetails": {
+      "givenName": "Katrina",
+      "familyName": "Haley",
+      "middleNames": "Clara",
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1976-01-11T04:09:11.185Z"
     },
     "diversity": {
@@ -1474,6 +2351,31 @@
       "subject": "Physics",
       "startDate": "2019-04-06T00:04:27.491Z",
       "duration": 2
+=======
+      "dateOfBirth": "1996-12-16T07:25:23.022Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "false"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "0800 106161",
+      "email": "katrina.haley22@gmail.com",
+      "address": {
+        "line1": "88417 Delaney Junctions",
+        "line2": "",
+        "level2": "South Travonmouth",
+        "level1": "Dumfries and Galloway",
+        "postcode": "QS74 9XF"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 18 Programme",
+      "subject": "Physics",
+      "startDate": "2018-05-18T23:31:18.197Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -1489,12 +2391,13 @@
       "science": {
         "type": "GCSE",
         "subject": "Science",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "3 and below"
       }
     },
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BMet/Eng - Bachelor of Metallurgy and Engineering",
           "subject": "Applied environmental sciences",
           "isInternational": "false",
@@ -1502,6 +2405,15 @@
           "country": "United Kingdom",
           "grade": "First-class honours",
           "predicted": true,
+=======
+          "type": "BA Combined Studies/Education of the Deaf",
+          "subject": "History of art",
+          "isInternational": "false",
+          "org": "The University of Buckingham",
+          "country": "United Kingdom",
+          "grade": "Pass",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -1509,6 +2421,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "02e78d22-ab6f-4624-9090-e05b29db14a4",
     "route": "Assessment Only",
     "traineeId": "SSRO0RMU",
@@ -1520,17 +2433,44 @@
       "givenName": "Claire",
       "familyName": "Treutel",
       "middleNames": "Rosalie",
+=======
+    "id": "d06d80d1-2ee4-49df-8650-9c4405a713c4",
+    "route": "Assessment Only",
+    "traineeId": "KPB0QNL8",
+    "status": "Deferred",
+    "trn": 1323566,
+    "updatedDate": "2020-04-17T03:48:21.993Z",
+    "submittedDate": "2019-12-05T23:59:10.670Z",
+    "personalDetails": {
+      "givenName": "Randal",
+      "familyName": "Watsica",
+      "middleNames": "Dwayne Ross",
+>>>>>>> origin/master
       "nationality": [
-        "British"
+        "British",
+        "French",
+        "Swiss"
       ],
+<<<<<<< HEAD
       "sex": "Female",
       "dateOfBirth": "1984-11-23T18:58:58.832Z"
     },
     "diversity": {
       "diversityDisclosed": "false"
+=======
+      "sex": "Male",
+      "dateOfBirth": "1971-06-02T12:06:02.890Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Asian or Asian British",
+      "ethnicGroupSpecific": "Another Asian background",
+      "disabledAnswer": "No"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "01460 502314",
       "email": "claire.treutel49@hotmail.com",
       "address": {
@@ -1539,28 +2479,43 @@
         "level2": "Corwinhaven",
         "level1": "Highlands and Islands",
         "postcode": "LP3 6YF"
+=======
+      "phoneNumber": "020 7476 9071",
+      "email": "randal72@gmail.com",
+      "address": {
+        "line1": "65523 Berge Shoals",
+        "line2": "",
+        "level2": "Andreaneton",
+        "level1": "West Sussex",
+        "postcode": "PF8 2HN"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
-    "assessmentDetails": {
-      "ageRange": "5 - 11 Programme",
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
       "subject": "Physics",
+<<<<<<< HEAD
       "startDate": "2018-06-19T04:32:32.460Z",
       "duration": 1
+=======
+      "startDate": "2017-07-30T22:00:00.837Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "English",
         "gradeBoundary": "3 and below"
       },
       "science": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -1568,12 +2523,19 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "MLib - Master of Librarianship",
           "subject": "International studies",
           "isInternational": "false",
           "org": "The University of Huddersfield",
+=======
+          "type": "DSc - Doctor of Science",
+          "subject": "Swahili and other Bantu languages",
+          "isInternational": "false",
+          "org": "St Andrew’s College of Education",
+>>>>>>> origin/master
           "country": "United Kingdom",
-          "grade": "Pass",
+          "grade": "Upper second-class honours (2:1)",
           "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
@@ -1582,6 +2544,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "edafdc55-2d4f-4ec4-8fbb-266dfcf8b7f1",
     "route": "Assessment Only",
     "traineeId": "9C428N0U",
@@ -1593,20 +2556,116 @@
       "givenName": "Levi",
       "familyName": "Kub",
       "middleNames": null,
+=======
+    "id": "557f4df9-79f0-4b8f-bb5c-f5f28e4d08b8",
+    "route": "Assessment Only",
+    "traineeId": "ZS6920MA",
+    "status": "Deferred",
+    "trn": 1776728,
+    "updatedDate": "2020-01-19T19:30:49.686Z",
+    "submittedDate": "2019-11-26T05:10:32.865Z",
+    "personalDetails": {
+      "givenName": "Kristopher",
+      "familyName": "Doyle",
+      "middleNames": "Alexander Abel",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1986-07-06T05:42:55.182Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "false"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "0800 644444",
+      "email": "kristopher19@hotmail.com",
+      "address": {
+        "line1": "339 Dietrich Walk",
+        "line2": "",
+        "level2": "East Vivianne",
+        "level1": "Cambridgeshire",
+        "postcode": "NB55 1LK"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Chemistry",
+      "startDate": "2017-01-26T18:12:05.142Z",
+      "duration": 2
+    },
+    "gcse": {
+      "maths": {
+        "type": "O level",
+        "subject": "Maths",
+        "gradeBoundary": "4 and above"
+      },
+      "english": {
+        "type": "O level",
+        "subject": "English",
+        "gradeBoundary": "3 and below"
+      },
+      "science": {
+        "type": "O level",
+        "subject": "Science",
+        "gradeBoundary": "4 and above"
+      }
+    },
+    "degree": {
+      "items": [
+        {
+          "type": "BFA - Bachelor of Fine Art",
+          "subject": "Transpersonal psychology",
+          "isInternational": "false",
+          "org": "Charing Cross and Westminster Medical School",
+          "country": "United Kingdom",
+          "grade": "Third-class honours",
+          "predicted": true,
+          "startDate": "2017",
+          "endDate": "2020"
+        }
+      ]
+    }
+  },
+  {
+    "id": "27a08a8b-9f86-4dc0-a260-2e5ccb8af6fa",
+    "route": "Assessment Only",
+    "traineeId": "ERVDXAG6",
+    "status": "TRN received",
+    "trn": 1828645,
+    "updatedDate": "2020-09-23T10:33:31.381Z",
+    "submittedDate": "2019-11-07T14:56:11.474Z",
+    "personalDetails": {
+      "givenName": "Traci",
+      "familyName": "McDermott",
+      "middleNames": "Janie",
+>>>>>>> origin/master
       "nationality": [
         "Irish"
       ],
+<<<<<<< HEAD
       "sex": "Male",
       "dateOfBirth": "1985-11-06T22:41:45.410Z"
     },
     "diversity": {
       "diversityDisclosed": "true",
       "ethnicGroup": "Mixed or multiple ethnic groups",
+=======
+      "sex": "Female",
+      "dateOfBirth": "1958-04-09T19:33:16.246Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Another ethnic group",
+>>>>>>> origin/master
       "ethnicGroupSpecific": "Prefer not to say",
       "disabledAnswer": "No"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0800 810 2252",
       "email": "levi14@gmail.com",
       "address": {
@@ -1615,14 +2674,30 @@
         "level2": "New Afton",
         "level1": "Worcestershire",
         "postcode": "VF35 3AC"
+=======
+      "phoneNumber": "0800 038336",
+      "email": "traci_mcdermott67@yahoo.com",
+      "address": {
+        "line1": "8119 Kristina Mountains",
+        "line2": "",
+        "level2": "Fadelview",
+        "level1": "Dyfed",
+        "postcode": "QB8 8UB"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
-    "assessmentDetails": {
+    "programmeDetails": {
       "ageRange": "5 - 11 Programme",
+<<<<<<< HEAD
       "subject": "Maths",
       "startDate": "2017-08-15T03:51:47.067Z",
       "duration": 2
+=======
+      "subject": "English",
+      "startDate": "2020-07-16T04:39:42.969Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -1644,12 +2719,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BA - Bachelor of Arts",
           "subject": "Curatorial studies",
           "isInternational": "false",
           "org": "Northern College of Education",
           "country": "United Kingdom",
           "grade": "First-class honours",
+=======
+          "type": "BLitt - Bachelor of Literature",
+          "subject": "Engineering design",
+          "isInternational": "false",
+          "org": "The Nottingham Trent University",
+          "country": "United Kingdom",
+          "grade": "Upper second-class honours (2:1)",
+>>>>>>> origin/master
           "predicted": false,
           "startDate": "2017",
           "endDate": "2020"
@@ -1658,6 +2742,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "d917962b-d338-4ddc-81c2-4fb731ea6bf1",
     "route": "Assessment Only",
     "traineeId": "E03KXNZS",
@@ -1683,9 +2768,31 @@
       "disabilities": [
         "Deaf"
       ]
+=======
+    "id": "00a48415-79d8-4d03-8989-cf4ced30c45c",
+    "route": "Assessment Only",
+    "traineeId": "I6HGP44S",
+    "status": "TRN received",
+    "trn": 3893263,
+    "updatedDate": "2020-07-30T13:41:57.120Z",
+    "submittedDate": "2019-11-06T17:43:41.981Z",
+    "personalDetails": {
+      "givenName": "Loup",
+      "familyName": "Le roux",
+      "middleNames": "Gustave",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1972-03-26T06:54:54.180Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "false"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "01506 58499",
       "email": "dianna12@hotmail.com",
       "address": {
@@ -1702,6 +2809,24 @@
       "subject": "Maths",
       "startDate": "2017-12-29T07:06:46.509Z",
       "duration": 2
+=======
+      "phoneNumber": "0965 266 8854",
+      "email": "loup.leroux26@yahoo.com",
+      "address": {
+        "line1": "37254 Rosina Curve",
+        "line2": "",
+        "level2": "Klingport",
+        "level1": "Dorset",
+        "postcode": "VO9 8IR"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Physics",
+      "startDate": "2020-02-27T01:03:20.335Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -1723,12 +2848,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BFA - Bachelor of Fine Art",
           "subject": "Child psychology",
           "isInternational": "false",
           "org": "The University of Oxford",
           "country": "United Kingdom",
           "grade": "Pass",
+=======
+          "type": "Higher Degree",
+          "subject": "Epistemology",
+          "isInternational": "false",
+          "org": "The University of East London",
+          "country": "United Kingdom",
+          "grade": "Third-class honours",
+>>>>>>> origin/master
           "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
@@ -1737,6 +2871,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "0bea502d-74fe-483b-9abe-09f831ca4e56",
     "route": "Assessment Only",
     "traineeId": "ET4GRI1F",
@@ -1777,6 +2912,46 @@
       "startDate": "2019-02-22T21:39:23.376Z",
       "duration": 3,
       "status": "Completed"
+=======
+    "id": "d9673657-aa61-4b4f-bda2-c72a53cfb3f1",
+    "route": "Assessment Only",
+    "traineeId": "V0BB558R",
+    "status": "Withdrawn",
+    "trn": 1321138,
+    "updatedDate": "2019-12-22T17:19:55.773Z",
+    "submittedDate": "2019-10-17T09:46:05.486Z",
+    "personalDetails": {
+      "givenName": "Katherine",
+      "familyName": "Schinner",
+      "middleNames": null,
+      "nationality": [
+        "British"
+      ],
+      "sex": "Female",
+      "dateOfBirth": "1972-07-27T12:57:09.708Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "false"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "01563 460605",
+      "email": "katherine.schinner76@yahoo.com",
+      "address": {
+        "line1": "5360 Lamar Park",
+        "line2": "",
+        "level2": "Davidchester",
+        "level1": "Essex",
+        "postcode": "IR46 1RW"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "Maths",
+      "startDate": "2017-12-14T09:55:10.974Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -1799,6 +2974,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BSocSc - Bachelor of Social Science",
           "subject": "Christopher Marlowe studies",
           "isInternational": "false",
@@ -1806,6 +2982,15 @@
           "country": "United Kingdom",
           "grade": "Lower second-class honours (2:2)",
           "predicted": false,
+=======
+          "type": "MBA - Master of Business Administration",
+          "subject": "Humanities",
+          "isInternational": "false",
+          "org": "The University of Salford",
+          "country": "United Kingdom",
+          "grade": "Distinction",
+          "predicted": true,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -1814,6 +2999,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "cf1969c8-6914-468f-967e-6f59684992e0",
     "route": "Assessment Only",
     "traineeId": "VS7Z608I",
@@ -1831,6 +3017,25 @@
       ],
       "sex": "Female",
       "dateOfBirth": "1975-12-19T05:57:04.478Z"
+=======
+    "id": "e34463a8-952e-491c-a2a7-dc170442ebd1",
+    "route": "Assessment Only",
+    "traineeId": "POLWJGAT",
+    "status": "TRN received",
+    "trn": 7320938,
+    "updatedDate": "2020-03-09T01:32:49.179Z",
+    "submittedDate": "2019-10-03T18:49:08.284Z",
+    "personalDetails": {
+      "givenName": "Jody",
+      "familyName": "Murazik",
+      "middleNames": "Alfredo",
+      "nationality": [
+        "French",
+        "Swiss"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1967-01-14T16:21:47.769Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "true",
@@ -1838,6 +3043,7 @@
       "ethnicGroupSpecific": "Prefer not to say",
       "disabledAnswer": "Not provided"
     },
+<<<<<<< HEAD
     "isInternationalCandidate": false,
     "contactDetails": {
       "phoneNumber": "0380 730 7520",
@@ -1848,13 +3054,33 @@
         "level2": "West Brandomouth",
         "level1": "Nottinghamshire",
         "postcode": "EI42 1YM"
+=======
+    "isInternationalTrainee": true,
+    "contactDetails": {
+      "phoneNumber": "+33 258704852",
+      "email": "jody53@gmail.com",
+      "address": {
+        "line1": "6315 Masson Pastourelle",
+        "line2": "",
+        "level2": "Port Yesseniabury",
+        "level1": "Provence-Alpes-Côte d'Azur",
+        "postcode": "10422",
+        "country": "France"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "11 - 16 Programme",
       "subject": "Physics",
       "startDate": "2018-04-13T09:32:08.599Z",
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "English",
+      "startDate": "2018-09-16T13:04:14.706Z",
+>>>>>>> origin/master
       "duration": 2
     },
     "gcse": {
@@ -1871,18 +3097,31 @@
       "science": {
         "type": "O level",
         "subject": "Science",
+<<<<<<< HEAD
         "gradeBoundary": "Not provided"
+=======
+        "gradeBoundary": "3 and below"
+>>>>>>> origin/master
       }
     },
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "MLib - Master of Librarianship",
           "subject": "Sports coaching",
           "isInternational": "false",
           "org": "London South Bank University",
           "country": "United Kingdom",
           "grade": "Distinction",
+=======
+          "type": "Diplôme",
+          "subject": "Epilepsy care",
+          "isInternational": "true",
+          "org": "University of Paris",
+          "country": "France",
+          "grade": "Pass",
+>>>>>>> origin/master
           "predicted": false,
           "startDate": "2017",
           "endDate": "2020"
@@ -1891,6 +3130,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "2f3e6764-905c-4a97-b612-66131eb3154e",
     "route": "Assessment Only",
     "traineeId": "XO6LY8GK",
@@ -1900,9 +3140,23 @@
       "givenName": "Isaac",
       "familyName": "Ruecker",
       "middleNames": null,
+=======
+    "id": "4f522daf-1c63-4ff1-9b58-3e4172b85b3f",
+    "route": "Assessment Only",
+    "traineeId": "I9H1T6OK",
+    "status": "TRN received",
+    "trn": 8277529,
+    "updatedDate": "2020-03-22T04:56:54.973Z",
+    "submittedDate": "2019-09-20T00:40:22.459Z",
+    "personalDetails": {
+      "givenName": "Alexis",
+      "familyName": "Wisozk",
+      "middleNames": "Genevieve Myra",
+>>>>>>> origin/master
       "nationality": [
-        "British"
+        "French"
       ],
+<<<<<<< HEAD
       "sex": "Male",
       "dateOfBirth": "1973-12-27T14:18:48.567Z",
       "status": "Completed"
@@ -1913,12 +3167,42 @@
       "subject": "Chemistry",
       "startDate": "2017-06-14T07:10:59.815Z",
       "duration": 2
+=======
+      "sex": "Female",
+      "dateOfBirth": "1992-05-24T09:52:59.349Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Mixed or multiple ethnic groups",
+      "ethnicGroupSpecific": "Black African and White",
+      "disabledAnswer": "Not provided"
+    },
+    "isInternationalTrainee": true,
+    "contactDetails": {
+      "phoneNumber": "0138987673",
+      "email": "alexis.wisozk6@yahoo.fr",
+      "address": {
+        "line1": "95962 Hollie La Boétie",
+        "line2": "",
+        "level2": "Eileenmouth",
+        "level1": "Alsace",
+        "postcode": "87688",
+        "country": "France"
+      },
+      "addressType": "international"
+    },
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "English",
+      "startDate": "2019-03-15T17:54:41.657Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
         "type": "GCSE",
         "subject": "Maths",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "english": {
         "type": "GCSE",
@@ -1934,13 +3218,26 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BEng/BS - Bachelor of Engineering with Business Studies",
           "subject": "Econometrics",
           "isInternational": "false",
           "org": "The University of St Andrews",
           "country": "United Kingdom",
           "grade": "Third-class honours",
+=======
+          "type": "Diplôme",
+          "subject": "Architectural design",
+          "isInternational": "true",
+          "org": "University of Paris",
+          "country": "France",
+          "grade": "Pass",
+>>>>>>> origin/master
           "predicted": true,
+          "naric": {
+            "reference": "4000228363",
+            "comparable": "Bachelor (Honours) degree"
+          },
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -1948,6 +3245,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "9c181227-98ce-4b7b-a6e7-48068b417604",
     "route": "Assessment Only",
     "traineeId": "2O8VNFT4",
@@ -1956,20 +3254,40 @@
     "personalDetails": {
       "givenName": "Tomas",
       "familyName": "Crona",
+=======
+    "id": "ee1f9bd3-dddc-4ab6-b31a-c436e85b8bdf",
+    "route": "Assessment Only",
+    "traineeId": "9LJX6EW3",
+    "status": "TRN received",
+    "trn": 5102418,
+    "updatedDate": "2019-12-02T04:33:17.587Z",
+    "submittedDate": "2019-08-18T22:03:42.718Z",
+    "personalDetails": {
+      "givenName": "Dallas",
+      "familyName": "Schaefer",
+>>>>>>> origin/master
       "middleNames": null,
       "nationality": [
         "British"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1997-08-05T15:28:19.620Z",
       "status": "Completed"
     },
     "diversity": {
       "diversityDisclosed": "false",
       "status": "Completed"
+=======
+      "dateOfBirth": "1966-12-01T09:12:49.665Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "false"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0500 451179",
       "email": "tomas_crona28@yahoo.com",
       "address": {
@@ -1978,21 +3296,39 @@
         "level2": "Kavonfurt",
         "level1": "South Yorkshire",
         "postcode": "EE97 1PR"
+=======
+      "phoneNumber": "016977 0401",
+      "email": "dallas_schaefer41@yahoo.com",
+      "address": {
+        "line1": "177 August Springs",
+        "line2": "",
+        "level2": "Kunzeport",
+        "level1": "East Sussex",
+        "postcode": "TP00 8AA"
+>>>>>>> origin/master
       },
       "addressType": "domestic",
       "status": "Completed"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "11 - 16 Programme",
       "subject": "Chemistry",
       "startDate": "2017-01-28T22:15:26.950Z",
       "duration": 2
+=======
+    "programmeDetails": {
+      "ageRange": "3 - 7 Programme",
+      "subject": "English",
+      "startDate": "2020-02-28T09:48:35.409Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
         "type": "GCSE",
         "subject": "Maths",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not provided"
       },
       "english": {
         "type": "GCSE",
@@ -2008,12 +3344,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Degree equivalent",
           "subject": "Italian studies",
           "isInternational": "false",
           "org": "Welsh Agricultural College",
           "country": "United Kingdom",
           "grade": "Lower second-class honours (2:2)",
+=======
+          "type": "BArch - Bachelor of Architecture",
+          "subject": "Organic farming",
+          "isInternational": "false",
+          "org": "Royal College of Music",
+          "country": "United Kingdom",
+          "grade": "Pass",
+>>>>>>> origin/master
           "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
@@ -2022,6 +3367,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "d0a1adc8-e0fa-42a4-8834-ebc0b00f0003",
     "route": "Assessment Only",
     "traineeId": "BJGWAOIY",
@@ -2047,9 +3393,34 @@
       "disabilities": [
         "Long-standing illness"
       ]
+=======
+    "id": "7234ade4-9624-4d33-bbb1-04c22505f2c1",
+    "route": "Assessment Only",
+    "traineeId": "VAYSP2E3",
+    "status": "TRN received",
+    "trn": 9859615,
+    "updatedDate": "2019-10-18T15:40:29.618Z",
+    "submittedDate": "2019-08-08T17:59:58.195Z",
+    "personalDetails": {
+      "givenName": "Neil",
+      "familyName": "Roob",
+      "middleNames": null,
+      "nationality": [
+        "British"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1959-06-24T20:55:13.244Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Asian or Asian British",
+      "ethnicGroupSpecific": "Bangladeshi",
+      "disabledAnswer": "Not provided"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0901 656 3803",
       "email": "evelyn94@gmail.com",
       "address": {
@@ -2058,28 +3429,44 @@
         "level2": "North Lennieburgh",
         "level1": "Borders",
         "postcode": "FW81 1UB"
+=======
+      "phoneNumber": "016977 1982",
+      "email": "neil50@yahoo.com",
+      "address": {
+        "line1": "9948 Kiera Village",
+        "line2": "",
+        "level2": "Kayleighfurt",
+        "level1": "Hampshire",
+        "postcode": "GR02 8IZ"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
-    "assessmentDetails": {
+    "programmeDetails": {
       "ageRange": "5 - 11 Programme",
+<<<<<<< HEAD
       "subject": "Chemistry",
       "startDate": "2017-01-04T21:53:38.704Z",
       "duration": 3
+=======
+      "subject": "Physics",
+      "startDate": "2020-01-31T08:19:39.107Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -2087,12 +3474,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BScEng - Bachelor of Science & Engineering",
           "subject": "Geological oceanography",
           "isInternational": "false",
           "org": "The University of Hull",
           "country": "United Kingdom",
           "grade": "Upper second-class honours (2:1)",
+=======
+          "type": "BBA - Bachelor of Business Administration",
+          "subject": "Computer games design",
+          "isInternational": "false",
+          "org": "Falmouth University",
+          "country": "United Kingdom",
+          "grade": "Pass",
+>>>>>>> origin/master
           "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
@@ -2101,6 +3497,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "b8a1b3ce-492b-4c0d-92cb-5ea213faf08c",
     "route": "Assessment Only",
     "traineeId": "4FTC5TZS",
@@ -2112,12 +3509,26 @@
       "givenName": "Marco",
       "familyName": "Carroll",
       "middleNames": "Dustin",
+=======
+    "id": "0bcd986e-1e64-4593-9a5e-bcbd501a56b6",
+    "route": "Assessment Only",
+    "traineeId": "UHQ7W0YV",
+    "status": "QTS awarded",
+    "trn": 8122361,
+    "updatedDate": "2019-11-23T17:35:49.343Z",
+    "submittedDate": "2019-08-04T15:41:28.774Z",
+    "personalDetails": {
+      "givenName": "Jason",
+      "familyName": "Lockman",
+      "middleNames": "Alonzo",
+>>>>>>> origin/master
       "nationality": [
         "British",
         "French",
         "Swiss"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1995-07-14T02:40:00.873Z"
     },
     "diversity": {
@@ -2133,14 +3544,44 @@
         "level2": "Myrticehaven",
         "level1": "Dyfed",
         "postcode": "BL5 8PS"
+=======
+      "dateOfBirth": "1972-01-11T08:03:12.580Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Black, African, Black British or Caribbean",
+      "ethnicGroupSpecific": "Caribbean",
+      "disabledAnswer": "Yes"
+    },
+    "isInternationalTrainee": true,
+    "contactDetails": {
+      "phoneNumber": "+33 788645738",
+      "email": "jason96@yahoo.fr",
+      "address": {
+        "line1": "79054 Petit de la Victoire",
+        "line2": "",
+        "level2": "Baronton",
+        "level1": "Aquitaine",
+        "postcode": "85332",
+        "country": "France"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "5 - 11 Programme",
       "subject": "Maths",
       "startDate": "2018-05-01T21:54:25.099Z",
       "duration": 2
+=======
+    "programmeDetails": {
+      "ageRange": "3 - 11 Programme",
+      "subject": "English",
+      "startDate": "2018-07-28T10:35:58.592Z",
+      "duration": 3,
+      "endDate": "2021-07-28T10:35:58.592Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -2162,6 +3603,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BASc - Bachelor of Applied Science",
           "subject": "Spa management",
           "isInternational": "false",
@@ -2169,6 +3611,19 @@
           "country": "United Kingdom",
           "grade": "Lower second-class honours (2:2)",
           "predicted": false,
+=======
+          "type": "Diplôme",
+          "subject": "Statistical modelling",
+          "isInternational": "true",
+          "org": "University of Paris",
+          "country": "France",
+          "grade": "Pass",
+          "predicted": false,
+          "naric": {
+            "reference": "4000228363",
+            "comparable": "Bachelor (Honours) degree"
+          },
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -2176,6 +3631,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "f868091a-87d2-4dc4-8c80-ac0df4363f6b",
     "route": "Assessment Only",
     "traineeId": "MWUJKU08",
@@ -2197,10 +3653,34 @@
       "diversityDisclosed": "true",
       "ethnicGroup": "White",
       "ethnicGroupSpecific": "British, English, Northern Irish, Scottish",
+=======
+    "id": "49d428f3-a663-4306-a7cb-02fc311052d5",
+    "route": "Assessment Only",
+    "traineeId": "2CE8IYGY",
+    "status": "TRN received",
+    "trn": 6729508,
+    "updatedDate": "2020-09-24T12:22:28.619Z",
+    "submittedDate": "2019-08-02T08:45:53.928Z",
+    "personalDetails": {
+      "givenName": "Dexter",
+      "familyName": "Medhurst",
+      "middleNames": "Ronnie",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1986-10-16T23:04:47.786Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Mixed or multiple ethnic groups",
+      "ethnicGroupSpecific": "Black Caribbean and White",
+>>>>>>> origin/master
       "disabledAnswer": "No"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0800 590570",
       "email": "gayle_hudson@hotmail.com",
       "address": {
@@ -2209,29 +3689,45 @@
         "level2": "Port Tiffanyhaven",
         "level1": "County Down",
         "postcode": "CB7 1ZB"
+=======
+      "phoneNumber": "023 2001 5273",
+      "email": "dexter_medhurst@gmail.com",
+      "address": {
+        "line1": "98455 Rachelle Coves",
+        "line2": "",
+        "level2": "New Adahborough",
+        "level1": "West Midlands",
+        "postcode": "SY71 9AK"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
-    "assessmentDetails": {
+    "programmeDetails": {
       "ageRange": "11 - 16 Programme",
+<<<<<<< HEAD
       "subject": "Physics",
       "startDate": "2018-03-22T18:02:05.558Z",
       "duration": 3,
       "endDate": "2021-03-22T18:02:05.558Z"
+=======
+      "subject": "Chemistry",
+      "startDate": "2020-01-23T16:43:01.774Z",
+      "duration": 1
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -2239,6 +3735,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BVSc - Bachelor of Veterinary Science",
           "subject": "Computational mathematics",
           "isInternational": "false",
@@ -2246,6 +3743,15 @@
           "country": "United Kingdom",
           "grade": "Third-class honours",
           "predicted": false,
+=======
+          "type": "BSocSc - Bachelor of Social Science",
+          "subject": "Speech and language therapy",
+          "isInternational": "false",
+          "org": "The University of Portsmouth",
+          "country": "United Kingdom",
+          "grade": "Lower second-class honours (2:2)",
+          "predicted": true,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -2253,6 +3759,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "adf210db-fced-459f-a09c-865cb77eb628",
     "route": "Assessment Only",
     "traineeId": "YJKQY4TC",
@@ -2275,9 +3782,31 @@
       "ethnicGroup": "White",
       "ethnicGroupSpecific": "Another White background",
       "disabledAnswer": "Not provided"
+=======
+    "id": "ce565c09-b025-4aea-9b8f-b29727a1c692",
+    "route": "Assessment Only",
+    "traineeId": "S5GAN28Z",
+    "status": "TRN received",
+    "trn": 6002058,
+    "updatedDate": "2019-10-29T20:42:21.603Z",
+    "submittedDate": "2019-07-20T15:43:02.728Z",
+    "personalDetails": {
+      "givenName": "Lena",
+      "familyName": "Kozey",
+      "middleNames": "Sheila",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Female",
+      "dateOfBirth": "1970-10-14T00:48:12.628Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "false"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "014720 82755",
       "email": "howard92@gmail.com",
       "address": {
@@ -2294,6 +3823,24 @@
       "subject": "Physics",
       "startDate": "2017-02-14T18:20:01.932Z",
       "duration": 3
+=======
+      "phoneNumber": "01635 180747",
+      "email": "lena54@yahoo.com",
+      "address": {
+        "line1": "14100 Kyleigh Islands",
+        "line2": "",
+        "level2": "East Lydia",
+        "level1": "Gloucestershire",
+        "postcode": "UE7 6KC"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 18 Programme",
+      "subject": "Chemistry",
+      "startDate": "2017-09-27T00:04:08.420Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -2315,12 +3862,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Higher Degree",
           "subject": "Logistics",
           "isInternational": "false",
           "org": "Cumbria Institute of the Arts",
           "country": "United Kingdom",
           "grade": "Lower second-class honours (2:2)",
+=======
+          "type": "BN - Bachelor of Nursing",
+          "subject": "European business studies",
+          "isInternational": "false",
+          "org": "The Arts University Bournemouth",
+          "country": "United Kingdom",
+          "grade": "Third-class honours",
+>>>>>>> origin/master
           "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
@@ -2329,6 +3885,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "b154cbd8-05f4-40c4-bc50-f51a60c384c9",
     "route": "Assessment Only",
     "traineeId": "3IWPZ4UY",
@@ -2340,16 +3897,35 @@
       "givenName": "Willard",
       "familyName": "Ernser",
       "middleNames": "Simon",
+=======
+    "id": "81eefde3-bea8-4f9f-9c8e-6f070574cce8",
+    "route": "Assessment Only",
+    "traineeId": "4B3VNPTV",
+    "status": "TRN received",
+    "trn": 2651364,
+    "updatedDate": "2020-06-01T23:53:49.476Z",
+    "submittedDate": "2019-07-02T06:24:06.958Z",
+    "personalDetails": {
+      "givenName": "Janie",
+      "familyName": "Price",
+      "middleNames": null,
+>>>>>>> origin/master
       "nationality": [
         "French",
         "Swiss"
       ],
+<<<<<<< HEAD
       "sex": "Male",
       "dateOfBirth": "1980-09-26T05:33:08.549Z"
+=======
+      "sex": "Female",
+      "dateOfBirth": "1980-12-13T19:20:20.779Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "true",
       "ethnicGroup": "White",
+<<<<<<< HEAD
       "ethnicGroupSpecific": "Another White background",
       "disabledAnswer": "Not provided"
     },
@@ -2364,15 +3940,38 @@
         "level1": "Pays de la Loire",
         "postcode": "85517",
         "country": "France"
+=======
+      "ethnicGroupSpecific": "Irish",
+      "disabledAnswer": "Yes"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "0800 753278",
+      "email": "janie10@yahoo.com",
+      "address": {
+        "line1": "392 Melissa Fields",
+        "line2": "",
+        "level2": "Port Tyrell",
+        "level1": "Buckinghamshire",
+        "postcode": "JY0 7BJ"
+>>>>>>> origin/master
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "3 - 11 Programme",
       "subject": "English",
       "startDate": "2019-01-29T23:02:51.596Z",
       "duration": 2,
       "endDate": "2021-01-29T23:02:51.596Z"
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Chemistry",
+      "startDate": "2019-05-14T02:23:34.140Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -2394,6 +3993,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Ethnomusicology and world music",
           "isInternational": "true",
@@ -2414,6 +4014,13 @@
           "isInternational": "true",
           "org": "University of Paris",
           "country": "France",
+=======
+          "type": "BAEcon - Bachelor of Arts in Economics",
+          "subject": "Cognitive psychology",
+          "isInternational": "false",
+          "org": "Falmouth University",
+          "country": "United Kingdom",
+>>>>>>> origin/master
           "grade": "Pass",
           "predicted": false,
           "naric": {
@@ -2427,6 +4034,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "900dfce6-2b21-4e92-b68d-8910bea95705",
     "route": "Assessment Only",
     "traineeId": "1DV87CPS",
@@ -2467,12 +4075,54 @@
       "subject": "Physics",
       "startDate": "2019-05-16T08:24:56.213Z",
       "duration": 3
+=======
+    "id": "ca2f522a-0b8d-4110-a493-739bdbda672d",
+    "route": "Assessment Only",
+    "traineeId": "S10QKJ1E",
+    "status": "TRN received",
+    "trn": 3061847,
+    "updatedDate": "2019-07-10T16:13:22.962Z",
+    "submittedDate": "2019-06-28T03:45:46.094Z",
+    "personalDetails": {
+      "givenName": "Ansbert",
+      "familyName": "Dupont",
+      "middleNames": null,
+      "nationality": [
+        "British"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1980-12-31T06:14:12.038Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Prefer not to say",
+      "disabledAnswer": "Not provided"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "056 6092 1280",
+      "email": "ansbert_dupont@gmail.com",
+      "address": {
+        "line1": "35149 Otis Mills",
+        "line2": "",
+        "level2": "East Vickyville",
+        "level1": "Highlands and Islands",
+        "postcode": "PP30 1SP"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Maths",
+      "startDate": "2017-05-31T17:07:25.642Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
         "type": "GCSE",
         "subject": "Maths",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "english": {
         "type": "GCSE",
@@ -2488,12 +4138,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BS - Bachelor of Surgery",
           "subject": "Czech studies",
           "isInternational": "false",
           "org": "The University of North London",
           "country": "United Kingdom",
           "grade": "Upper second-class honours (2:1)",
+=======
+          "type": "BEng/BS - Bachelor of Engineering with Business Studies",
+          "subject": "Information technology",
+          "isInternational": "false",
+          "org": "West London Institute of HE",
+          "country": "United Kingdom",
+          "grade": "First-class honours",
+>>>>>>> origin/master
           "predicted": false,
           "startDate": "2017",
           "endDate": "2020"
@@ -2502,6 +4161,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "89402ac2-50ec-472d-9cc8-8be5f1d537a0",
     "route": "Assessment Only",
     "traineeId": "VO91ZB44",
@@ -2535,9 +4195,47 @@
         "level2": "Lake Damianton",
         "level1": "Warwickshire",
         "postcode": "BT8 7UC"
+=======
+    "id": "4134e79f-cd42-473f-b563-2678271b4ce4",
+    "route": "Assessment Only",
+    "traineeId": "VYWF13P5",
+    "status": "Pending QTS",
+    "trn": 4721552,
+    "updatedDate": "2019-08-15T21:58:06.250Z",
+    "submittedDate": "2019-06-25T19:53:43.829Z",
+    "personalDetails": {
+      "givenName": "Lori",
+      "familyName": "Swaniawski",
+      "middleNames": null,
+      "nationality": [
+        "French",
+        "Swiss"
+      ],
+      "sex": "Female",
+      "dateOfBirth": "1992-07-11T12:37:58.148Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Asian or Asian British",
+      "ethnicGroupSpecific": "Another Asian background",
+      "disabledAnswer": "Not provided"
+    },
+    "isInternationalTrainee": true,
+    "contactDetails": {
+      "phoneNumber": "+33 246411221",
+      "email": "lori_swaniawski25@gmail.com",
+      "address": {
+        "line1": "29011 Alexandra de la Huchette",
+        "line2": "",
+        "level2": "New Gabe",
+        "level1": "Corse",
+        "postcode": "39405",
+        "country": "France"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "11 - 16 Programme",
       "subject": "Physics",
@@ -2552,18 +4250,40 @@
       },
       "english": {
         "type": "Scottish National 5",
+=======
+    "programmeDetails": {
+      "ageRange": "3 - 11 Programme",
+      "subject": "Physics",
+      "startDate": "2019-02-03T14:55:46.028Z",
+      "duration": 1,
+      "endDate": "2020-02-03T14:55:46.028Z"
+    },
+    "gcse": {
+      "maths": {
+        "type": "O level",
+        "subject": "Maths",
+        "gradeBoundary": "Not provided"
+      },
+      "english": {
+        "type": "O level",
+>>>>>>> origin/master
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
+<<<<<<< HEAD
         "type": "Scottish National 5",
+=======
+        "type": "O level",
+>>>>>>> origin/master
         "subject": "Science",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       }
     },
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "MA - Master of Arts",
           "subject": "Music theory and analysis",
           "isInternational": "false",
@@ -2582,6 +4302,19 @@
           "country": "United Kingdom",
           "grade": "Upper second-class honours (2:1)",
           "predicted": true,
+=======
+          "type": "Diplôme",
+          "subject": "Popular music",
+          "isInternational": "true",
+          "org": "University of Paris",
+          "country": "France",
+          "grade": "Pass",
+          "predicted": true,
+          "naric": {
+            "reference": "4000228363",
+            "comparable": "Bachelor (Honours) degree"
+          },
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -2589,6 +4322,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "935ff7de-80e9-4157-9b5d-a314a69db55b",
     "route": "Assessment Only",
     "traineeId": "KCDVXTQV",
@@ -2605,12 +4339,31 @@
       ],
       "sex": "Male",
       "dateOfBirth": "1996-01-24T05:34:02.654Z"
+=======
+    "id": "2d5b1106-3dc8-4be0-9542-850523ef79ab",
+    "route": "Assessment Only",
+    "traineeId": "GD21PX85",
+    "status": "QTS awarded",
+    "trn": 1943352,
+    "updatedDate": "2019-08-02T03:57:51.341Z",
+    "submittedDate": "2019-06-20T23:59:53.796Z",
+    "personalDetails": {
+      "givenName": "Bennie",
+      "familyName": "Champlin",
+      "middleNames": "Byron Gilbert",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1992-12-14T05:27:10.724Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "false"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "056 6863 9628",
       "email": "jesus.boyer76@hotmail.com",
       "address": {
@@ -2627,6 +4380,25 @@
       "subject": "Maths",
       "startDate": "2019-06-14T22:24:40.724Z",
       "duration": 1
+=======
+      "phoneNumber": "016977 6183",
+      "email": "bennie_champlin@hotmail.com",
+      "address": {
+        "line1": "988 Stacey Divide",
+        "line2": "",
+        "level2": "Rebecastad",
+        "level1": "Surrey",
+        "postcode": "GQ49 9VO"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "3 - 11 Programme",
+      "subject": "Maths",
+      "startDate": "2017-01-10T08:57:12.453Z",
+      "duration": 3,
+      "endDate": "2020-01-10T08:57:12.453Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -2648,6 +4420,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BAEcon - Bachelor of Arts in Economics",
           "subject": "Marine technology",
           "isInternational": "false",
@@ -2655,6 +4428,15 @@
           "country": "United Kingdom",
           "grade": "Pass",
           "predicted": true,
+=======
+          "type": "BEd - Bachelor of Education Scotland & Northern Ireland",
+          "subject": "Theatre production",
+          "isInternational": "false",
+          "org": "University of Newcastle-upon-Tyne",
+          "country": "United Kingdom",
+          "grade": "Third-class honours",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -2662,6 +4444,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "1b29789e-cc12-4dc5-ba96-d9f37438fb25",
     "route": "Assessment Only",
     "traineeId": "2GA6NQFK",
@@ -2685,9 +4468,34 @@
       "ethnicGroup": "Asian or Asian British",
       "ethnicGroupSpecific": "Prefer not to say",
       "disabledAnswer": "Not provided"
+=======
+    "id": "69f920bd-cbd4-4c24-8bc2-c49a0005de23",
+    "route": "Assessment Only",
+    "traineeId": "4HGUPN4X",
+    "status": "QTS awarded",
+    "trn": 6596289,
+    "updatedDate": "2019-06-18T22:39:40.427Z",
+    "submittedDate": "2019-06-12T22:51:43.261Z",
+    "personalDetails": {
+      "givenName": "Cassandra",
+      "familyName": "Heaney",
+      "middleNames": "Evelyn",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Female",
+      "dateOfBirth": "1958-09-30T10:12:59.255Z"
     },
-    "isInternationalCandidate": true,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "White",
+      "ethnicGroupSpecific": "Another White background",
+      "disabledAnswer": "No"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "+33 665431978",
       "email": "vernon.jerde58@gmail.com",
       "address": {
@@ -2697,28 +4505,47 @@
         "level1": "Île-de-France",
         "postcode": "98708",
         "country": "France"
+=======
+      "phoneNumber": "0111 819 5832",
+      "email": "cassandra.heaney39@yahoo.com",
+      "address": {
+        "line1": "517 Schmidt Isle",
+        "line2": "",
+        "level2": "East Winona",
+        "level1": "West Midlands",
+        "postcode": "ZW83 1TE"
+>>>>>>> origin/master
       },
-      "addressType": "international"
+      "addressType": "domestic"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "3 - 7 Programme",
       "subject": "Maths",
       "startDate": "2018-07-16T12:47:05.618Z",
       "duration": 1
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "English",
+      "startDate": "2019-01-10T21:48:40.886Z",
+      "duration": 1,
+      "endDate": "2020-01-10T21:48:40.886Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "English",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "3 and below"
       },
       "science": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -2726,6 +4553,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Bob Dylan studies",
           "isInternational": "true",
@@ -2737,6 +4565,15 @@
             "reference": "4000228363",
             "comparable": "Bachelor (Honours) degree"
           },
+=======
+          "type": "BScEng - Bachelor of Science & Engineering",
+          "subject": "Acoustics",
+          "isInternational": "false",
+          "org": "The University of North London",
+          "country": "United Kingdom",
+          "grade": "Pass",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -2744,6 +4581,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "7c76e8cf-2051-472f-a131-231d884489cc",
     "route": "Assessment Only",
     "traineeId": "Z2WD0THT",
@@ -2755,10 +4593,26 @@
       "givenName": "Hermine",
       "familyName": "Dupont",
       "middleNames": "Claude",
+=======
+    "id": "527de484-7122-4ba5-9586-e084797758e4",
+    "route": "Assessment Only",
+    "traineeId": "CVX0DL0L",
+    "status": "TRN received",
+    "trn": 3485418,
+    "updatedDate": "2019-06-21T17:45:10.049Z",
+    "submittedDate": "2019-06-08T17:47:03.516Z",
+    "personalDetails": {
+      "givenName": "Colleen",
+      "familyName": "Larson",
+      "middleNames": "Courtney",
+>>>>>>> origin/master
       "nationality": [
-        "British"
+        "British",
+        "French",
+        "Swiss"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1988-01-20T15:20:56.401Z"
     },
     "diversity": {
@@ -2766,9 +4620,19 @@
       "ethnicGroup": "Another ethnic group",
       "ethnicGroupSpecific": "Arab",
       "disabledAnswer": "No"
+=======
+      "dateOfBirth": "1976-12-08T17:42:55.650Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Black, African, Black British or Caribbean",
+      "ethnicGroupSpecific": "African",
+      "disabledAnswer": "Not provided"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "012178 66829",
       "email": "hermine.dupont98@yahoo.com",
       "address": {
@@ -2786,20 +4650,38 @@
       "startDate": "2018-02-22T08:53:43.890Z",
       "duration": 3,
       "endDate": "2021-02-22T08:53:43.890Z"
+=======
+      "phoneNumber": "056 4413 6436",
+      "email": "colleen.larson11@hotmail.com",
+      "address": {
+        "line1": "4872 Daugherty Causeway",
+        "line2": "",
+        "level2": "Maximetown",
+        "level1": "Gwent",
+        "postcode": "UX5 3NW"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "English",
+      "startDate": "2018-12-20T15:10:10.559Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -2807,6 +4689,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "MLaw - Master of Law",
           "subject": "Sales management",
           "isInternational": "false",
@@ -2822,9 +4705,15 @@
           "subject": "Educational psychology",
           "isInternational": "false",
           "org": "British Postgraduate Medical Federation",
+=======
+          "type": "BBA - Bachelor of Business Administration",
+          "subject": "Health informatics",
+          "isInternational": "false",
+          "org": "The University of Wolverhampton",
+>>>>>>> origin/master
           "country": "United Kingdom",
           "grade": "Third-class honours",
-          "predicted": true,
+          "predicted": false,
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -2832,6 +4721,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "6d02dc75-3497-45e2-8c1a-72db0106822e",
     "route": "Assessment Only",
     "traineeId": "3CALBOSX",
@@ -2843,10 +4733,26 @@
       "givenName": "Sadie",
       "familyName": "Mills",
       "middleNames": "Ethel",
+=======
+    "id": "c45b367e-16f9-43cd-ad2c-016e0f1123cc",
+    "route": "Assessment Only",
+    "traineeId": "G6WZ5P3Y",
+    "status": "QTS awarded",
+    "trn": 5282808,
+    "updatedDate": "2019-11-06T06:05:03.206Z",
+    "submittedDate": "2019-06-04T10:26:43.507Z",
+    "personalDetails": {
+      "givenName": "Katherine",
+      "familyName": "O'Reilly",
+      "middleNames": null,
+>>>>>>> origin/master
       "nationality": [
-        "British"
+        "British",
+        "French",
+        "Swiss"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1969-02-26T18:45:30.265Z"
     },
     "diversity": {
@@ -2854,9 +4760,22 @@
       "ethnicGroup": "Asian or Asian British",
       "ethnicGroupSpecific": "Pakistani",
       "disabledAnswer": "Not provided"
+=======
+      "dateOfBirth": "1987-08-03T02:28:49.717Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Mixed or multiple ethnic groups",
+      "ethnicGroupSpecific": "Black African and White",
+      "disabledAnswer": "Yes",
+      "disabilities": [
+        "Deaf"
+      ]
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "022 4659 0907",
       "email": "sadie.mills20@hotmail.com",
       "address": {
@@ -2865,14 +4784,30 @@
         "level2": "North Orval",
         "level1": "Lancashire",
         "postcode": "SO08 7CY"
+=======
+      "phoneNumber": "0800 114307",
+      "email": "katherine36@hotmail.com",
+      "address": {
+        "line1": "726 Richie Road",
+        "line2": "",
+        "level2": "Phoebeside",
+        "level1": "West Yorkshire",
+        "postcode": "AZ21 0PD"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
-    "assessmentDetails": {
+    "programmeDetails": {
       "ageRange": "5 - 11 Programme",
       "subject": "English",
+<<<<<<< HEAD
       "startDate": "2020-06-14T21:19:43.151Z",
       "duration": 2
+=======
+      "startDate": "2020-05-04T17:32:35.995Z",
+      "duration": 3,
+      "endDate": "2023-05-04T17:32:35.995Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -2888,16 +4823,34 @@
       "science": {
         "type": "O level",
         "subject": "Science",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not provided"
       }
     },
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Degree equivalent",
           "subject": "Jazz performance",
           "isInternational": "false",
           "org": "SRUC - Scotland’s Rural College",
+=======
+          "type": "BVMS - Bachelor of Veterinary Medicine and Surgery",
+          "subject": "Investment",
+          "isInternational": "false",
+          "org": "Bishop Grosseteste University",
+          "country": "United Kingdom",
+          "grade": "Upper second-class honours (2:1)",
+          "predicted": false,
+          "startDate": "2017",
+          "endDate": "2020"
+        },
+        {
+          "type": "BCom - Bachelor of Commerce",
+          "subject": "Biochemistry",
+          "isInternational": "false",
+          "org": "Kingston University",
+>>>>>>> origin/master
           "country": "United Kingdom",
           "grade": "Unknown",
           "predicted": true,
@@ -2908,6 +4861,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "67f3b949-4155-42a7-8d06-0d2770dd95dc",
     "route": "Assessment Only",
     "traineeId": "HNIP71WJ",
@@ -2919,10 +4873,24 @@
       "givenName": "Fulcran",
       "familyName": "Moulin",
       "middleNames": "Wandrille",
+=======
+    "id": "f19247c2-baa4-4146-965b-84edaafc12eb",
+    "route": "Assessment Only",
+    "traineeId": "HTPJ8LSO",
+    "status": "Pending QTS",
+    "trn": 9605163,
+    "updatedDate": "2019-08-15T12:03:44.593Z",
+    "submittedDate": "2019-06-04T08:53:49.946Z",
+    "personalDetails": {
+      "givenName": "Tami",
+      "familyName": "Cruickshank",
+      "middleNames": "Emily",
+>>>>>>> origin/master
       "nationality": [
         "French",
         "Swiss"
       ],
+<<<<<<< HEAD
       "sex": "Male",
       "dateOfBirth": "1965-09-23T13:05:20.236Z"
     },
@@ -2942,15 +4910,42 @@
         "level1": "Corse",
         "postcode": "21208",
         "country": "France"
+=======
+      "sex": "Female",
+      "dateOfBirth": "1976-09-03T10:18:16.312Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "false"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "018439 90372",
+      "email": "tami_cruickshank@gmail.com",
+      "address": {
+        "line1": "37515 Waylon Mall",
+        "line2": "",
+        "level2": "Langoshfurt",
+        "level1": "Durham",
+        "postcode": "PA3 4CV"
+>>>>>>> origin/master
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "3 - 11 Programme",
       "subject": "Physics",
       "startDate": "2020-05-08T14:27:41.985Z",
       "duration": 1,
       "endDate": "2021-05-08T14:27:41.985Z"
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Physics",
+      "startDate": "2020-07-14T09:00:30.582Z",
+      "duration": 2,
+      "endDate": "2022-07-14T09:00:30.582Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -2972,6 +4967,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Institutional management",
           "isInternational": "true",
@@ -2983,6 +4979,26 @@
             "reference": "4000228363",
             "comparable": "Bachelor (Honours) degree"
           },
+=======
+          "type": "MSc - Master of Science",
+          "subject": "Archives and records management",
+          "isInternational": "false",
+          "org": "The City University",
+          "country": "United Kingdom",
+          "grade": "Not applicable",
+          "predicted": true,
+          "startDate": "2017",
+          "endDate": "2020"
+        },
+        {
+          "type": "MPhil - Master of Philosophy",
+          "subject": "Plant physiology",
+          "isInternational": "false",
+          "org": "The University of Birmingham",
+          "country": "United Kingdom",
+          "grade": "Distinction",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -2990,6 +5006,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "e4a0d29d-8a2b-4e9d-81ac-6129411a7b89",
     "route": "Assessment Only",
     "traineeId": "23EN3FAG",
@@ -3001,19 +5018,42 @@
       "givenName": "Jules",
       "familyName": "Breton",
       "middleNames": null,
+=======
+    "id": "7122c012-ceee-43f7-870c-0043cb0eecbb",
+    "route": "Assessment Only",
+    "traineeId": "550WAEH9",
+    "status": "Withdrawn",
+    "trn": 1591315,
+    "updatedDate": "2020-02-20T15:19:21.863Z",
+    "submittedDate": "2019-06-04T05:48:24.262Z",
+    "personalDetails": {
+      "givenName": "Bradley",
+      "familyName": "Altenwerth",
+      "middleNames": "Clinton",
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1959-09-22T08:20:55.089Z"
     },
     "diversity": {
       "diversityDisclosed": "true",
       "ethnicGroup": "Prefer not to say",
+=======
+      "dateOfBirth": "1982-01-15T16:12:35.199Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Black, African, Black British or Caribbean",
+      "ethnicGroupSpecific": "Caribbean",
+>>>>>>> origin/master
       "disabledAnswer": "Not provided"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0800 379220",
       "email": "jules.breton@yahoo.com",
       "address": {
@@ -3031,20 +5071,38 @@
       "startDate": "2018-01-26T16:35:24.101Z",
       "duration": 3,
       "endDate": "2021-01-26T16:35:24.101Z"
+=======
+      "phoneNumber": "0114 055 6703",
+      "email": "bradley.altenwerth96@gmail.com",
+      "address": {
+        "line1": "908 MacGyver Lake",
+        "line2": "",
+        "level2": "Jacklynport",
+        "level1": "West Yorkshire",
+        "postcode": "CW66 0EF"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Chemistry",
+      "startDate": "2019-07-30T11:32:31.095Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -3052,12 +5110,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "MEng - Master of Engineering",
           "subject": "Software engineering",
           "isInternational": "false",
           "org": "The Open University",
           "country": "United Kingdom",
           "grade": "First-class honours",
+=======
+          "type": "BFA - Bachelor of Fine Art",
+          "subject": "Sociology of law",
+          "isInternational": "false",
+          "org": "Royal Holloway and Bedford New College",
+          "country": "United Kingdom",
+          "grade": "Pass",
+>>>>>>> origin/master
           "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
@@ -3066,6 +5133,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "8934f13f-29c2-4c50-b0dc-ebe6ebd1f20e",
     "route": "Assessment Only",
     "traineeId": "NTUDE12C",
@@ -3077,20 +5145,43 @@
       "givenName": "Julie",
       "familyName": "Rousseau",
       "middleNames": null,
+=======
+    "id": "a6a903b6-4045-470c-b201-f8101ddd146e",
+    "route": "Assessment Only",
+    "traineeId": "YEN1WZ4X",
+    "status": "Pending QTS",
+    "trn": 5460171,
+    "updatedDate": "2019-08-01T19:29:35.231Z",
+    "submittedDate": "2019-06-04T04:33:16.162Z",
+    "personalDetails": {
+      "givenName": "Kellie",
+      "familyName": "Beatty",
+      "middleNames": "Gertrude",
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1958-10-19T00:24:34.355Z"
     },
     "diversity": {
       "diversityDisclosed": "true",
       "ethnicGroup": "Black, African, Black British or Caribbean",
       "ethnicGroupSpecific": "African",
+=======
+      "dateOfBirth": "1980-06-15T09:36:38.896Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Another ethnic group",
+      "ethnicGroupSpecific": "Another ethnic background",
+>>>>>>> origin/master
       "disabledAnswer": "No"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "055 7932 1494",
       "email": "julie.rousseau89@yahoo.com",
       "address": {
@@ -3108,6 +5199,25 @@
       "startDate": "2020-05-17T03:25:07.203Z",
       "duration": 1,
       "endDate": "2021-05-17T03:25:07.203Z"
+=======
+      "phoneNumber": "027 0456 9406",
+      "email": "kellie.beatty95@gmail.com",
+      "address": {
+        "line1": "36317 Sammie Hills",
+        "line2": "",
+        "level2": "East Zitabury",
+        "level1": "Oxfordshire",
+        "postcode": "KO26 6UN"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Physics",
+      "startDate": "2017-05-04T21:58:22.145Z",
+      "duration": 3,
+      "endDate": "2020-05-04T21:58:22.145Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -3118,7 +5228,7 @@
       "english": {
         "type": "GCSE",
         "subject": "English",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "science": {
         "type": "GCSE",
@@ -3129,10 +5239,17 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BMus - Bachelor of Music",
           "subject": "Publishing",
           "isInternational": "false",
           "org": "St Mary’s University College",
+=======
+          "type": "MTheol - Master of Theology",
+          "subject": "Hospitality",
+          "isInternational": "false",
+          "org": "Wye College",
+>>>>>>> origin/master
           "country": "United Kingdom",
           "grade": "First-class honours",
           "predicted": true,
@@ -3143,6 +5260,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "3e132db3-4d94-495a-8261-2623c62a15f9",
     "route": "Assessment Only",
     "traineeId": "CHWPA6X3",
@@ -3154,10 +5272,24 @@
       "givenName": "Margaret",
       "familyName": "Wehner",
       "middleNames": "Karen",
+=======
+    "id": "72fa8db4-a289-490a-a719-70c21a2b121f",
+    "route": "Assessment Only",
+    "traineeId": "JWYC9Q1G",
+    "status": "Pending QTS",
+    "trn": 8097730,
+    "updatedDate": "2019-06-09T10:54:05.243Z",
+    "submittedDate": "2019-06-03T11:45:40.187Z",
+    "personalDetails": {
+      "givenName": "Raymond",
+      "familyName": "Brown",
+      "middleNames": "Gregg",
+>>>>>>> origin/master
       "nationality": [
         "French",
         "Swiss"
       ],
+<<<<<<< HEAD
       "sex": "Female",
       "dateOfBirth": "1976-05-24T11:32:25.699Z"
     },
@@ -3178,15 +5310,44 @@
         "level1": "Franche-Comté",
         "postcode": "56748",
         "country": "France"
+=======
+      "sex": "Male",
+      "dateOfBirth": "1973-02-15T20:57:11.787Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Prefer not to say",
+      "disabledAnswer": "No"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "056 8274 4093",
+      "email": "raymond_brown@gmail.com",
+      "address": {
+        "line1": "185 Klocko Mews",
+        "line2": "",
+        "level2": "Port Rick",
+        "level1": "Herefordshire",
+        "postcode": "SO13 8WX"
+>>>>>>> origin/master
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "3 - 7 Programme",
       "subject": "English",
       "startDate": "2019-09-06T19:58:44.255Z",
       "duration": 3,
       "endDate": "2022-09-06T19:58:44.255Z"
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "English",
+      "startDate": "2019-06-03T18:07:23.765Z",
+      "duration": 1,
+      "endDate": "2020-06-03T18:07:23.765Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -3208,11 +5369,19 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Jane Austen studies",
           "isInternational": "true",
           "org": "University of Paris",
           "country": "France",
+=======
+          "type": "BScEcon - Bachelor of Science Economics",
+          "subject": "Gaelic language",
+          "isInternational": "false",
+          "org": "Oxford Brookes University",
+          "country": "United Kingdom",
+>>>>>>> origin/master
           "grade": "Pass",
           "predicted": false,
           "naric": {
@@ -3221,11 +5390,23 @@
           },
           "startDate": "2017",
           "endDate": "2020"
+        },
+        {
+          "type": "MA - Master of Arts",
+          "subject": "The Torah and Judaic texts",
+          "isInternational": "false",
+          "org": "The University of Leicester",
+          "country": "United Kingdom",
+          "grade": "Unknown",
+          "predicted": true,
+          "startDate": "2017",
+          "endDate": "2020"
         }
       ]
     }
   },
   {
+<<<<<<< HEAD
     "id": "edfdd96b-e3fc-4138-a6d3-7e035a4f2907",
     "route": "Assessment Only",
     "traineeId": "A2PKLEAY",
@@ -3237,10 +5418,24 @@
       "givenName": "Gene",
       "familyName": "Prohaska",
       "middleNames": "Robin Otis",
+=======
+    "id": "d1409351-3b5e-44de-ab71-e71449f7f143",
+    "route": "Assessment Only",
+    "traineeId": "SH89K4S7",
+    "status": "TRN received",
+    "trn": 3774769,
+    "updatedDate": "2019-07-22T00:46:18.676Z",
+    "submittedDate": "2019-06-03T10:25:37.995Z",
+    "personalDetails": {
+      "givenName": "Francis",
+      "familyName": "Friesen",
+      "middleNames": "Reginald Pat",
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1960-01-22T21:19:11.359Z"
     },
     "diversity": {
@@ -3248,9 +5443,16 @@
       "ethnicGroup": "Asian or Asian British",
       "ethnicGroupSpecific": "Chinese",
       "disabledAnswer": "Not provided"
+=======
+      "dateOfBirth": "1972-09-16T20:37:53.941Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "false"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0800 117984",
       "email": "gene36@hotmail.com",
       "address": {
@@ -3259,29 +5461,45 @@
         "level2": "Parisianmouth",
         "level1": "Cornwall",
         "postcode": "NX4 4KB"
+=======
+      "phoneNumber": "0829 429 0050",
+      "email": "francis40@hotmail.com",
+      "address": {
+        "line1": "62634 Manuel Views",
+        "line2": "",
+        "level2": "Port Tadport",
+        "level1": "Tayside",
+        "postcode": "ZX26 7XE"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
-    "assessmentDetails": {
+    "programmeDetails": {
       "ageRange": "5 - 11 Programme",
+<<<<<<< HEAD
       "subject": "Physics",
       "startDate": "2017-02-06T01:44:00.342Z",
       "duration": 1,
       "endDate": "2018-02-06T01:44:00.342Z"
+=======
+      "subject": "English",
+      "startDate": "2017-05-30T19:57:54.750Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "GCSE",
+        "type": "Scottish National 5",
         "subject": "Maths",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "english": {
-        "type": "GCSE",
+        "type": "Scottish National 5",
         "subject": "English",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "science": {
-        "type": "GCSE",
+        "type": "Scottish National 5",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -3289,10 +5507,17 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BA Education",
           "subject": "Business information technology",
           "isInternational": "false",
           "org": "Middlesex University",
+=======
+          "type": "MTheol - Master of Theology",
+          "subject": "Satellite engineering",
+          "isInternational": "false",
+          "org": "King’s College London",
+>>>>>>> origin/master
           "country": "United Kingdom",
           "grade": "Upper second-class honours (2:1)",
           "predicted": true,
@@ -3303,6 +5528,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "29378f23-1d19-4d23-b01b-e84ee052dbae",
     "route": "Assessment Only",
     "traineeId": "YCOO1PW0",
@@ -3314,10 +5540,24 @@
       "givenName": "Grégoire",
       "familyName": "Noel",
       "middleNames": "Alverède Timoléon",
+=======
+    "id": "5a852245-39b8-4766-826b-630b85702f2b",
+    "route": "Assessment Only",
+    "traineeId": "WFD2PGOP",
+    "status": "TRN received",
+    "trn": 3806123,
+    "updatedDate": "2019-10-11T16:06:33.193Z",
+    "submittedDate": "2019-06-01T11:26:13.373Z",
+    "personalDetails": {
+      "givenName": "Andres",
+      "familyName": "Hirthe",
+      "middleNames": "Perry",
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1975-04-19T10:30:42.347Z"
     },
     "diversity": {
@@ -3342,20 +5582,48 @@
       "startDate": "2017-10-23T11:41:34.624Z",
       "duration": 2,
       "endDate": "2019-10-23T11:41:34.624Z"
+=======
+      "dateOfBirth": "1959-05-14T12:55:13.414Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Mixed or multiple ethnic groups",
+      "ethnicGroupSpecific": "Black African and White",
+      "disabledAnswer": "Yes"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "0800 017 2319",
+      "email": "andres18@yahoo.com",
+      "address": {
+        "line1": "0141 Florence Heights",
+        "line2": "",
+        "level2": "Kianborough",
+        "level1": "Hertfordshire",
+        "postcode": "BI24 8QK"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 18 Programme",
+      "subject": "Maths",
+      "startDate": "2019-03-29T10:52:56.639Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "GCSE",
+        "type": "Scottish National 5",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "GCSE",
+        "type": "Scottish National 5",
         "subject": "English",
         "gradeBoundary": "3 and below"
       },
       "science": {
-        "type": "GCSE",
+        "type": "Scottish National 5",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -3363,6 +5631,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "MSocStud - Master of Social Studies",
           "subject": "Cellular pathology",
           "isInternational": "false",
@@ -3370,6 +5639,26 @@
           "country": "United Kingdom",
           "grade": "Third-class honours",
           "predicted": false,
+=======
+          "type": "BH - Bachelor of Humanities",
+          "subject": "Horticulture",
+          "isInternational": "false",
+          "org": "The University of Lancaster",
+          "country": "United Kingdom",
+          "grade": "Third-class honours",
+          "predicted": true,
+          "startDate": "2017",
+          "endDate": "2020"
+        },
+        {
+          "type": "BPharm - Bachelor of Pharmacy",
+          "subject": "Health informatics",
+          "isInternational": "false",
+          "org": "The Institute of Cancer Research",
+          "country": "United Kingdom",
+          "grade": "Upper second-class honours (2:1)",
+          "predicted": true,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -3377,6 +5666,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "c21dac19-08d1-4784-b1b1-28d39899ff3f",
     "route": "Assessment Only",
     "traineeId": "YPC2V8KA",
@@ -3388,10 +5678,24 @@
       "givenName": "Tricia",
       "familyName": "Olson",
       "middleNames": "Donna Essie",
+=======
+    "id": "f275a0e5-5983-4419-9ced-43494e761cc7",
+    "route": "Assessment Only",
+    "traineeId": "P151ZJ3U",
+    "status": "Pending QTS",
+    "trn": 1323479,
+    "updatedDate": "2019-06-08T12:20:57.637Z",
+    "submittedDate": "2019-05-28T23:48:50.641Z",
+    "personalDetails": {
+      "givenName": "Teri",
+      "familyName": "Hirthe",
+      "middleNames": null,
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1996-11-19T19:50:50.137Z"
     },
     "diversity": {
@@ -3399,9 +5703,18 @@
       "ethnicGroup": "Mixed or multiple ethnic groups",
       "ethnicGroupSpecific": "Asian and White",
       "disabledAnswer": "Not provided"
+=======
+      "dateOfBirth": "1988-12-06T10:01:30.917Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Prefer not to say",
+      "disabledAnswer": "No"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0500 955710",
       "email": "tricia.olson40@gmail.com",
       "address": {
@@ -3419,12 +5732,31 @@
       "startDate": "2019-09-19T08:53:36.819Z",
       "duration": 3,
       "endDate": "2022-09-19T08:53:36.819Z"
+=======
+      "phoneNumber": "0117 146 4641",
+      "email": "teri_hirthe@gmail.com",
+      "address": {
+        "line1": "2919 Elinore Gardens",
+        "line2": "",
+        "level2": "South Ericstad",
+        "level1": "Bedfordshire",
+        "postcode": "BN91 8RM"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "3 - 7 Programme",
+      "subject": "Chemistry",
+      "startDate": "2017-01-21T00:57:34.332Z",
+      "duration": 2,
+      "endDate": "2019-01-21T00:57:34.332Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
         "type": "O level",
         "subject": "Maths",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "english": {
         "type": "O level",
@@ -3440,6 +5772,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BScEcon - Bachelor of Science Economics",
           "subject": "Adult education teaching",
           "isInternational": "false",
@@ -3447,6 +5780,15 @@
           "country": "United Kingdom",
           "grade": "Third-class honours",
           "predicted": true,
+=======
+          "type": "BA Education",
+          "subject": "Publishing",
+          "isInternational": "false",
+          "org": "Heythrop College",
+          "country": "United Kingdom",
+          "grade": "Pass",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -3454,6 +5796,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "87ccba06-1b2e-4b2a-9866-d8a877894acc",
     "route": "Assessment Only",
     "traineeId": "A8B3QC2A",
@@ -3491,29 +5834,72 @@
         "level2": "Alisaburgh",
         "level1": "Centre",
         "postcode": "15737",
+=======
+    "id": "8e652b9c-a16c-48b8-b2ab-e40614d94242",
+    "route": "Assessment Only",
+    "traineeId": "W4HDPII5",
+    "status": "TRN received",
+    "trn": 9029784,
+    "updatedDate": "2019-09-11T06:34:10.793Z",
+    "submittedDate": "2019-05-23T20:14:06.181Z",
+    "personalDetails": {
+      "givenName": "Mercedes",
+      "familyName": "Klein",
+      "middleNames": "Marjorie",
+      "nationality": [
+        "French"
+      ],
+      "sex": "Female",
+      "dateOfBirth": "1961-05-12T22:56:32.346Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Black, African, Black British or Caribbean",
+      "ethnicGroupSpecific": "Prefer not to say",
+      "disabledAnswer": "Not provided"
+    },
+    "isInternationalTrainee": true,
+    "contactDetails": {
+      "phoneNumber": "0547809492",
+      "email": "mercedes10@hotmail.fr",
+      "address": {
+        "line1": "889 Aubry du Dahomey",
+        "line2": "",
+        "level2": "Chadrickstad",
+        "level1": "Franche-Comté",
+        "postcode": "37890",
+>>>>>>> origin/master
         "country": "France"
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "11 - 16 Programme",
       "subject": "Chemistry",
       "startDate": "2020-05-06T00:20:01.039Z",
       "duration": 1
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "English",
+      "startDate": "2017-04-18T07:34:55.871Z",
+      "duration": 2
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Science",
         "gradeBoundary": "Not completed or not passed"
       }
@@ -3522,7 +5908,11 @@
       "items": [
         {
           "type": "Diplôme",
+<<<<<<< HEAD
           "subject": "Environmental biotechnology",
+=======
+          "subject": "Economic systems",
+>>>>>>> origin/master
           "isInternational": "true",
           "org": "University of Paris",
           "country": "France",
@@ -3539,6 +5929,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "8a18a9f2-5201-4711-9698-27edd33f7f1e",
     "route": "Assessment Only",
     "traineeId": "RJM51QYO",
@@ -3550,19 +5941,43 @@
       "givenName": "Bryan",
       "familyName": "Littel",
       "middleNames": "Tyrone Felix",
+=======
+    "id": "ff72d4d3-03d5-4ab3-9b1d-b2994fa31dee",
+    "route": "Assessment Only",
+    "traineeId": "01C4Y6J9",
+    "status": "Pending QTS",
+    "trn": 3781051,
+    "updatedDate": "2019-06-18T13:51:30.459Z",
+    "submittedDate": "2019-05-23T09:56:06.493Z",
+    "personalDetails": {
+      "givenName": "Caleb",
+      "familyName": "Yost",
+      "middleNames": "Jesse",
+>>>>>>> origin/master
       "nationality": [
         "Irish"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1971-07-07T00:12:14.413Z"
     },
     "diversity": {
       "diversityDisclosed": "true",
       "ethnicGroup": "Prefer not to say",
       "disabledAnswer": "No"
+=======
+      "dateOfBirth": "1996-04-05T05:30:34.787Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Asian or Asian British",
+      "ethnicGroupSpecific": "Prefer not to say",
+      "disabledAnswer": "Yes"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "056 0497 7432",
       "email": "bryan.littel@yahoo.com",
       "address": {
@@ -3580,6 +5995,25 @@
       "startDate": "2020-02-14T12:19:07.111Z",
       "duration": 2,
       "endDate": "2022-02-14T12:19:07.111Z"
+=======
+      "phoneNumber": "010419 99596",
+      "email": "caleb_yost@hotmail.com",
+      "address": {
+        "line1": "04571 Winston Canyon",
+        "line2": "",
+        "level2": "North Irving",
+        "level1": "Northamptonshire",
+        "postcode": "XV46 5KF"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 18 Programme",
+      "subject": "Physics",
+      "startDate": "2017-01-28T14:20:14.573Z",
+      "duration": 2,
+      "endDate": "2019-01-28T14:20:14.573Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -3601,10 +6035,17 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "MA - Master of Arts",
           "subject": "Drama",
           "isInternational": "false",
           "org": "University of Worcester",
+=======
+          "type": "BLitt - Bachelor of Literature",
+          "subject": "Economic geography",
+          "isInternational": "false",
+          "org": "Oxford Brookes University",
+>>>>>>> origin/master
           "country": "United Kingdom",
           "grade": "Pass",
           "predicted": true,
@@ -3615,6 +6056,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "6ac5ec3f-280e-4c74-81bd-525e2d10143f",
     "route": "Assessment Only",
     "traineeId": "DRGU6RUC",
@@ -3631,12 +6073,34 @@
       ],
       "sex": "Male",
       "dateOfBirth": "1995-08-19T22:16:50.895Z"
+=======
+    "id": "119e8553-f1af-4963-b1de-9cddb4d4bd82",
+    "route": "Assessment Only",
+    "traineeId": "OCEX708O",
+    "status": "Pending QTS",
+    "trn": 9463117,
+    "updatedDate": "2019-04-06T23:33:27.466Z",
+    "submittedDate": "2019-05-16T08:26:06.195Z",
+    "personalDetails": {
+      "givenName": "Yseult",
+      "familyName": "Rousseau",
+      "middleNames": "Aurélie",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Female",
+      "dateOfBirth": "1972-08-31T05:24:50.952Z"
+>>>>>>> origin/master
     },
     "diversity": {
-      "diversityDisclosed": "false"
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Another ethnic group",
+      "ethnicGroupSpecific": "Arab",
+      "disabledAnswer": "Yes"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "025 4797 4437",
       "email": "steven.lesch6@hotmail.com",
       "address": {
@@ -3654,17 +6118,36 @@
       "startDate": "2017-08-08T14:02:14.841Z",
       "duration": 1,
       "endDate": "2018-08-08T14:02:14.841Z"
+=======
+      "phoneNumber": "016977 7630",
+      "email": "yseult91@yahoo.com",
+      "address": {
+        "line1": "213 Schiller Forest",
+        "line2": "",
+        "level2": "South Geraldine",
+        "level1": "Berkshire",
+        "postcode": "UN56 6CT"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Maths",
+      "startDate": "2020-02-29T14:44:58.662Z",
+      "duration": 1,
+      "endDate": "2021-02-28T14:44:58.662Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
         "type": "O level",
         "subject": "Maths",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "english": {
         "type": "O level",
         "subject": "English",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "science": {
         "type": "O level",
@@ -3675,6 +6158,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "DSc - Doctor of Science",
           "subject": "Not known",
           "isInternational": "false",
@@ -3682,6 +6166,15 @@
           "country": "United Kingdom",
           "grade": "Unknown",
           "predicted": true,
+=======
+          "type": "BLitt - Bachelor of Literature",
+          "subject": "Sociolinguistics",
+          "isInternational": "false",
+          "org": "Royal Postgraduate Medical School",
+          "country": "United Kingdom",
+          "grade": "Lower second-class honours (2:2)",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -3689,6 +6182,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "64952a92-3e6c-4132-9591-dbf45a065b01",
     "route": "Assessment Only",
     "traineeId": "JUHG4TFE",
@@ -3730,6 +6224,52 @@
       "subject": "English",
       "startDate": "2017-07-28T12:57:20.136Z",
       "duration": 2
+=======
+    "id": "bcb483ec-de4e-44e5-a42e-6248458a1c8b",
+    "route": "Assessment Only",
+    "traineeId": "P0J4GLY9",
+    "status": "QTS awarded",
+    "trn": 3861791,
+    "updatedDate": "2019-05-11T03:47:41.208Z",
+    "submittedDate": "2019-05-11T16:14:28.056Z",
+    "personalDetails": {
+      "givenName": "Débora",
+      "familyName": "Charpentier",
+      "middleNames": "Artémis",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Female",
+      "dateOfBirth": "1991-08-30T05:48:07.508Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Prefer not to say",
+      "disabledAnswer": "Yes",
+      "disabilities": [
+        "Learning difficulty"
+      ]
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "0110 425 7565",
+      "email": "dbora_charpentier@gmail.com",
+      "address": {
+        "line1": "20411 Era Squares",
+        "line2": "",
+        "level2": "Angelitachester",
+        "level1": "Dorset",
+        "postcode": "TW55 5WY"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 18 Programme",
+      "subject": "English",
+      "startDate": "2020-07-26T16:14:30.542Z",
+      "duration": 2,
+      "endDate": "2022-07-26T16:14:30.542Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -3751,6 +6291,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BCh - Bachelor of Chirurgiae",
           "subject": "Computational physics",
           "isInternational": "false",
@@ -3758,6 +6299,15 @@
           "country": "United Kingdom",
           "grade": "Third-class honours",
           "predicted": true,
+=======
+          "type": "BSocSc - Bachelor of Social Science",
+          "subject": "Business and management",
+          "isInternational": "false",
+          "org": "Loughborough College of Art and Design",
+          "country": "United Kingdom",
+          "grade": "Pass",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -3765,6 +6315,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "2f85dfc0-43ff-4d4a-9fc1-c6844e59c920",
     "route": "Assessment Only",
     "traineeId": "RFL8J4C8",
@@ -3801,29 +6352,73 @@
         "level1": "Lorraine",
         "postcode": "29022",
         "country": "France"
+=======
+    "id": "e88c857a-97f0-40ee-8f73-95690692d78b",
+    "route": "Assessment Only",
+    "traineeId": "ESZ99LQA",
+    "status": "Pending QTS",
+    "trn": 6427965,
+    "updatedDate": "2019-04-30T22:07:08.625Z",
+    "submittedDate": "2019-05-07T02:29:47.859Z",
+    "personalDetails": {
+      "givenName": "Tonya",
+      "familyName": "Stark",
+      "middleNames": null,
+      "nationality": [
+        "British"
+      ],
+      "sex": "Female",
+      "dateOfBirth": "1993-10-22T06:54:02.854Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Black, African, Black British or Caribbean",
+      "ethnicGroupSpecific": "Prefer not to say",
+      "disabledAnswer": "Not provided"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "014896 12695",
+      "email": "tonya_stark83@yahoo.com",
+      "address": {
+        "line1": "63429 Walsh Route",
+        "line2": "",
+        "level2": "Lake Wilfordbury",
+        "level1": "Lancashire",
+        "postcode": "OA92 7GQ"
+>>>>>>> origin/master
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "5 - 11 Programme",
       "subject": "Maths",
       "startDate": "2017-10-02T10:03:53.283Z",
       "duration": 2,
       "endDate": "2019-10-02T10:03:53.283Z"
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Physics",
+      "startDate": "2019-04-02T03:26:39.107Z",
+      "duration": 2,
+      "endDate": "2021-04-02T03:26:39.107Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -3831,6 +6426,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Rail vehicle engineering",
           "isInternational": "true",
@@ -3842,6 +6438,26 @@
             "reference": "4000228363",
             "comparable": "Bachelor (Honours) degree"
           },
+=======
+          "type": "BSc SS - Bachelor of Science in Social Science",
+          "subject": "Garden design",
+          "isInternational": "false",
+          "org": "York St John University",
+          "country": "United Kingdom",
+          "grade": "Lower second-class honours (2:2)",
+          "predicted": false,
+>>>>>>> origin/master
+          "startDate": "2017",
+          "endDate": "2020"
+        },
+        {
+          "type": "BScEng - Bachelor of Science & Engineering",
+          "subject": "Advertising",
+          "isInternational": "false",
+          "org": "Royal Postgraduate Medical School",
+          "country": "United Kingdom",
+          "grade": "Pass",
+          "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -3849,6 +6465,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "8a4c19ec-f9bf-40cd-91ec-b45c2eca280a",
     "route": "Assessment Only",
     "traineeId": "I1HNYTOQ",
@@ -3860,19 +6477,38 @@
       "givenName": "Charlemagne",
       "familyName": "Lecomte",
       "middleNames": null,
+=======
+    "id": "f89aac9a-8cac-4e63-a64c-dcd9f8d40e96",
+    "route": "Assessment Only",
+    "traineeId": "0CWITERI",
+    "status": "TRN received",
+    "trn": 7773271,
+    "updatedDate": "2019-04-04T02:51:11.638Z",
+    "submittedDate": "2019-05-05T10:35:52.847Z",
+    "personalDetails": {
+      "givenName": "Lindsey",
+      "familyName": "Gulgowski",
+      "middleNames": "Faye Alexandra",
+>>>>>>> origin/master
       "nationality": [
         "British",
         "French",
         "Swiss"
       ],
+<<<<<<< HEAD
       "sex": "Male",
       "dateOfBirth": "1973-08-14T03:44:09.054Z"
+=======
+      "sex": "Female",
+      "dateOfBirth": "1994-04-13T06:10:15.439Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "false"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0110 753 3966",
       "email": "charlemagne18@gmail.com",
       "address": {
@@ -3881,15 +6517,30 @@
         "level2": "Schoenhaven",
         "level1": "Northumberland",
         "postcode": "MU7 6ST"
+=======
+      "phoneNumber": "016977 2215",
+      "email": "lindsey_gulgowski@yahoo.com",
+      "address": {
+        "line1": "47256 Kautzer Springs",
+        "line2": "",
+        "level2": "New Forrestborough",
+        "level1": "South Glamorgan",
+        "postcode": "RQ16 7LS"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
-    "assessmentDetails": {
-      "ageRange": "5 - 11 Programme",
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
       "subject": "Maths",
+<<<<<<< HEAD
       "startDate": "2019-12-13T04:56:17.564Z",
       "duration": 3,
       "endDate": "2022-12-13T04:56:17.564Z"
+=======
+      "startDate": "2019-08-08T16:05:41.205Z",
+      "duration": 3
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -3911,6 +6562,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "MLit - Master of Literature",
           "subject": "Translation studies",
           "isInternational": "false",
@@ -3918,6 +6570,15 @@
           "country": "United Kingdom",
           "grade": "Pass",
           "predicted": true,
+=======
+          "type": "BHy - Bachelor of Hygiene",
+          "subject": "Industrial biotechnology",
+          "isInternational": "false",
+          "org": "The University of Manchester",
+          "country": "United Kingdom",
+          "grade": "Lower second-class honours (2:2)",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -3925,6 +6586,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "27ddb92f-1e0c-45cb-aa69-d8a4a7fafe62",
     "route": "Assessment Only",
     "traineeId": "68A4OGXT",
@@ -3936,11 +6598,28 @@
       "givenName": "Valerie",
       "familyName": "Miller",
       "middleNames": "Rebecca",
+=======
+    "id": "e55c8435-1a3c-464f-92e6-c6cb1a4a1fba",
+    "route": "Assessment Only",
+    "traineeId": "5M00D5FR",
+    "status": "Pending QTS",
+    "trn": 2601720,
+    "updatedDate": "2019-05-02T00:34:41.235Z",
+    "submittedDate": "2019-05-05T08:04:15.481Z",
+    "personalDetails": {
+      "givenName": "Becky",
+      "familyName": "Prohaska",
+      "middleNames": "Traci",
+>>>>>>> origin/master
       "nationality": [
         "Irish"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1961-11-11T02:20:21.903Z"
+=======
+      "dateOfBirth": "1971-05-19T18:03:04.560Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "true",
@@ -3948,8 +6627,9 @@
       "ethnicGroupSpecific": "Arab",
       "disabledAnswer": "No"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "016977 1090",
       "email": "valerie_miller@hotmail.com",
       "address": {
@@ -3971,16 +6651,47 @@
     "gcse": {
       "maths": {
         "type": "O level",
+=======
+      "phoneNumber": "021 2416 3118",
+      "email": "becky_prohaska98@hotmail.com",
+      "address": {
+        "line1": "833 Gutmann Place",
+        "line2": "",
+        "level2": "Port Buddyton",
+        "level1": "County Tyrone",
+        "postcode": "BI9 2UG"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "Maths",
+      "startDate": "2017-01-15T01:36:37.401Z",
+      "duration": 2,
+      "endDate": "2019-01-15T01:36:37.401Z"
+    },
+    "gcse": {
+      "maths": {
+        "type": "Scottish National 5",
+>>>>>>> origin/master
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
+<<<<<<< HEAD
         "type": "O level",
+=======
+        "type": "Scottish National 5",
+>>>>>>> origin/master
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
+<<<<<<< HEAD
         "type": "O level",
+=======
+        "type": "Scottish National 5",
+>>>>>>> origin/master
         "subject": "Science",
         "gradeBoundary": "Not provided"
       }
@@ -3988,6 +6699,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BBA - Bachelor of Business Administration",
           "subject": "Linguistics",
           "isInternational": "false",
@@ -3995,6 +6707,26 @@
           "country": "United Kingdom",
           "grade": "Upper second-class honours (2:1)",
           "predicted": false,
+=======
+          "type": "BScTech - Bachelor of Science & Technology",
+          "subject": "BrontÃ«s studies",
+          "isInternational": "false",
+          "org": "The Liverpool Institute for Performing Arts",
+          "country": "United Kingdom",
+          "grade": "First-class honours",
+          "predicted": true,
+          "startDate": "2017",
+          "endDate": "2020"
+        },
+        {
+          "type": "BSc SPT - Bachelor of Science in Speech Therapy",
+          "subject": "Dynamics",
+          "isInternational": "false",
+          "org": "The University of East London",
+          "country": "United Kingdom",
+          "grade": "Upper second-class honours (2:1)",
+          "predicted": true,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -4002,6 +6734,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "475b4893-0d44-4053-a1d7-b77392491038",
     "route": "Assessment Only",
     "traineeId": "YL9UZULO",
@@ -4039,6 +6772,48 @@
       "ageRange": "11 - 18 Programme",
       "subject": "Physics",
       "startDate": "2019-05-09T12:04:23.394Z",
+=======
+    "id": "160b3bf7-6e38-4066-b260-1fff70f945e5",
+    "route": "Assessment Only",
+    "traineeId": "BM57VB5Y",
+    "status": "TRN received",
+    "trn": 9473678,
+    "updatedDate": "2019-04-29T09:29:47.548Z",
+    "submittedDate": "2019-05-05T08:03:31.814Z",
+    "personalDetails": {
+      "givenName": "Oscar",
+      "familyName": "Lubowitz",
+      "middleNames": "Craig",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1964-10-03T03:09:48.055Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Black, African, Black British or Caribbean",
+      "ethnicGroupSpecific": "African",
+      "disabledAnswer": "No"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "01951 241204",
+      "email": "oscar_lubowitz@hotmail.com",
+      "address": {
+        "line1": "0532 Brown Islands",
+        "line2": "",
+        "level2": "Rolfsonmouth",
+        "level1": "Warwickshire",
+        "postcode": "OK13 9DE"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "3 - 7 Programme",
+      "subject": "Physics",
+      "startDate": "2019-06-19T23:40:51.419Z",
+>>>>>>> origin/master
       "duration": 3
     },
     "gcse": {
@@ -4055,12 +6830,13 @@
       "science": {
         "type": "GCSE",
         "subject": "Science",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "3 and below"
       }
     },
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "MD - Doctor of Medicine",
           "subject": "Bob Dylan studies",
           "isInternational": "false",
@@ -4068,6 +6844,15 @@
           "country": "United Kingdom",
           "grade": "Upper second-class honours (2:1)",
           "predicted": false,
+=======
+          "type": "BA Combined Studies/Education of the Deaf",
+          "subject": "Fashion design",
+          "isInternational": "false",
+          "org": "Royal Holloway and Bedford New College",
+          "country": "United Kingdom",
+          "grade": "Lower second-class honours (2:2)",
+          "predicted": true,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -4075,6 +6860,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "f3adf9c3-b312-4fcb-9546-5c1049720415",
     "route": "Assessment Only",
     "traineeId": "OKJAKLXW",
@@ -4086,10 +6872,24 @@
       "givenName": "Theodore",
       "familyName": "Fisher",
       "middleNames": "Tim",
+=======
+    "id": "ed36f542-e793-40d7-a775-37d112cd1da5",
+    "route": "Assessment Only",
+    "traineeId": "I6448C3N",
+    "status": "Pending QTS",
+    "trn": 1910768,
+    "updatedDate": "2019-04-11T07:22:34.361Z",
+    "submittedDate": "2019-04-25T08:01:05.304Z",
+    "personalDetails": {
+      "givenName": "Arcade",
+      "familyName": "Fernandez",
+      "middleNames": null,
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1995-08-11T13:20:04.387Z"
     },
     "diversity": {
@@ -4116,6 +6916,35 @@
       "startDate": "2017-01-26T00:12:39.732Z",
       "duration": 3,
       "endDate": "2020-01-26T00:12:39.732Z"
+=======
+      "dateOfBirth": "1977-07-18T10:02:29.134Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Black, African, Black British or Caribbean",
+      "ethnicGroupSpecific": "Another Black background",
+      "disabledAnswer": "Not provided"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "0141 589 6720",
+      "email": "arcade51@gmail.com",
+      "address": {
+        "line1": "41843 Alva Bridge",
+        "line2": "",
+        "level2": "Port Rozellaberg",
+        "level1": "Dorset",
+        "postcode": "OK45 5TH"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 18 Programme",
+      "subject": "Chemistry",
+      "startDate": "2017-04-15T15:18:08.955Z",
+      "duration": 3,
+      "endDate": "2020-04-15T15:18:08.955Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -4137,6 +6966,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "MD - Doctor of Medicine",
           "subject": "Sport technology",
           "isInternational": "false",
@@ -4154,6 +6984,14 @@
           "org": "The Liverpool Institute for Performing Arts",
           "country": "United Kingdom",
           "grade": "First-class honours",
+=======
+          "type": "BSc SS - Bachelor of Science in Social Science",
+          "subject": "Visual and audio effects",
+          "isInternational": "false",
+          "org": "The University of Keele",
+          "country": "United Kingdom",
+          "grade": "Pass",
+>>>>>>> origin/master
           "predicted": false,
           "startDate": "2017",
           "endDate": "2020"
@@ -4162,6 +7000,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "69c59dd8-b9f1-446d-856f-82803e159fba",
     "route": "Assessment Only",
     "traineeId": "A1FM90TV",
@@ -4173,10 +7012,24 @@
       "givenName": "Holly",
       "familyName": "VonRueden",
       "middleNames": null,
+=======
+    "id": "cfe6c7d5-181f-40c0-993c-4996bdb05968",
+    "route": "Assessment Only",
+    "traineeId": "AYUFCPFZ",
+    "status": "QTS awarded",
+    "trn": 9173677,
+    "updatedDate": "2019-04-21T03:38:56.620Z",
+    "submittedDate": "2019-04-24T13:46:36.819Z",
+    "personalDetails": {
+      "givenName": "Stacy",
+      "familyName": "Kilback",
+      "middleNames": "Marcella",
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Female",
+<<<<<<< HEAD
       "dateOfBirth": "1958-10-23T05:45:34.422Z"
     },
     "diversity": {
@@ -4184,9 +7037,16 @@
       "ethnicGroup": "Mixed or multiple ethnic groups",
       "ethnicGroupSpecific": "Prefer not to say",
       "disabledAnswer": "No"
+=======
+      "dateOfBirth": "1971-12-02T05:37:16.206Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "false"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0500 554236",
       "email": "holly8@gmail.com",
       "address": {
@@ -4204,6 +7064,25 @@
       "startDate": "2017-04-23T06:52:44.856Z",
       "duration": 3,
       "endDate": "2020-04-23T06:52:44.856Z"
+=======
+      "phoneNumber": "016977 2426",
+      "email": "stacy84@yahoo.com",
+      "address": {
+        "line1": "3837 Andreane Shores",
+        "line2": "",
+        "level2": "West Aniyaburgh",
+        "level1": "Warwickshire",
+        "postcode": "OX2 8GS"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "3 - 7 Programme",
+      "subject": "Physics",
+      "startDate": "2019-07-15T00:12:59.188Z",
+      "duration": 1,
+      "endDate": "2020-07-15T00:12:59.188Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -4219,16 +7098,34 @@
       "science": {
         "type": "O level",
         "subject": "Science",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       }
     },
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BLS - Bachelor of Librarianship and Information Studies",
           "subject": "Environmental management",
           "isInternational": "false",
           "org": "Royal Agricultural University",
+=======
+          "type": "BTech - Bachelor of Technology",
+          "subject": "Men’s studies",
+          "isInternational": "false",
+          "org": "St George’s Hospital Medical School",
+          "country": "United Kingdom",
+          "grade": "Third-class honours",
+          "predicted": true,
+          "startDate": "2017",
+          "endDate": "2020"
+        },
+        {
+          "type": "BArch - Bachelor of Architecture",
+          "subject": "Mechatronics and robotics",
+          "isInternational": "false",
+          "org": "The Nottingham Trent University",
+>>>>>>> origin/master
           "country": "United Kingdom",
           "grade": "First-class honours",
           "predicted": false,
@@ -4239,6 +7136,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "4c5dee0f-8349-4990-b61e-b81fdc202e1d",
     "route": "Assessment Only",
     "traineeId": "TA5OQ7HY",
@@ -4250,9 +7148,23 @@
       "givenName": "Rudy",
       "familyName": "Kling",
       "middleNames": null,
+=======
+    "id": "c0e31eda-8b9e-46f8-8688-b00e48ff9e9a",
+    "route": "Assessment Only",
+    "traineeId": "8OWI7OSP",
+    "status": "QTS awarded",
+    "trn": 3172879,
+    "updatedDate": "2019-03-29T18:27:42.942Z",
+    "submittedDate": "2019-03-30T19:27:52.752Z",
+    "personalDetails": {
+      "givenName": "Laurane",
+      "familyName": "Perrot",
+      "middleNames": "Aymardine",
+>>>>>>> origin/master
       "nationality": [
         "French"
       ],
+<<<<<<< HEAD
       "sex": "Male",
       "dateOfBirth": "1991-03-02T04:26:58.315Z"
     },
@@ -4270,41 +7182,81 @@
         "level1": "Champagne-Ardenne",
         "postcode": "43906",
         "country": "France"
+=======
+      "sex": "Female",
+      "dateOfBirth": "1992-05-29T20:32:45.601Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "false"
+    },
+    "isInternationalTrainee": false,
+    "contactDetails": {
+      "phoneNumber": "029 2177 8627",
+      "email": "laurane52@hotmail.com",
+      "address": {
+        "line1": "2409 Schmidt Place",
+        "line2": "",
+        "level2": "New Melvina",
+        "level1": "South Yorkshire",
+        "postcode": "HB93 5XA"
+>>>>>>> origin/master
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "11 - 18 Programme",
       "subject": "Chemistry",
       "startDate": "2018-11-19T19:43:09.397Z",
       "duration": 3
+=======
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Chemistry",
+      "startDate": "2017-09-01T00:45:49.674Z",
+      "duration": 2,
+      "endDate": "2019-09-01T00:45:49.674Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
-        "type": "GCSE",
+        "type": "O level",
         "subject": "Science",
+<<<<<<< HEAD
         "gradeBoundary": "3 and below"
+=======
+        "gradeBoundary": "4 and above"
+>>>>>>> origin/master
       }
     },
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Music composition",
           "isInternational": "true",
           "org": "University of Paris",
           "country": "France",
           "grade": "Pass",
+=======
+          "type": "BM - Bachelor of Medicine",
+          "subject": "Naval architecture",
+          "isInternational": "false",
+          "org": "Edinburgh College of Art",
+          "country": "United Kingdom",
+          "grade": "First-class honours",
+>>>>>>> origin/master
           "predicted": true,
           "naric": {
             "reference": "4000228363",
@@ -4317,6 +7269,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "9b5ad717-8b15-4bda-9abe-a454d021ac8f",
     "route": "Assessment Only",
     "traineeId": "1PULA0ZN",
@@ -4350,9 +7303,46 @@
         "level2": "New Johnland",
         "level1": "Hertfordshire",
         "postcode": "XR7 9HK"
+=======
+    "id": "9834beb1-d641-4e42-9712-bb5305003947",
+    "route": "Assessment Only",
+    "traineeId": "11G55UZM",
+    "status": "QTS awarded",
+    "trn": 2719210,
+    "updatedDate": "2018-10-31T07:50:59.752Z",
+    "submittedDate": "2019-02-26T21:50:31.744Z",
+    "personalDetails": {
+      "givenName": "Gilberto",
+      "familyName": "Kuhn",
+      "middleNames": null,
+      "nationality": [
+        "French"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1962-04-09T23:32:48.811Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Black, African, Black British or Caribbean",
+      "ethnicGroupSpecific": "Prefer not to say",
+      "disabledAnswer": "No"
+    },
+    "isInternationalTrainee": true,
+    "contactDetails": {
+      "phoneNumber": "+33 409950300",
+      "email": "gilberto_kuhn@yahoo.fr",
+      "address": {
+        "line1": "0913 Muller des Saussaies",
+        "line2": "",
+        "level2": "Krystinafurt",
+        "level1": "Provence-Alpes-Côte d'Azur",
+        "postcode": "05217",
+        "country": "France"
+>>>>>>> origin/master
       },
       "addressType": "domestic"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "3 - 7 Programme",
       "subject": "English",
@@ -4363,16 +7353,36 @@
     "gcse": {
       "maths": {
         "type": "GCSE",
+=======
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "Maths",
+      "startDate": "2020-01-17T19:17:23.417Z",
+      "duration": 1,
+      "endDate": "2021-01-17T19:17:23.417Z"
+    },
+    "gcse": {
+      "maths": {
+        "type": "Scottish National 5",
+>>>>>>> origin/master
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
+<<<<<<< HEAD
         "type": "GCSE",
+=======
+        "type": "Scottish National 5",
+>>>>>>> origin/master
         "subject": "English",
         "gradeBoundary": "4 and above"
       },
       "science": {
+<<<<<<< HEAD
         "type": "GCSE",
+=======
+        "type": "Scottish National 5",
+>>>>>>> origin/master
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -4380,12 +7390,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "MTheol - Master of Theology",
           "subject": "Advice and guidance (personal learning)",
           "isInternational": "false",
           "org": "The University of the West of Scotland",
           "country": "United Kingdom",
           "grade": "Lower second-class honours (2:2)",
+=======
+          "type": "Diplôme",
+          "subject": "Ancient history",
+          "isInternational": "true",
+          "org": "University of Paris",
+          "country": "France",
+          "grade": "Pass",
+>>>>>>> origin/master
           "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
@@ -4394,6 +7413,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "a72d06c7-db58-4c29-8978-b58f63628119",
     "route": "Assessment Only",
     "traineeId": "PI8RPMNT",
@@ -4404,19 +7424,38 @@
     "personalDetails": {
       "givenName": "Lionel",
       "familyName": "Heaney",
+=======
+    "id": "af7cc83a-fefb-494a-b706-805c65fc5c0f",
+    "route": "Assessment Only",
+    "traineeId": "NS7IWRLS",
+    "status": "QTS awarded",
+    "trn": 3071561,
+    "updatedDate": "2019-01-26T19:28:41.295Z",
+    "submittedDate": "2019-02-21T16:12:15.790Z",
+    "personalDetails": {
+      "givenName": "Virginie",
+      "familyName": "Barbier",
+>>>>>>> origin/master
       "middleNames": null,
       "nationality": [
-        "French",
-        "Swiss"
+        "Irish"
       ],
+<<<<<<< HEAD
       "sex": "Male",
       "dateOfBirth": "1966-02-03T09:43:41.675Z"
+=======
+      "sex": "Female",
+      "dateOfBirth": "1964-07-10T02:20:00.717Z"
+>>>>>>> origin/master
     },
     "diversity": {
-      "diversityDisclosed": "false"
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Prefer not to say",
+      "disabledAnswer": "No"
     },
-    "isInternationalCandidate": true,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "+33 672549166",
       "email": "lionel.heaney@yahoo.fr",
       "address": {
@@ -4426,15 +7465,34 @@
         "level1": "Pays de la Loire",
         "postcode": "36522",
         "country": "France"
+=======
+      "phoneNumber": "0800 474118",
+      "email": "virginie_barbier30@gmail.com",
+      "address": {
+        "line1": "500 Travis Cliff",
+        "line2": "",
+        "level2": "New Vada",
+        "level1": "Strathclyde",
+        "postcode": "CD55 7SQ"
+>>>>>>> origin/master
       },
-      "addressType": "international"
+      "addressType": "domestic"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "5 - 11 Programme",
       "subject": "Chemistry",
       "startDate": "2018-09-04T23:34:15.745Z",
       "duration": 1,
       "endDate": "2019-09-04T23:34:15.745Z"
+=======
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "Maths",
+      "startDate": "2018-12-21T14:58:32.696Z",
+      "duration": 2,
+      "endDate": "2020-12-21T14:58:32.696Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -4445,7 +7503,7 @@
       "english": {
         "type": "GCSE",
         "subject": "English",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "3 and below"
       },
       "science": {
         "type": "GCSE",
@@ -4456,6 +7514,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Diplôme",
           "subject": "Molecular genetics",
           "isInternational": "true",
@@ -4467,6 +7526,15 @@
             "reference": "4000228363",
             "comparable": "Bachelor (Honours) degree"
           },
+=======
+          "type": "BAO - Bachelor of the Art of Obstetrics",
+          "subject": "Nursing",
+          "isInternational": "false",
+          "org": "The University of Aberdeen",
+          "country": "United Kingdom",
+          "grade": "Third-class honours",
+          "predicted": false,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -4474,6 +7542,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "cb27bb9d-faf0-42f0-9324-85f46bb42c5f",
     "route": "Assessment Only",
     "traineeId": "8CVTBN19",
@@ -4499,9 +7568,31 @@
       "disabilities": [
         "Mental health condition"
       ]
+=======
+    "id": "9b66c73e-140e-48dd-953f-7c910d90cad6",
+    "route": "Assessment Only",
+    "traineeId": "IP2MQ0L2",
+    "status": "QTS awarded",
+    "trn": 4929374,
+    "updatedDate": "2018-11-01T17:57:16.929Z",
+    "submittedDate": "2019-01-18T14:25:43.096Z",
+    "personalDetails": {
+      "givenName": "Jessie",
+      "familyName": "Dickens",
+      "middleNames": "Dwight",
+      "nationality": [
+        "British"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1991-11-03T00:34:23.359Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "false"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "055 2072 2818",
       "email": "loretta_wehner39@yahoo.com",
       "address": {
@@ -4519,6 +7610,25 @@
       "startDate": "2020-01-18T10:21:01.815Z",
       "duration": 3,
       "endDate": "2023-01-18T10:21:01.815Z"
+=======
+      "phoneNumber": "01147 632787",
+      "email": "jessie72@hotmail.com",
+      "address": {
+        "line1": "91897 Cartwright Via",
+        "line2": "",
+        "level2": "Velvastad",
+        "level1": "Staffordshire",
+        "postcode": "UQ1 0AO"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "English",
+      "startDate": "2017-01-27T15:42:58.109Z",
+      "duration": 1,
+      "endDate": "2018-01-27T15:42:58.109Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -4540,6 +7650,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "DPhil - Doctor of Philosophy",
           "subject": "Sonic arts",
           "isInternational": "false",
@@ -4555,9 +7666,15 @@
           "subject": "Folk music",
           "isInternational": "false",
           "org": "GlyndÅµr University",
+=======
+          "type": "BA with intercalated PGCE",
+          "subject": "Crystallography",
+          "isInternational": "false",
+          "org": "Wye College",
+>>>>>>> origin/master
           "country": "United Kingdom",
-          "grade": "Third-class honours",
-          "predicted": false,
+          "grade": "First-class honours",
+          "predicted": true,
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -4565,6 +7682,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "4d0709e4-7f03-49be-919e-1523c0b8d019",
     "route": "Assessment Only",
     "traineeId": "GGB3YVWW",
@@ -4576,15 +7694,33 @@
       "givenName": "Ignacio",
       "familyName": "Zboncak",
       "middleNames": "Aaron Cameron",
+=======
+    "id": "125bddaa-5254-4f7c-afc6-4351769dee93",
+    "route": "Assessment Only",
+    "traineeId": "U7FAF8K8",
+    "status": "QTS awarded",
+    "trn": 5276331,
+    "updatedDate": "2018-12-18T15:18:34.283Z",
+    "submittedDate": "2019-01-17T20:25:17.367Z",
+    "personalDetails": {
+      "givenName": "Hector",
+      "familyName": "Nicolas",
+      "middleNames": "Abélard Amélien",
+>>>>>>> origin/master
       "nationality": [
         "French"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1977-11-12T06:13:33.779Z"
+=======
+      "dateOfBirth": "1989-11-14T12:47:08.954Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "false"
     },
+<<<<<<< HEAD
     "isInternationalCandidate": true,
     "contactDetails": {
       "phoneNumber": "+33 291220075",
@@ -4595,30 +7731,51 @@
         "level2": "Moreautown",
         "level1": "Provence-Alpes-Côte d'Azur",
         "postcode": "95707",
+=======
+    "isInternationalTrainee": true,
+    "contactDetails": {
+      "phoneNumber": "+33 287366585",
+      "email": "hector_nicolas@yahoo.fr",
+      "address": {
+        "line1": "8530 Remy de Provence",
+        "line2": "",
+        "level2": "South Urbanburgh",
+        "level1": "Haute-Normandie",
+        "postcode": "89547",
+>>>>>>> origin/master
         "country": "France"
       },
       "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "5 - 11 Programme",
       "subject": "Maths",
       "startDate": "2020-05-21T11:35:45.291Z",
       "duration": 3,
       "endDate": "2023-05-21T11:35:45.291Z"
+=======
+    "programmeDetails": {
+      "ageRange": "11 - 18 Programme",
+      "subject": "Physics",
+      "startDate": "2017-02-22T22:36:23.462Z",
+      "duration": 3,
+      "endDate": "2020-02-22T22:36:23.462Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Maths",
         "gradeBoundary": "4 and above"
       },
       "english": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "English",
         "gradeBoundary": "Not provided"
       },
       "science": {
-        "type": "O level",
+        "type": "GCSE",
         "subject": "Science",
         "gradeBoundary": "4 and above"
       }
@@ -4627,7 +7784,11 @@
       "items": [
         {
           "type": "Diplôme",
+<<<<<<< HEAD
           "subject": "Chemistry",
+=======
+          "subject": "Agricultural botany",
+>>>>>>> origin/master
           "isInternational": "true",
           "org": "University of Paris",
           "country": "France",
@@ -4637,6 +7798,24 @@
             "reference": "4000228363",
             "comparable": "Bachelor (Honours) degree"
           },
+<<<<<<< HEAD
+=======
+          "startDate": "2017",
+          "endDate": "2020"
+        },
+        {
+          "type": "Diplôme",
+          "subject": "Computing and information technology",
+          "isInternational": "true",
+          "org": "University of Paris",
+          "country": "France",
+          "grade": "Pass",
+          "predicted": true,
+          "naric": {
+            "reference": "4000228363",
+            "comparable": "Bachelor (Honours) degree"
+          },
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -4644,6 +7823,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "e0e3f00a-4fea-4750-a9b3-b9d9de149c1b",
     "route": "Assessment Only",
     "traineeId": "Z62DPJZI",
@@ -4666,9 +7846,32 @@
       "ethnicGroup": "Black, African, Black British or Caribbean",
       "ethnicGroupSpecific": "Another Black background",
       "disabledAnswer": "Yes"
+=======
+    "id": "3daa753d-ed1f-4380-87d3-66085af231a1",
+    "route": "Assessment Only",
+    "traineeId": "GP41BP50",
+    "status": "QTS awarded",
+    "trn": 4927198,
+    "updatedDate": "2018-12-17T06:26:54.522Z",
+    "submittedDate": "2018-12-23T03:37:29.188Z",
+    "personalDetails": {
+      "givenName": "Pierrick",
+      "familyName": "Boyer",
+      "middleNames": "Dimitri Hervé",
+      "nationality": [
+        "French",
+        "Swiss"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1975-04-29T08:43:26.782Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "false"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": true,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "012421 87657",
       "email": "jana45@gmail.com",
       "address": {
@@ -4677,15 +7880,35 @@
         "level2": "South Darbyburgh",
         "level1": "Worcestershire",
         "postcode": "LR1 6VX"
+=======
+      "phoneNumber": "0791205527",
+      "email": "pierrick51@yahoo.fr",
+      "address": {
+        "line1": "850 Pearl Pierre Charron",
+        "line2": "",
+        "level2": "Amayatown",
+        "level1": "Nord-Pas-de-Calais",
+        "postcode": "19786",
+        "country": "France"
+>>>>>>> origin/master
       },
-      "addressType": "domestic"
+      "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "5 - 11 Programme",
       "subject": "Maths",
       "startDate": "2019-04-26T13:44:07.398Z",
       "duration": 1,
       "endDate": "2020-04-26T13:44:07.398Z"
+=======
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "Maths",
+      "startDate": "2017-05-25T09:17:45.219Z",
+      "duration": 2,
+      "endDate": "2019-05-25T09:17:45.219Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -4707,6 +7930,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BAdmin - Bachelor of Administration",
           "subject": "Pre-clinical dentistry",
           "isInternational": "false",
@@ -4725,6 +7949,19 @@
           "country": "United Kingdom",
           "grade": "First-class honours",
           "predicted": true,
+=======
+          "type": "Diplôme",
+          "subject": "Crystallography",
+          "isInternational": "true",
+          "org": "University of Paris",
+          "country": "France",
+          "grade": "Pass",
+          "predicted": true,
+          "naric": {
+            "reference": "4000228363",
+            "comparable": "Bachelor (Honours) degree"
+          },
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -4732,6 +7969,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "4590608d-b868-4681-b089-c8d14ffef5b2",
     "route": "Assessment Only",
     "traineeId": "G4CDF1FP",
@@ -4743,17 +7981,35 @@
       "givenName": "Savin",
       "familyName": "Sanchez",
       "middleNames": "Abelin",
+=======
+    "id": "c705e7a9-3875-49e3-bf4b-fa451b21ba1f",
+    "route": "Assessment Only",
+    "traineeId": "9V8HS4H1",
+    "status": "QTS awarded",
+    "trn": 5295885,
+    "updatedDate": "2018-11-12T22:27:35.784Z",
+    "submittedDate": "2018-11-23T14:42:56.766Z",
+    "personalDetails": {
+      "givenName": "Clyde",
+      "familyName": "Torphy",
+      "middleNames": null,
+>>>>>>> origin/master
       "nationality": [
         "British"
       ],
       "sex": "Male",
+<<<<<<< HEAD
       "dateOfBirth": "1984-12-25T14:59:02.380Z"
+=======
+      "dateOfBirth": "1972-11-18T10:37:25.583Z"
+>>>>>>> origin/master
     },
     "diversity": {
       "diversityDisclosed": "false"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "0305 851 1037",
       "email": "savin_sanchez61@yahoo.com",
       "address": {
@@ -4771,12 +8027,31 @@
       "startDate": "2019-11-09T20:44:59.773Z",
       "duration": 3,
       "endDate": "2022-11-09T20:44:59.773Z"
+=======
+      "phoneNumber": "055 4609 2685",
+      "email": "clyde.torphy85@gmail.com",
+      "address": {
+        "line1": "40322 Shawna Flat",
+        "line2": "",
+        "level2": "Port Vesta",
+        "level1": "Derbyshire",
+        "postcode": "UD3 2NO"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "11 - 16 Programme",
+      "subject": "Physics",
+      "startDate": "2018-01-19T09:14:57.066Z",
+      "duration": 1,
+      "endDate": "2019-01-19T09:14:57.066Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
         "type": "GCSE",
         "subject": "Maths",
-        "gradeBoundary": "4 and above"
+        "gradeBoundary": "Not completed or not passed"
       },
       "english": {
         "type": "GCSE",
@@ -4792,12 +8067,21 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BH - Bachelor of Humanities",
           "subject": "Archives and records management",
           "isInternational": "false",
           "org": "Staffordshire University",
           "country": "United Kingdom",
           "grade": "Pass",
+=======
+          "type": "BA Education",
+          "subject": "Technical theatre studies",
+          "isInternational": "false",
+          "org": "La Sainte Union College of HE",
+          "country": "United Kingdom",
+          "grade": "Third-class honours",
+>>>>>>> origin/master
           "predicted": false,
           "startDate": "2017",
           "endDate": "2020"
@@ -4806,6 +8090,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "4eb2c101-6e5f-4b47-a1d8-fc633d7b8479",
     "route": "Assessment Only",
     "traineeId": "PHWVAH64",
@@ -4817,17 +8102,43 @@
       "givenName": "Leticia",
       "familyName": "Auer",
       "middleNames": "Rosemary",
+=======
+    "id": "f4199df8-c37b-4e9c-beff-f637c82f3b51",
+    "route": "Assessment Only",
+    "traineeId": "JPOAKHK7",
+    "status": "QTS awarded",
+    "trn": 4556453,
+    "updatedDate": "2018-10-17T18:31:26.630Z",
+    "submittedDate": "2018-11-03T08:58:34.369Z",
+    "personalDetails": {
+      "givenName": "Andre",
+      "familyName": "Murray",
+      "middleNames": "Richard",
+>>>>>>> origin/master
       "nationality": [
-        "British"
+        "British",
+        "French",
+        "Swiss"
       ],
+<<<<<<< HEAD
       "sex": "Female",
       "dateOfBirth": "1980-06-02T06:01:00.510Z"
     },
     "diversity": {
       "diversityDisclosed": "false"
+=======
+      "sex": "Male",
+      "dateOfBirth": "1968-02-27T10:51:25.675Z"
     },
-    "isInternationalCandidate": false,
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Prefer not to say",
+      "disabledAnswer": "Not provided"
+>>>>>>> origin/master
+    },
+    "isInternationalTrainee": false,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "016529 49292",
       "email": "leticia25@hotmail.com",
       "address": {
@@ -4845,12 +8156,35 @@
       "startDate": "2019-06-10T19:45:54.230Z",
       "duration": 3,
       "endDate": "2022-06-10T19:45:54.230Z"
+=======
+      "phoneNumber": "0118 147 4000",
+      "email": "andre.murray@yahoo.com",
+      "address": {
+        "line1": "2809 Heaney Fields",
+        "line2": "",
+        "level2": "Lake Horaciomouth",
+        "level1": "Staffordshire",
+        "postcode": "CJ5 7IU"
+      },
+      "addressType": "domestic"
+    },
+    "programmeDetails": {
+      "ageRange": "5 - 11 Programme",
+      "subject": "Maths",
+      "startDate": "2019-05-15T20:30:00.282Z",
+      "duration": 2,
+      "endDate": "2021-05-15T20:30:00.282Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
         "type": "GCSE",
         "subject": "Maths",
+<<<<<<< HEAD
         "gradeBoundary": "4 and above"
+=======
+        "gradeBoundary": "3 and below"
+>>>>>>> origin/master
       },
       "english": {
         "type": "GCSE",
@@ -4866,6 +8200,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "BPharm - Bachelor of Pharmacy",
           "subject": "Environmentalism",
           "isInternational": "false",
@@ -4873,6 +8208,15 @@
           "country": "United Kingdom",
           "grade": "First-class honours",
           "predicted": false,
+=======
+          "type": "MChem - Master of Chemistry",
+          "subject": "Dental technology",
+          "isInternational": "false",
+          "org": "Plymouth College of Art",
+          "country": "United Kingdom",
+          "grade": "Unknown",
+          "predicted": true,
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }
@@ -4880,6 +8224,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "id": "2c960e5c-3a57-4c21-8543-47470b5ceb60",
     "route": "Assessment Only",
     "traineeId": "IES702SV",
@@ -4901,10 +8246,35 @@
       "diversityDisclosed": "true",
       "ethnicGroup": "White",
       "ethnicGroupSpecific": "Irish",
+=======
+    "id": "30ac372c-4a62-4308-a299-af730394fe33",
+    "route": "Assessment Only",
+    "traineeId": "SUHD5JTG",
+    "status": "QTS awarded",
+    "trn": 7108961,
+    "updatedDate": "2018-08-10T09:49:58.314Z",
+    "submittedDate": "2018-09-10T19:29:28.852Z",
+    "personalDetails": {
+      "givenName": "Bryant",
+      "familyName": "Spinka",
+      "middleNames": "Philip Ray",
+      "nationality": [
+        "French",
+        "Swiss"
+      ],
+      "sex": "Male",
+      "dateOfBirth": "1962-11-19T06:43:42.809Z"
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "Asian or Asian British",
+      "ethnicGroupSpecific": "Prefer not to say",
+>>>>>>> origin/master
       "disabledAnswer": "No"
     },
-    "isInternationalCandidate": false,
+    "isInternationalTrainee": true,
     "contactDetails": {
+<<<<<<< HEAD
       "phoneNumber": "056 1560 8725",
       "email": "eduardo_stokes@gmail.com",
       "address": {
@@ -4913,15 +8283,35 @@
         "level2": "East Jannie",
         "level1": "Strathclyde",
         "postcode": "QO2 7VB"
+=======
+      "phoneNumber": "+33 583739408",
+      "email": "bryant.spinka@yahoo.fr",
+      "address": {
+        "line1": "29366 Darion du Havre",
+        "line2": "",
+        "level2": "West Emory",
+        "level1": "Auvergne",
+        "postcode": "73410",
+        "country": "France"
+>>>>>>> origin/master
       },
-      "addressType": "domestic"
+      "addressType": "international"
     },
+<<<<<<< HEAD
     "assessmentDetails": {
       "ageRange": "5 - 11 Programme",
       "subject": "Chemistry",
       "startDate": "2017-01-15T23:34:47.319Z",
       "duration": 1,
       "endDate": "2018-01-15T23:34:47.319Z"
+=======
+    "programmeDetails": {
+      "ageRange": "3 - 7 Programme",
+      "subject": "English",
+      "startDate": "2018-12-27T06:31:43.930Z",
+      "duration": 3,
+      "endDate": "2021-12-27T06:31:43.930Z"
+>>>>>>> origin/master
     },
     "gcse": {
       "maths": {
@@ -4932,7 +8322,7 @@
       "english": {
         "type": "O level",
         "subject": "English",
-        "gradeBoundary": "3 and below"
+        "gradeBoundary": "4 and above"
       },
       "science": {
         "type": "O level",
@@ -4943,6 +8333,7 @@
     "degree": {
       "items": [
         {
+<<<<<<< HEAD
           "type": "Degree equivalent",
           "subject": "Acting",
           "isInternational": "false",
@@ -4950,6 +8341,19 @@
           "country": "United Kingdom",
           "grade": "Upper second-class honours (2:1)",
           "predicted": false,
+=======
+          "type": "Diplôme",
+          "subject": "Journalism",
+          "isInternational": "true",
+          "org": "University of Paris",
+          "country": "France",
+          "grade": "Pass",
+          "predicted": true,
+          "naric": {
+            "reference": "4000228363",
+            "comparable": "Bachelor (Honours) degree"
+          },
+>>>>>>> origin/master
           "startDate": "2017",
           "endDate": "2020"
         }

@@ -31,7 +31,7 @@ const recordIsComplete = record => {
     'personalDetails',
     'contactDetails',
     'diversity',
-    'assessmentDetails',
+    'programmeDetails',
     // 'qualifications.gceStatus', // A levels not implimented yet
     'gcse',
     'degree'
@@ -131,7 +131,7 @@ router.post(['/:recordtype/:uuid/disabilities','/:recordtype/disabilities'], fun
     res.redirect(`${recordPath}/disabilities${referrer}`)
   }
   else if (hasDisabilities == "Yes"){
-    res.redirect(`${recordPath}/candidate-disabilities${referrer}`)
+    res.redirect(`${recordPath}/trainee-disabilities${referrer}`)
   }
   else {
     res.redirect(`${recordPath}/diversity/confirm${referrer}`)
@@ -240,27 +240,27 @@ router.post(['/:recordtype/:uuid/degree/:index/confirm','/:recordtype/degree/:in
 })
 
 // Diversity branching
-router.post(['/:recordtype/:uuid/assessment-details','/:recordtype/assessment-details'], function (req, res) {
+router.post(['/:recordtype/:uuid/programme-details','/:recordtype/programme-details'], function (req, res) {
   const data = req.session.data
   let record = data.record
   let referrer = getReferrer(req.query.referrer)
 
-  let assessmentDetails = _.get(data, 'record.assessmentDetails')
+  let programmeDetails = _.get(data, 'record.programmeDetails')
   let recordPath = getRecordPath(req)
   // No data, return to page
-  if (!assessmentDetails){
-    res.redirect(`${recordPath}/assessment-details`)
+  if (!programmeDetails){
+    res.redirect(`${recordPath}/programme-details`)
   }
   
   // Merge autocomplete and radio answers
-  if (assessmentDetails.ageRange == 'Other age range'){
-    assessmentDetails.ageRange = assessmentDetails.ageRangeOther
-    delete assessmentDetails.ageRangeOther
+  if (programmeDetails.ageRange == 'Other age range'){
+    programmeDetails.ageRange = programmeDetails.ageRangeOther
+    delete programmeDetails.ageRangeOther
   }
 
-  record.assessmentDetails = assessmentDetails
+  record.programmeDetails = programmeDetails
 
-  res.redirect(`${recordPath}/assessment-details/confirm${referrer}`)
+  res.redirect(`${recordPath}/programme-details/confirm${referrer}`)
 })
 
 
@@ -488,7 +488,7 @@ router.post(['/record/:uuid/:page/update', '/record/:uuid/update'], (req, res) =
     updateRecord(data, newRecord)
     req.flash('success', 'Trainee record updated')
 
-    if (req.params.page && req.params.page != 'assessment-details'){
+    if (req.params.page && req.params.page != 'programme-details'){
       res.redirect(`/record/${req.params.uuid}/details-and-education`)
     }
     else {
