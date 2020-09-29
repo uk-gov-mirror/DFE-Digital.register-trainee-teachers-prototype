@@ -29,6 +29,11 @@
             text: "This record is pending a TRN",
             classes: "govuk-!-margin-0"
           }) }}
+        {% elseif record.status == "Deferred" %}
+          {{ govukInsetText({
+            text: "This record is deferred",
+            classes: "govuk-!-margin-0"
+          }) }}
       {% endif %}
 
       <div class="record-actions__links">
