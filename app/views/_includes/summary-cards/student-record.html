@@ -103,18 +103,18 @@
       text: "Deferred",
       classes: "govuk-tag--yellow govuk-!-margin-bottom-2"
     })}} <br>
-    Deferred: {{record.deferredDate | govukDate}}
+    Deferral date: {{record.deferredDate | govukDate}}
   {% elseif (record.deferredDate) and (record.reinstateDate)  %}
-    Reinstated: {{record.reinstateDate | govukDate}} <br>
-    <span class="govuk-hint">Deferred: {{record.deferredDate | govukDate}}</span>
+    Reinstatement date: {{record.reinstateDate | govukDate}} <br>
+    <span class="govuk-hint">Deferral date: {{record.deferredDate | govukDate}}</span>
   {% endif %}
 {% endset %}
 
-{% if record.status == "Deferred" %}
+{% if (record.status == "Deferred") and not (record.reinstateDate) %}
 
   {% set studentRecordRows = studentRecordRows | push({
     key: {
-      text: "Course status"
+      text: "Trainee status"
     },
     value: {
       html: deferredContent
@@ -125,7 +125,7 @@
 {% if record.reinstateDate %}
   {% set studentRecordRows = studentRecordRows | push({
     key: {
-      text: "Course status"
+      text: "Trainee status"
     },
     value: {
       html: deferredContent
