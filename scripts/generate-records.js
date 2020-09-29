@@ -31,7 +31,7 @@ const generateFakeApplication = (params = {}) => {
   const status = params.status || generateStatus(faker)
 
   // Dates
-  let updatedDate, submittedDate, deferralDate
+  let updatedDate, submittedDate, deferredDate
   // Make sure updated date is after submitted date
   if (params.submittedDate){
     updatedDate = params.updatedDate || faker.date.between(
@@ -53,12 +53,12 @@ const generateFakeApplication = (params = {}) => {
   // If the status is Deferred 
   if (status === 'Deferred') {
     // Make sure deferral date is after submitted date
-    deferralDate = params.deferralDate || faker.date.between(
+    deferredDate = params.deferredDate || faker.date.between(
       moment(),
       moment(params.submittedDate))
 
     // Defferred date happens at some point in last 500 days
-    deferralDate = params.deferralDate || faker.date.between(
+    deferredDate = params.deferredDate || faker.date.between(
       moment(),
       moment().subtract(500, 'days'))
   }
@@ -108,7 +108,7 @@ const generateFakeApplication = (params = {}) => {
     trn,
     updatedDate,
     submittedDate,
-    deferralDate,
+    deferredDate,
     personalDetails,
     diversity,
     isInternationalTrainee,

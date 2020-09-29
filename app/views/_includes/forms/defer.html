@@ -1,8 +1,8 @@
-{% set deferDateArray = record.deferralDate | toDateArray %}
+{% set deferDateArray = record.deferredDate | toDateArray %}
 
 {{ govukDateInput({
   id: "defer-date",
-  namePrefix: "record[deferralDate]",
+  namePrefix: "record[deferredDate]",
   fieldset: {
     legend: {
       text: "Date left the course",
