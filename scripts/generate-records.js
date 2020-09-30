@@ -57,7 +57,7 @@ const generateFakeApplication = (params = {}) => {
       moment(),
       moment(params.submittedDate))
     
-    // Make sure deferral date is between submit and updated date
+    // Make sure deferral date is between submitted and updated date
     deferredDate = params.deferredDate || faker.date.between(
       moment(submittedDate),
       moment(updatedDate))
