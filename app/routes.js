@@ -516,7 +516,7 @@ router.post('/record/:uuid/reinstate', (req, res) => {
     if (radioChoice != "On another day") {
       if (radioChoice == "Today") {
         newRecord.reinstateDate = filters.toDateArray(filters.today())
-      } 
+      }
       if (radioChoice == "Yesterday") {
         newRecord.reinstateDate = filters.toDateArray(moment().subtract(1, "days"))
       } 
