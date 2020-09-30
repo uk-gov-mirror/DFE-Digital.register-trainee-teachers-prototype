@@ -453,6 +453,7 @@ router.post('/record/:uuid/defer/defer', (req, res) => {
   else {
     newRecord.previousStatus = newRecord.status
     newRecord.status = 'Deferred'
+    delete newRecord.deferredDateRadio
     deleteTempData(data)
     updateRecord(data, newRecord)
     req.flash('success', 'Trainee deferred')
