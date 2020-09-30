@@ -1,4 +1,7 @@
 {% set customDeferDateArray = record.deferredDate | toDateArray %}
+{% if record.deferredDate | isInLast(2, "days") and record.deferredDateRadio != "On another day" %}
+  {% set customDeferDateArray = undefined %}
+{% endif %}
 
 {% set customDeferDate %}
   {{ govukDateInput({

@@ -3,10 +3,8 @@ const router = express.Router()
 const faker = require('faker')
 const path = require('path')
 const moment = require('moment')
-const filters = require('./filters.js')
+const filters = require('./filters.js')()
 const _ = require('lodash')
-
-console.log(Object.keys(filters))
 
 // Return first part of url to use in redirects
 const getRecordPath = req => {
