@@ -1,66 +1,69 @@
-{% set reinstateDateArray = record.reinstateDate | toDateArray %}
+{% set customReinstateDateArray = record.reinstateDate | toDateArray %}
+{% if record.reinstateDate | isInLast(2, "days") and record.reinstateDateRadio != "On another day" %}
+  {% set customReinstateDateArray = undefined %}
+{% endif %}
 
 {% set customReinstateDate %}
   {{ govukDateInput({
-  id: "custom-reinstate-date",
-  namePrefix: "record[customReinstateDate]",
-  fieldset: {
-    legend: {
-      text: "Enter the return date",
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  hint: {
-    text: "For example, " + "" | today | toDateArray | spaceSeparate
-  },
-  items: [
-      {
-        name: "day",
-        classes: "govuk-input--width-2",
-        value: reinstateDateArray["0"]
-      },
-      {
-        name: "month",
-        classes: "govuk-input--width-2",
-        value: reinstateDateArray["1"]
-      },
-      {
-        name: "year",
-        classes: "govuk-input--width-4",
-        value: reinstateDateArray["2"]
+    id: "custom-reinstate-date",
+    namePrefix: "record[reinstateDate]",
+    fieldset: {
+      legend: {
+        text: "Enter the return date",
+        classes: "govuk-label govuk-label--s"
       }
-    ]
+    },
+    hint: {
+      text: "For example, " + "" | today | toDateArray | spaceSeparate
+    },
+    items: [
+        {
+          name: "day",
+          classes: "govuk-input--width-2",
+          value: customReinstateDateArray["0"]
+        },
+        {
+          name: "month",
+          classes: "govuk-input--width-2",
+          value: customReinstateDateArray["1"]
+        },
+        {
+          name: "year",
+          classes: "govuk-input--width-4",
+          value: customReinstateDateArray["2"]
+        }
+      ]
   }) }}
 {% endset %}
 
+{% set todayDateArray = "" | today | toDateArray %}
+{% set yesterdayDateArray = "" | today |  moment('subtract', 1, "day") | toDateArray %}
+
 {{ govukRadios({
-  id: "reinstate-date",
-  namePrefix: "record[reinstateDate]",
   fieldset: {
     legend: {
-      text: "When did the trainee return to the course?",
+      text: "When did the trainee return?",
       isPageHeading: true,
       classes: "govuk-fieldset__legend--l govuk-!-margin-bottom-4"
     }
   },
   items: [
     {
-      value: "Today",
-      text: "Today"
+      text: "Today",
+      _value: todayDateArray
     },
     {
-      value: "Yesterday",
-      text: "Yesterday"
+      text: "Yesterday",
+      _value: yesterdayDateArray
     },
     {
-      value: "On another day",
       text: "On another day",
       conditional: {
         html: customReinstateDate
       }
     }
   ]
-} | decorateAttributes(data, "data.reinstateDate")) }}
+} | decorateAttributes(record, "record.reinstateDateRadio")) }}
 
 {{ govukButton({
   text: "Continue"
