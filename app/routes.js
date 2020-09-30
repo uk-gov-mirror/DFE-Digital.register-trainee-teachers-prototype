@@ -461,7 +461,7 @@ router.post('/record/:uuid/defer/defer', (req, res) => {
   }
 })
 
-// Get dates...
+// Get dates for Defer flow
 router.post('/record/:uuid/defer', (req, res) => {
   const data = req.session.data
   const newRecord = data.record
@@ -471,10 +471,8 @@ router.post('/record/:uuid/defer', (req, res) => {
     res.redirect('/record/:uuid')
   }
   else {
-    console.log(newRecord)
     let radioChoice = newRecord.deferredDateRadio
     if (radioChoice != "On another day") {
-      // newRecord.deferredDate = radioChoice.split(",")
       if (radioChoice == "Today") {
         newRecord.deferredDate = filters.toDateArray(filters.today())
       } 
@@ -482,9 +480,6 @@ router.post('/record/:uuid/defer', (req, res) => {
         newRecord.deferredDate = filters.toDateArray(moment().subtract(1, "days"))
       } 
     }
-    // deleteTempData(data)
-    // updateRecord(data, newRecord)
-    // req.flash('success', 'Trainee deferred')
     res.redirect('/record/' + req.params.uuid + '/defer/confirm')
   }
 })
@@ -504,6 +499,29 @@ router.post('/record/:uuid/reinstate/reinstate', (req, res) => {
     updateRecord(data, newRecord)
     req.flash('success', 'Trainee reinstated')
     res.redirect('/record/' + req.params.uuid)
+  }
+})
+
+// Get dates for reinstate flow
+router.post('/record/:uuid/reinstate', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    let radioChoice = newRecord.reinstateDateRadio
+    if (radioChoice != "On another day") {
+      if (radioChoice == "Today") {
+        newRecord.reinstateDate = filters.toDateArray(filters.today())
+      } 
+      if (radioChoice == "Yesterday") {
+        newRecord.reinstateDate = filters.toDateArray(moment().subtract(1, "days"))
+      } 
+    }
+    res.redirect('/record/' + req.params.uuid + '/reinstate/confirm')
   }
 })
 
