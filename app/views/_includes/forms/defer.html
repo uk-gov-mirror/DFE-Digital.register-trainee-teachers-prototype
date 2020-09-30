@@ -36,13 +36,8 @@
   }) }}
 {% endset %}
 
-{{record | log}}
-
 {% set todayDateArray = "" | today | toDateArray %}
 {% set yesterdayDateArray = "" | today |  moment('subtract', 1, "day") | toDateArray %}
-
-{# {{ date | moment('subtract', 1, "week") }}  #}
-
 
 {{ govukRadios({
   fieldset: {
