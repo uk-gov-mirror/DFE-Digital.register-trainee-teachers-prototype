@@ -9,6 +9,9 @@
     <span class="govuk-caption-xl">{{pageHeadingTraineeName}}</span>
     {{pageHeading}}
   </h1>
+
+  {{record.deferredDate | log}}
+
   {% include "_includes/summary-cards/defer-details.html" %}
 
   {# {{ govukCheckboxes({
@@ -24,7 +27,7 @@
   }) }} #}
 
   {{ govukButton({
-    text: "Defer trainee"
+    text: "Defer this trainee"
   }) }}
 
 {% endblock %}

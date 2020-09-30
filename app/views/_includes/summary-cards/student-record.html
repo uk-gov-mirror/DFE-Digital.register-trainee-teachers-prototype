@@ -122,7 +122,7 @@
   }) %}
 {% endif %}
 
-{% if record.reinstateDate %}
+{# {% if record.reinstateDate %}
   {% set studentRecordRows = studentRecordRows | push({
     key: {
       text: "Trainee status"
@@ -131,7 +131,7 @@
       html: deferredContent
     }
   }) %}
-{% endif %}
+{% endif %} #}
 
 {% set updatedDate %}
   <p class="govuk-body">{{record.updatedDate | govukDate or 'Not provided'}}</p>

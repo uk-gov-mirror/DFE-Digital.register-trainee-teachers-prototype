@@ -9,6 +9,7 @@
 }
 
 .record-actions__links {
+  margin-left: auto;
   @include govuk-media-query($until: tablet) {
     margin-top: govuk-spacing(3);
   }

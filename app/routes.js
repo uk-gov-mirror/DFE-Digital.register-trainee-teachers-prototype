@@ -2,7 +2,11 @@ const express = require('express')
 const router = express.Router()
 const faker = require('faker')
 const path = require('path')
+const moment = require('moment')
+const filters = require('./filters.js')
 const _ = require('lodash')
+
+console.log(Object.keys(filters))
 
 // Return first part of url to use in redirects
 const getRecordPath = req => {
@@ -443,6 +447,7 @@ router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
 router.post('/record/:uuid/defer/defer', (req, res) => {
   const data = req.session.data
   const newRecord = data.record
+
   // Update failed or no data
   if (!newRecord){
     res.redirect('/record/:uuid')
@@ -457,8 +462,35 @@ router.post('/record/:uuid/defer/defer', (req, res) => {
   }
 })
 
+// Get dates...
+router.post('/record/:uuid/defer', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    console.log(newRecord)
+    let radioChoice = newRecord.deferredDateRadio
+    if (radioChoice != "On another day") {
+      // newRecord.deferredDate = radioChoice.split(",")
+      if (radioChoice == "Today") {
+        newRecord.deferredDate = filters.toDateArray(filters.today())
+      } 
+      if (radioChoice == "Yesterday") {
+        newRecord.deferredDate = filters.toDateArray(moment().subtract(1, "days"))
+      } 
+    }
+    // deleteTempData(data)
+    // updateRecord(data, newRecord)
+    // req.flash('success', 'Trainee deferred')
+    res.redirect('/record/' + req.params.uuid + '/defer/confirm')
+  }
+})
+
 // Copy reinstate data back to real record
-// Do we want to set a date here or can it be the date of the action? 
 router.post('/record/:uuid/reinstate/reinstate', (req, res) => {
   const data = req.session.data
   const newRecord = data.record

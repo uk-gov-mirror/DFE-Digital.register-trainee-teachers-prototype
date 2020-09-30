@@ -1,35 +1,71 @@
-{% set deferDateArray = record.deferredDate | toDateArray %}
+{% set customDeferDateArray = record.deferredDate | toDateArray %}
 
-{{ govukDateInput({
-  id: "defer-date",
-  namePrefix: "record[deferredDate]",
+{% set customDeferDate %}
+  {{ govukDateInput({
+    id: "custom-defer-date",
+    namePrefix: "record[deferredDate]",
+    fieldset: {
+      legend: {
+        text: "Enter the deferral date",
+        classes: "govuk-label govuk-label--s"
+      }
+    },
+    hint: {
+      text: "For example, " + "" | today | toDateArray | spaceSeparate
+    },
+    items: [
+        {
+          name: "day",
+          classes: "govuk-input--width-2",
+          value: customDeferDateArray["0"]
+        },
+        {
+          name: "month",
+          classes: "govuk-input--width-2",
+          value: customDeferDateArray["1"]
+        },
+        {
+          name: "year",
+          classes: "govuk-input--width-4",
+          value: customDeferDateArray["2"]
+        }
+      ]
+  }) }}
+{% endset %}
+
+{{record | log}}
+
+{% set todayDateArray = "" | today | toDateArray %}
+{% set yesterdayDateArray = "" | today |  moment('subtract', 1, "day") | toDateArray %}
+
+{# {{ date | moment('subtract', 1, "week") }}  #}
+
+
+{{ govukRadios({
   fieldset: {
     legend: {
-      text: "Date left the course",
-      classes: "govuk-fieldset__legend--s"
+      text: "When did the trainee defer?",
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--l govuk-!-margin-bottom-4"
     }
   },
-  hint: {
-    text: "For example, " + "" | today | toDateArray | spaceSeparate
-  },
   items: [
-      {
-        name: "day",
-        classes: "govuk-input--width-2",
-        value: deferDateArray["0"]
-      },
-      {
-        name: "month",
-        classes: "govuk-input--width-2",
-        value: deferDateArray["1"]
-      },
-      {
-        name: "year",
-        classes: "govuk-input--width-4",
-        value: deferDateArray["2"]
+    {
+      text: "Today",
+      _value: todayDateArray
+    },
+    {
+      text: "Yesterday",
+      _value: yesterdayDateArray
+    },
+    {
+      text: "On another day",
+      conditional: {
+        html: customDeferDate
       }
-    ]
-}) }}
+    }
+  ]
+} | decorateAttributes(record, "record.deferredDateRadio")) }}
 
 {{ govukButton({
   text: "Continue"

@@ -1,14 +1,12 @@
 {% extends "_templates/_record-form.html" %}
 
 {% set pageHeadingTraineeName = data.record.personalDetails | getShortName %}
-{% set pageHeading = "Reinstate trainee" %}
 {% set formAction = "./reinstate/confirm" %}
   
 {% block formContent %}
 
-  <h1 class="govuk-heading-l">
+  <h1 class="govuk-heading-l govuk-!-margin-bottom-0">
     <span class="govuk-caption-xl">{{pageHeadingTraineeName}}</span>
-    {{pageHeading}}
   </h1>
 
   {% include "_includes/forms/reinstate.html" %}

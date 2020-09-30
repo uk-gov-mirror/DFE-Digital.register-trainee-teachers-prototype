@@ -37,6 +37,11 @@ const generateFakeApplication = (params = {}) => {
     updatedDate = params.updatedDate || faker.date.between(
       moment(),
       moment(params.submittedDate))
+      
+      // Make sure defer date is after submitted date
+      deferredDate = params.deferredDate || faker.date.between(
+      moment(),
+      moment(params.submittedDate))
   }
   else {
     // Updated at some point in last 500 days
@@ -53,14 +58,19 @@ const generateFakeApplication = (params = {}) => {
   // If the status is Deferred 
   if (status === 'Deferred') {
     // Make sure deferral date is after submitted date
+    // deferredDate = params.deferredDate || faker.date.between(
+    //   moment(),
+    //   moment(params.submittedDate))
+    
+    // Make sure deferral date is before it was updated
     deferredDate = params.deferredDate || faker.date.between(
-      moment(),
-      moment(params.submittedDate))
+      moment(updatedDate),
+      moment().subtract(500, 'days'))
 
     // Defferred date happens at some point in last 500 days
-    deferredDate = params.deferredDate || faker.date.between(
-      moment(),
-      moment().subtract(500, 'days'))
+    // deferredDate = params.deferredDate || faker.date.between(
+    //   moment(),
+    //   moment().subtract(500, 'days'))
   }
 
 
