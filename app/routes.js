@@ -430,7 +430,7 @@ router.get('/record/:uuid/trn', (req, res) => {
   }
 })
 
-// Manually advance an application from Pending QTS received to QTS awarded
+// Manually advance an application from Pending QTS to QTS awarded
 router.get('/record/:uuid/qts', (req, res) => {
   const data = req.session.data
   const newRecord = data.record
