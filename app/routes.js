@@ -534,7 +534,7 @@ router.post('/record/:uuid/reinstate', (req, res) => {
 
   // Update failed or no data
   if (!newRecord){
-    res.redirect('/record/:uuid')
+    res.redirect(`/record/${req.params.uuid}`)
   }
   else {
     let radioChoice = newRecord.reinstateDateRadio
