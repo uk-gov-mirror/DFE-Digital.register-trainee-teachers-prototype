@@ -1,0 +1,20 @@
+
+{{ appSubNavigation({
+  label: 'Sub navigation',
+  items: [{
+    text: 'Trainee details',
+    href: recordPath,
+    active: (activeTab == "trainee-details")
+  },
+  {
+    text: 'Personal details and education',
+    href: recordPath + '/details-and-education',
+    active: (activeTab == "details-education")
+  },
+  {
+    text: "Timeline",
+    href: recordPath + '/timeline',
+    active: (activeTab == "trainee-timeline")
+  } if false
+  ]
+}) }}
