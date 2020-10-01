@@ -467,7 +467,7 @@ router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
 })
 
 // Copy defer data back to real record
-router.post('/record/:uuid/defer/defer', (req, res) => {
+router.post('/record/:uuid/defer/confirm', (req, res) => {
   const data = req.session.data
   const newRecord = data.record
 
@@ -510,7 +510,7 @@ router.post('/record/:uuid/defer', (req, res) => {
 })
 
 // Copy reinstate data back to real record
-router.post('/record/:uuid/reinstate/reinstate', (req, res) => {
+router.post('/record/:uuid/reinstate/confirm', (req, res) => {
   const data = req.session.data
   const newRecord = data.record
   // Update failed or no data
