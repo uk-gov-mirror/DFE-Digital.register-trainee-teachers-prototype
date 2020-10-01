@@ -497,14 +497,12 @@ router.post('/record/:uuid/defer', (req, res) => {
   }
   else {
     let radioChoice = newRecord.deferredDateRadio
-    if (radioChoice != "On another day") {
-      if (radioChoice == "Today") {
-        newRecord.deferredDate = filters.toDateArray(filters.today())
-      } 
-      if (radioChoice == "Yesterday") {
-        newRecord.deferredDate = filters.toDateArray(moment().subtract(1, "days"))
-      } 
-    }
+    if (radioChoice == "Today") {
+      newRecord.deferredDate = filters.toDateArray(filters.today())
+    } 
+    if (radioChoice == "Yesterday") {
+      newRecord.deferredDate = filters.toDateArray(moment().subtract(1, "days"))
+    } 
     res.redirect('/record/' + req.params.uuid + '/defer/confirm')
   }
 })
@@ -538,14 +536,12 @@ router.post('/record/:uuid/reinstate', (req, res) => {
   }
   else {
     let radioChoice = newRecord.reinstateDateRadio
-    if (radioChoice != "On another day") {
-      if (radioChoice == "Today") {
-        newRecord.reinstateDate = filters.toDateArray(filters.today())
-      }
-      if (radioChoice == "Yesterday") {
-        newRecord.reinstateDate = filters.toDateArray(moment().subtract(1, "days"))
-      } 
+    if (radioChoice == "Today") {
+      newRecord.reinstateDate = filters.toDateArray(filters.today())
     }
+    if (radioChoice == "Yesterday") {
+      newRecord.reinstateDate = filters.toDateArray(moment().subtract(1, "days"))
+    } 
     res.redirect('/record/' + req.params.uuid + '/reinstate/confirm')
   }
 })
