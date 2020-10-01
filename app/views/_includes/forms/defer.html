@@ -36,9 +36,6 @@
   }) }}
 {% endset %}
 
-{% set todayDateArray = "" | today | toDateArray %}
-{% set yesterdayDateArray = "" | today |  moment('subtract', 1, "day") | toDateArray %}
-
 {{ govukRadios({
   fieldset: {
     legend: {
@@ -49,12 +46,10 @@
   },
   items: [
     {
-      text: "Today",
-      _value: todayDateArray
+      text: "Today"
     },
     {
-      text: "Yesterday",
-      _value: yesterdayDateArray
+      text: "Yesterday"
     },
     {
       text: "On another day",
