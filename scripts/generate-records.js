@@ -51,12 +51,7 @@ const generateFakeApplication = (params = {}) => {
     moment().subtract(500, 'days'))
   }
   // If the status is Deferred 
-  if (status === 'Deferred') {
-    // Make sure deferral date is after submitted date
-    deferredDate = params.deferredDate || faker.date.between(
-      moment(),
-      moment(params.submittedDate))
-    
+  if (status === 'Deferred') {    
     // Make sure deferral date is between submitted and updated date
     deferredDate = params.deferredDate || faker.date.between(
       moment(submittedDate),
