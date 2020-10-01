@@ -1,7 +1,7 @@
 
 {% set expectedDuration = 'Not provided' %}
-{% if record.assessmentDetails.duration | falsify %}
-  {% set expectedDuration = record.assessmentDetails.duration + " years" %}
+{% if record.programmeDetails.duration | falsify %}
+  {% set expectedDuration = record.programmeDetails.duration + " years" %}
 {% endif %}
 
 {% set studentRecordRows = [
@@ -30,7 +30,6 @@
   {% set submittedDate %}
     <p class="govuk-body">{{record.submittedDate | govukDate}}</p>
     <span class="govuk-hint">{{submittedAge}}</span>
-
   {% endset %}
 
   {% set studentRecordRows = studentRecordRows | push({
@@ -54,12 +53,12 @@
   }) %}
 {% endif %}
 
-{% if record.status == "Pending QTS" %}
-  {% set recommendedDate = record.qtsRecommendedDate | formatDate('relative') %}
+{% if record.status == "QTS recommended" %}
+{% set recommendedDate = record.qtsRecommendedDate | formatDate('relative') %}
 
   {% set qtsContent %}
     {{govukTag({
-      text: "Pending QTS",
+      text: "QTS recommended",
       classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
     })}} <br>
     {% if record.qtsRecommendedDate %}
@@ -97,26 +96,6 @@
   }) %}
 {% endif %}
 
-{% set deferredContent %}
-    {{govukTag({
-      text: "Deferred",
-      classes: "govuk-tag--yellow govuk-!-margin-bottom-2"
-    })}} <br>
-    Deferral date: {{record.deferredDate | govukDate}}
-{% endset %}
-
-{% if (record.status == "Deferred") %}
-
-  {% set studentRecordRows = studentRecordRows | push({
-    key: {
-      text: "Trainee status"
-    },
-    value: {
-      html: deferredContent
-    }
-  }) %}
-{% endif %}
-
 {% set updatedDate %}
   <p class="govuk-body">{{record.updatedDate | govukDate or 'Not provided'}}</p>
   {% if record.updatedDate | isInLast( 7, 'days') %}
@@ -143,14 +122,18 @@
 
 {% set studentRecordRows = studentRecordRows | combineArrays(datesRows) %}
 
+
+
 {% set studentRecordHtml %}
   {{ govukSummaryList({
     rows: studentRecordRows
   }) }}
 {% endset %}
 
+
 {{ appSummaryCard({
   classes: "govuk-!-margin-bottom-6",
   titleText: "Record details",
   html: studentRecordHtml
 }) }}
+
