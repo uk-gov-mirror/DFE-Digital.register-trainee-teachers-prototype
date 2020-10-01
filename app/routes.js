@@ -57,10 +57,35 @@ const updateRecord = (data, newRecord) => {
   
   let records = data.records
   newRecord.updatedDate = new Date()
+  if (newRecord.addressType == "domestic"){
+    delete newRecord.contactDetails.internationalAddress
+  }
+  if (newRecord.addressType == "international"){
+    delete newRecord.contactDetails.address
+  }
   data.record = newRecord
   
   if (!newRecord.id){
     newRecord.id = faker.random.uuid()
+    Object.defineProperty(newRecord.personalDetails, 'fullName', {
+      get() {
+        let names = []
+        names.push(this.givenName)
+        names.push(this.middleNames)
+        names.push(this.familyName)
+        return names.filter(Boolean).join(' ')
+      },
+      enumerable: true
+    })
+    Object.defineProperty(newRecord.personalDetails, 'shortName', {
+      get() {
+        let names = []
+        names.push(this.givenName)
+        names.push(this.familyName)
+        return names.filter(Boolean).join(' ')
+      },
+      enumerable: true
+    })
     records.push(newRecord)
   }
   else {
@@ -211,7 +236,7 @@ router.post(['/:recordtype/:uuid/degree/:index/confirm','/:recordtype/degree/:in
 
   // Combine radio and text inputs
   if (newDegree.baseGrade){
-    if (newDegree.baseGrade == "Other"){
+    if (newDegree.baseGrade == "Grade known"){
       newDegree.grade = newDegree.otherGrade
       delete newDegree.baseGrade
       delete newDegree.otherGrade
@@ -578,22 +603,16 @@ router.get('/records', function (req, res) {
     filteredRecords = filteredRecords.filter(record => {
       let recordIdMatch = (searchQuery) ? (record.traineeId.toLowerCase().includes(searchQuery.toLowerCase())) : false
       let nameMatch = false
-  
-        // Combine names in to one string
-        // Todo: there's probably an easier way to do this
-        let names = []
-        names.push(record.personalDetails.givenName)
-        names.push(record.personalDetails.middleNames)
-        names.push(record.personalDetails.familyName)
-        let fullName = names.filter(Boolean).join(' ').toLowerCase()
+
+        let fullName = record.personalDetails.fullName
 
         // Split query in to parts
-        let searchParts = searchQuery.toLowerCase().split(' ')
+        let searchParts = searchQuery.split(' ')
        
         // Check that each part exists in the trainee's name
         nameMatch = true
         searchParts.forEach(part => {
-          if (!fullName.includes(part)) {
+          if (!fullName.toLowerCase().includes(part.toLowerCase())) {
             nameMatch = false
           }
         })

@@ -121,8 +121,8 @@ const joinArray = (array, options={}) => {
 
   // Strip trailing space from delimiters and add breaks
   if (options.newlines){
-    options.delimiter = options.delimiter.replace(/\s+$/g, '') + "<br>"
-    options.lastDelimiter = options.lastDelimiter.replace(/\s+$/g, '') + "<br>"
+    options.delimiter = options.delimiter.replace(/\s+$/g, '') + "\n"
+    options.lastDelimiter = options.lastDelimiter.replace(/\s+$/g, '') + "\n"
   }
 
   // console.log('Input array is', array)
@@ -161,6 +161,8 @@ filters.commaSeparate = (items) => filters.joinArray(items, {delimiter:', '})
 //  C,
 //  D
 filters.commaSeparateLines = (items) => filters.joinArray(items, {delimiter:', ', newlines: true })
+
+filters.separateLines = (items) => filters.joinArray(items, {delimiter:' ', newlines: true })
 
 // A and B and C and D
 filters.andSeparate = (items)=> filters.joinArray(items, {delimiter: ' and '})
