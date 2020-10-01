@@ -31,8 +31,8 @@ const generateFakeApplication = (params = {}) => {
   const status = params.status || generateStatus(faker)
 
   // Dates
-  let updatedDate, submittedDate
-  // Make sure updated is after submitted
+  let updatedDate, submittedDate, deferredDate
+  // Make sure updated date is after submitted date
   if (params.submittedDate){
     updatedDate = params.updatedDate || faker.date.between(
       moment(),
@@ -50,6 +50,14 @@ const generateFakeApplication = (params = {}) => {
     moment(updatedDate),
     moment().subtract(500, 'days'))
   }
+  // If the status is Deferred 
+  if (status === 'Deferred') {    
+    // Make sure deferral date is between submitted and updated date
+    deferredDate = params.deferredDate || faker.date.between(
+      moment(submittedDate),
+      moment(updatedDate))
+  }
+
 
   // Personal details
   const personalDetails = (params.personalDetails === null) ? null : { ...generatePersonalDetails(faker), ...params.personalDetails }
@@ -95,6 +103,7 @@ const generateFakeApplication = (params = {}) => {
     trn,
     updatedDate,
     submittedDate,
+    deferredDate,
     personalDetails,
     diversity,
     isInternationalTrainee,
