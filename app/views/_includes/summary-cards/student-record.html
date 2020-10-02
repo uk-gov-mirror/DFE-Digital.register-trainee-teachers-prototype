@@ -96,6 +96,26 @@
   }) %}
 {% endif %}
 
+{% set deferredContent %}
+    {{govukTag({
+      text: "Deferred",
+      classes: "govuk-tag--yellow govuk-!-margin-bottom-2"
+    })}} <br>
+    Deferral date: {{record.deferredDate | govukDate}}
+{% endset %}
+
+{% if (record.status == "Deferred") %}
+
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: "Trainee status"
+    },
+    value: {
+      html: deferredContent
+    }
+  }) %}
+{% endif %}
+
 {% set updatedDate %}
   <p class="govuk-body">{{record.updatedDate | govukDate or 'Not provided'}}</p>
   {% if record.updatedDate | isInLast( 7, 'days') %}

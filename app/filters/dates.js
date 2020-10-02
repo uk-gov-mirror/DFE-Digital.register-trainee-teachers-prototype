@@ -256,6 +256,9 @@ filters.formatDate = (date, format, dateFormat) => {
 }
 
 filters.isInLast = (date, count, units) => {
+  if (_.isArray(date)){
+    date = filters.arrayToDateObject(date)
+  }
   let compareDate = moment().subtract(count, units)
   return moment(date).isAfter(compareDate)
 }

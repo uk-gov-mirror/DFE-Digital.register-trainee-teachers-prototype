@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const faker = require('faker')
 const path = require('path')
+const moment = require('moment')
+const filters = require('./filters.js')()
 const _ = require('lodash')
 
 // Return first part of url to use in redirects
@@ -428,7 +430,7 @@ router.get('/record/:uuid/trn', (req, res) => {
   }
 })
 
-// Manually advance an application from pending to trn received
+// Manually advance an application from Pending QTS to QTS awarded
 router.get('/record/:uuid/qts', (req, res) => {
   const data = req.session.data
   const newRecord = data.record
@@ -461,6 +463,86 @@ router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
     updateRecord(data, newRecord)
     req.flash('success', 'Trainee recommended for QTS')
     res.redirect('/record/' + req.params.uuid)
+  }
+})
+
+// Copy defer data back to real record
+router.post('/record/:uuid/defer/confirm', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    newRecord.previousStatus = newRecord.status
+    newRecord.status = 'Deferred'
+    delete newRecord.deferredDateRadio
+    deleteTempData(data)
+    updateRecord(data, newRecord)
+    req.flash('success', 'Trainee deferred')
+    res.redirect('/record/' + req.params.uuid)
+  }
+})
+
+// Get dates for Defer flow
+router.post('/record/:uuid/defer', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    let radioChoice = newRecord.deferredDateRadio
+    if (radioChoice == "Today") {
+      newRecord.deferredDate = filters.toDateArray(filters.today())
+    } 
+    if (radioChoice == "Yesterday") {
+      newRecord.deferredDate = filters.toDateArray(moment().subtract(1, "days"))
+    } 
+    res.redirect('/record/' + req.params.uuid + '/defer/confirm')
+  }
+})
+
+// Copy reinstate data back to real record
+router.post('/record/:uuid/reinstate/confirm', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    newRecord.status = newRecord.previousStatus || 'TRN received'
+    delete newRecord.previousStatus
+    deleteTempData(data)
+    updateRecord(data, newRecord)
+    req.flash('success', 'Trainee reinstated')
+    res.redirect('/record/' + req.params.uuid)
+  }
+})
+
+// Get dates for reinstate flow
+router.post('/record/:uuid/reinstate', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect(`/record/${req.params.uuid}`)
+  }
+  else {
+    let radioChoice = newRecord.reinstateDateRadio
+    if (radioChoice == "Today") {
+      newRecord.reinstateDate = filters.toDateArray(filters.today())
+    }
+    if (radioChoice == "Yesterday") {
+      newRecord.reinstateDate = filters.toDateArray(moment().subtract(1, "days"))
+    } 
+    res.redirect('/record/' + req.params.uuid + '/reinstate/confirm')
   }
 })
 
