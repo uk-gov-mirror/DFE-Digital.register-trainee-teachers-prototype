@@ -159,7 +159,8 @@ const generateFakeApplications = () => {
     personalDetails: {
       givenName: "Bea",
       familyName: "Waite",
-      sex: "Female"
+      sex: "Female",
+      nationality: ["French"]
     },
   }))
 

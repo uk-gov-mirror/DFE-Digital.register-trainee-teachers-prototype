@@ -5,17 +5,18 @@ module.exports = (faker, isInternationalTrainee) => {
   const item = (faker) => {
     const subject = faker.helpers.randomize(degreeData().subjects)
     const predicted = faker.random.boolean()
-    const startDate = '2017'
-    const endDate = '2020'
+    const endDate = faker.helpers.randomize(['2020','2019','2018','2017','2016','2015'])
+    const startDate = (parseInt(endDate) - 4).toString()
 
     if (isInternationalTrainee) {
       return {
-        type: 'Diplôme',
+        // type: 'Diplôme',
+        type: 'Bachelor (Honours) degree',
         subject,
         isInternational: "true",
         org: 'University of Paris',
         country: 'France',
-        grade: 'Pass',
+        // grade: 'Pass',
         predicted,
         naric: {
           reference: '4000228363',

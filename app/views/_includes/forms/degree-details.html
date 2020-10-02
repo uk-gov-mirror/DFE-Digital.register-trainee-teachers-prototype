@@ -107,7 +107,7 @@
     }| decorateAttributes(degreeTemp, "degreeTemp.grade"))}}
   {% endset %}
 
-  {{ govukRadios({
+ {#  {{ govukRadios({
     fieldset: {
       legend: {
         text: "Degree grade",
@@ -139,7 +139,50 @@
         text: "The trainee is still studying for their degree"
       }
     ]
-  } | decorateAttributes(degreeTemp, "degreeTemp.grade")) }}
+  } | decorateAttributes(degreeTemp, "degreeTemp.grade")) }} #}
+
+  {% set naricItems = [] %}
+  {% for naricItem in data.ukComparableDegrees %}
+    {% set naricItems = naricItems | push({text: naricItem}) %}
+  {% endfor %}
+
+  {% set naricComparableDegrees %}
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: "Select the comparable UK degree",
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      hint: {
+        text: ""
+      },
+      items: naricItems
+    } | decorateAttributes(degreeTemp, "degreeTemp.comparableType")) }}
+  {% endset %}
+
+  {# {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Do you have the NARIC comparable degree?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: ""
+    },
+    items: [
+      {
+        text: "Yes",
+        conditional: {
+          html: naricComparableDegrees
+        }
+      },
+      {
+        text: "No"
+      }
+    ]
+  } | decorateAttributes(degreeTemp, "degreeTemp.hasNaric")) }} #}
 
 {% else %}
 

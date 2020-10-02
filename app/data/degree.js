@@ -1631,12 +1631,23 @@ module.exports = () => {
     'York St John University'
   ]
 
+  const ukComparableDegrees = [
+    'Bachelor degree',
+    'Bachelor (Ordinary) degree',
+    'Bachelor (Honors) degree',
+    'Postgraduate Certificate / Postgraduate Diploma',
+    'Master’s degree / Integraded Master’s degree',
+    // 'Doctor of Philosophy degree',
+    // 'Post Doctoral award'
+  ]
+
   return {
     types: {
       all: types,
       undergraduate: types.filter(type => type.level === 6 || type.level === 7)
     },
     subjects,
+    ukComparableDegrees,
     orgs
   }
 }
