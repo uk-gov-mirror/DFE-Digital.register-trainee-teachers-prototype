@@ -96,9 +96,8 @@ const updateRecord = (data, newRecord, timelineMessage) => {
     delete newRecord.contactDetails.address
   }
   data.record = newRecord
-  
-  if (!newRecord.id){
-    newRecord.id = faker.random.uuid()
+
+  if (newRecord.personalDetails && !newRecord.personalDetails.fullName){
     Object.defineProperty(newRecord.personalDetails, 'fullName', {
       get() {
         let names = []
@@ -109,6 +108,8 @@ const updateRecord = (data, newRecord, timelineMessage) => {
       },
       enumerable: true
     })
+  }
+  if (newRecord.personalDetails && !newRecord.personalDetails.shortName){
     Object.defineProperty(newRecord.personalDetails, 'shortName', {
       get() {
         let names = []
@@ -118,6 +119,10 @@ const updateRecord = (data, newRecord, timelineMessage) => {
       },
       enumerable: true
     })
+  }
+
+  if (!newRecord.id){
+    newRecord.id = faker.random.uuid()
     records.push(newRecord)
   }
   else {
@@ -332,6 +337,7 @@ router.get(['/new-record/new', '/new-record'], function (req, res) {
   const data = req.session.data
   deleteTempData(data)
   _.set(data, 'record', { status: 'Draft' })
+  _.set(data, 'record.events.items', [])
   res.redirect('/new-record/record-setup')
 })
 
