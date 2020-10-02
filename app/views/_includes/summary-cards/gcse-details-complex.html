@@ -2,8 +2,8 @@
 
 
 {% set expectedDuration = 'Not provided' %}
-{% if record.assessmentDetails.duration | falsify %}
-  {% set expectedDuration = record.assessmentDetails.duration + " years" %}
+{% if record.programmeDetails.duration | falsify %}
+  {% set expectedDuration = record.programmeDetails.duration + " years" %}
 {% endif %}
 
 {% set gcseRows = [] %}

@@ -2,10 +2,13 @@
 
 {% set degreeCount = record.degree.items | length %}
 
+{# Degree data is stored in a temp location before being merged back to array #}
+
 {# Get degree (if it exists) from existing data #}
 {% set degree = record.degree.items[itemIndex] %}
-{# Merge with temp store (temp store has) #}
+{# Merge with temp store #}
 {% set degreeTemp = degree | mergeObjects(data.degreeTemp) %}
+
 {% set isInternational = degreeTemp.isInternational | falsify %}
 
 {% if degreeCount < 1 %}
@@ -14,13 +17,11 @@
 {% else %}
   {% set ukHintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
 {% endif %}
-{% set intHintHtml = "For example, Bachelor degree, Bachelor of Arts, <span lang=\"fr\">Diplôme</span>, <span lang=\"es\">Licenciatura</span>" %}
 
-<p class="govuk-body">Enter the details of the degree as they appear on the certificate, translating them into English if necessary</p>
-
-<p class="govuk-body">If the trainee or candidate has further postgraduate degrees, you’ll be able to add them next.</p>
+<p class="govuk-body">If the trainee or candidate has further postgraduate degrees, you can add them next.</p>
 
 {% set ukConditionalHtml %}
+  {# typeUK ultimately gets merged back in to type, hence value checking both #}
   {{ appAutocomplete({
     label: {
       text: "Enter degree type"
@@ -39,15 +40,26 @@
 
 
 {% set internationalConditionalHtml %}
-  {{ govukInput({
-    value: (degreeTemp.type or degreeTemp.typeUK) if isInternational,
-    label: {
-      text: "Type of qualification"
+
+  {% set naricItems = [] %}
+  {% for naricItem in data.ukComparableDegrees %}
+    {% set naricItems = naricItems | push({
+      text: naricItem,
+      checked: checked(degreeTemp.type, naricItem)
+    }) %}
+  {% endfor %}
+  {% set naricItems = naricItems | push({divider: 'or'}) %}
+  {% set naricItems = naricItems | push({text: 'NARIC not provided'}) %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Select the NARIC comparable UK degree"
+      }
     },
-    hint: {
-      html: intHintHtml
-    }
+    items: naricItems
   } | decorateAttributes(degreeTemp, "degreeTemp.typeInt")) }}
+  
 {% endset %}
 
 {{ govukRadios({
@@ -68,7 +80,7 @@
     text: "Non-UK degree",
     conditional: {
       html: internationalConditionalHtml
-    } if false
+    }
   }]
 } | decorateAttributes(degreeTemp, "degreeTemp.isInternational")) }}
 

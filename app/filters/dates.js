@@ -274,6 +274,16 @@ filters.moment = (date, name, ...args) => {
   return moment(date)[name](...args)
 }
 
+
+filters.time = (str) => {
+  var m = moment(str)
+  if (m.minutes() > 0) {
+    return m.format('h:mma')
+  } else {
+    return m.format('ha')
+  }
+}
+  
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app
 // -------------------------------------------------------------------

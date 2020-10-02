@@ -24,11 +24,13 @@ const generateAssessmentOnlyDetails = require('../app/data/generators/assessment
 const generateDegree = require('../app/data/generators/degree')
 const generateGce = require('../app/data/generators/gce')
 const generateGcse = require('../app/data/generators/gcse')
+const generateEvents = require('../app/data/generators/events')
 
 // Populate application data object with fake data
 const generateFakeApplication = (params = {}) => {
 
   const status = params.status || generateStatus(faker)
+  const events = generateEvents(faker, { status })
 
   // Dates
   let updatedDate, submittedDate, deferredDate
@@ -110,7 +112,8 @@ const generateFakeApplication = (params = {}) => {
     contactDetails,
     programmeDetails,
     gcse,
-    degree
+    degree,
+    events
 
     // gcse: params.gcse || generateGcse(faker, personalDetails.isInternationalTrainee),
     // englishLanguageQualification: params.englishLanguageQualification || generateEnglishLanguageQualification(faker),
@@ -156,7 +159,8 @@ const generateFakeApplications = () => {
     personalDetails: {
       givenName: "Bea",
       familyName: "Waite",
-      sex: "Female"
+      sex: "Female",
+      nationality: ["French"]
     },
   }))
 

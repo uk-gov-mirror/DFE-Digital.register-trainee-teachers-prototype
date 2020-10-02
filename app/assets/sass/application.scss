@@ -28,6 +28,8 @@ $govuk-assets-path: '/govuk/assets/';
 @import "components/cookie-banner";
 @import "components/record-header";
 @import "components/record-actions";
+@import "components/sub-navigation";
+@import "components/timeline";
 
 // Overrides
 @import "overrides/govuk-panel";

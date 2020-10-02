@@ -11,11 +11,11 @@ module.exports = (faker, status) => {
   // ])
 
   const ageRanges = {
-    "one": "5 - 11 Programme",
-    "two": "11 - 16 Programme",
-    "three": "11 - 18 Programme",
-    "four": "3 - 11 Programme",
-    "five": "3 - 7 Programme"
+    "one": "5 to 11 programme",
+    "two": "11 to 16 programme",
+    "three": "11 to 18 programme",
+    "four": "3 to 11 programme",
+    "five": "3 to 7 programme"
   }
 
   const selectedAgeRange = weighted.select({
@@ -54,20 +54,20 @@ module.exports = (faker, status) => {
 
 
 // Age range options (only top 5 used - which make up majority)
-// "0 - 5 Programme",
-// "3 - 7 Programme",
-// "3 - 8 Programme",
-// "3 - 9 Programme",
-// "3 - 11 Programme",
-// "5 - 9 Programme",
-// "5 - 11 Programme",
-// "5 - 14 Programme",
-// "7 - 11 Programme",
-// "7 - 14 Programme",
-// "7 - 16 Programme",
-// "9 - 14 Programme",
-// "9 - 16 Programme",
-// "11 - 16 Programme",
-// "11 - 19 Programme",
-// "14 - 19 Programme",
-// "14 - 19 Diploma",
+// "0 to 5 programme",
+// "3 to 7 programme",
+// "3 to 8 programme",
+// "3 to 9 programme",
+// "3 to 11 programme",
+// "5 to 9 programme",
+// "5 to 11 programme",
+// "5 to 14 programme",
+// "7 to 11 programme",
+// "7 to 14 programme",
+// "7 to 16 programme",
+// "9 to 14 programme",
+// "9 to 16 programme",
+// "11 to 16 programme",
+// "11 to 19 programme",
+// "14 to 19 programme",
+// "14 to 19 Diploma",
