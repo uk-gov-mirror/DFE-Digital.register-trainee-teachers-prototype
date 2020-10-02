@@ -18,6 +18,14 @@ const deleteTempData = (data) => {
   delete data.record
 }
 
+const addEvent = (record, content) => {
+  record.events.items.push({
+    title: content,
+    user: 'Provider',
+    date: new Date()
+  })
+}
+
 // Append referrer to string if it exists
 const getReferrer = referrer => {
   if (referrer && referrer != 'undefined'){
@@ -25,6 +33,26 @@ const getReferrer = referrer => {
   }
   else return '' 
 }
+
+// Stolen from manage
+const getTimeline = (record) => {
+  return record.events.items.map(item => {
+    return {
+      label: {
+        text: item.title
+      },
+      datetime: {
+        timestamp: item.date,
+        type: 'datetime'
+      },
+      byline: {
+        text: item.user
+      }
+      // link: getLink(item, record)
+    }
+  }).reverse()
+}
+
 
 // Check if all sections are complete
 const recordIsComplete = record => {
@@ -51,12 +79,16 @@ const recordIsComplete = record => {
 }
 
 // Update or create a record
-const updateRecord = (data, newRecord) => {
+const updateRecord = (data, newRecord, timelineMessage) => {
 
   if (!newRecord) return false
   
   let records = data.records
   newRecord.updatedDate = new Date()
+  if (timelineMessage !== false){
+    let message = (timelineMessage) ? timelineMessage : "Record updated"
+    addEvent(newRecord, message)
+  }
   if (newRecord.addressType == "domestic"){
     delete newRecord.contactDetails.internationalAddress
   }
@@ -371,7 +403,7 @@ router.post('/new-record/save', (req, res) => {
     newRecord.status = "Pending TRN"
     newRecord.submittedDate = new Date()
     deleteTempData(data)
-    updateRecord(data, newRecord)
+    updateRecord(data, newRecord, "Trainee submitted for TRN")
     req.session.data.recordId = newRecord.id //temp store for id to link to the record
     res.redirect('/new-record/submitted')
   }
@@ -424,7 +456,7 @@ router.get('/record/:uuid/trn', (req, res) => {
         'max': 9999999
       })
       deleteTempData(data)
-      updateRecord(data, newRecord)
+      updateRecord(data, newRecord, "TRN received")
     }
     res.redirect('/record/' + req.params.uuid)
   }
@@ -442,10 +474,22 @@ router.get('/record/:uuid/qts', (req, res) => {
     if (newRecord.status == 'QTS recommended'){
       newRecord.status = 'QTS awarded'
       deleteTempData(data)
-      updateRecord(data, newRecord)
+      addEvent(newRecord, "Trainee recommended for QTS")
+      updateRecord(data, newRecord, "QTS awarded")
     }
     res.redirect('/record/' + req.params.uuid)
   }
+})
+
+// Get timeline items and pass to view
+router.get('/record/:uuid/timeline', (req, res) => {
+  const data = req.session.data
+  const record = data.record
+  if (!record){
+    res.redirect('/record/:uuid')
+  }
+  let timeline = getTimeline(record)
+  res.render(`record/timeline`, {timeline})
 })
 
 // Copy qts data back to real record
@@ -460,7 +504,7 @@ router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
     newRecord.status = 'QTS recommended'
     newRecord.qtsRecommendedDate = new Date()
     deleteTempData(data)
-    updateRecord(data, newRecord)
+    updateRecord(data, newRecord, "Trainee recommended for QTS")
     req.flash('success', 'Trainee recommended for QTS')
     res.redirect('/record/' + req.params.uuid)
   }
@@ -480,7 +524,7 @@ router.post('/record/:uuid/defer/confirm', (req, res) => {
     newRecord.status = 'Deferred'
     delete newRecord.deferredDateRadio
     deleteTempData(data)
-    updateRecord(data, newRecord)
+    updateRecord(data, newRecord, "Trainee deferred")
     req.flash('success', 'Trainee deferred')
     res.redirect('/record/' + req.params.uuid)
   }
@@ -519,7 +563,7 @@ router.post('/record/:uuid/reinstate/confirm', (req, res) => {
     newRecord.status = newRecord.previousStatus || 'TRN received'
     delete newRecord.previousStatus
     deleteTempData(data)
-    updateRecord(data, newRecord)
+    updateRecord(data, newRecord, "Trainee reinstated")
     req.flash('success', 'Trainee reinstated')
     res.redirect('/record/' + req.params.uuid)
   }
