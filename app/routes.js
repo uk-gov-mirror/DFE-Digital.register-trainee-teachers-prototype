@@ -609,6 +609,9 @@ router.post('/record/:uuid/withdraw/confirm', (req, res) => {
     newRecord.previousStatus = newRecord.status
     newRecord.status = 'Withdrawn'
     delete newRecord.withdrawDateRadio
+    if (newRecord.withdrawalReason != "For another reason") {
+      delete newRecord.withdrawalReasonOther
+    }
     deleteTempData(data)
     updateRecord(data, newRecord, "Trainee withdrawn")
     req.flash('success', 'Trainee withdrawn')
