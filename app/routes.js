@@ -9,7 +9,7 @@ const _ = require('lodash')
 // Return first part of url to use in redirects
 const getRecordPath = req => {
   let recordType = req.params.recordtype
-  return (recordType == 'record') ? ('/record/' + req.params.uuid) : '/new-record'
+  return (recordType == 'record') ? (`/record/${req.params.uuid}`) : '/new-record'
 }
 
 // Delete temporary stores of data
@@ -464,7 +464,7 @@ router.get('/record/:uuid/trn', (req, res) => {
       deleteTempData(data)
       updateRecord(data, newRecord, "TRN received")
     }
-    res.redirect('/record/' + req.params.uuid)
+    res.redirect(`/record/${req.params.uuid}`)
   }
 })
 
@@ -477,13 +477,15 @@ router.get('/record/:uuid/qts', (req, res) => {
     res.redirect('/record/:uuid')
   }
   else {
-    if (newRecord.status == 'QTS recommended'){
+    if (newRecord.status == 'QTS recommended' || newRecord.status == 'TRN received'){
       newRecord.status = 'QTS awarded'
+      _.set(newRecord, 'programmeDetails.endDate', (new Date()))
+      _.set(newRecord, 'qtsDetails.qtsDetails.standardsAssessedOutcome', "Passed")
       deleteTempData(data)
       addEvent(newRecord, "Trainee recommended for QTS")
       updateRecord(data, newRecord, "QTS awarded")
     }
-    res.redirect('/record/' + req.params.uuid)
+    res.redirect(`/record/${req.params.uuid}`)
   }
 })
 
@@ -499,7 +501,18 @@ router.get('/record/:uuid/timeline', (req, res) => {
 })
 
 // Copy qts data back to real record
-router.post('/record/:uuid/qts/update', (req, res) => {
+router.post('/record/:uuid/qts/outcome', (req, res) => {
+  const data = req.session.data
+  if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'Not passed'){
+    res.redirect(`/record/${req.params.uuid}/qts/assessment-not-passed`)
+  }
+  else {
+    res.redirect(`/record/${req.params.uuid}/qts/confirm`)
+  }
+})
+
+// Copy qts data back to real record
+router.post('/record/:uuid/qts/confirm', (req, res) => {
   const data = req.session.data
   const newRecord = data.record
   // Update failed or no data
@@ -532,7 +545,7 @@ router.post('/record/:uuid/defer/confirm', (req, res) => {
     deleteTempData(data)
     updateRecord(data, newRecord, "Trainee deferred")
     req.flash('success', 'Trainee deferred')
-    res.redirect('/record/' + req.params.uuid)
+    res.redirect(`/record/${req.params.uuid}`)
   }
 })
 
@@ -553,7 +566,7 @@ router.post('/record/:uuid/defer', (req, res) => {
     if (radioChoice == "Yesterday") {
       newRecord.deferredDate = filters.toDateArray(moment().subtract(1, "days"))
     } 
-    res.redirect('/record/' + req.params.uuid + '/defer/confirm')
+    res.redirect(`/record/${req.params.uuid}/defer/confirm`)
   }
 })
 
@@ -571,7 +584,7 @@ router.post('/record/:uuid/reinstate/confirm', (req, res) => {
     deleteTempData(data)
     updateRecord(data, newRecord, "Trainee reinstated")
     req.flash('success', 'Trainee reinstated')
-    res.redirect('/record/' + req.params.uuid)
+    res.redirect(`/record/${req.params.uuid}`)
   }
 })
 
@@ -592,7 +605,7 @@ router.post('/record/:uuid/reinstate', (req, res) => {
     if (radioChoice == "Yesterday") {
       newRecord.reinstateDate = filters.toDateArray(moment().subtract(1, "days"))
     } 
-    res.redirect('/record/' + req.params.uuid + '/reinstate/confirm')
+    res.redirect(`/record/${req.params.uuid}/reinstate/confirm`)
   }
 })
 
@@ -613,7 +626,7 @@ router.post(['/record/:uuid/:page/update', '/record/:uuid/update'], (req, res) =
       res.redirect(`/record/${req.params.uuid}/details-and-education`)
     }
     else {
-      res.redirect('/record/' + req.params.uuid)
+      res.redirect(`/record/${req.params.uuid}`)
     }
   }
 })
