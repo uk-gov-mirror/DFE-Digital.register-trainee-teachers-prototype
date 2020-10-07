@@ -499,7 +499,7 @@ router.get('/record/:uuid/timeline', (req, res) => {
 })
 
 // Copy qts data back to real record
-router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
+router.post('/record/:uuid/qts/update', (req, res) => {
   const data = req.session.data
   const newRecord = data.record
   // Update failed or no data
@@ -511,8 +511,8 @@ router.post('/record/:uuid/qts/qts-recommended', (req, res) => {
     newRecord.qtsRecommendedDate = new Date()
     deleteTempData(data)
     updateRecord(data, newRecord, "Trainee recommended for QTS")
-    req.flash('success', 'Trainee recommended for QTS')
-    res.redirect('/record/' + req.params.uuid)
+    // req.flash('success', 'Trainee recommended for QTS')
+    res.redirect(`/record/${req.params.uuid}/qts/recommended`)
   }
 })
 
