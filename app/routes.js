@@ -596,6 +596,61 @@ router.post('/record/:uuid/reinstate', (req, res) => {
   }
 })
 
+// Copy withdraw data back to real record
+router.post('/record/:uuid/withdraw/confirm', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    newRecord.previousStatus = newRecord.status
+    newRecord.status = 'Withdrawn'
+    delete newRecord.withdrawDateRadio
+    deleteTempData(data)
+    updateRecord(data, newRecord, "Trainee withdrawn")
+    req.flash('success', 'Trainee withdrawn')
+    res.redirect('/record/' + req.params.uuid)
+  }
+})
+
+// Get dates for withdraw flow
+router.post('/record/:uuid/withdraw', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    let radioChoice = newRecord.withdrawalDateRadio
+    if (radioChoice == "Today") {
+      newRecord.withdrawalDate = filters.toDateArray(filters.today())
+    } 
+    if (radioChoice == "Yesterday") {
+      newRecord.withdrawalDate = filters.toDateArray(moment().subtract(1, "days"))
+    } 
+    res.redirect('/record/' + req.params.uuid + '/withdraw/confirm')
+  }
+})
+
+// Combine radio and text inputs
+// if (newDegree.baseGrade){
+//   if (newDegree.baseGrade == "Grade known"){
+//     newDegree.grade = newDegree.otherGrade
+//     delete newDegree.baseGrade
+//     delete newDegree.otherGrade
+//   }
+//   else {
+//     newDegree.grade = newDegree.baseGrade
+//     delete newDegree.baseGrade
+//     delete newDegree.otherGrade
+//   }
+// }
+
 // Copy temp record back to real record
 router.post(['/record/:uuid/:page/update', '/record/:uuid/update'], (req, res) => {
   const data = req.session.data
