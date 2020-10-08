@@ -609,6 +609,50 @@ router.post('/record/:uuid/reinstate', (req, res) => {
   }
 })
 
+// Copy withdraw data back to real record
+router.post('/record/:uuid/withdraw/confirm', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    newRecord.previousStatus = newRecord.status
+    newRecord.status = 'Withdrawn'
+    delete newRecord.withdrawDateRadio
+    if (newRecord.withdrawalReason != "For another reason") {
+      delete newRecord.withdrawalReasonOther
+    }
+    deleteTempData(data)
+    updateRecord(data, newRecord, "Trainee withdrawn")
+    req.flash('success', 'Trainee withdrawn')
+    res.redirect('/record/' + req.params.uuid)
+  }
+})
+
+// Get dates for withdraw flow
+router.post('/record/:uuid/withdraw', (req, res) => {
+  const data = req.session.data
+  const newRecord = data.record
+
+  // Update failed or no data
+  if (!newRecord){
+    res.redirect('/record/:uuid')
+  }
+  else {
+    let radioChoice = newRecord.withdrawalDateRadio
+    if (radioChoice == "Today") {
+      newRecord.withdrawalDate = filters.toDateArray(filters.today())
+    } 
+    if (radioChoice == "Yesterday") {
+      newRecord.withdrawalDate = filters.toDateArray(moment().subtract(1, "days"))
+    } 
+    res.redirect('/record/' + req.params.uuid + '/withdraw/confirm')
+  }
+})
+
 // Copy temp record back to real record
 router.post(['/record/:uuid/:page/update', '/record/:uuid/update'], (req, res) => {
   const data = req.session.data

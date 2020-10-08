@@ -1,4 +1,3 @@
-
 {% set expectedDuration = 'Not provided' %}
 {% if record.programmeDetails.duration | falsify %}
   {% set expectedDuration = record.programmeDetails.duration + " years" %}
@@ -96,15 +95,14 @@
   }) %}
 {% endif %}
 
-{% set deferredContent %}
-    {{govukTag({
-      text: "Deferred",
-      classes: "govuk-tag--yellow govuk-!-margin-bottom-2"
-    })}} <br>
-    Deferral date: {{record.deferredDate | govukDate}}
-{% endset %}
-
 {% if (record.status == "Deferred") %}
+  {% set deferredContent %}
+      {{govukTag({
+        text: "Deferred",
+        classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
+      })}} <br>
+      Deferral date: {{record.deferredDate | govukDate}}
+  {% endset %}
 
   {% set studentRecordRows = studentRecordRows | push({
     key: {
@@ -112,6 +110,25 @@
     },
     value: {
       html: deferredContent
+    }
+  }) %}
+{% endif %}
+
+{% if (record.status == "Withdrawn") %}
+  {% set withdrawalContent %}
+      {{govukTag({
+        text: "Withdrawn",
+        classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
+      })}} <br>
+      Withdrawal date: {{record.withdrawalDate | govukDate}}
+  {% endset %}
+
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: "Trainee status"
+    },
+    value: {
+      html: withdrawalContent
     }
   }) %}
 {% endif %}
@@ -142,18 +159,14 @@
 
 {% set studentRecordRows = studentRecordRows | combineArrays(datesRows) %}
 
-
-
 {% set studentRecordHtml %}
   {{ govukSummaryList({
     rows: studentRecordRows
   }) }}
 {% endset %}
 
-
 {{ appSummaryCard({
   classes: "govuk-!-margin-bottom-6",
   titleText: "Record details",
   html: studentRecordHtml
 }) }}
-

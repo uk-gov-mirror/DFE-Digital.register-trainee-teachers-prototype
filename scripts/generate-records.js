@@ -33,7 +33,7 @@ const generateFakeApplication = (params = {}) => {
   const events = generateEvents(faker, { status })
 
   // Dates
-  let updatedDate, submittedDate, deferredDate
+  let updatedDate, submittedDate, deferredDate, withdrawalDate
   // Make sure updated date is after submitted date
   if (params.submittedDate){
     updatedDate = params.updatedDate || faker.date.between(
@@ -58,6 +58,11 @@ const generateFakeApplication = (params = {}) => {
     deferredDate = params.deferredDate || faker.date.between(
       moment(submittedDate),
       moment(updatedDate))
+  }
+  // If the status is Withdrawn 
+  if (status === 'Withdrawn') {    
+    // Make sure withdrawal date is the same as the last updated date
+    withdrawalDate = params.updatedDate
   }
 
 
@@ -106,6 +111,7 @@ const generateFakeApplication = (params = {}) => {
     updatedDate,
     submittedDate,
     deferredDate,
+    withdrawalDate,
     personalDetails,
     diversity,
     isInternationalTrainee,

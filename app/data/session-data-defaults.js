@@ -38,6 +38,7 @@ let awards = require('./awards')
 
 let ittSubjects = require('./itt-subjects').map( subject => subject.attributes.subject_name )
 
+let withdrawalReasons = require('./withdrawal-reasons')
 
 module.exports = {
   assessmentOnlyAgeRanges,
@@ -50,7 +51,8 @@ module.exports = {
   ukComparableDegrees,
   countries,
   awards,
-  ittSubjects
+  ittSubjects,
+  withdrawalReasons
   // Insert values here
 
 }
