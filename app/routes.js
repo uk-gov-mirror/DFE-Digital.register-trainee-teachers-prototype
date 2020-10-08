@@ -640,20 +640,6 @@ router.post('/record/:uuid/withdraw', (req, res) => {
   }
 })
 
-// Combine radio and text inputs
-// if (newDegree.baseGrade){
-//   if (newDegree.baseGrade == "Grade known"){
-//     newDegree.grade = newDegree.otherGrade
-//     delete newDegree.baseGrade
-//     delete newDegree.otherGrade
-//   }
-//   else {
-//     newDegree.grade = newDegree.baseGrade
-//     delete newDegree.baseGrade
-//     delete newDegree.otherGrade
-//   }
-// }
-
 // Copy temp record back to real record
 router.post(['/record/:uuid/:page/update', '/record/:uuid/update'], (req, res) => {
   const data = req.session.data
