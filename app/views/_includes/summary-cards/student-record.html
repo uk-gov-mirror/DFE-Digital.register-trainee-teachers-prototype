@@ -99,7 +99,7 @@
   {% set deferredContent %}
       {{govukTag({
         text: "Deferred",
-        classes: "govuk-tag--yellow govuk-!-margin-bottom-2"
+        classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
       })}} <br>
       Deferral date: {{record.deferredDate | govukDate}}
   {% endset %}
@@ -118,7 +118,7 @@
   {% set withdrawalContent %}
       {{govukTag({
         text: "Withdrawn",
-        classes: "govuk-tag--red govuk-!-margin-bottom-2"
+        classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
       })}} <br>
       Withdrawal date: {{record.withdrawalDate | govukDate}}
   {% endset %}
