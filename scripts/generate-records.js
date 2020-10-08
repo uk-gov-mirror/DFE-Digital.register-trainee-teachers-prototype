@@ -61,10 +61,8 @@ const generateFakeApplication = (params = {}) => {
   }
   // If the status is Withdrawn 
   if (status === 'Withdrawn') {    
-    // Make sure deferral date is between submitted and updated date
-    withdrawalDate = params.withdrawalDate || faker.date.between(
-      moment(submittedDate),
-      moment(updatedDate))
+    // Make sure withdrawal date is the same as the last updated date
+    withdrawalDate = params.updatedDate
   }
 
 
