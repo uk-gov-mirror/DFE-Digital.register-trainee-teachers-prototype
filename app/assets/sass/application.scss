@@ -33,6 +33,7 @@ $govuk-assets-path: '/govuk/assets/';
 @import "components/record-actions";
 @import "components/sub-navigation";
 @import "components/timeline";
+@import "components/status-card";
 
 // Overrides
 @import "overrides/govuk-panel";

@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h1 class="govuk-heading-l">{{serviceName}}</h1>
+    <p class="govuk-body">Collecting and managing trainee teacher registration data.</p>
+    {{ govukButton({
+      text: "Add a trainee",
+      href: "./new-record/new",
+      isStartButton: true
+    }) }}
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+    <div class="govuk-grid-row">
+
+      <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m"><a href="#" class="govuk-link">View trainee records</a></h2>
+        <p class="govuk-body">All the trainee teachers in your organisation.</p>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m"><a href="#" class="govuk-link">Guidance</a></h2>
+        <p class="govuk-body">Service guidance and route specific data requirements.</p>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m"><a href="#" class="govuk-link">Notifications</a></h2>
+        <p class="govuk-body">Things to action and other stuff.</p>
+      </div>
+
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+    <h2 class="govuk-heading-m">Trainee status overview</h2>
+    
+    <div class="govuk-grid-row govuk-!-margin-bottom-6">
+
+      <div class="govuk-grid-column-one-half">
+        <div class="app-card app-card--pending-trn">
+          <span class="app-card__count">59</span>
+          pending TRN
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-half">
+        <div class="app-card app-card--trn-received">
+          <span class="app-card__count">597</span>
+          TRN receieved
+        </div>
+      </div>
+
+    </div>
+
+    <div class="govuk-grid-row govuk-!-margin-bottom-6">
+
+      <div class="govuk-grid-column-one-third">
+        <div class="app-card app-card--draft">
+          <span class="app-card__count">19</span>
+          draft records
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <div class="app-card app-card--deferred">
+          <span class="app-card__count">6</span>
+          deferred
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <div class="app-card app-card--withdrawn">
+          <span class="app-card__count">2</span>
+          withdrawn
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}
