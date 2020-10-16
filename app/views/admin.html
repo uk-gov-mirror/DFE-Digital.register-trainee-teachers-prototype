@@ -7,29 +7,43 @@
 {# {% set pageAction = value %} #}
 
 {% block content %}
-
-
+{{super()}}
 <div class="govuk-grid-row">
-
   <div class="govuk-grid-column-two-thirds-from-desktop">
     <h1 class="govuk-heading-l">{{pageHeading}}</h1>
+    <form action="" method="post">
+      {{ govukCheckboxes({
+        items: [
+          {
+            value: 'true',
+            text: "Include timeline on records"
+          }
+        ]
+      } | decorateAttributes(data, "data.settings.includeTimeline")) }}
 
-      <form action="" method="post">
-        {{data.settings | log}}
+      {% set allTrainingRoutes = [] %}
+      {% for route in data.allTrainingRoutes %}
+        {% set allTrainingRoutes = allTrainingRoutes | push({
+          text: route
+        }) %}
+      {% endfor %}
 
-        {{ govukCheckboxes({
-          items: [
-            {
-              value: 'true',
-              text: "Include timeline on records"
-            }
-          ]
-        } | decorateAttributes(data, "data.settings.includeTimeline")) }}
+      {{ govukCheckboxes({
+        fieldset: {
+          legend: {
+            text: "Enabled training routes",
+            classes: "govuk-fieldset__legend--s"
+          }
+        },
+        items: allTrainingRoutes
+      } | decorateAttributes(data, "data.settings.enabledTrainingRoutes")) }}
 
-        {{ govukButton({
-          "text": "Update"
-        }) }}
-   
+      {{ govukButton({
+        "text": "Update"
+      }) }}
+
+      <input name="successFlash" type="hidden" value="Prototype settings updated">
+
     </form>
 
   </div>
