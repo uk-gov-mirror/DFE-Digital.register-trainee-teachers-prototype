@@ -1,13 +1,13 @@
 {% extends "_templates/_new-record.html" %}
 
-{% set pageHeading = "Check record" %}
+{% set pageHeading = "Review trainee record" %}
 
 {% set formAction = "./save" %}
 
 {% set hideReturnLink = true %}
 {% set showIncomplete = true %}
 {% set backLink = './overview' %}
-{% set backText = 'Back to overview' %}
+{% set backText = 'Back to draft record' %}
 {% set gridColumn = 'govuk-grid-column-full' %}
 
 
@@ -28,7 +28,13 @@
       }) }}
     {% endif %}
 
-    <span class="govuk-caption-l">{{'Add a trainee' if not record.id else 'Draft record'}}</span>
+    {% set draftRecordName %}
+      {% if record.personalDetails.shortName %}
+       for {{record.personalDetails.shortName}}
+      {% endif %}
+    {% endset %}
+
+    <span class="govuk-caption-l">{{'Draft record' + draftRecordName}}</span>
     <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
     {% if recordIsComplete %}
@@ -48,9 +54,8 @@
   </div>
 </div>
 
+<h2 class="govuk-heading-m">Route into teaching</h2>
 {% include "_includes/summary-cards/record-setup.html" %}
-
-<h2 class="govuk-heading-m">Programme details</h2>
 {% include "_includes/summary-cards/programme-details.html" %}
 
 <h2 class="govuk-heading-m">Trainee details</h2>
@@ -71,7 +76,7 @@
 
 
 {{ govukButton({
-  text: "Submit for TRN registration"
+  text: "Submit this record for a teacher reference number"
 }) }}
 
 <p class="govuk-body"><a href="./save-as-draft" class="govuk-link">Return to this draft record later</a></p>

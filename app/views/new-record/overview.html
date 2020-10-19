@@ -1,6 +1,6 @@
 {% extends "_templates/_new-record.html" %}
 
-{% set pageHeading = "Overview" if not data.record.id else (data.record.personalDetails.shortName or "Overview") %}
+{% set pageHeading = "Add a trainee" %}
 
 {% set hideReturnLink = true %}
 {% set backLink = '/records' %}
@@ -10,26 +10,29 @@
 
 {% block formContent %}
 
-<span class="govuk-caption-l">{{'Add a trainee' if not record.id else 'Draft record'}}</span>
+{% set draftRecordName %}
+  {% if record.personalDetails.shortName %}
+   for {{record.personalDetails.shortName}}
+  {% endif %}
+{% endset %}
+
+<span class="govuk-caption-l">{{'Draft record' + draftRecordName}}</span>
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
+
+<h2 class="govuk-heading-m">Route into teaching</h2>
 
 {{ appTaskList({
   classes: "govuk-!-margin-bottom-8",
   items: [{
-    text: "Record setup",
+    text: "Type of training",
     href: "record-setup",
     id: "record-type",
     tag: {
       classes: 'Completed' | getStatusClass,
       text: 'Completed'
     }
-  }]
-}) if not closed }}
-
-<h2 class="govuk-heading-m">Programme</h2>
-{{ appTaskList({
-  classes: "govuk-!-margin-bottom-8",
-  items: [
+  },
   {
     text: "Programme details",
     href: "programme-details" | reviewIfInProgress(record.programmeDetails),
@@ -104,11 +107,12 @@
 
 
 {{ govukButton({
-  text: "Check and submit for TRN",
+  text: "Review this record",
   href: "check-record"
 }) }}
 
 <p class="govuk-body"><a href="./save-as-draft" class="govuk-link">Return to this draft record later</a></p>
+{# <p class="govuk-body"><a href="./save-as-draft" class="govuk-link">Save this as draft</a></p> #}
 
 {% endblock %}
 
