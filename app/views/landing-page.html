@@ -15,7 +15,7 @@
     <div class="govuk-grid-row">
 
       <div class="govuk-grid-column-one-third">
-        <h2 class="govuk-heading-m"><a href="#" class="govuk-link">View trainee records</a></h2>
+        <h2 class="govuk-heading-m"><a href="/records" class="govuk-link">View trainee records</a></h2>
         <p class="govuk-body">All the trainee teachers in your organisation.</p>
       </div>
       <div class="govuk-grid-column-one-third">
@@ -36,14 +36,15 @@
     <div class="govuk-grid-row govuk-!-margin-bottom-6">
 
       <div class="govuk-grid-column-one-half">
-        <div class="app-card app-card--pending-trn">
-          <span class="app-card__count">59</span>
+        <div class="status-card status-card--pending-trn">
+          <span class="status-card__count">59</span>
           pending TRN
         </div>
       </div>
       <div class="govuk-grid-column-one-half">
-        <div class="app-card app-card--trn-received">
-          <span class="app-card__count">597</span>
+        <div class="status-card status-card--trn-received">
+          {% set draftCount = getCanReinstate | length %}
+          <span class="status-card__count">{{ draftCount }} </span>
           TRN receieved
         </div>
       </div>
@@ -51,22 +52,23 @@
     </div>
 
     <div class="govuk-grid-row govuk-!-margin-bottom-6">
-
+        
       <div class="govuk-grid-column-one-third">
-        <div class="app-card app-card--draft">
-          <span class="app-card__count">19</span>
+        <div class="status-card status-card--draft">
+           {% set draftRecords = record.draft | length %}
+          <span class="status-card__count">{{draftRecords | length}}</span>
           draft records
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
-        <div class="app-card app-card--deferred">
-          <span class="app-card__count">6</span>
+        <div class="status-card status-card--deferred">
+          <span class="status-card__count">6</span>
           deferred
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
-        <div class="app-card app-card--withdrawn">
-          <span class="app-card__count">2</span>
+        <div class="status-card status-card--withdrawn">
+          <span class="status-card__count">2</span>
           withdrawn
         </div>
       </div>

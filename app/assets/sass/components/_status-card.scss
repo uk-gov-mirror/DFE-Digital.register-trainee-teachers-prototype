@@ -1,4 +1,4 @@
-.app-card {
+.status-card {
   background-color: govuk-colour("light-grey");
   display: block;
   padding: govuk-spacing(2);
@@ -10,32 +10,32 @@
   }
 }
 
-.app-card--draft {
+.status-card--draft {
   color: govuk-shade(govuk-colour("dark-grey", $legacy: "grey-1"), 30);
   background: govuk-tint(govuk-colour("dark-grey", $legacy: "grey-1"), 90);
 }
 
-.app-card--pending-trn {
+.status-card--pending-trn {
   color: govuk-shade(govuk-colour("turquoise"), 60);
   background: govuk-tint(govuk-colour("turquoise"), 70);
 }
 
-.app-card--trn-received {
+.status-card--trn-received {
   color: govuk-shade(govuk-colour("blue"), 30);
   background: govuk-tint(govuk-colour("blue"), 80);
 }
 
-.app-card--deferred {
+.status-card--deferred {
   color: govuk-shade(govuk-colour("yellow"), 65);
   background: govuk-tint(govuk-colour("yellow"), 75);
 }
 
-.app-card--withdrawn {
+.status-card--withdrawn {
   color: govuk-shade(govuk-colour("red"), 30);
   background: govuk-tint(govuk-colour("red"), 80);
 }
 
-.app-card__count {
+.status-card__count {
   @include govuk-font($size: 36, $weight: bold);
   display: block;
 }
