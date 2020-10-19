@@ -1,3 +1,4 @@
+{# <span class="govuk-caption-l">{{'Add a trainee'}}</span> #}
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
 {% set enabledTrainingRoutes = [] %}
@@ -9,7 +10,7 @@
 {{ govukRadios({
   fieldset: {
     legend: {
-      text: "What type of training route is this?",
+      text: "What type of training are they on?",
       classes: "govuk-fieldset__legend--s"
     }
   },
@@ -33,5 +34,4 @@
 {{ govukButton({
   text: "Continue"
 }) }}
-
 
