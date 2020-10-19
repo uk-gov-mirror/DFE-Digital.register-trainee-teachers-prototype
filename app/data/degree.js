@@ -1633,10 +1633,12 @@ module.exports = () => {
 
   const ukComparableDegrees = [
     'Bachelor degree',
-    'Bachelor (Ordinary) degree',
-    'Bachelor (Honours) degree',
-    'Postgraduate Certificate / Postgraduate Diploma',
-    'Master’s degree / Integrated Master’s degree',
+    // 'Bachelor (Ordinary) degree',
+    // 'Bachelor (Honours) degree',
+    'Ordinary bachelor degree',
+    'Bachelor degree with honours',
+    'Postgraduate certificate or postgraduate diploma',
+    'Master’s degree or Integrated Master’s degree',
     // 'Doctor of Philosophy degree',
     // 'Post Doctoral award'
   ]

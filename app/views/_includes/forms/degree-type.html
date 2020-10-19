@@ -13,12 +13,15 @@
 
 {% if degreeCount < 1 %}
 {# {% if degreeCount < 1 and action == "add" %} #}
-  {% set ukHintText = "For example, BA, BSc or other (please specify)" %}
+  {# {% set ukHintText = "For example, BA, BSc or other (please specify)" %} #}
+  {% set ukHintText = "For example, BA or BSc" %}
 {% else %}
-  {% set ukHintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
+  {% set ukHintText = "For example, BA, BSc, Masters or PhD" %}
 {% endif %}
 
-<p class="govuk-body">If the trainee or candidate has further postgraduate degrees, you can add them next.</p>
+{# <p class="govuk-body">If the trainee or candidate has further postgraduate degrees, you can add them next.</p> #}
+<p class="govuk-body">If the trainee has any other degrees, you can add them next.</p>
+
 
 {% set ukConditionalHtml %}
   {# typeUK ultimately gets merged back in to type, hence value checking both #}
@@ -65,8 +68,8 @@
 {{ govukRadios({
   fieldset: {
     legend: {
-      text: "What type of degree are you adding?",
-      classes: "govuk-fieldset__legend--s govuk-visually-hidden"
+      text: "Is this a UK or non-UK degree?",
+      classes: "govuk-fieldset__legend--m _govuk-visually-hidden"
     }
   },
   items: [{
