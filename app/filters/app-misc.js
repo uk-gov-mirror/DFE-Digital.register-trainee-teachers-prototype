@@ -1,6 +1,8 @@
 // -------------------------------------------------------------------
 // Imports and setup
 // -------------------------------------------------------------------
+const _ = require('lodash')
+const trainingRoutes = require('./../data/training-routes')
 
 // Leave this filters line
 var filters = {}
@@ -42,6 +44,17 @@ filters.orReferrer = (url, referrer) => {
   else {
     return referrer
   }
+}
+
+// Check if the course route requires this section
+filters.requiresSection = (record, sectionName) => {
+  let route = _.get(record, "route")
+  if (!route) {
+    console.log("Missing route in requiresSection")
+    return false
+  }
+  let requiredSections = _.get(trainingRoutes, `${route}.sections`)
+  return requiredSections.includes(sectionName)
 }
 
 // -------------------------------------------------------------------

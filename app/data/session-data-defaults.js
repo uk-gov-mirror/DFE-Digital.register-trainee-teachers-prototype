@@ -1,7 +1,31 @@
-let ethnicities = require('./ethnicities')
-let nationalities = require('./nationalities')
+let countries               = require('./countries')
+let ethnicities             = require('./ethnicities')
+let nationalities           = require('./nationalities')
 
+// Degree stuff
+let awards                  = require('./awards') // Types of degree
+let degreeData              = require('./degree')()
+let degreeTypes             = degreeData.types.undergraduate.map(type => type.text)
+let subjects                = degreeData.subjects
+let ukComparableDegrees     = degreeData.ukComparableDegrees
+let degreeOrganisations     = degreeData.orgs
 
+// Assessment only
+let assessmentOnlyAgeRanges = require('./assessmentOnlyAgeRanges')
+let ittSubjects             = require('./itt-subjects').map( subject => subject.attributes.subject_name )
+let withdrawalReasons       = require('./withdrawal-reasons')
+
+// Different training routes
+let trainingRoutes          = require('./training-routes')
+let allTrainingRoutes       = Object.values(trainingRoutes).map(route => route.name)
+
+// Things that can be changed from the /admin page
+let settings = {}
+// Simplify structure so it can be worked with from admin page
+settings.enabledTrainingRoutes = Object.values(trainingRoutes).filter(route => route.defaultEnabled == true).map(route => route.name).sort()
+settings.includeTimeline = 'true'
+
+// Supliment records with getter for name
 let records = require('./records.json')
 records = records.map(record => {
   Object.defineProperty(record.personalDetails, 'fullName', {
@@ -26,33 +50,20 @@ records = records.map(record => {
   return record
 })
 
-// let subjects = require('./subjects')
-let assessmentOnlyAgeRanges = require('./assessmentOnlyAgeRanges')
-let degreeData = require('./degree')()
-let degreeTypes = degreeData.types.undergraduate.map(type => type.text)
-let subjects = degreeData.subjects
-let ukComparableDegrees = degreeData.ukComparableDegrees
-let degreeOrganisations = degreeData.orgs
-let countries = require('./countries')
-let awards = require('./awards')
-
-let ittSubjects = require('./itt-subjects').map( subject => subject.attributes.subject_name )
-
-let withdrawalReasons = require('./withdrawal-reasons')
-
 module.exports = {
+  allTrainingRoutes,
   assessmentOnlyAgeRanges,
-  ethnicities,
-  nationalities,
-  records,
-  subjects,
+  awards,
+  countries,
   degreeOrganisations,
   degreeTypes,
-  ukComparableDegrees,
-  countries,
-  awards,
+  ethnicities,
   ittSubjects,
+  nationalities,
+  records,
+  settings,
+  subjects,
+  trainingRoutes,
+  ukComparableDegrees,
   withdrawalReasons
-  // Insert values here
-
 }
