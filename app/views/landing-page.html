@@ -37,14 +37,15 @@
 
       <div class="govuk-grid-column-one-half">
         <div class="status-card status-card--pending-trn">
-          <span class="status-card__count">59</span>
+          {% set pendingTrnRecordCount = data.records | where("status", "Pending TRN") | length %}
+          <span class="status-card__count">{{pendingTrnRecordCount}}</span>
           pending TRN
         </div>
       </div>
       <div class="govuk-grid-column-one-half">
         <div class="status-card status-card--trn-received">
-          {% set draftCount = getCanReinstate | length %}
-          <span class="status-card__count">{{ draftCount }} </span>
+          {% set trnReceivedRecordCount = data.records | where("status", "TRN received") | length %}
+          <span class="status-card__count">{{trnReceivedRecordCount}}</span>
           TRN receieved
         </div>
       </div>
@@ -55,20 +56,23 @@
         
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--draft">
-           {% set draftRecords = record.draft | length %}
-          <span class="status-card__count">{{draftRecords | length}}</span>
+          {# {% set draftRecordsCount = data.records | where("status", "Draft") %} #}
+          {% set draftRecordCount = data.records | where("status", "Draft") | length %}
+          <span class="status-card__count">{{draftRecordCount}}</span>
           draft records
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--deferred">
-          <span class="status-card__count">6</span>
+          {% set deferredRecordCount = data.records | where("status", "Deferred") | length %}
+          <span class="status-card__count">{{deferredRecordCount}}</span>
           deferred
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--withdrawn">
-          <span class="status-card__count">2</span>
+          {% set withdrawnRecordCount = data.records | where("status", "withdrawn") | length %}
+          <span class="status-card__count">{{withdrawnRecordCount}}</span>
           withdrawn
         </div>
       </div>
