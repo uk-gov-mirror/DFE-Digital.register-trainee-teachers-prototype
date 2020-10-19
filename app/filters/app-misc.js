@@ -57,6 +57,17 @@ filters.requiresSection = (record, sectionName) => {
   return requiredSections.includes(sectionName)
 }
 
+// Filter out records for routes that aren't enabled
+// Needs to be old style function declaration for *this* to work
+filters.filterDisabledTrainingRoutes = function(records){
+  let enabledTrainingRoutes = _.get(this, "ctx.data.settings.enabledTrainingRoutes")
+  if (!enabledTrainingRoutes) return [] // Something went wrong
+  let filteredRecords = records.filter(record => {
+    return enabledTrainingRoutes.includes(record.route)
+  })
+  return filteredRecords
+}
+
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app
 // -------------------------------------------------------------------
