@@ -20,7 +20,7 @@
     <div class="record-actions">
       {% if record.status | getCanRecommendForQts %}
         {{ govukButton({
-          text: "Recommend for QTS",
+          text: "Record QTS outcome",
           href: referrer + '/qts/outcome',
           classes: "govuk-!-margin-bottom-0"
         }) }}
