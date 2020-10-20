@@ -3,7 +3,7 @@
 {% block content %}
 
     <h1 class="govuk-heading-l">{{serviceName}}</h1>
-    <p class="govuk-body">Collecting and managing trainee teacher registration data.</p>
+    <p class="govuk-body">Collect and manage trainee teacher registration data.</p>
     {{ govukButton({
       text: "Add a trainee",
       href: "./new-record/new",
@@ -14,17 +14,21 @@
 
     <div class="govuk-grid-row">
 
-      <div class="govuk-grid-column-one-third">
-        <h2 class="govuk-heading-m"><a href="/records" class="govuk-link">View trainee records</a></h2>
+      <div class="govuk-grid-column-one-quarter">
+        <h2 class="govuk-heading-m"><a href="/records" class="govuk-link">Trainee records</a></h2>
         <p class="govuk-body">All the trainee teachers in your organisation.</p>
       </div>
-      <div class="govuk-grid-column-one-third">
-        <h2 class="govuk-heading-m"><a href="#" class="govuk-link">Guidance</a></h2>
-        <p class="govuk-body">Service guidance and route specific data requirements.</p>
+      <div class="govuk-grid-column-one-quarter">
+        <h2 class="govuk-heading-m"><a href="/guidance" class="govuk-link">Guidance</a></h2>
+        <p class="govuk-body">Service guidance for each route.</p>
       </div>
-      <div class="govuk-grid-column-one-third">
+      <div class="govuk-grid-column-one-quarter">
+        <h2 class="govuk-heading-m"><a href="/data-requirements" class="govuk-link">Data requirements</a></h2>
+        <p class="govuk-body">Route specific data requirements.</p>
+      </div>
+      <div class="govuk-grid-column-one-quarter">
         <h2 class="govuk-heading-m"><a href="#" class="govuk-link">Notifications</a></h2>
-        <p class="govuk-body">Things to action and other stuff.</p>
+        <p class="govuk-body">Notifications about your trainee teachers.</p>
       </div>
 
     </div>
@@ -35,16 +39,23 @@
     
     <div class="govuk-grid-row govuk-!-margin-bottom-6">
 
-      <div class="govuk-grid-column-one-half">
+      <div class="govuk-grid-column-one-third">
+        <div class="status-card status-card--draft">
+          {% set draftRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Draft") | length %}
+          <span class="status-card__count">{{draftRecordCount}}</span>
+          draft records
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--pending-trn">
-          {% set pendingTrnRecordCount = data.records | where("status", "Pending TRN") | length %}
+          {% set pendingTrnRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Pending TRN") | length %}
           <span class="status-card__count">{{pendingTrnRecordCount}}</span>
           pending TRN
         </div>
       </div>
-      <div class="govuk-grid-column-one-half">
+      <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--trn-received">
-          {% set trnReceivedRecordCount = data.records | where("status", "TRN received") | length %}
+          {% set trnReceivedRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "TRN received") | length %}
           <span class="status-card__count">{{trnReceivedRecordCount}}</span>
           TRN receieved
         </div>
@@ -54,26 +65,26 @@
 
     <div class="govuk-grid-row govuk-!-margin-bottom-6">
         
-      <div class="govuk-grid-column-one-third">
-        <div class="status-card status-card--draft">
-          {# {% set draftRecordsCount = data.records | where("status", "Draft") %} #}
-          {% set draftRecordCount = data.records | where("status", "Draft") | length %}
-          <span class="status-card__count">{{draftRecordCount}}</span>
-          draft records
-        </div>
-      </div>
+      
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--deferred">
-          {% set deferredRecordCount = data.records | where("status", "Deferred") | length %}
+          {% set deferredRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Deferred") | length %}
           <span class="status-card__count">{{deferredRecordCount}}</span>
           deferred
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--withdrawn">
-          {% set withdrawnRecordCount = data.records | where("status", "withdrawn") | length %}
+          {% set withdrawnRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Withdrawn") | length %}
           <span class="status-card__count">{{withdrawnRecordCount}}</span>
           withdrawn
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <div class="status-card status-card--qts-awarded">
+          {% set trnReceivedRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "QTS awarded") | length %}
+          <span class="status-card__count">{{trnReceivedRecordCount}}</span>
+          QTS awarded
         </div>
       </div>
 

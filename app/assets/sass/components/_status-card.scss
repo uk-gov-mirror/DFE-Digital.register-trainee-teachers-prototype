@@ -15,6 +15,11 @@
   background: govuk-tint(govuk-colour("dark-grey", $legacy: "grey-1"), 90);
 }
 
+.status-card--qts-awarded {
+  color:  #fff;
+  background: $govuk-brand-colour;
+}
+
 .status-card--pending-trn {
   color: govuk-shade(govuk-colour("turquoise"), 60);
   background: govuk-tint(govuk-colour("turquoise"), 70);
