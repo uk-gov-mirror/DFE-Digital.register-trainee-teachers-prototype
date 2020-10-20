@@ -43,14 +43,14 @@
         <div class="status-card status-card--draft">
           {% set draftRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Draft") | length %}
           <span class="status-card__count">{{draftRecordCount}}</span>
-          draft records
+          Draft records
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--pending-trn">
           {% set pendingTrnRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Pending TRN") | length %}
           <span class="status-card__count">{{pendingTrnRecordCount}}</span>
-          pending TRN
+          Pending TRN
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
@@ -76,14 +76,14 @@
         <div class="status-card status-card--deferred">
           {% set deferredRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Deferred") | length %}
           <span class="status-card__count">{{deferredRecordCount}}</span>
-          deferred
+          Deferred
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--withdrawn">
           {% set withdrawnRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Withdrawn") | length %}
           <span class="status-card__count">{{withdrawnRecordCount}}</span>
-          withdrawn
+          Withdrawn
         </div>
       </div>
 
