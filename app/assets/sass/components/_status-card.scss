@@ -43,6 +43,6 @@
 }
 
 .status-card__count {
-  @include govuk-font($size: 36, $weight: bold);
+  @include govuk-font($size: 36, $weight: bold, $tabular: true);
   display: block;
 }
