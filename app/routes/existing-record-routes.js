@@ -91,7 +91,7 @@ module.exports = router => {
   router.post('/record/:uuid/qts/outcome', (req, res) => {
     const data = req.session.data
     if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'Not passed'){
-      res.redirect(`/record/${req.params.uuid}/qts/assessment-not-passed`)
+      res.redirect(`/record/${req.params.uuid}/qts/reason-not-passed`)
     }
     else {
       res.redirect(`/record/${req.params.uuid}/qts/confirm`)
