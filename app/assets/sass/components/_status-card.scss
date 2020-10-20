@@ -10,6 +10,8 @@
   }
 }
 
+// Colours sourced from here: https://github.com/alphagov/govuk-frontend/blob/61aabca3d440edee6bdecdd20ea54a241c7bbdd5/src/govuk/components/tag/_index.scss#L42
+
 .status-card--draft {
   color: govuk-shade(govuk-colour("dark-grey", $legacy: "grey-1"), 30);
   background: govuk-tint(govuk-colour("dark-grey", $legacy: "grey-1"), 90);
