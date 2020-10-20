@@ -1,6 +1,6 @@
 
 {% extends "_templates/_page.html" %}
-{% set backLink = '/start-page' %}
+{% set backLink = '/home' %}
 
 {% set pageHeading = 'Data requirements' %}
 
@@ -10,160 +10,193 @@
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l">{{pageHeading}}</h1>
     <p class="govuk-body">We only ask for the data we require to register trainee teachers. We have outlined what you need to collect for each route.</p>
+    <h2 class="govuk-heading-m">Contents</h2>
+    <ul class="govuk-list govuk-list--dash govuk-!-margin-bottom-8">
+      <li><a class="govuk-link" href="#section-all-routes">Data required for all routes</a></li>
+      <li><a class="govuk-link" href="#section-assessment-only">Specific data for Assessment Only</a></li>
+      <li><a class="govuk-link" href="#section-provider-led">Specific data for Provider-led</a></li>
+    </ul> 
   </div>
 </div>
+
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-    {{ govukTable({
-      caption: "Data requirements",
-      captionClasses: "govuk-visually-hidden",
-      head: [
-        {
-          text: "Data required for all routes"
-        },
-        {
-          text: "Specific data for Assessment Only"
-        }
-      ],
-      rows: [
-        [
+  <div class="govuk-grid-column-two-thirds">
+    <section id="section-all-routes">
+      {{ govukTable({
+        caption: "Data requirements",
+        captionClasses: "govuk-visually-hidden",
+        head: [
           {
-            html: "
-            <h2 class='govuk-heading-s'>Personal details</h2>
-            <ul class='govuk-list'>
-              <li>
-                First or given names
-              </li>
-              <li>
-                Middle names
-              </li>
-              <li>
-                Last or family name
-              </li>
-              <li>
-                Date of birth
-              </li>
-              <li>
-                Gender
-              </li>
-              <li>
-                Nationality
-              </li>
-            </ul>
-            "
-          },
-          {
-            html: "
-            <h2 class='govuk-heading-s'>Programme details</h2>
-            <ul class='govuk-list'>
-              <li>
-                Subject
-              </li>
-              <li>
-                Age range
-              </li>
-              <li>
-                Start date
-              </li>
-              <li>
-                End date (to recommend for QTS)
-              </li>
-            </ul>
-            "
+            text: "Data required for all routes",
+			classes: "govuk-heading-m"
           }
         ],
-        [
-          {
-            html: "
-            <h2 class='govuk-heading-s'>Contact details</h2>
-            <ul class='govuk-list'>
-              <li>
-                Address
-              </li>
-              <li>
-                Phone number
-              </li>
-              <li>
-                Email address
-              </li>
-            </ul>
-            "
-          },
-          {
-            html: ""
-          }
-        ],
-        [
-          {
-            html: "
-            <h2 class='govuk-heading-s'>Diversity information (optional)</h2>
-            <ul class='govuk-list'>
-              <li>
-                Ethnicity
-              </li>
-              <li>
-                Disability
-              </li>
-            </ul>
-            "
-          },
-          {
-            html: ""
-          }
-        ],
-        [
-          {
-            html: "
-            <h2 class='govuk-heading-s'>UK degrees</h2>
-            <ul class='govuk-list'>
-              <li>
-                Type, for example, BA, BSc or other
-              </li>
-              <li>
-                Subject
-              </li>
-              <li>
-                Institution
-              </li>
-              <li>
-                Graduation year
-              </li>
-              <li>
-                Grade
-              </li>
-            </ul>
-            "
-          },
-          {
-            html: ""
-          }
-        ],
-        [
-          {
-            html: "
-            <h2 class='govuk-heading-s'>Non-UK degrees</h2>
-            <ul class='govuk-list'>
-              <li>
-                NARIC comparable UK degree (if provided)
-              </li>
-              <li>
-                Degree subject
-              </li>
-              <li>
-                Country where the degree was obtained
-              </li>
-              <li>
-                Graduation year
-              </li>
-            </ul>
-            "
-          },
-          {
-            html: ""
-          }
+        rows: [
+          [
+            {
+              html: "
+              <h2 class='govuk-heading-s'>Personal details</h2>
+              <ul class='govuk-list'>
+                <li>
+                  First or given names
+                </li>
+                <li>
+                  Middle names
+                </li>
+                <li>
+                  Last or family name
+                </li>
+                <li>
+                  Date of birth
+                </li>
+                <li>
+                  Gender
+                </li>
+                <li>
+                  Nationality
+                </li>
+              </ul>
+              "
+            }
+          ],
+          [
+            {
+              html: "
+              <h2 class='govuk-heading-s'>Contact details</h2>
+              <ul class='govuk-list'>
+                <li>
+                  Address
+                </li>
+                <li>
+                  Phone number
+                </li>
+                <li>
+                  Email address
+                </li>
+              </ul>
+              "
+            }
+          ],
+          [
+            {
+              html: "
+              <h2 class='govuk-heading-s'>Diversity information (optional)</h2>
+              <ul class='govuk-list'>
+                <li>
+                  Ethnicity
+                </li>
+                <li>
+                  Disability
+                </li>
+              </ul>
+              "
+            }
+          ],
+          [
+            {
+              html: "
+              <h2 class='govuk-heading-s'>UK degrees</h2>
+              <ul class='govuk-list'>
+                <li>
+                  Type, for example, BA, BSc or other
+                </li>
+                <li>
+                  Subject
+                </li>
+                <li>
+                  Institution
+                </li>
+                <li>
+                  Graduation year
+                </li>
+                <li>
+                  Grade
+                </li>
+              </ul>
+              "
+            }
+          ],
+          [
+            {
+              html: "
+              <h2 class='govuk-heading-s'>Non-UK degrees</h2>
+              <ul class='govuk-list'>
+                <li>
+                  NARIC comparable UK degree (if provided)
+                </li>
+                <li>
+                  Degree subject
+                </li>
+                <li>
+                  Country where the degree was obtained
+                </li>
+                <li>
+                  Graduation year
+                </li>
+              </ul>
+              "
+            }
+          ]
         ]
-      ]
-    }) }}
+      }) }}
+    </section>
+    <section id="section-assessment-only">
+      {{ govukTable({
+        caption: "Data requirements",
+        captionClasses: "govuk-visually-hidden",
+        head: [
+          {
+            text: "Specific data for Assessment Only",
+			classes: "govuk-heading-m"
+          }
+        ],
+        rows: [
+          [
+            {
+              html: "
+              <h2 class='govuk-heading-s'>Programme details</h2>
+              <ul class='govuk-list'>
+                <li>
+                  Subject
+                </li>
+                <li>
+                  Age range
+                </li>
+                <li>
+                  Start date
+                </li>
+                <li>
+                  End date (to recommend for QTS)
+                </li>
+              </ul>
+              "
+            }
+          ]
+        ]
+      }) }}
+    </section>
+    <section id="section-provider-led">
+      {{ govukTable({
+        caption: "Data requirements",
+        captionClasses: "govuk-visually-hidden",
+        head: [
+          {
+            text: "Specific data for Provider-led",
+			classes: "govuk-heading-m"
+          }
+        ],
+        rows: [
+          [
+            {
+              html: "
+              <h2 class='govuk-heading-s'>This is a placeholder for Provider-led route data</h2>
+              
+              "
+            }
+          ]
+        ]
+      }) }}
+    </section>
   </div>
 </div>
 
