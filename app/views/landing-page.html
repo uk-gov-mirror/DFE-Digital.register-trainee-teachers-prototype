@@ -14,21 +14,17 @@
 
     <div class="govuk-grid-row">
 
-      <div class="govuk-grid-column-one-quarter">
+      <div class="govuk-grid-column-one-third">
         <h2 class="govuk-heading-m"><a href="/records" class="govuk-link govuk-link--no-visited-state">Trainee records</a></h2>
         <p class="govuk-body">All the trainee teachers in your organisation.</p>
       </div>
-      <div class="govuk-grid-column-one-quarter">
+      <div class="govuk-grid-column-one-third">
         <h2 class="govuk-heading-m"><a href="/guidance" class="govuk-link govuk-link--no-visited-state">Guidance</a></h2>
         <p class="govuk-body">Service guidance for each route.</p>
       </div>
-      <div class="govuk-grid-column-one-quarter">
+      <div class="govuk-grid-column-one-third">
         <h2 class="govuk-heading-m"><a href="/data-requirements" class="govuk-link govuk-link--no-visited-state">Data requirements</a></h2>
         <p class="govuk-body">Route specific data requirements.</p>
-      </div>
-      <div class="govuk-grid-column-one-quarter">
-        <h2 class="govuk-heading-m"><a href="#" class="govuk-link govuk-link--no-visited-state">Notifications</a></h2>
-        <p class="govuk-body">Notifications about your trainee teachers.</p>
       </div>
 
     </div>
@@ -39,23 +35,25 @@
     
     <div class="govuk-grid-row govuk-!-margin-bottom-6">
 
+      {% set records = data.records | filterDisabledTrainingRoutes %}
+      
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--draft">
-          {% set draftRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Draft") | length %}
+          {% set draftRecordCount = records | where("status", "Draft") | length %}
           <span class="status-card__count">{{draftRecordCount}}</span>
           Draft
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--pending-trn">
-          {% set pendingTrnRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Pending TRN") | length %}
+          {% set pendingTrnRecordCount = records | where("status", "Pending TRN") | length %}
           <span class="status-card__count">{{pendingTrnRecordCount}}</span>
           Pending TRN
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--trn-received">
-          {% set trnReceivedRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "TRN received") | length %}
+          {% set trnReceivedRecordCount = records | where("status", "TRN received") | length %}
           <span class="status-card__count">{{trnReceivedRecordCount}}</span>
           TRN receieved
         </div>
@@ -67,21 +65,21 @@
         
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--qts-awarded">
-          {% set trnReceivedRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "QTS awarded") | length %}
+          {% set trnReceivedRecordCount = records | where("status", "QTS awarded") | length %}
           <span class="status-card__count">{{trnReceivedRecordCount}}</span>
           QTS awarded
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--deferred">
-          {% set deferredRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Deferred") | length %}
+          {% set deferredRecordCount = records | where("status", "Deferred") | length %}
           <span class="status-card__count">{{deferredRecordCount}}</span>
           Deferred
         </div>
       </div>
       <div class="govuk-grid-column-one-third">
         <div class="status-card status-card--withdrawn">
-          {% set withdrawnRecordCount = data.records | filterDisabledTrainingRoutes | where("status", "Withdrawn") | length %}
+          {% set withdrawnRecordCount = records | where("status", "Withdrawn") | length %}
           <span class="status-card__count">{{withdrawnRecordCount}}</span>
           Withdrawn
         </div>

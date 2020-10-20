@@ -23,6 +23,7 @@
 .status-card--pending-trn {
   color: govuk-shade(govuk-colour("turquoise"), 60);
   background: govuk-tint(govuk-colour("turquoise"), 70);
+  @include govuk-tag--colour
 }
 
 .status-card--trn-received {
