@@ -8,6 +8,37 @@ const utils = require('./route-utils')
 
 module.exports = router => {
 
+  // =============================================================================
+  // Programme details
+  // =============================================================================
+
+  router.post(['/:recordtype/:uuid/programme-details','/:recordtype/programme-details'], function (req, res) {
+    const data = req.session.data
+    let record = data.record
+    let referrer = utils.getReferrer(req.query.referrer)
+
+    let programmeDetails = _.get(data, 'record.programmeDetails')
+    let recordPath = utils.getRecordPath(req)
+    // No data, return to page
+    if (!programmeDetails){
+      res.redirect(`${recordPath}/programme-details`)
+    }
+    
+    // Merge autocomplete and radio answers
+    if (programmeDetails.ageRange == 'Other age range'){
+      programmeDetails.ageRange = programmeDetails.ageRangeOther
+      delete programmeDetails.ageRangeOther
+    }
+
+    record.programmeDetails = programmeDetails
+
+    res.redirect(`${recordPath}/programme-details/confirm${referrer}`)
+  })
+
+  // =============================================================================
+  // Diversity section
+  // =============================================================================
+
   // Diversity branching
   router.post(['/:recordtype/:uuid/diversity/information-disclosed','/:recordtype/diversity/information-disclosed'], function (req, res) {
     const data = req.session.data
@@ -63,6 +94,10 @@ module.exports = router => {
       res.redirect(`${recordPath}/diversity/confirm${referrer}`)
     }
   })
+
+  // =============================================================================
+  // Degrees
+  // =============================================================================
 
   // Add a degree - sends you to index one greater than current number of degrees
   router.get(['/:recordtype/:uuid/degree/add','/:recordtype/degree/add'], function (req, res) {
@@ -164,31 +199,5 @@ module.exports = router => {
 
     res.redirect(`${recordPath}/degree/confirm${referrer}`)
   })
-
-  // Diversity branching
-  router.post(['/:recordtype/:uuid/programme-details','/:recordtype/programme-details'], function (req, res) {
-    const data = req.session.data
-    let record = data.record
-    let referrer = utils.getReferrer(req.query.referrer)
-
-    let programmeDetails = _.get(data, 'record.programmeDetails')
-    let recordPath = utils.getRecordPath(req)
-    // No data, return to page
-    if (!programmeDetails){
-      res.redirect(`${recordPath}/programme-details`)
-    }
-    
-    // Merge autocomplete and radio answers
-    if (programmeDetails.ageRange == 'Other age range'){
-      programmeDetails.ageRange = programmeDetails.ageRangeOther
-      delete programmeDetails.ageRangeOther
-    }
-
-    record.programmeDetails = programmeDetails
-
-    res.redirect(`${recordPath}/programme-details/confirm${referrer}`)
-  })
-
-
 
 }
