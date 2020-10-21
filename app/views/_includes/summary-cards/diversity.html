@@ -61,12 +61,46 @@
   {% set diversityRows = diversityRows | push(ethnicGroupRow) %}
 {% endif %}
 
+{% set hasDisabilities = true if record.diversity.disabledAnswer == "They shared that they’re disabled" %}
+
+{% set disabilities = record.diversity.disabilities %}
+
+{% if disabilities | length > 0 %}
+  {% set disabilitiesList %}
+    <ul class="govuk-list govuk-list--bullet">
+      {% for disability in disabilities %}
+        {% if disability == 'Other' and record.diversity.disabilitiesOther %}
+          <li>{{ disability | lower }} ({{record.diversity.disabilitiesOther | lower}})</li>
+        {% else %}
+          <li>{{ disability | lower }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% endset %}
+{% endif %}
+
+{% if hasDisabilities %}
+  {% set disabledAnswer %}
+    <p class="govuk-body">{{record.diversity.disabledAnswer}}</p>
+    {% if disabilitiesList %}
+      <p class="govuk-body">Disabilities shared:</p>
+      {{disabilitiesList | safe}}
+    {% else %}
+      <p class="govuk-body">They have not shared details of specific disabilities</p>
+    {% endif %}
+  {% endset %}
+{% else %}
+  {% set disabledAnswer %}
+    {{record.diversity.disabledAnswer}}
+  {% endset %}
+{% endif %}
+
 {% set disabilitiesAnswerRow = {
     key: {
-      text: "Trainee is disabled"
+      text: "Disability"
     },
     value: {
-      text: record.diversity.disabledAnswer
+      text: disabledAnswer | safe or "Not provided"
     },
     actions: {
       items: [
@@ -81,35 +115,6 @@
 
 {% if diversityInformationDisclosed %}
   {% set diversityRows = diversityRows | push(disabilitiesAnswerRow) %}
-{% endif %}
-
-{% set disabilities = record.diversity.disabilities | joinify | lower | sentenceCase %}
-
-{% if disabilities and 'other' in (disabilities | lower) and record.diversity.disabilitiesOther%}
-  {% set disabilities %}
-    {{disabilities}} ({{record.diversity.disabilitiesOther}})
-  {% endset %}
-{% endif %}
-
-{% set disabilitiesRow = {
-    key: {
-      text: "Disabilities"
-    },
-    value: {
-      text: disabilities or "Not provided"
-    },
-    actions: {
-      items: [
-        {
-          href: recordPath + "/diversity/trainee-disabilities" | addReferrer(referrer),
-          text: "Change",
-          visuallyHiddenText: "trainee disabilities"
-        }
-      ]
-    } if canAmend
-  } %}
-{% if diversityInformationDisclosed and record.diversity.disabledAnswer == "Yes" %}
-  {% set diversityRows = diversityRows | push(disabilitiesRow) %}
 {% endif %}
 
 {% set diversityHtml %}

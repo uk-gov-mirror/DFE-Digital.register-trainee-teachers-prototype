@@ -13,25 +13,22 @@
   },
   items: [
     {
-      value: "Yes",
-      text: "Yes",
-      checked: checked(record.diversity.disabledAnswer, "Yes")
+      value: "They shared that they’re disabled",
+      text: "Yes, they shared that they’re disabled"
     },
     {
-      value: "No",
-      text: "No",
-      checked: checked(record.diversity.disabledAnswer, "No")
+      value: "They shared that they’re not disabled",
+      text: "They shared that they’re not disabled"
     },
     {
       divider: "or"
     },
     {
       value: "Not provided",
-      text: "Not provided",
-      checked: checked(record.diversity.disabledAnswer, "Not provided")
+      text: "They did not say"
     }
   ]
-}) }}
+} | decorateAttributes(record, "record.diversity.disabledAnswer"))}}
 
 {{ govukButton({
   text: "Continue"
