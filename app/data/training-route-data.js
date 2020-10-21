@@ -16,11 +16,13 @@ let mainTrainingRoutes = {
     hasAllocatedSubjects: true,
     sections: [
       'programmeDetails',
-      'programmeEndDate',
       'personalDetails',
       'contactDetails',
       'diversity',
       'degree'
+    ],
+    fields: [
+      'programmeEndDate',
     ]
   }
 }

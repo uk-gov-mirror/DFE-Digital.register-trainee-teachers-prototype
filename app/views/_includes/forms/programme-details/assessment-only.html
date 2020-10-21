@@ -81,35 +81,35 @@
   items: ageRangeRadioItems
 } | decorateAttributes(record, "record.programmeDetails.ageRange")) }}
 
-{% set assessmentStartDateArray = record.programmeDetails.startDate | toDateArray %}
+{% set programmeStartDateArray = record.programmeDetails.startDate | toDateArray %}
 
 {{ govukDateInput({
-  id: "assessment-start-date",
+  id: "programme-start-date",
   namePrefix: "record[programmeDetails][startDate]",
   fieldset: {
     legend: {
-      text: "Assessment start date",
+      text: "Programme start date",
       classes: "govuk-fieldset__legend--s"
     }
   },
   hint: {
-    text: "For example, " + "" | today | moment('subtract', 12, 'weeks') | toDateArray | spaceSeparate
+    text: "For example, " + "" | today | toDateArray | spaceSeparate
   },
   items: [
       {
         name: "day",
         classes: "govuk-input--width-2",
-        value: assessmentStartDateArray["0"]
+        value: programmeStartDateArray["0"]
       },
       {
         name: "month",
         classes: "govuk-input--width-2",
-        value: assessmentStartDateArray["1"]
+        value: programmeStartDateArray["1"]
       },
       {
         name: "year",
         classes: "govuk-input--width-4",
-        value: assessmentStartDateArray["2"]
+        value: programmeStartDateArray["2"]
       }
     ]
 }) }}
@@ -117,35 +117,35 @@
 {# We only want to collect this once they go to submit for QTS #}
 {# Likely it can never be seen on this page, as we don't currently
 allow editing after you submit for QTS #}
-{% if record.status == "QTS recommended" or record.status == "QTS Awarded" %}
-  {% set assessmentEndDateArray = record.programmeDetails.endDate | toDateArray %}
+{% if record | requiresField("programmeEndDate") or record.status == "QTS recommended" or record.status == "QTS Awarded" %}
+  {% set programmeEndDateArray = record.programmeDetails.endDate | toDateArray %}
   {{ govukDateInput({
-    id: "assessment-end-date",
+    id: "programme-end-date",
     namePrefix: "record[programmeDetails][endDate]",
     fieldset: {
       legend: {
-        text: "Assessment end date",
+        text: "Programme end date",
         classes: "govuk-fieldset__legend--s"
       }
     },
     hint: {
-      text: "For example, " + "" | today | toDateArray | spaceSeparate
+      text: "For example, " + "" | today | moment('add', 1, 'years') | toDateArray | spaceSeparate
     },
     items: [
         {
           name: "day",
           classes: "govuk-input--width-2",
-          value: assessmentEndDateArray["0"]
+          value: programmeEndDateArray["0"]
         },
         {
           name: "month",
           classes: "govuk-input--width-2",
-          value: assessmentEndDateArray["1"]
+          value: programmeEndDateArray["1"]
         },
         {
           name: "year",
           classes: "govuk-input--width-4",
-          value: assessmentEndDateArray["2"]
+          value: programmeEndDateArray["2"]
         }
       ]
   }) }}
