@@ -2,7 +2,9 @@
 // Imports and setup
 // -------------------------------------------------------------------
 const _ = require('lodash')
-const trainingRoutes = require('./../data/training-route-data').trainingRoutes
+const trainingRouteData = require('./../data/training-route-data')
+const trainingRoutes = trainingRouteData.trainingRoutes
+const recordUtils = require('./../lib/record')
 
 // Leave this filters line
 var filters = {}
@@ -46,40 +48,4 @@ filters.orReferrer = (url, referrer) => {
   }
 }
 
-// Check if the course route requires this section
-filters.requiresField = (record, fieldName) => {
-  let route = _.get(record, "route")
-  if (!route) {
-    console.log("Missing route in requiresField")
-    return false
-  }
-  let requiredFields = _.get(trainingRoutes, `${route}.fields`)
-  return (requiredFields) ? requiredFields.includes(fieldName) : false
-}
-
-// Check if the course route requires this section
-filters.requiresSection = (record, sectionName) => {
-  let route = _.get(record, "route")
-  if (!route) {
-    console.log("Missing route in requiresSection")
-    return false
-  }
-  let requiredSections = _.get(trainingRoutes, `${route}.sections`)
-  return requiredSections.includes(sectionName)
-}
-
-// Filter out records for routes that aren't enabled
-// Needs to be old style function declaration for *this* to work
-filters.filterDisabledTrainingRoutes = function(records){
-  let enabledTrainingRoutes = _.get(this, "ctx.data.settings.enabledTrainingRoutes")
-  if (!enabledTrainingRoutes) return [] // Something went wrong
-  let filteredRecords = records.filter(record => {
-    return enabledTrainingRoutes.includes(record.route)
-  })
-  return filteredRecords
-}
-
-// -------------------------------------------------------------------
-// keep the following line to return your filters to the app
-// -------------------------------------------------------------------
 exports.filters = filters

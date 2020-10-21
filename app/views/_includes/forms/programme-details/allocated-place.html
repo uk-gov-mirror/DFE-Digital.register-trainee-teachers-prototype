@@ -1,0 +1,31 @@
+<h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
+<p class="govuk-body">{{record.programmeDetails.subject}} has allocated places for the training route {{record.route}}.</p>
+
+<p class="govuk-body">ITT Providers should not recruit beyond their total number of allocated places for each course.</p>
+
+{{ govukRadios({
+  fieldset: {
+    legend: {
+      text: "Is this trainee using one of your allocated places?",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: ""
+  },
+  items: [
+    {
+      value: "Yes",
+      text: "Yes, they should come out of our allocation"
+    },
+    {
+      value: "No",
+      text: "No, they are not included within our allocation"
+    }
+  ]
+} | decorateAttributes(record, "record.programmeDetails.allocatedPlace")) }}
+
+{{ govukButton({
+  text: "Continue"
+}) }}

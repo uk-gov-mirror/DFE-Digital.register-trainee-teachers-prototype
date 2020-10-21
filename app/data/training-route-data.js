@@ -13,7 +13,7 @@ let mainTrainingRoutes = {
   "Provider-led": {
     name: "Provider-led",
     defaultEnabled: true,
-    hasAllocatedSubjects: true,
+    hasAllocatedPlaces: true,
     sections: [
       'programmeDetails',
       'personalDetails',

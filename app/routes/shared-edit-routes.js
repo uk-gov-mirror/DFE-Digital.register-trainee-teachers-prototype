@@ -1,7 +1,7 @@
 const faker = require('faker')
 const path = require('path')
 const moment = require('moment')
-const filters = require('./../filters.js')()
+const recordUtils = require('./../lib/record.js')
 const _ = require('lodash')
 const utils = require('./route-utils')
 
@@ -32,7 +32,16 @@ module.exports = router => {
 
     record.programmeDetails = programmeDetails
 
-    res.redirect(`${recordPath}/programme-details/confirm${referrer}`)
+    let isAllocated = recordUtils.hasAllocatedPlaces(record)
+
+    if (isAllocated) {
+      res.redirect(`${recordPath}/programme-details/allocated-place${referrer}`)
+    }
+    else {
+      res.redirect(`${recordPath}/programme-details/confirm${referrer}`)
+    }
+
+
   })
 
   // =============================================================================

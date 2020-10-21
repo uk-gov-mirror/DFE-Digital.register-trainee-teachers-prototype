@@ -55,38 +55,54 @@
         }
       ]
     } if canAmend
-  }
+  },
+  {
+    key: {
+      text: "Programme end date"
+    },
+    value: {
+      text: record.programmeDetails.endDate | govukDate or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/programme-details" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "programme end date"
+        }
+      ]
+    } if canAmend
+  },
+  {
+    key: {
+      text: "Trainee using an allocated place"
+    },
+    value: {
+      text: record.programmeDetails.allocatedPlace or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/programme-details/allocated-place" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "allocated place"
+        }
+      ]
+    } if canAmend
+  } if record | hasAllocatedPlaces
   ] %}
 
-{# Only shown after recommending for qts #}
-{% set endDateRow = {
-  key: {
-    text: "Programme end date"
-  },
-  value: {
-    text: record.programmeDetails.endDate | govukDate or 'Not provided'
-  },
-  actions: {
-    items: [
-      {
-        href: recordPath + "/programme-details" | addReferrer(referrer),
-        text: "Change",
-        visuallyHiddenText: "programme end date"
-      }
-    ]
-  } if canAmend
-}  %}
 
-{# End date only collected when submitting for QTS #}
-{% if record.status == "QTS recommended" or record.status == "QTS awarded" %}
-  {% set programmeDetailsRows = programmeDetailsRows | push(endDateRow) %}  
-{% endif %}
 
 {% set programmeDetailsHtml %}
   {{ govukSummaryList({
     rows: programmeDetailsRows
   }) }}
 {% endset %}
+
+
+
+
 
 {% set complete = true if (record.programmeDetails | sectionIsCompleted ) %}
 {% set status  = record.programmeDetails | getStatusText %}

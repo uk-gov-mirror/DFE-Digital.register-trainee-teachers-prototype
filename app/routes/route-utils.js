@@ -53,7 +53,6 @@ exports.getTimeline = (record) => {
   }).reverse()
 }
 
-
 // Check if all sections are complete
 exports.recordIsComplete = record => {
   if (!record || !_.get(record, "route")) return false
@@ -127,7 +126,7 @@ exports.updateRecord = (data, newRecord, timelineMessage) => {
 }
 
 // Loosely copied from lib/utils
-// Needed because some templates live at /index and default res.render
+// Needed because some templates live at '/index' and default res.render
 // won't look for them in the right folder
 exports.render = (path, res, next, ...args) => {
 
