@@ -47,6 +47,17 @@ filters.orReferrer = (url, referrer) => {
 }
 
 // Check if the course route requires this section
+filters.requiresField = (record, fieldName) => {
+  let route = _.get(record, "route")
+  if (!route) {
+    console.log("Missing route in requiresField")
+    return false
+  }
+  let requiredFields = _.get(trainingRoutes, `${route}.fields`)
+  return requiredFields.includes(fieldName)
+}
+
+// Check if the course route requires this section
 filters.requiresSection = (record, sectionName) => {
   let route = _.get(record, "route")
   if (!route) {

@@ -50,10 +50,7 @@ module.exports = router => {
     let errors = req.query.errors
     let newRecord = _.get(data, 'record') // copy record
     let isComplete = utils.recordIsComplete(newRecord)
-    let errorList = false
-    if (errors){
-      errorList = true
-    }
+    let errorList = (errors) ? true : false
     res.render('new-record/check-record', {errorList, recordIsComplete: isComplete})
   })
 
