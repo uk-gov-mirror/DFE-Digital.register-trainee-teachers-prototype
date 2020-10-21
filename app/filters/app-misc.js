@@ -54,7 +54,7 @@ filters.requiresField = (record, fieldName) => {
     return false
   }
   let requiredFields = _.get(trainingRoutes, `${route}.fields`)
-  return requiredFields.includes(fieldName)
+  return (requiredFields) ? requiredFields.includes(fieldName) : false
 }
 
 // Check if the course route requires this section
