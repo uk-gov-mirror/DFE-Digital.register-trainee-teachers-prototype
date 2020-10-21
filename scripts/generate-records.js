@@ -8,6 +8,7 @@ const faker   = require('faker')
 faker.locale  = 'en_GB'
 const moment  = require('moment')
 const _       = require('lodash')
+const trainingRouteData = require('../app/data/training-route-data')
 
 // Settings
 let simpleGcseGrades = true //output pass/fail rather than full detail
@@ -18,9 +19,9 @@ const sortBySubmittedDate = (x, y) => {
 
 // Route into teaching
 const generateStatus = require('../app/data/generators/status')
-const trainingRoutes = Object.keys(require('../app/data/training-routes'))
+const trainingRoutes = Object.keys(trainingRouteData.trainingRoutes)
 console.log(trainingRoutes)
-const enabledTrainingRoutes = Object.values(require('../app/data/training-routes')).filter(route => route.defaultEnabled == true).map(route => route.name)
+const enabledTrainingRoutes = Object.values(trainingRouteData.trainingRoutes).filter(route => route.defaultEnabled == true).map(route => route.name)
 console.log(enabledTrainingRoutes)
 
 // const generateProgrammeDetails = require('../app/data/generators/programme-details')

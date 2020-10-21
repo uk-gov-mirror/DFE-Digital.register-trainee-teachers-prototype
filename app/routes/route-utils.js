@@ -3,7 +3,7 @@ const path = require('path')
 const moment = require('moment')
 const filters = require('./../filters.js')()
 const _ = require('lodash')
-const trainingRoutes = require('./../data/training-routes')
+const trainingRoutes = require('./../data/training-route-data').trainingRoutes
 
 
 // Return first part of url to use in redirects
