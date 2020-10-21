@@ -16,7 +16,8 @@ let ittSubjects             = require('./itt-subjects').map( subject => subject.
 let withdrawalReasons       = require('./withdrawal-reasons')
 
 // Different training routes
-let trainingRoutes          = require('./training-routes')
+let trainingRouteData          = require('./training-route-data')
+let trainingRoutes = trainingRouteData.trainingRoutes
 let allTrainingRoutes       = Object.values(trainingRoutes).map(route => route.name)
 
 // Things that can be changed from the /admin page

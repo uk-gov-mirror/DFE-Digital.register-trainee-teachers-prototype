@@ -2,7 +2,7 @@
 // Imports and setup
 // -------------------------------------------------------------------
 const _ = require('lodash')
-const trainingRoutes = require('./../data/training-routes')
+const trainingRoutes = require('./../data/training-route-data').trainingRoutes
 
 // Leave this filters line
 var filters = {}
