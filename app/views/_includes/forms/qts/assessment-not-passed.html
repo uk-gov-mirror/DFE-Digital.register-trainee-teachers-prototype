@@ -1,3 +1,39 @@
+{# Do we need to collect a specific date? #}
+{# {% set assessmentEndDateArray = record.programmeDetails.endDate | toDateArray %} #}
+
+{# {% set assessmentEndDateHtml %}
+  {{ govukDateInput({
+    id: "assessment-end-date",
+    namePrefix: "record[programmeDetails][endDate]",
+    fieldset: {
+      legend: {
+        text: "On what date?",
+        classes: "govuk-fieldset__legend--ss"
+      }
+    },
+    hint: {
+      text: "For example, " + "" | today | toDateArray | spaceSeparate
+    },
+    items: [
+        {
+          name: "day",
+          classes: "govuk-input--width-2",
+          value: assessmentEndDateArray["0"]
+        },
+        {
+          name: "month",
+          classes: "govuk-input--width-2",
+          value: assessmentEndDateArray["1"]
+        },
+        {
+          name: "year",
+          classes: "govuk-input--width-4",
+          value: assessmentEndDateArray["2"]
+        }
+      ]
+  }) }}
+{% endset %} #}
+
 {% set customNotPassedReason %}
   {{ govukInput({
     label: {
@@ -22,9 +58,9 @@
 
 {% set notPassedReasonsItems = notPassedReasonsItems | push ({ 
   text: "For another reason",
-  checked: storenotPassedReasonOther,
+  checked: storeNotPassedReasonOther,
   conditional: {
-    html: customnotPassedReason
+    html: customNotPassedReason
   }
 }) %}
 

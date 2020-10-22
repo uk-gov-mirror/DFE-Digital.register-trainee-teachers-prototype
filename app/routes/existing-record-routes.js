@@ -87,19 +87,19 @@ module.exports = router => {
     res.render(`record/timeline`, {timeline})
   })
 
-  // Copy qts data back to real record
+  // QTS outcome passed or not passed?
   router.post('/record/:uuid/qts/outcome', (req, res) => {
     const data = req.session.data
     if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'Not passed'){
-      res.redirect(`/record/${req.params.uuid}/qts/reason-not-passed`)
+      res.redirect(`/record/${req.params.uuid}/qts/not-passed/assessment-not-passed`)
     }
     else {
-      res.redirect(`/record/${req.params.uuid}/qts/confirm`)
+      res.redirect(`/record/${req.params.uuid}/qts/passed/confirm`)
     }
   })
 
-  // Copy qts data back to real record
-  router.post('/record/:uuid/qts/confirm', (req, res) => {
+  // Copy qts (passed) data back to real record
+  router.post('/record/:uuid/qts/passed/confirm', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
     // Update failed or no data
@@ -112,7 +112,38 @@ module.exports = router => {
       utils.deleteTempData(data)
       utils.updateRecord(data, newRecord, "Trainee recommended for QTS")
       // req.flash('success', 'Trainee recommended for QTS')
-      res.redirect(`/record/${req.params.uuid}/qts/recommended`)
+      res.redirect(`/record/${req.params.uuid}/qts/passed/recommended`)
+    }
+  })
+
+  // Cature QTS reasons for not passing and confirm
+  router.post('/record/:uuid/qts/not-passed/assessment-not-passed', (req, res) => {
+    const data = req.session.data
+    const newRecord = data.record
+
+    // Update failed or no data
+    if (!newRecord){
+      res.redirect('/record/:uuid')
+    }
+    else {
+      res.redirect('/record/' + req.params.uuid + '/qts/not-passed/confirm')
+    }
+  })
+
+  // Copy qts (not passed data) back to real record
+  router.post('/record/:uuid/qts/not-passed/confirm', (req, res) => {
+    const data = req.session.data
+    const newRecord = data.record
+    // Update failed or no data
+    if (!newRecord){
+      res.redirect('/record/:uuid')
+    }
+    else {
+      newRecord.status = 'Not passed'
+      // newRecord.qtsRecommendedDate = new Date()
+      utils.deleteTempData(data)
+      utils.updateRecord(data, newRecord, "Trainee QTS outcome has been recorded")
+      res.redirect(`/record/${req.params.uuid}/qts/not-passed/not-recommended`)
     }
   })
 

@@ -14,6 +14,7 @@ let degreeOrganisations     = degreeData.orgs
 let assessmentOnlyAgeRanges = require('./assessmentOnlyAgeRanges')
 let ittSubjects             = require('./itt-subjects').map( subject => subject.attributes.subject_name )
 let withdrawalReasons       = require('./withdrawal-reasons')
+let notPassedReasons       = require('./not-passed-reasons')
 
 // Different training routes
 let trainingRouteData          = require('./training-route-data')
@@ -61,6 +62,7 @@ module.exports = {
   ethnicities,
   ittSubjects,
   nationalities,
+  notPassedReasons,
   records,
   settings,
   subjects,
