@@ -70,13 +70,19 @@
   },
   items: [
     {
-      text: "Male"
-    },
-    {
       text: "Female"
     },
     {
+      text: "Male"
+    },
+    {
       text: "Other"
+    },
+    {
+      divider: 'or'
+    },
+    {
+      text: "Not provided"
     }
   ]
 } | decorateAttributes(record, "record.personalDetails.sex"))}}
@@ -86,7 +92,7 @@
 {# Separate out nationalities #}
 {% set otherNationalities = record.personalDetails.nationality | removeArrayItems(['British','Irish','Other'] | removeEmpty )%}
 
-{% set otherNationalities = otherNationalities | removeEmpty %}
+{% set otherNationalities = otherNationalities %}
 {% set hasOtherNationality = otherNationalities | length > 0 %}
 
 {% set nationalityOtherHtml %}
@@ -124,6 +130,19 @@
       },
       id: 'nationality-other',
       name: "record[personalDetails][nationality][3]",
+      items: nationalitiesWithoutBritishAndIrish,
+      classes: "govuk-!-width-two-thirds",
+      value: nationality
+      }
+    ) }}
+
+    {{ appAutocomplete({
+      label: {
+        text: "Other nationality",
+        classes: "govuk-label--s"
+      },
+      id: 'nationality-other1',
+      name: "record[personalDetails][nationality][35]",
       items: nationalitiesWithoutBritishAndIrish,
       classes: "govuk-!-width-two-thirds",
       value: nationality
