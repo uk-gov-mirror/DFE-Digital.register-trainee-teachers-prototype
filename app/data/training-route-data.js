@@ -70,6 +70,10 @@ allocatedSubjects = [
 let enabledTrainingRoutes = Object.values(trainingRoutes).filter(route => route.defaultEnabled == true).map(route => route.name)
 
 let levels = {
+  "early years": {
+    "hint": "ages 0 to 5",
+    "ageRanges": null
+  },
   "primary": {
     "hint": "ages 3 to 11",
     "ageRanges": [
@@ -80,8 +84,7 @@ let levels = {
   },
   "middle": {
     "hint": "ages 7 to 14",
-    "ageRanges": [
-    ]
+    "ageRanges": null
   },
   "secondary": {
     "hint": "ages 11 to 19",
