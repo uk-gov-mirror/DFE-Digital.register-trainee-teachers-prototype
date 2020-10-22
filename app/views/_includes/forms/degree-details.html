@@ -245,18 +245,21 @@
         conditional: {
           html: degreeGradeOtherHtml
         }
-      },
-      {
-        divider: "or"
-      },
-      {
-        text: "The trainee is still studying for their degree"
       }
     ]
   } | decorateAttributes(degreeTemp, "degreeTemp.grade")) }}
 
 {% endif %}
 
+{# 
+,
+      {
+        divider: "or"
+      },
+      {
+        text: "The trainee is still studying for their degree"
+      }
+ #}
 
 {{ govukButton({
   text: "Continue"
