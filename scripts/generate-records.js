@@ -20,12 +20,8 @@ const sortBySubmittedDate = (x, y) => {
 // Route into teaching
 const generateStatus = require('../app/data/generators/status')
 const trainingRoutes = Object.keys(trainingRouteData.trainingRoutes)
-console.log(trainingRoutes)
-const enabledTrainingRoutes = Object.values(trainingRouteData.trainingRoutes).filter(route => route.defaultEnabled == true).map(route => route.name)
-console.log(enabledTrainingRoutes)
-
-// const generateProgrammeDetails = require('../app/data/generators/programme-details')
-const generateAssessmentOnlyDetails = require('../app/data/generators/programme-details')
+const enabledTrainingRoutes = trainingRouteData.enabledTrainingRoutes
+const generateProgrammeDetails = require('../app/data/generators/programme-details')
 
 // Personal details
 const generatePersonalDetails = require('../app/data/generators/personal-details')
@@ -82,6 +78,8 @@ const generateFakeApplication = (params = {}) => {
     withdrawalDate = params.updatedDate
   }
 
+  // Programme details
+  const programmeDetails = (params.programmeDetails === null) ? undefined : { ...generateProgrammeDetails(faker, route, status), ...params.programmeDetails }
 
   // Personal details
   const personalDetails = (params.personalDetails === null) ? null : { ...generatePersonalDetails(faker), ...params.personalDetails }
@@ -95,8 +93,7 @@ const generateFakeApplication = (params = {}) => {
   person.isInternationalTrainee = isInternationalTrainee
   const contactDetails = (params.contactDetails === null) ? undefined : { ...generateContactDetails(faker, person), ...params.contactDetails }
 
-  // Assessment details
-  const programmeDetails = (params.programmeDetails === null) ? undefined : { ...generateAssessmentOnlyDetails(faker, status), ...params.programmeDetails }
+
 
   // Qualifications
 
