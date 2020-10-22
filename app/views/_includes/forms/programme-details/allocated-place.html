@@ -1,8 +1,8 @@
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
-<p class="govuk-body">{{record.programmeDetails.subject}} has allocated places for the training route {{record.route}}.</p>
+<p class="govuk-body">{{record.programmeDetails.subject}} has allocated places for the {{record.route | lower}} route.</p>
 
-<p class="govuk-body">ITT Providers should not recruit beyond their total number of allocated places for each course.</p>
+<p class="govuk-body">You should not recruit beyond your allocated places for this course.</p>
 
 {{ govukRadios({
   fieldset: {
