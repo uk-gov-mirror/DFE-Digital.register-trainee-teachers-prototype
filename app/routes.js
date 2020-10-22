@@ -36,12 +36,12 @@ router.post('*', function(req, res, next){
 require('./routes/records-list')(router)
 
 // =============================================================================
-// Edit routes - add / edit record data
+// Shared routes - add / edit record data
 //
 // These routes are for editing data on new records and existing records
 // Match against 'new-record' and 'uuid record' paths and work for both.
 // =============================================================================
-require('./routes/edit-routes')(router)
+require('./routes/shared-edit-routes')(router)
 
 // =============================================================================
 // New records

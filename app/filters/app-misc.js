@@ -2,7 +2,7 @@
 // Imports and setup
 // -------------------------------------------------------------------
 const _ = require('lodash')
-const trainingRoutes = require('./../data/training-routes')
+const trainingRoutes = require('./../data/training-route-data').trainingRoutes
 
 // Leave this filters line
 var filters = {}
@@ -44,6 +44,17 @@ filters.orReferrer = (url, referrer) => {
   else {
     return referrer
   }
+}
+
+// Check if the course route requires this section
+filters.requiresField = (record, fieldName) => {
+  let route = _.get(record, "route")
+  if (!route) {
+    console.log("Missing route in requiresField")
+    return false
+  }
+  let requiredFields = _.get(trainingRoutes, `${route}.fields`)
+  return requiredFields.includes(fieldName)
 }
 
 // Check if the course route requires this section

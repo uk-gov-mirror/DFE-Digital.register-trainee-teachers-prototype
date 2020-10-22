@@ -13,16 +13,19 @@ let mainTrainingRoutes = {
   "Provider-led": {
     name: "Provider-led",
     defaultEnabled: true,
+    hasAllocatedSubjects: true,
     sections: [
       'programmeDetails',
       'personalDetails',
       'contactDetails',
       'diversity',
       'degree'
+    ],
+    fields: [
+      'programmeEndDate',
     ]
   }
 }
-
 
 let extraRoutes = [
   "Teach first PG",
@@ -58,6 +61,15 @@ Object.keys(trainingRoutes).sort().forEach(function(key) {
   orderedTrainingRoutes[key] = trainingRoutes[key];
 });
 
-// console.log(trainingRoutes)
+trainingRoutes = orderedTrainingRoutes
 
-module.exports = orderedTrainingRoutes
+allocatedSubjects = [
+  "Physical education"
+]
+
+
+
+module.exports = {
+  trainingRoutes,
+  allocatedSubjects
+}
