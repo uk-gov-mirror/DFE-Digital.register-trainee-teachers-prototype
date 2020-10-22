@@ -25,7 +25,7 @@ const enabledTrainingRoutes = Object.values(trainingRouteData.trainingRoutes).fi
 console.log(enabledTrainingRoutes)
 
 // const generateProgrammeDetails = require('../app/data/generators/programme-details')
-const generateAssessmentOnlyDetails = require('../app/data/generators/assessment-only-details')
+const generateAssessmentOnlyDetails = require('../app/data/generators/programme-details')
 
 // Personal details
 const generatePersonalDetails = require('../app/data/generators/personal-details')
