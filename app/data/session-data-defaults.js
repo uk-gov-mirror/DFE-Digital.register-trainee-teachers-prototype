@@ -12,7 +12,8 @@ let degreeOrganisations     = degreeData.orgs
 
 // Assessment only
 let assessmentOnlyAgeRanges = require('./assessmentOnlyAgeRanges')
-let ittSubjects             = require('./itt-subjects').map( subject => subject.attributes.subject_name )
+let ittSubjects = require('./itt-subjects').allSubjects
+console.log("subject length", ittSubjects.length)
 let withdrawalReasons       = require('./withdrawal-reasons')
 
 // Different training routes
