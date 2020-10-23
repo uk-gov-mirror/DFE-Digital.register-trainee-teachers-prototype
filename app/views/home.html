@@ -55,7 +55,7 @@
         <div class="status-card status-card--trn-received">
           {% set trnReceivedRecordCount = records | where("status", "TRN received") | length %}
           <span class="status-card__count">{{trnReceivedRecordCount}}</span>
-          TRN receieved
+          TRN received
         </div>
       </div>
 
@@ -63,21 +63,28 @@
 
     <div class="govuk-grid-row govuk-!-margin-bottom-6">
         
-      <div class="govuk-grid-column-one-third">
+      <div class="govuk-grid-column-one-quarter">
+        <div class="status-card status-card--qts-recommended">
+          {% set qtsRecommendedRecordCount = records | where("status", "QTS recommended") | length %}
+          <span class="status-card__count">{{qtsRecommendedRecordCount}}</span>
+          QTS recommended
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-quarter">
         <div class="status-card status-card--qts-awarded">
-          {% set trnReceivedRecordCount = records | where("status", "QTS awarded") | length %}
-          <span class="status-card__count">{{trnReceivedRecordCount}}</span>
+          {% set qtsAwardedRecordCount = records | where("status", "QTS awarded") | length %}
+          <span class="status-card__count">{{qtsAwardedRecordCount}}</span>
           QTS awarded
         </div>
       </div>
-      <div class="govuk-grid-column-one-third">
+      <div class="govuk-grid-column-one-quarter">
         <div class="status-card status-card--deferred">
           {% set deferredRecordCount = records | where("status", "Deferred") | length %}
           <span class="status-card__count">{{deferredRecordCount}}</span>
           Deferred
         </div>
       </div>
-      <div class="govuk-grid-column-one-third">
+      <div class="govuk-grid-column-one-quarter">
         <div class="status-card status-card--withdrawn">
           {% set withdrawnRecordCount = records | where("status", "Withdrawn") | length %}
           <span class="status-card__count">{{withdrawnRecordCount}}</span>
