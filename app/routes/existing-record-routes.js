@@ -76,17 +76,6 @@ module.exports = router => {
     }
   })
 
-  // Get timeline items and pass to view
-  router.get('/record/:uuid/timeline', (req, res) => {
-    const data = req.session.data
-    const record = data.record
-    if (!record){
-      res.redirect('/record/:uuid')
-    }
-    let timeline = utils.getTimeline(record)
-    res.render(`record/timeline`, {timeline})
-  })
-
   // QTS outcome passed or not passed?
   router.post('/record/:uuid/qts/outcome', (req, res) => {
     const data = req.session.data
@@ -139,8 +128,8 @@ module.exports = router => {
       res.redirect('/record/:uuid')
     }
     else {
-      newRecord.status = 'Not passed'
-      // newRecord.qtsRecommendedDate = new Date()
+      newRecord.status = 'TRN received'
+      newRecord.qtsNotPassedOutcomeDate = new Date()
       utils.deleteTempData(data)
       utils.updateRecord(data, newRecord, "Trainee QTS outcome has been recorded")
       res.redirect(`/record/${req.params.uuid}/qts/not-passed/not-recommended`)
@@ -293,7 +282,6 @@ module.exports = router => {
     }
   })
 
-
   // Existing record pages
   router.get('/record/:uuid/:page*', function (req, res, next) {
     let records = req.session.data.records
@@ -308,5 +296,16 @@ module.exports = router => {
       utils.render(path.join('record', req.params.page, req.params[0]), res, next)
       // res.render(path.join('record', req.params.page, req.params[0]))
     }
+  })
+
+  // Get timeline items and pass to view
+  router.get('/record/:uuid/timeline', (req, res) => {
+    const data = req.session.data
+    const record = data.record
+    if (!record){
+      res.redirect('/record/:uuid')
+    }
+    let timeline = utils.getTimeline(record)
+    res.render(`record/timeline`, {timeline})
   })
 }
