@@ -47,6 +47,7 @@
       
         <div class="moj-filter-layout__filter">
           {% include "_includes/filter-panel.njk" %}
+          <p class="govuk-body govuk-!-margin-top-5"><a href="#" class="govuk-link">Export these records</a></p>
         </div>
 
         <div class="moj-filter-layout__content">
@@ -141,7 +142,7 @@
                 classes: 'govuk-!-margin-bottom-3'
               }) }}
             {% endif %}
-          <p class="govuk-body govuk-!-margin-top-5"><a href="#" class="govuk-link">Export these records</a></p>
+          
           {% else %}
             <h2 class="govuk-heading-m">No records found.</h2>
             <p class="govuk-body">Try <a href="/records">clearing your search and filters</a>.</p>
