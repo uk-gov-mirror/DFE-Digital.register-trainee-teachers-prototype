@@ -21,6 +21,15 @@
         ]
       } | decorateAttributes(data, "data.settings.includeTimeline")) }}
 
+      {{ govukCheckboxes({
+        items: [
+          {
+            value: 'true',
+            text: "Show links to guidance"
+          }
+        ]
+      } | decorateAttributes(data, "data.settings.includeGuidance")) }}
+
       {% set allTrainingRoutes = [] %}
       {% for route in data.allTrainingRoutes %}
         {% set allTrainingRoutes = allTrainingRoutes | push({
