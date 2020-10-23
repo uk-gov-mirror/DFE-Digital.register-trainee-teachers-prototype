@@ -1,3 +1,11 @@
+{% set notPassedReason %}
+  {% if record.notPassedReason == "For another reason" %}
+    {{record.notPassedReasonOther}}
+  {% else%}
+    {{record.notPassedReason}}
+  {% endif %}
+{% endset %}
+
 {% set qtsDetailsRows = [
   {
     key: {
@@ -18,17 +26,17 @@
   },
   {
     key: {
-      text: "Assessment end date"
+      text: "Reason for not passing"
     },
     value: {
-      text: record.programmeDetails.endDate | govukDate or 'Not provided'
+      text: notPassedReason or 'Not provided'
     },
     actions: {
       items: [
         {
-          href: recordPath + "/qts/outcome" | addReferrer(referrer),
+          href: recordPath + "/qts/not-passed/assessment-not-passed" | addReferrer(referrer),
           text: "Change",
-          visuallyHiddenText: "assessment end date"
+          visuallyHiddenText: "reason for not passing"
         }
       ]
     } if canAmend

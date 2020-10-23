@@ -18,8 +18,7 @@
 }) }}
 
 <p class="govuk-body">The trainee has been recorded as not passing their QTS.</p>
-<p class="govuk-body">What happens now?</p>
-<p class="govuk-body">What happens next?</p>
+<p class="govuk-body">What happens now? What happens next?</p>
 
 <p class="govuk-body">
   If you think there is a problem with the QTS award, contact <a href="mailto:itt.datamanagement@education.gov.uk">itt.datamanagement@education.gov.uk</a>.
@@ -28,22 +27,11 @@
 <h2 class="govuk-heading-m">Next steps:</h2>
 <ul class="govuk-list govuk-list--bullet">
   <li>
-    <a href="{{ recordPath }}" class="govuk-link">View this trainee’s record</a>
+    <a href="{{ recordPath }}/withdraw" class="govuk-link">Did you want to withdraw this trainee?</a>
   </li>
   <li>
-    <a href="{{ recordPath }}/withdraw" class="govuk-link">Withdraw this trainee</a>
+    <a href="{{ recordPath }}" class="govuk-link">View this trainee’s record</a>
   </li>
 </ul>
-
-{# {{ govukButton({
-  text: "View record",
-  href: "/record/" + data.recordId
-}) }}
-
-{{ govukButton({
-  text: "Add another record",
-  href: "/new-record/new"
-}) }}
- #}
 
 {% endblock %}

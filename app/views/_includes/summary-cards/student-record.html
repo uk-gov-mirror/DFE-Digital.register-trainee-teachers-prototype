@@ -133,6 +133,32 @@
   }) %}
 {% endif %}
 
+{% if record.qtsNotPassedOutcomeDate | length %}
+  
+  {% set notPassedReason %}
+    {% if record.notPassedReason == "For another reason" %}
+      {{record.notPassedReasonOther}}
+    {% else%}
+      {{record.notPassedReason}}
+    {% endif %}
+  {% endset %}
+
+  {% set qtsOutcomeContent %}
+      Not passed: {{notPassedReason}}
+      <br>
+      Outcome recorded: {{record.qtsNotPassedOutcomeDate | govukDate}}
+  {% endset %}
+
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: "QTS"
+    },
+    value: {
+      html: qtsOutcomeContent
+    }
+  }) %}
+{% endif %}
+
 {% set updatedDate %}
   <p class="govuk-body">{{record.updatedDate | govukDate or 'Not provided'}}</p>
   {% if record.updatedDate | isInLast( 7, 'days') %}
