@@ -1,11 +1,11 @@
 module.exports = [
-    'Yet to complete the course',
-    'Left course before the end',
+    'Course complete - standards and/or skills test not met',
     'Failed the course',
-    'Withheld: skills test not met',
-    'Withheld: standards not met',
-    'Withheld: standards & skills test not met',
+    'Left course before the end',
     'Skills test not taken (standards met)',
     'Skills tests not taken (standards not met)',
-    'Course complete - standards and/or skills test not met'
+    'Withheld: skills test not met',
+    'Withheld: standards & skills test not met',
+    'Withheld: standards not met',
+    'Yet to complete the course'
 ]
