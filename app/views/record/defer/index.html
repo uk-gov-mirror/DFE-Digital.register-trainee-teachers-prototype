@@ -1,12 +1,12 @@
 {% extends "_templates/_record-form.html" %}
 
-{% set pageHeadingTraineeName = data.record.personalDetails | getShortName %}
+{% set pageHeading = "When did the trainee defer?" %}
 {# {% set formAction = "./defer/confirm" %} #}
   
 {% block formContent %}
 
   <h1 class="govuk-heading-l govuk-!-margin-bottom-0">
-    <span class="govuk-caption-l">{{pageHeadingTraineeName}}</span>
+    <span class="govuk-caption-l">{{ record.personalDetails | getShortName}}</span>
   </h1>
 
   {% include "_includes/forms/defer.html" %}

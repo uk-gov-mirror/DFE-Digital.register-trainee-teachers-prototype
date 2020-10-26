@@ -80,7 +80,7 @@ module.exports = router => {
   router.post('/record/:uuid/qts/outcome', (req, res) => {
     const data = req.session.data
     if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'Not passed'){
-      res.redirect(`/record/${req.params.uuid}/qts/not-passed/assessment-not-passed`)
+      res.redirect(`/record/${req.params.uuid}/qts/not-passed/reason`)
     }
     else {
       res.redirect(`/record/${req.params.uuid}/qts/passed/confirm`)
@@ -105,22 +105,22 @@ module.exports = router => {
     }
   })
 
-  // Cature QTS reasons for not passing and confirm
-  router.post('/record/:uuid/qts/not-passed/assessment-not-passed', (req, res) => {
-    const data = req.session.data
-    const newRecord = data.record
+  // // Cature QTS reasons for not passing and confirm
+  // router.post('/record/:uuid/qts/not-passed/assessment-not-passed', (req, res) => {
+  //   const data = req.session.data
+  //   const newRecord = data.record
 
-    // Update failed or no data
-    if (!newRecord){
-      res.redirect('/record/:uuid')
-    }
-    else {
-      res.redirect('/record/' + req.params.uuid + '/qts/not-passed/confirm')
-    }
-  })
+  //   // Update failed or no data
+  //   if (!newRecord){
+  //     res.redirect('/record/:uuid')
+  //   }
+  //   else {
+  //     res.redirect('/record/' + req.params.uuid + '/qts/not-passed/confirm')
+  //   }
+  // })
 
   // Copy qts (not passed data) back to real record
-  router.post('/record/:uuid/qts/not-passed/confirm', (req, res) => {
+  router.post('/record/:uuid/qts/not-passed/update', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
     // Update failed or no data
@@ -128,35 +128,15 @@ module.exports = router => {
       res.redirect('/record/:uuid')
     }
     else {
-      newRecord.status = 'TRN received'
+      // newRecord.status = 'TRN received' //status stays as it is?
       newRecord.qtsNotPassedOutcomeDate = new Date()
       utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord, "Trainee QTS outcome has been recorded")
+      utils.updateRecord(data, newRecord, "Trainee did not pass their QTS")
       res.redirect(`/record/${req.params.uuid}/qts/not-passed/not-recommended`)
     }
   })
 
-  // Copy defer data back to real record
-  router.post('/record/:uuid/defer/confirm', (req, res) => {
-    const data = req.session.data
-    const newRecord = data.record
-
-    // Update failed or no data
-    if (!newRecord){
-      res.redirect('/record/:uuid')
-    }
-    else {
-      newRecord.previousStatus = newRecord.status
-      newRecord.status = 'Deferred'
-      delete newRecord.deferredDateRadio
-      utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord, "Trainee deferred")
-      req.flash('success', 'Trainee deferred')
-      res.redirect(`/record/${req.params.uuid}`)
-    }
-  })
-
-  // Get dates for Defer flow
+  // Convert radio choices to real datesso 
   router.post('/record/:uuid/defer', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
@@ -177,25 +157,27 @@ module.exports = router => {
     }
   })
 
-  // Copy reinstate data back to real record
-  router.post('/record/:uuid/reinstate/confirm', (req, res) => {
+  // Copy defer data back to real record
+  router.post('/record/:uuid/defer/update', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
+
     // Update failed or no data
     if (!newRecord){
       res.redirect('/record/:uuid')
     }
     else {
-      newRecord.status = newRecord.previousStatus || 'TRN received'
-      delete newRecord.previousStatus
+      newRecord.previousStatus = newRecord.status
+      newRecord.status = 'Deferred'
+      delete newRecord.deferredDateRadio
       utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord, "Trainee reinstated")
-      req.flash('success', 'Trainee reinstated')
+      utils.updateRecord(data, newRecord, "Trainee deferred")
+      req.flash('success', 'Trainee deferred')
       res.redirect(`/record/${req.params.uuid}`)
     }
   })
 
-  // Get dates for reinstate flow
+  // Convert radio choices to real dates
   router.post('/record/:uuid/reinstate', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
@@ -216,8 +198,28 @@ module.exports = router => {
     }
   })
 
+  // Copy reinstate data back to real record
+  router.post('/record/:uuid/reinstate/update', (req, res) => {
+    const data = req.session.data
+    const newRecord = data.record
+    // Update failed or no data
+    if (!newRecord){
+      res.redirect('/record/:uuid')
+    }
+    else {
+      newRecord.status = newRecord.previousStatus || 'TRN received'
+      delete newRecord.previousStatus
+      utils.deleteTempData(data)
+      utils.updateRecord(data, newRecord, "Trainee reinstated")
+      req.flash('success', 'Trainee reinstated')
+      res.redirect(`/record/${req.params.uuid}`)
+    }
+  })
+
+
+
   // Copy withdraw data back to real record
-  router.post('/record/:uuid/withdraw/confirm', (req, res) => {
+  router.post('/record/:uuid/withdraw/update', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
 
@@ -282,6 +284,18 @@ module.exports = router => {
     }
   })
 
+  // Get timeline items and pass to view
+  router.get('/record/:uuid/timeline', (req, res) => {
+    const data = req.session.data
+    const record = data.record
+    if (!record){
+      res.redirect('/record/:uuid')
+    }
+    let timeline = utils.getTimeline(record)
+    console.log({timeline})
+    res.render(`record/timeline`, {timeline})
+  })
+
   // Existing record pages
   router.get('/record/:uuid/:page*', function (req, res, next) {
     let records = req.session.data.records
@@ -298,14 +312,5 @@ module.exports = router => {
     }
   })
 
-  // Get timeline items and pass to view
-  router.get('/record/:uuid/timeline', (req, res) => {
-    const data = req.session.data
-    const record = data.record
-    if (!record){
-      res.redirect('/record/:uuid')
-    }
-    let timeline = utils.getTimeline(record)
-    res.render(`record/timeline`, {timeline})
-  })
+
 }
