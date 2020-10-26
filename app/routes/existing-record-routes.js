@@ -88,7 +88,7 @@ module.exports = router => {
   })
 
   // Copy qts (passed) data back to real record
-  router.post('/record/:uuid/qts/passed/confirm', (req, res) => {
+  router.post('/record/:uuid/qts/passed/update', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
     // Update failed or no data
@@ -128,10 +128,30 @@ module.exports = router => {
       res.redirect('/record/:uuid')
     }
     else {
-      // newRecord.status = 'TRN received' //status stays as it is?
+      
+      // Trainees may withdraw at this stage
+      let isWithdrawing = (_.get(newRecord, "qtsDetails.withdrawalStatus") == "Withdrawing from programme")
+      // console.log('is withdrawing:', isWithdrawing)
       newRecord.qtsNotPassedOutcomeDate = new Date()
+
       utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord, "Trainee did not pass their QTS")
+      utils.addEvent(newRecord, "Trainee did not pass their QTS")
+      
+      if (isWithdrawing){
+        utils.addEvent(newRecord, "Trainee withdrawn")
+        newRecord.previousStatus = newRecord.status
+        newRecord.status = 'Withdrawn'
+        newRecord.withdrawalDate = newRecord.qtsNotPassedOutcomeDate
+        newRecord.withdrawalReason = newRecord.notPassedReason
+      }
+      else {
+        // newRecord.status = 'TRN received' // TODO: should we have a new status?
+        
+      }
+      delete newRecord.qtsDetails.standardsAssessedOutcome
+      delete newRecord.notPassedReason
+      delete newRecord.notPassedReasonOther
+      utils.updateRecord(data, newRecord, false)
       res.redirect(`/record/${req.params.uuid}/qts/not-passed/not-recommended`)
     }
   })

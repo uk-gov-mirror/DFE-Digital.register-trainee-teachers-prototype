@@ -1,0 +1,13 @@
+{% extends "_templates/_record-form.html" %}
+
+{% set pageHeadingTraineeName = data.record.personalDetails.shortName %}
+{% set pageHeading = "Is the trainee withdrawing?" %}
+{% set formAction = "./confirm" %}
+  
+{% block formContent %}
+
+  <span class="govuk-caption-l">{{pageHeadingTraineeName}}</span>
+
+  {% include "_includes/forms/qts/withdrawal.html" %}
+
+{% endblock %}

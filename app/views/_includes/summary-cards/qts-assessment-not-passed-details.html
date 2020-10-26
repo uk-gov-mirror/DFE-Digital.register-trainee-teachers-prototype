@@ -57,7 +57,25 @@
         }
       ]
     } if canAmend
-  } if false
+  } if false,
+  {
+    key: {
+      text: "Future status"
+    },
+    value: {
+      text: record.qtsDetails.withdrawalStatus or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/qts/not-passed/withdrawal" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "future course status"
+        }
+      ]
+    } if canAmend
+  }
+
   ] %}
 
 {% set qtsDetailsHtml %}
