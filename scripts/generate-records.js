@@ -205,8 +205,8 @@ const generateFakeApplications = () => {
         "level2": "Birmingham",
         "postcode": "B12 0QY"
       },
-      "phoneNumber": "07853451864",
-      "email": "s.jones@gmail.com",
+      "phoneNumber": "07700 900941",
+      "email": "s.jones@example.com",
       "status": [
         "Completed"
       ]
