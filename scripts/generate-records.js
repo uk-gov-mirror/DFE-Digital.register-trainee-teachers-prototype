@@ -152,6 +152,104 @@ const generateFakeApplication = (params = {}) => {
 const generateFakeApplications = () => {
   let applications = []
 
+  // Static draft record for use in user research - matches seed data
+  applications.push(generateFakeApplication({
+    "status": "Draft",
+    "events": {
+      "items": []
+    },
+    "route": "Provider-led",
+    "traineeId": "73RTQRQL",
+    "programmeDetails": {
+      "subject": "Physical education",
+      "ageRange": "14 - 19 programme",
+      "startDate": [
+        "3",
+        "10",
+        "2021"
+      ],
+      "endDate": [
+        "10",
+        "06",
+        "2024"
+      ],
+      "allocatedPlace": "Yes",
+      "status": [
+        "Completed"
+      ]
+    },
+    "personalDetails": {
+      "nationality": [
+        "Irish",
+        "American"
+      ],
+      "givenName": "Sarah Lilia",
+      "middleNames": "",
+      "familyName": "Jones",
+      "dateOfBirth": [
+        "3",
+        "12",
+        "1987"
+      ],
+      "sex": "Female",
+      "status": [
+        "Completed"
+      ]
+    },
+    "contactDetails": {
+      "internationalAddress": "",
+      "addressType": "domestic",
+      "address": {
+        "line1": "260 Bradford Street",
+        "line2": "Deritend",
+        "level2": "Birmingham",
+        "postcode": "B12 0QY"
+      },
+      "phoneNumber": "07853451864",
+      "email": "s.jones@gmail.com",
+      "status": [
+        "Completed"
+      ]
+    },
+    "diversity": {
+      "diversityDisclosed": "true",
+      "ethnicGroup": "White",
+      "ethnicBackground": "Irish",
+      "ethnicBackgroundOther": "",
+      "disabledAnswer": "They shared that they’re disabled",
+      "disabilities": [
+        "Physical disability or mobility issue",
+        "Social or communication impairment"
+      ],
+      "disabilitiesOther": "",
+      "status": [
+        "Completed"
+      ]
+    },
+    "degree": {
+      "items": [
+        {
+          "isInternational": "true",
+          "subject": "Biology",
+          "country": "United States",
+          "endDate": "2013",
+          "type": "Bachelor degree"
+        },
+        {
+          "isInternational": "false",
+          "subject": "Sport and exercise sciences",
+          "org": "The University of Manchester",
+          "endDate": "2016",
+          "type": "BSc - Bachelor of Science",
+          "grade": "First-class honours"
+        }
+      ],
+      "status": [
+        "Completed"
+      ]
+    }
+  }))
+
   // Manually create specific applications
   applications.push(generateFakeApplication({
     status: 'Pending TRN',
