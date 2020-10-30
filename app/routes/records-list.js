@@ -172,6 +172,33 @@ module.exports = router => {
 
     }
 
+    if (query.sortOrder){
+      switch (query.sortOrder) {
+        case "lastName":
+          filteredRecords.sort((a, b) => {
+            if (a?.personalDetails?.familyName && b?.personalDetails?.familyName){
+              return a.personalDetails.familyName.localeCompare(b.personalDetails.familyName)
+            }
+            else return (a?.personalDetails?.familyName) ? 1 : -1
+          })
+          break
+        case "firstName":
+          filteredRecords.sort((a, b) => {
+            if (a?.personalDetails?.givenName && b?.personalDetails?.givenName){
+              return a.personalDetails.givenName.localeCompare(b.personalDetails.givenName)
+            }
+            else return (a?.personalDetails?.givenName) ? 1 : -1
+          })
+          break
+        // case "dateAdded":
+        //   filteredRecords.sort((a,b) => new Date(b.submittedDate).getTime() - new Date(a.submittedDate).getTime())
+        //   break
+        default:
+          filteredRecords.sort((a, b) => new Date(b.updatedDate).getTime() - new Date(a.updatedDate).getTime())
+          break
+      }
+    }
+
     res.render('records', {
       filteredRecords,
       hasFilters,

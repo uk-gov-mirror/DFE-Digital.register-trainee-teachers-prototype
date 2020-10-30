@@ -14,3 +14,7 @@ $(document).ready(function () {
 $('.moj-filter').on('change', function(){
   $(this).closest('form').submit();
 });
+
+$('#sortOrder').on('change', function(){
+  $(this).closest('form').submit();
+});

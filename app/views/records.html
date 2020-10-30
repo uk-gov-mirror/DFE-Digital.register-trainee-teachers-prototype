@@ -4,6 +4,7 @@
 {% set backLink = 'false' %}
 
 {% block content %}
+{# super pulling in flash message banner #}
 {{super()}}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
@@ -16,24 +17,7 @@
         isStartButton: true
       }) }}
 
-      {# {{ govukSelect({
-        id: "sort",
-        name: "sort",
-        label: {
-          text: "Sort by"
-        },
-        items: [
-          {
-            value: "published",
-            text: "Recently added"
-          },
-          {
-            value: "updated",
-            text: "Recently updated",
-            selected: true
-          }
-        ]
-      }) }} #}
+      
     </div>
   </div>
 </div>
@@ -55,6 +39,37 @@
           <div class="moj-action-bar">
             <div class="moj-action-bar__filter"></div>
           </div>
+
+          {{ govukSelect({
+            id: "sortOrder",
+            name: "sortOrder",
+            label: {
+              text: "Sort by",
+              classes: "govuk-label--s"
+            },
+            items: [
+              {
+                value: "dateUpdated",
+                text: "Date updated",
+                selected: true if (query.sortOrder == "dateUpdated") or (not query.sortOrder)
+              },
+              {
+                value: "dateAdded",
+                text: "Date added",
+                selected: true if query.sortOrder == "dateAdded"
+              } if false,
+              {
+                value: "lastName",
+                text: "Last name",
+                selected: true if query.sortOrder == "lastName"
+              },
+              {
+                value: "firstName",
+                text: "First name",
+                selected: true if query.sortOrder == "firstName"
+              }
+            ]
+          }) }}
           
           <div class="records-search">
             {{ govukInput({
@@ -69,6 +84,7 @@
             {{ govukButton({
               text: "Search"
             }) }}
+
           </div>
 
         </form>
@@ -78,13 +94,11 @@
           {% if filteredRecords.length %}
 
             <div class="app-application-cards">
-              {% set sortedFilterRecords = filteredRecords | sort(attribute="updatedDate") | reverse %}
 
-              {% set draftRecords = sortedFilterRecords | where("status", "Draft") %}
+              {% set draftRecords = filteredRecords | where("status", "Draft") %}
              
               {% if (draftRecords | length) %}
                 <div class="govuk-!-margin-bottom-8">
-                  
                   <h2 class="govuk-heading-m">Draft records ({{draftRecords | length}})</h2>
                   {% for record in draftRecords %}
                     {% include "_includes/trainee-record-card.njk" %}
@@ -92,17 +106,13 @@
                 </div>
               {% endif %}
 
-              {% set nonDraftRecords = sortedFilterRecords | removeWhere("status", "Draft") %}
+              {% set nonDraftRecords = filteredRecords | removeWhere("status", "Draft") %}
               {% if (nonDraftRecords | length) %} 
                 <h2 class="govuk-heading-m">Records ({{nonDraftRecords | length}})</h2>
                 {% for record in nonDraftRecords %}
-
                     {% include "_includes/trainee-record-card.njk" %}
-
                 {% endfor %}
               {% endif %}
-
-              
 
             </div>
 
