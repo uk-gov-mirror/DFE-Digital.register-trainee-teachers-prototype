@@ -37,61 +37,17 @@
         <div class="moj-filter-layout__content">
 
           <div class="moj-action-bar">
-            <div class="moj-action-bar__filter"></div>
+            <div class="moj-action-bar__filter">   
+            </div>
           </div>
 
-          {{ govukSelect({
-            id: "sortOrder",
-            name: "sortOrder",
-            label: {
-              text: "Sort by",
-              classes: "govuk-label--s"
-            },
-            items: [
-              {
-                value: "dateUpdated",
-                text: "Date updated",
-                selected: true if (query.sortOrder == "dateUpdated") or (not query.sortOrder)
-              },
-              {
-                value: "dateAdded",
-                text: "Date added",
-                selected: true if query.sortOrder == "dateAdded"
-              } if false,
-              {
-                value: "lastName",
-                text: "Last name",
-                selected: true if query.sortOrder == "lastName"
-              },
-              {
-                value: "firstName",
-                text: "First name",
-                selected: true if query.sortOrder == "firstName"
-              }
-            ]
-          }) }}
-          
-          <div class="records-search">
-            {{ govukInput({
-              label: {
-                html: "Search records",
-                classes: "govuk-label--s"
-              },
-              id: "search",
-              name: "searchQuery",
-              value: query.searchQuery
-            }) }}
-            {{ govukButton({
-              text: "Search"
-            }) }}
-
-          </div>
-
-        </form>
-
-        <div>
+          {# Only sort if there's at least two items #}
+          {% if filteredRecords.length > 1 %}
+            {% include "_includes/record-sort-order.njk" %}
+          {% endif %}
 
           {% if filteredRecords.length %}
+
 
             <div class="app-application-cards">
 
@@ -157,13 +113,11 @@
             <h2 class="govuk-heading-m">No records found.</h2>
             <p class="govuk-body">Try <a href="/records">clearing your search and filters</a>.</p>
           {% endif %}
-
-          
         </div>
 
-      </div>
-    </div>
+      </form>
 
+    </div>
   </div>
 
 </div>

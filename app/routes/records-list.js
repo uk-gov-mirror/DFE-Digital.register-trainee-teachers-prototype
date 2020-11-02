@@ -8,6 +8,9 @@ const cleanInputData = radios => {
     radios = undefined
   }
   else if (!_.isArray(radios)) radios = [radios] // coerce to arrays so we can filter them
+  if (_.isArray(radios)){
+    radios = radios.filter(item => item != '_unchecked')
+  }
   return radios
 }
 
@@ -199,10 +202,35 @@ module.exports = router => {
       }
     }
 
+    const createSortLink = sortBy => {
+      let newQuery = Object.assign({}, query)
+      newQuery.sortOrder = sortBy
+      return url.format({
+        pathname: '/records',
+        query: newQuery,
+      })
+    }
+
+
+    // newQuery.sortOrder = 'lastName'
+    // let linkSortByName = url.format({
+    //   pathname: '/records',
+    //   query: newQuery,
+    // })
+
+    // newQuery.sortOrder = 'dateUpdated'
+    // let linkSortByDateUpdated = url.format({
+    //   pathname: '/records',
+    //   query: newQuery,
+    // })
+
+
     res.render('records', {
       filteredRecords,
       hasFilters,
-      selectedFilters
+      selectedFilters,
+      linkSortByName: createSortLink("lastName"),
+      linkSortByDateUpdated: createSortLink("dateUpdated")
     })
   })
 
