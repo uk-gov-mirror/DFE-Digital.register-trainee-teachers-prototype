@@ -105,20 +105,6 @@ module.exports = router => {
     }
   })
 
-  // // Cature QTS reasons for not passing and confirm
-  // router.post('/record/:uuid/qts/not-passed/assessment-not-passed', (req, res) => {
-  //   const data = req.session.data
-  //   const newRecord = data.record
-
-  //   // Update failed or no data
-  //   if (!newRecord){
-  //     res.redirect('/record/:uuid')
-  //   }
-  //   else {
-  //     res.redirect('/record/' + req.params.uuid + '/qts/not-passed/confirm')
-  //   }
-  // })
-
   // Copy qts (not passed data) back to real record
   router.post('/record/:uuid/qts/not-passed/update', (req, res) => {
     const data = req.session.data
