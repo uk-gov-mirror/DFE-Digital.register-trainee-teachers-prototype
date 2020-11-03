@@ -46,13 +46,7 @@
 
 {% block content %}
 
-  {# {{ appBanner({
-    html: "<h2 class=\"govuk-heading-m\">"+flash+"</h2>",
-    type: "success",
-    icon: false
-  }) if flash | falsify }} #}
-
-  {% include "_includes/app-banner.njk" %}
+  {% include "_includes/app-flash-message.html" %}
 
   <div class="record-header">
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-0">

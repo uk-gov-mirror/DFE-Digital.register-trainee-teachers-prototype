@@ -17,8 +17,8 @@
 
   <div class="govuk-grid-column-full">
     
-    {# Hide the record actions ui if empty #}
-    {% if record.status | getCanDefer or getCanReinstate %}
+    {# Hide the record actions ui if it's empty #}
+    {% if (record.status | getCanDefer) or (record.status | getCanReinstate) %}
       <div class="record-actions">
         {% if record.status | getCanRecommendForQts %}
           {{ govukButton({

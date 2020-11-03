@@ -129,16 +129,16 @@ module.exports = router => {
         newRecord.status = 'Withdrawn'
         newRecord.withdrawalDate = newRecord.qtsNotPassedOutcomeDate
         newRecord.withdrawalReason = newRecord.notPassedReason
+        req.flash( 'success', {title: 'Trainee withdrawn', html: '<p><a href="#">Para</a> content here</p>' } )
       }
       else {
         // newRecord.status = 'TRN received' // TODO: should we have a new status?
-        
+        req.flash('success', 'Status changed')   
       }
       delete newRecord.qtsDetails.standardsAssessedOutcome
       delete newRecord.notPassedReason
       delete newRecord.notPassedReasonOther
       utils.updateRecord(data, newRecord, false)
-      req.flash('success', 'Trainee withdrawn')
       res.redirect(`/record/${req.params.uuid}`)
     }
   })
@@ -242,8 +242,9 @@ module.exports = router => {
         delete newRecord.withdrawalReasonOther
       }
       utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord, "Trainee withdrawn")
-      req.flash('success', 'Trainee withdrawn')
+      utils.updateRecord(data, newRecord, "Test")
+      // req.flash('success', 'Trainee withdrawn')
+      req.flash( 'success', {title: 'Trainee withdrawn', html: '<p><a href="#">Para</a> content here</p>' } )
       res.redirect('/record/' + req.params.uuid)
     }
   })

@@ -29,7 +29,11 @@ filters.sentenceCase = (input) => {
   else return input
 }
 
-
+// Is it a string or not?
+filters.isString = str => {
+  let isString = _.isString(str)
+  return _.isString(str)
+}
 
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app
