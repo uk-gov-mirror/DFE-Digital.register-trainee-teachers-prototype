@@ -138,7 +138,8 @@ module.exports = router => {
       delete newRecord.notPassedReason
       delete newRecord.notPassedReasonOther
       utils.updateRecord(data, newRecord, false)
-      res.redirect(`/record/${req.params.uuid}/qts/not-passed/not-recommended`)
+      req.flash('success', 'Trainee withdrawn')
+      res.redirect(`/record/${req.params.uuid}`)
     }
   })
 
