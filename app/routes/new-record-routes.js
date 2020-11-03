@@ -54,6 +54,20 @@ module.exports = router => {
     res.render('new-record/check-record', {errorList, recordIsComplete: isComplete})
   })
 
+  // Delete draft
+  router.get('/new-record/delete-draft', (req, res) => {
+    const data = req.session.data
+    const records = data.records
+    let newRecord = data.record
+    if (newRecord.id){
+      let recordIndex = records.findIndex(record => record.id == newRecord.id)
+      _.pullAt(records, [recordIndex]) // delete item at index
+    }
+    utils.deleteTempData(data)
+    req.flash('success', 'Draft deleted')
+    res.redirect('/records')
+  })
+
   // Save a record and put in data store
   router.get('/new-record/save-as-draft', (req, res) => {
     const data = req.session.data
