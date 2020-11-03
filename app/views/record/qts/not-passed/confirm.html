@@ -24,20 +24,15 @@
   }) }} #}
 
   {% if record.qtsDetails.withdrawalStatus == "Withdrawing from programme" %}
-
     {{ govukButton({
       text: "Record QTS outcome and withdraw trainee",
       classes: "govuk-button--warning"
     }) }}
-
   {% else %}
- 
     {{ govukButton({
       text: "Record QTS outcome"
     }) }}
-
   {% endif %}
-
 
 {% endblock %}
 

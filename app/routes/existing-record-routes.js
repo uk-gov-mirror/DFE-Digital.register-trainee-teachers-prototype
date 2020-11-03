@@ -119,7 +119,6 @@ module.exports = router => {
       let isWithdrawing = (_.get(newRecord, "qtsDetails.withdrawalStatus") == "Withdrawing from programme")
       // console.log('is withdrawing:', isWithdrawing)
       newRecord.qtsNotPassedOutcomeDate = new Date()
-
       utils.deleteTempData(data)
       utils.addEvent(newRecord, "Trainee did not pass their QTS")
       
@@ -129,15 +128,21 @@ module.exports = router => {
         newRecord.status = 'Withdrawn'
         newRecord.withdrawalDate = newRecord.qtsNotPassedOutcomeDate
         newRecord.withdrawalReason = newRecord.notPassedReason
-        req.flash( 'success', {title: 'Trainee withdrawn', html: '<p><a href="#">Para</a> content here</p>' } )
+        req.flash( 'success', {title: 'QTS outcome recorded and trainee withdrawn', html: '<p class="govuk-body">If you think there is a problem with the QTS award, contact <a href="mailto:itt.datamanagement@education.gov.uk">itt.datamanagement@education.gov.uk</a>.</p>' } )
       }
       else {
         // newRecord.status = 'TRN received' // TODO: should we have a new status?
-        req.flash('success', 'Status changed')   
+        req.flash('success', 'QTS outcome recorded')   
       }
-      delete newRecord.qtsDetails.standardsAssessedOutcome
+      newRecord.previousQtsOutcome = newRecord.notPassedReason
       delete newRecord.notPassedReason
+      newRecord.previousQtsOutcomeOther = newRecord.notPassedReasonOther
       delete newRecord.notPassedReasonOther
+      // todo add these 2 to other withdraw flow
+      // todo delete these 2 from pass qts flow
+
+      delete newRecord.qtsDetails.standardsAssessedOutcome
+      delete newRecord.qtsDetails.withdrawalStatus
       utils.updateRecord(data, newRecord, false)
       res.redirect(`/record/${req.params.uuid}`)
     }
@@ -243,8 +248,7 @@ module.exports = router => {
       }
       utils.deleteTempData(data)
       utils.updateRecord(data, newRecord, "Test")
-      // req.flash('success', 'Trainee withdrawn')
-      req.flash( 'success', {title: 'Trainee withdrawn', html: '<p><a href="#">Para</a> content here</p>' } )
+      req.flash('success', 'Trainee withdrawn')
       res.redirect('/record/' + req.params.uuid)
     }
   })

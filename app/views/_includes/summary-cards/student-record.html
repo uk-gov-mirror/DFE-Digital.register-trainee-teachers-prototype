@@ -120,7 +120,7 @@
         text: "Withdrawn",
         classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
       })}} <br>
-      Withdrawal date: {{record.withdrawalDate | govukDate}}
+      {# Withdrawal date: {{record.withdrawalDate | govukDate}} <br>  #}
   {% endset %}
 
   {% set studentRecordRows = studentRecordRows | push({
@@ -133,25 +133,24 @@
   }) %}
 {% endif %}
 
-{% if record.qtsNotPassedOutcomeDate | length %}
-  
-  {% set notPassedReason %}
-    {% if record.notPassedReason == "For another reason" %}
-      {{record.notPassedReasonOther}}
-    {% else%}
-      {{record.notPassedReason}}
-    {% endif %}
-  {% endset %}
+{% set previousQtsOutcome %}
+  {% if record.previousQtsOutcome == "For another reason" %}
+    {{record.previousQtsOutcomeOther}}
+  {% else%}
+    {{record.previousQtsOutcome}}
+  {% endif %}
+{% endset %}
 
+{% if record.qtsNotPassedOutcomeDate | length %}
   {% set qtsOutcomeContent %}
-      Not passed: {{notPassedReason}}
+      Not passed: {{previousQtsOutcome}}
       <br>
-      Outcome recorded: {{record.qtsNotPassedOutcomeDate | govukDate}}
+      {# Outcome recorded: {{record.qtsNotPassedOutcomeDate | govukDate}} #}
   {% endset %}
 
   {% set studentRecordRows = studentRecordRows | push({
     key: {
-      text: "QTS"
+      text: "QTS outcome"
     },
     value: {
       html: qtsOutcomeContent
