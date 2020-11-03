@@ -4,6 +4,7 @@
 {% set backLink = 'false' %}
 
 {% block content %}
+{# super pulling in flash message banner #}
 {{super()}}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
@@ -16,24 +17,7 @@
         isStartButton: true
       }) }}
 
-      {# {{ govukSelect({
-        id: "sort",
-        name: "sort",
-        label: {
-          text: "Sort by"
-        },
-        items: [
-          {
-            value: "published",
-            text: "Recently added"
-          },
-          {
-            value: "updated",
-            text: "Recently updated",
-            selected: true
-          }
-        ]
-      }) }} #}
+      
     </div>
   </div>
 </div>
@@ -53,38 +37,24 @@
         <div class="moj-filter-layout__content">
 
           <div class="moj-action-bar">
-            <div class="moj-action-bar__filter"></div>
-          </div>
-          
-          <div class="records-search">
-            {{ govukInput({
-              label: {
-                html: "Search records",
-                classes: "govuk-label--s"
-              },
-              id: "search",
-              name: "searchQuery",
-              value: query.searchQuery
-            }) }}
-            {{ govukButton({
-              text: "Search"
-            }) }}
+            <div class="moj-action-bar__filter">   
+            </div>
           </div>
 
-        </form>
-
-        <div>
+          {# Only sort if there's at least two items #}
+          {% if filteredRecords.length > 1 %}
+            {% include "_includes/record-sort-order.njk" %}
+          {% endif %}
 
           {% if filteredRecords.length %}
 
-            <div class="app-application-cards">
-              {% set sortedFilterRecords = filteredRecords | sort(attribute="updatedDate") | reverse %}
 
-              {% set draftRecords = sortedFilterRecords | where("status", "Draft") %}
+            <div class="app-application-cards">
+
+              {% set draftRecords = filteredRecords | where("status", "Draft") %}
              
               {% if (draftRecords | length) %}
                 <div class="govuk-!-margin-bottom-8">
-                  
                   <h2 class="govuk-heading-m">Draft records ({{draftRecords | length}})</h2>
                   {% for record in draftRecords %}
                     {% include "_includes/trainee-record-card.njk" %}
@@ -92,17 +62,13 @@
                 </div>
               {% endif %}
 
-              {% set nonDraftRecords = sortedFilterRecords | removeWhere("status", "Draft") %}
+              {% set nonDraftRecords = filteredRecords | removeWhere("status", "Draft") %}
               {% if (nonDraftRecords | length) %} 
                 <h2 class="govuk-heading-m">Records ({{nonDraftRecords | length}})</h2>
                 {% for record in nonDraftRecords %}
-
                     {% include "_includes/trainee-record-card.njk" %}
-
                 {% endfor %}
               {% endif %}
-
-              
 
             </div>
 
@@ -147,13 +113,11 @@
             <h2 class="govuk-heading-m">No records found.</h2>
             <p class="govuk-body">Try <a href="/records">clearing your search and filters</a>.</p>
           {% endif %}
-
-          
         </div>
 
-      </div>
-    </div>
+      </form>
 
+    </div>
   </div>
 
 </div>
