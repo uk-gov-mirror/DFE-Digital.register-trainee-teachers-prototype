@@ -10,6 +10,7 @@ const cleanInputData = radios => {
   else if (!_.isArray(radios)) radios = [radios] // coerce to arrays so we can filter them
   if (_.isArray(radios)){
     radios = radios.filter(item => item != '_unchecked')
+    radios = (radios.length == 0) ? undefined : radios
   }
   return radios
 }
