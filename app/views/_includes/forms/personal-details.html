@@ -90,21 +90,21 @@
 {% set nationalitiesWithoutBritishAndIrish = data.nationalities | removeArrayItems(['British', 'Irish']) %}
 
 {# Separate out nationalities #}
-{% set otherNationalities = record.personalDetails.nationality | removeArrayItems(['British','Irish','Other'] | removeEmpty )%}
+{% set otherNationalities = record.personalDetails.nationality | removeArrayItems(['British', 'Irish', 'Other'] | removeEmpty )%}
 
-{% set otherNationalities = otherNationalities %}
+{# {% set otherNationalities = otherNationalities %} #}
 {% set hasOtherNationality = otherNationalities | length > 0 %}
 
+
 {% set nationalityOtherHtml %}
-  {% set nationalityOther = otherNationalities %}
-  {% if nationalityOther | length > 1 %}
-    {% set nationalityOther = nationalityOther[0] %}
+
+  {# Make sure there's at least one input #}
+  {% if not otherNationalities | length   %}
+    {% set otherNationalities = [''] %}
   {% endif %}
 
-  {# Make sure there's enough inputs to cover existing nationalities #}
   {% for nationality in otherNationalities %}
     {% set nationalityIndex = loop.index0 + 3 %}
-
     {{ appAutocomplete({
       label: {
         text: "Other nationality",
@@ -117,39 +117,7 @@
       value: nationality
       }
     ) }}
-
   {% endfor %}
-
-  {# Make sure there's at least one extra input #}
-  {% if not otherNationalities | length %}
-  
-    {{ appAutocomplete({
-      label: {
-        text: "Other nationality",
-        classes: "govuk-label--s"
-      },
-      id: 'nationality-other',
-      name: "record[personalDetails][nationality][3]",
-      items: nationalitiesWithoutBritishAndIrish,
-      classes: "govuk-!-width-two-thirds",
-      value: nationality
-      }
-    ) }}
-
-    {{ appAutocomplete({
-      label: {
-        text: "Other nationality",
-        classes: "govuk-label--s"
-      },
-      id: 'nationality-other1',
-      name: "record[personalDetails][nationality][35]",
-      items: nationalitiesWithoutBritishAndIrish,
-      classes: "govuk-!-width-two-thirds",
-      value: nationality
-      }
-    ) }}
-  {% endif %}
-
 
   <div class="govuk-form-group">
     {{ govukButton({
