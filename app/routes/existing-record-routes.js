@@ -138,7 +138,7 @@ module.exports = router => {
       delete newRecord.notPassedReason
       newRecord.previousQtsOutcomeOther = newRecord.notPassedReasonOther
       delete newRecord.notPassedReasonOther
-      // todo add these 2 to other withdraw flow
+      // todo add these 2 to the other withdraw flow
       // todo delete these 2 from pass qts flow
 
       delete newRecord.qtsDetails.standardsAssessedOutcome
@@ -247,7 +247,7 @@ module.exports = router => {
         delete newRecord.withdrawalReasonOther
       }
       utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord, "Test")
+      utils.updateRecord(data, newRecord, 'Trainee withdrawn')
       req.flash('success', 'Trainee withdrawn')
       res.redirect('/record/' + req.params.uuid)
     }
