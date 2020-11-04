@@ -118,7 +118,7 @@
   {% set withdrawalContent %}
       {{govukTag({
         text: "Withdrawn",
-        classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
+        classes: record.status | getStatusClass
       })}} <br>
       {# Withdrawal date: {{record.withdrawalDate | govukDate}} <br>  #}
   {% endset %}
@@ -141,6 +141,14 @@
   {% endif %}
 {% endset %}
 
+{% set qtsRowText %}
+    {% if record.status == "QTS recommended" %}
+      Previous QTS outcome
+    {% else %}
+      QTS outcome 
+    {% endif %}
+{% endset %}  
+
 {% if record.qtsNotPassedOutcomeDate | length %}
   {% set qtsOutcomeContent %}
       Not passed: {{previousQtsOutcome}}
@@ -148,14 +156,16 @@
       {# Outcome recorded: {{record.qtsNotPassedOutcomeDate | govukDate}} #}
   {% endset %}
 
-  {% set studentRecordRows = studentRecordRows | push({
-    key: {
-      text: "QTS outcome"
-    },
-    value: {
-      html: qtsOutcomeContent
-    }
-  }) %}
+    {% set studentRecordRows = studentRecordRows | push({
+      key: {
+        text: qtsRowText
+      },
+      value: {
+        html: qtsOutcomeContent
+      }
+    }) %}
+  {% else %}
+  {}
 {% endif %}
 
 {% set updatedDate %}
