@@ -153,19 +153,16 @@
   {% set qtsOutcomeContent %}
       Not passed: {{previousQtsOutcome}}
       <br>
-      {# Outcome recorded: {{record.qtsNotPassedOutcomeDate | govukDate}} #}
   {% endset %}
 
-    {% set studentRecordRows = studentRecordRows | push({
-      key: {
-        text: qtsRowText
-      },
-      value: {
-        html: qtsOutcomeContent
-      }
-    }) %}
-  {% else %}
-  {}
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: qtsRowText
+    },
+    value: {
+      html: qtsOutcomeContent
+    }
+  }) %}
 {% endif %}
 
 {% set updatedDate %}
