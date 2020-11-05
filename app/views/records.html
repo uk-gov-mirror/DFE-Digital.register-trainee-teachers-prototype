@@ -29,9 +29,14 @@
       
       <form method="get" action="">
       
-        <div class="moj-filter-layout__filter">
-          {% include "_includes/filter-panel.njk" %}
-          <p class="govuk-body govuk-!-margin-top-5"><a href="#" class="govuk-link">Export these records</a></p>
+        <div class="moj-filter-layout__filter-wrapper">
+          
+          <div class="moj-filter-layout__filter">
+            {% include "_includes/filter-panel.njk" %}
+          </div>
+
+          <p class="govuk-body"><a href="#" class="govuk-link">Export these records</a></p>
+
         </div>
 
         <div class="moj-filter-layout__content">
