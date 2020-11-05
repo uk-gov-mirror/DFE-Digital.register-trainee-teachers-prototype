@@ -25,7 +25,7 @@
 
 {% set ukConditionalHtml %}
   {# typeUK ultimately gets merged back in to type, hence value checking both #}
-  {{ appAutocomplete({
+  {# {{ appAutocomplete({
     label: {
       text: "Enter degree type"
     },
@@ -38,13 +38,13 @@
     classes: "govuk-!-width-two-thirds",
     value: (degreeTemp.type or degreeTemp.typeUK) if not isInternational
     }
-  ) }}
+  ) }} #}
 {% endset %}
 
 
 {% set internationalConditionalHtml %}
 
-  {% set naricItems = [] %}
+  {# {% set naricItems = [] %}
   {% for naricItem in data.ukComparableDegrees %}
     {% set naricItems = naricItems | push({
       text: naricItem,
@@ -62,7 +62,7 @@
     },
     items: naricItems
   } | decorateAttributes(degreeTemp, "degreeTemp.typeInt")) }}
-  
+   #}
 {% endset %}
 
 {{ govukRadios({
@@ -75,13 +75,13 @@
   items: [{
     value: "false",
     text: "UK degree",
-    conditional: {
+    _conditional: {
       html: ukConditionalHtml
     }
   }, {
     value: "true",
     text: "Non-UK degree",
-    conditional: {
+    _conditional: {
       html: internationalConditionalHtml
     }
   }]
