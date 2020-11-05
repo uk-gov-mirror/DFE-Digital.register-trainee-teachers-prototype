@@ -31,14 +31,18 @@
   
 {% endfor %}
 
-{{ govukSelect({
-  label: params.label,
-  hint: params.hint,
-  id: params.id,
-  classes: params.classes,
-  name: params.name,
-  items: selectItems
-}) }}
+<div class="{{params.classes}} govuk-!-margin-bottom-6">
+  {{ govukSelect({
+    label: params.label,
+    hint: params.hint,
+    id: params.id,
+    classes: params.classes,
+    name: params.name,
+    items: selectItems
+  }) }}
+  {# <div class="govuk-form-group"></div> #}
+</div>
+
 
 {# {% if data.class %}
   {% set class = data.class %}
