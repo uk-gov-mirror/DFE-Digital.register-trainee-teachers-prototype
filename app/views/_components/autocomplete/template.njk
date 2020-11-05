@@ -31,6 +31,9 @@
   
 {% endfor %}
 
+{# This needs margin manually applied because the design system removes
+ bottom margin from the last govuk-form-group in a div - which happens
+  for *each* autocomplete #}
 <div class="{{params.classes}} govuk-!-margin-bottom-6">
   {{ govukSelect({
     label: params.label,
