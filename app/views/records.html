@@ -1,5 +1,5 @@
 {% extends "_templates/_page.html" %}
-{% set pageHeading = "Trainee teachers" %}
+{% set pageHeading = "Trainee records" %}
 
 {% set backLink = 'false' %}
 
@@ -17,7 +17,7 @@
         isStartButton: true
       }) }}
 
-      
+
     </div>
   </div>
 </div>
@@ -26,9 +26,9 @@
   <div class="govuk-grid-column-full">
 
     <div class="moj-filter-layout">
-      
+
       <form method="get" action="">
-      
+
         <div class="moj-filter-layout__filter">
           {% include "_includes/filter-panel.njk" %}
           <p class="govuk-body govuk-!-margin-top-5"><a href="#" class="govuk-link">Export these records</a></p>
@@ -37,7 +37,7 @@
         <div class="moj-filter-layout__content">
 
           <div class="moj-action-bar">
-            <div class="moj-action-bar__filter">   
+            <div class="moj-action-bar__filter">
             </div>
           </div>
 
@@ -52,7 +52,7 @@
             <div class="app-application-cards">
 
               {% set draftRecords = filteredRecords | where("status", "Draft") %}
-             
+
               {% if (draftRecords | length) %}
                 <div class="govuk-!-margin-bottom-8">
                   <h2 class="govuk-heading-m">Draft records ({{draftRecords | length}})</h2>
@@ -63,7 +63,7 @@
               {% endif %}
 
               {% set nonDraftRecords = filteredRecords | removeWhere("status", "Draft") %}
-              {% if (nonDraftRecords | length) %} 
+              {% if (nonDraftRecords | length) %}
                 <h2 class="govuk-heading-m">Records ({{nonDraftRecords | length}})</h2>
                 {% for record in nonDraftRecords %}
                     {% include "_includes/trainee-record-card.njk" %}
@@ -108,7 +108,7 @@
                 classes: 'govuk-!-margin-bottom-3'
               }) }}
             {% endif %}
-          
+
           {% else %}
             <h2 class="govuk-heading-m">No records found.</h2>
             <p class="govuk-body">Try <a href="/records">clearing your search and filters</a>.</p>
