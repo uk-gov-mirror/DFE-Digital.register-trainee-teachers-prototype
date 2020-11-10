@@ -1,54 +1,13 @@
-{% set assessmentEndDateArray = record.programmeDetails.endDate | toDateArray %}
-
-{% set assessmentEndDateHtml %}
-  {# Collected now because they won't know the date before this #}
-  {{ govukDateInput({
-    id: "assessment-end-date",
-    namePrefix: "record[programmeDetails][endDate]",
-    fieldset: {
-      legend: {
-        text: "On what date?",
-        classes: "govuk-fieldset__legend--ss"
-      }
-    },
-    hint: {
-      text: "For example, " + "" | today | toDateArray | spaceSeparate
-    },
-    items: [
-        {
-          name: "day",
-          classes: "govuk-input--width-2",
-          value: assessmentEndDateArray["0"]
-        },
-        {
-          name: "month",
-          classes: "govuk-input--width-2",
-          value: assessmentEndDateArray["1"]
-        },
-        {
-          name: "year",
-          classes: "govuk-input--width-4",
-          value: assessmentEndDateArray["2"]
-        }
-      ]
-  }) }}
-{% endset %}
-
-
 {{ govukRadios({
   fieldset: {
     legend: {
-      text: pageHeading,
-      classes: "govuk-fieldset__legend--l",
-      isPageHeading: true
+      text: "Has the trainee passed their assessment?",
+      classes: "govuk-fieldset__legend--s govuk-!-margin-bottom-4"
     }
   },
   items: [
     {
-      text: "Passed",
-      conditional: {
-        html: assessmentEndDateHtml
-      }
+      text: "Passed"
     },
     {
       text: "Not passed"
@@ -59,6 +18,66 @@
   ]
 } | decorateAttributes(record, "record.qtsDetails.standardsAssessedOutcome"))}}
 
+{% set customQtsOutcomeRecordedDateArray = record.qtsOutcomeRecordedDate | toDateArray %}
+{% if record.qtsOutcomeRecordedDate | isInLast(2, "days") and record.qtsOutcomeRecordedDateRadio != "On another day" %}
+  {% set customQtsOutcomeRecordedDateArray = undefined %}
+{% endif %}
+
+{% set customQtsOutcomeRecordedDateArray %}
+  {{ govukDateInput({
+    id: "custom-qtsOutcomeRecorded-date",
+    namePrefix: "record[qtsOutcomeRecordedDate]",
+    fieldset: {
+      legend: {
+        text: "Enter the date the outcome was recorded",
+        classes: "govuk-label govuk-label--s"
+      }
+    },
+    hint: {
+      text: "For example, " + "" | today | toDateArray | spaceSeparate
+    },
+    items: [
+        {
+          name: "day",
+          classes: "govuk-input--width-2",
+          value: customQtsOutcomeRecordedDateArray["0"]
+        },
+        {
+          name: "month",
+          classes: "govuk-input--width-2",
+          value: customQtsOutcomeRecordedDateArray["1"]
+        },
+        {
+          name: "year",
+          classes: "govuk-input--width-4",
+          value: customQtsOutcomeRecordedDateArray["2"]
+        }
+      ]
+  }) }}
+{% endset %}
+
+{{ govukRadios({
+  fieldset: {
+    legend: {
+      text: "When was the outcome recorded?",
+      classes: "govuk-fieldset__legend--s govuk-!-margin-bottom-4"
+    }
+  },
+  items: [
+    {
+      text: "Today"
+    },
+    {
+      text: "Yesterday"
+    },
+    {
+      text: "On another day",
+      conditional: {
+        html: customQtsOutcomeRecordedDateArray
+      }
+    }
+  ]
+} | decorateAttributes(record, "record.qtsOutcomeRecordedDateRadio")) }}
 
 {{ govukButton({
   text: "Continue"
