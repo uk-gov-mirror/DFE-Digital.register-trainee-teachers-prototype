@@ -37,6 +37,7 @@
 {% from "_components/task-list/macro.njk"   import appTaskList %}
 {% from "_components/footer/macro.njk"   import appFooter %}
 {% from "_components/sub-navigation/macro.njk"   import appSubNavigation %}
+{% from "_components/primary-navigation/macro.njk"   import appPrimaryNavigation %}
 {% from "_components/timeline/macro.njk"   import appTimeline %}
 
 {# moj components #}
@@ -58,21 +59,21 @@
   {# Set serviceName in config.js. #}
   {{ govukHeader({
     homepageUrl: "/start-page",
-    serviceName: serviceName,
+    productName: serviceName,
     serviceUrl: "/records",
     containerClasses: "govuk-width-container",
     navigation: [
       {
         href: "/home",
         text: "Home"
-      },
+      } if false,
       {
         href: "/records",
         text: "Trainee records"
-      },
+      } if false,
       {
         href: "#1",
-        text: "Support"
+        text: "Your account"
       },
       {
         href: "#3",
@@ -80,6 +81,30 @@
       }
     ] if not hideNav
   }) }}
+
+  {{ appPrimaryNavigation({
+    label: 'Primary navigation',
+    items: [{
+        text: 'Home',
+        href: '/home',
+        active: true if navActive == 'home'
+      }, {
+        text: 'Trainee records',
+        href: '/records',
+        active: true if navActive == 'records'
+      }, {
+        text: 'Courses',
+        href: '/root/case-list',
+        active: true if navActive == 'courses'
+      },
+      {
+        text: 'Your team',
+        href: '/pages/teams/b1dab0f5-4651-4af8-9f15-fa8143ff338d',
+        active: true if navActive == 'teams',
+        classes: 'align-right'
+      } if false
+      ]
+    }) }}
 {% endblock %}
 
 {% block beforeContent %}
@@ -87,7 +112,7 @@
   tag: {
     text: "prototype"
   },
-  html: 'This is a prototype of a new service. Some parts of this prototype do not work yet. '
+  html: 'This is a prototype of a new service. Some parts of this prototype do not work yet.'
 }) }}
 {% block pageNavigation %}
 {% endblock %}
