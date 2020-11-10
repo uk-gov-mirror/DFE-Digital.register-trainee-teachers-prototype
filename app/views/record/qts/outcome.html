@@ -1,12 +1,15 @@
 {% extends "_templates/_record-form.html" %}
 
 {% set pageHeadingTraineeName = data.record.personalDetails.shortName %}
-{% set pageHeading = "Has the trainee passed their assessment?" %}
+{% set pageHeading = "Record the QTS outcome" %}
 {# {% set formAction = "./confirm" %} #}
   
 {% block formContent %}
 
-  <span class="govuk-caption-l">{{pageHeadingTraineeName}}</span>
+  <h1 class="govuk-heading-l">
+    <span class="govuk-caption-l">{{pageHeadingTraineeName}}</span>
+    {{pageHeading}}
+  </h1>
 
   {% include "_includes/forms/qts/outcome.html" %}
 
