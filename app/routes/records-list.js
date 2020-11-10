@@ -8,6 +8,10 @@ const cleanInputData = radios => {
     radios = undefined
   }
   else if (!_.isArray(radios)) radios = [radios] // coerce to arrays so we can filter them
+  if (_.isArray(radios)){
+    radios = radios.filter(item => item != '_unchecked')
+    radios = (radios.length == 0) ? undefined : radios
+  }
   return radios
 }
 
@@ -172,10 +176,64 @@ module.exports = router => {
 
     }
 
+    filteredRecords.sort((a, b) => new Date(b.updatedDate).getTime() - new Date(a.updatedDate).getTime())
+
+    if (query.sortOrder){
+      switch (query.sortOrder) {
+        case "lastName":
+          filteredRecords.sort((a, b) => {
+            if (a?.personalDetails?.familyName && b?.personalDetails?.familyName){
+              return a.personalDetails.familyName.localeCompare(b.personalDetails.familyName)
+            }
+            else return (a?.personalDetails?.familyName) ? 1 : -1
+          })
+          break
+        case "firstName":
+          filteredRecords.sort((a, b) => {
+            if (a?.personalDetails?.givenName && b?.personalDetails?.givenName){
+              return a.personalDetails.givenName.localeCompare(b.personalDetails.givenName)
+            }
+            else return (a?.personalDetails?.givenName) ? 1 : -1
+          })
+          break
+        // case "dateAdded":
+        //   filteredRecords.sort((a,b) => new Date(b.submittedDate).getTime() - new Date(a.submittedDate).getTime())
+        //   break
+        default:
+          // filteredRecords.sort((a, b) => new Date(b.updatedDate).getTime() - new Date(a.updatedDate).getTime())
+          break
+      }
+    }
+
+    const createSortLink = sortBy => {
+      let newQuery = Object.assign({}, query)
+      newQuery.sortOrder = sortBy
+      return url.format({
+        pathname: '/records',
+        query: newQuery,
+      })
+    }
+
+
+    // newQuery.sortOrder = 'lastName'
+    // let linkSortByName = url.format({
+    //   pathname: '/records',
+    //   query: newQuery,
+    // })
+
+    // newQuery.sortOrder = 'dateUpdated'
+    // let linkSortByDateUpdated = url.format({
+    //   pathname: '/records',
+    //   query: newQuery,
+    // })
+
+
     res.render('records', {
       filteredRecords,
       hasFilters,
-      selectedFilters
+      selectedFilters,
+      linkSortByName: createSortLink("lastName"),
+      linkSortByDateUpdated: createSortLink("dateUpdated")
     })
   })
 

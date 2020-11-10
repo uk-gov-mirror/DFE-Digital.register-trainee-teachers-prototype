@@ -9,6 +9,8 @@ faker.locale  = 'en_GB'
 const moment  = require('moment')
 const _       = require('lodash')
 const trainingRouteData = require('../app/data/training-route-data')
+const seedRecords = require('../app/data/seed-records')
+const statuses = require('../app/data/status')
 
 // Settings
 let simpleGcseGrades = true //output pass/fail rather than full detail
@@ -18,7 +20,6 @@ const sortBySubmittedDate = (x, y) => {
 }
 
 // Route into teaching
-const generateStatus = require('../app/data/generators/status')
 const trainingRoutes = Object.keys(trainingRouteData.trainingRoutes)
 const enabledTrainingRoutes = trainingRouteData.enabledTrainingRoutes
 const generateProgrammeDetails = require('../app/data/generators/programme-details')
@@ -39,7 +40,7 @@ const generateEvents = require('../app/data/generators/events')
 // Populate application data object with fake data
 const generateFakeApplication = (params = {}) => {
 
-  const status = params.status || generateStatus(faker)
+  const status = params.status || faker.helpers.randomize(statuses)
   const events = generateEvents(faker, { status })
 
   let route = params.route || faker.helpers.randomize(enabledTrainingRoutes)
@@ -152,66 +153,9 @@ const generateFakeApplication = (params = {}) => {
 const generateFakeApplications = () => {
   let applications = []
 
-  // Manually create specific applications
-  applications.push(generateFakeApplication({
-    status: 'Pending TRN',
-    submittedDate: new Date(),
-    personalDetails: {
-      givenName: "Becky",
-      familyName: "Brothers",
-      nationality: ["British"],
-      sex: 'Female'
-    },
-    diversity: {
-      "diversityDisclosed": "true",
-      "ethnicGroup": "Black, African, Black British or Caribbean",
-      "ethnicGroupSpecific": "Caribbean",
-      "disabledAnswer": "Not provided"
-    }
-  }))
-
-  // Manually create specific applications
-  applications.push(generateFakeApplication({
-    status: "TRN received",
-    traineeId: "FLD38X59",
-    submittedDate: "2020-05-28T12:37:21.384Z",
-    updatedDate: "2020-08-04T04:26:19.269Z",
-    trn: 8405624,
-    personalDetails: {
-      givenName: "Bea",
-      familyName: "Waite",
-      sex: "Female",
-      nationality: ["French"]
-    },
-  }))
-
-  // Manually create specific applications
-  applications.push(generateFakeApplication({
-    status: "TRN received",
-    traineeId: "TLQGB1N1",
-    submittedDate: "2020-06-28T12:37:21.384Z",
-    updatedDate: "2020-07-04T04:26:19.269Z",
-    trn: 8594837,
-    personalDetails: {
-      givenName: "Janine",
-      familyName: "Newman",
-      sex: "Female"
-    },
-  }))
-
-  // Manually create specific applications
-  applications.push(generateFakeApplication({
-    status: "TRN received",
-    traineeId: "K9BKXNTX",
-    submittedDate: "2020-05-28T12:37:21.384Z",
-    updatedDate: "2020-07-15T04:26:19.269Z",
-    trn: 8694898,
-    personalDetails: {
-      givenName: "Martin",
-      familyName: "Cable",
-      sex: "Male"
-    },
-  }))
+  seedRecords.forEach(seedRecord => {
+    applications.push(generateFakeApplication(seedRecord))
+  })
 
   // Incomplete draft applications
   for (var i = 0; i < 1; i++) {
@@ -357,11 +301,15 @@ const generateFakeApplications = () => {
     applications.push(application)
   }
 
+
+
   // Generate random other applications for all routes including those
   // not enabled
   for (var i = 0; i < 100; i++) {
+    let nonDraftStatuses = statuses.filter(status => status != 'Draft')
     const application = generateFakeApplication({
-      route: faker.helpers.randomize(trainingRoutes)
+      route: faker.helpers.randomize(trainingRoutes),
+      status: faker.helpers.randomize(nonDraftStatuses)
     })
     applications.push(application)
   }

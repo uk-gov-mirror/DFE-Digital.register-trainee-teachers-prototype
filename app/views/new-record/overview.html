@@ -20,7 +20,7 @@
 <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{pageHeading}}</h1>
 
 
-<h2 class="govuk-heading-m">Route into teaching</h2>
+<h2 class="govuk-heading-m">Training details</h2>
 
 {{ appTaskList({
   classes: "govuk-!-margin-bottom-8",
@@ -45,7 +45,7 @@
   ]
 }) if not closed }}
 
-<h2 class="govuk-heading-m">Trainee details</h2>
+<h2 class="govuk-heading-m">About the trainee</h2>
 {{ appTaskList({
   classes: "govuk-!-margin-bottom-8",
   items: [{
@@ -74,14 +74,7 @@
       classes: record.diversity | getStatusText | getStatusClass,
       text: record.diversity | getStatusText
     }
-  } if record | requiresSection("diversity")
-  ]
-}) if not closed }}
-
-<h2 class="govuk-heading-m">Education</h2>
-{{ appTaskList({
-  classes: "govuk-!-margin-bottom-8",
-  items: [
+  } if record | requiresSection("diversity"),
   {
     text: "GCSE",
     href: "gcse-details" | reviewIfInProgress(record.gcse, 'gcse'),
@@ -103,15 +96,16 @@
   ]
 }) if not closed }}
 
-
-<h2 class="govuk-heading-m">Check and submit</h2>
+<h2 class="govuk-heading-m">Review and submit</h2>
 
 {{ govukButton({
   text: "Review this record",
   href: "check-record"
 }) }}
 
-<p class="govuk-body"><a href="./save-as-draft" class="govuk-link">Return to this draft record later</a></p>
+<p class="govuk-body"><a href="./save-as-draft" class="govuk-link govuk-link--no-visited-state">Return to this draft record later</a></p>
+
+<p class="govuk-body govuk-!-margin-top-8"><a href="./delete-draft" class="govuk-link app-destructive-link">Delete this draft</a></p>
 {# <p class="govuk-body"><a href="./save-as-draft" class="govuk-link">Save this as draft</a></p> #}
 
 {% endblock %}

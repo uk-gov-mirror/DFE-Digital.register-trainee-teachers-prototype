@@ -1,64 +1,60 @@
 {% set isInternational = degree.isInternational | falsify %}
 
-{% set degreeDetailsRows = [
-  {
-    key: {
-      text: "Degree type" if not isInternational else "Comparable UK degree"
-    },
-    value: {
-      text: degree.type or 'Not provided'
-    },
-    actions: {
-      items: [
-        {
-          href: recordPath + "/degree/" + loop.index0 + "/type" | addReferrer(referrer),
-          text: "Change",
-          visuallyHiddenText: "degree type"
-        }
-      ]
-    } if canAmend
+{% set subjectRow = {
+  key: {
+    text: "Subject"
   },
-  {
-    key: {
-      text: "Subject"
-    },
-    value: {
-      text: degree.subject or 'Not provided'
-    },
-    actions: {
-      items: [
-        {
-          href: recordPath + "/degree/" + loop.index0 + "/details" | addReferrer(referrer),
-          text: "Change",
-          visuallyHiddenText: "degree subject"
-        }
-      ]
-    } if canAmend
-  }] %}
+  value: {
+    text: degree.subject or 'Not provided'
+  },
+  actions: {
+    items: [
+      {
+        href: recordPath + "/degree/" + loop.index0 + "/details" | addReferrer(referrer),
+        text: "Change",
+        visuallyHiddenText: "degree subject"
+      }
+    ]
+  } if canAmend
+} %}
 
-{% set degreeInstitutionRow = {
-    key: {
-      text: "Institution"
-    },
-    value: {
-      text: degree.org or 'Not provided'
-    },
-    actions: {
-      items: [
-        {
-          href: recordPath + "/degree/" + loop.index0 + "/details" | addReferrer(referrer),
-          text: "Change",
-          visuallyHiddenText: "degree institution"
-        }
-      ]
-    } if canAmend
-  } %}
+{% set degreeTypeRow = {
+  key: {
+    text: "Degree type"
+  },
+  value: {
+    text: degree.type or 'Not provided'
+  },
+  actions: {
+    items: [
+      {
+        href: recordPath + "/degree/" + loop.index0 + "/details" | addReferrer(referrer),
+        text: "Change",
+        visuallyHiddenText: "degree type"
+      }
+    ]
+  } if canAmend
+} %}
 
-{% if degree.isInternational == 'false' %}
-  {% set degreeDetailsRows = degreeDetailsRows | push(degreeInstitutionRow) %}
-{% endif %}
+{% set institutionRow = {
+  key: {
+    text: "Institution"
+  },
+  value: {
+    text: degree.org or 'Not provided'
+  },
+  actions: {
+    items: [
+      {
+        href: recordPath + "/degree/" + loop.index0 + "/details" | addReferrer(referrer),
+        text: "Change",
+        visuallyHiddenText: "degree institution"
+      }
+    ]
+  } if canAmend
+} %}
 
-{% set degreeCountryRow = {
+{% set countryRow = {
   key: {
     text: "Country"
   },
@@ -76,29 +72,7 @@
   } if canAmend
 } %}
 
-{# Country only relevant for international #}
-{% if isInternational %}
-  {% set degreeDetailsRows = degreeDetailsRows | push(degreeCountryRow) %}
-{% endif %}
-
-{% set degreeYears = [{
-  key: {
-    text: "Start year"
-  },
-  value: {
-    text: degree.startDate or "Not provided"
-  },
-  actions: {
-    items: [
-      {
-        href: recordPath + "/degree/" + loop.index0 + "/details" | addReferrer(referrer),
-        text: "Change",
-        visuallyHiddenText: "degree start year"
-      }
-    ]
-  } if canAmend
-} if false,
-{
+{% set graduationRow = {
   key: {
     text: "Graduation year"
   },
@@ -114,9 +88,7 @@
       }
     ]
   } if canAmend
-}] %}
-
-{% set degreeDetailsRows = degreeDetailsRows | combineArrays(degreeYears) %}
+} %}
 
 {% set gradeRow = {
   key: {
@@ -136,9 +108,21 @@
   } if canAmend
 } %}
 
-{# Grade not relevant for international #}
-{% if not isInternational %}
-  {% set degreeDetailsRows = degreeDetailsRows | push(gradeRow) %}
+{% if isInternational %}
+  {% set degreeDetailsRows = [
+    subjectRow,
+    countryRow,
+    graduationRow,
+    degreeTypeRow
+  ] %}
+{% else %}
+  {% set degreeDetailsRows = [
+    subjectRow,
+    degreeTypeRow,
+    institutionRow,
+    graduationRow,
+    gradeRow
+  ] %}  
 {% endif %}
 
 

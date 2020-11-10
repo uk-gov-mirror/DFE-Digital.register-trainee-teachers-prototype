@@ -10,7 +10,6 @@ $(document).ready(function () {
 })
 
 // Submit form when any change detected
-// Todo: is this too slopppy?
-$('.moj-filter').on('change', function(){
+$('.js-auto-submit').on('change', function(){
   $(this).closest('form').submit();
 });

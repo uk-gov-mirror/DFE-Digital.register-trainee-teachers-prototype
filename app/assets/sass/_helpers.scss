@@ -12,3 +12,10 @@ body:not(.js-enabled) .app-js-only {
 .js-enabled .app-no-js-only {
   display: none;
 }
+
+
+.app-destructive-link {
+  &.govuk-link, &.govuk-link:visited {
+    color: govuk-colour("red");
+  }
+}

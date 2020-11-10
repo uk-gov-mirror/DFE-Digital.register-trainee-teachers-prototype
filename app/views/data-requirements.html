@@ -2,20 +2,18 @@
 {% extends "_templates/_page.html" %}
 {% set backLink = '/home' %}
 
-{% set pageHeading = 'Data requirements' %}
+{% set pageHeading = 'Check what data you need' %}
 
 {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l">{{pageHeading}}</h1>
-    <p class="govuk-body">We only ask for the data we require to register trainee teachers. We have outlined what you need to collect for each route.</p>
-    <h2 class="govuk-heading-m">Contents</h2>
     <ul class="govuk-list govuk-list--dash govuk-!-margin-bottom-8">
-      <li><a class="govuk-link" href="#section-all-routes">Data required for all routes</a></li>
-      <li><a class="govuk-link" href="#section-assessment-only">Specific data for Assessment Only</a></li>
-      <li><a class="govuk-link" href="#section-provider-led">Specific data for Provider-led</a></li>
-    </ul> 
+      <li><a class="govuk-link" href="#section-all-routes">Standard data for all trainees</a></li>
+      <li><a class="govuk-link" href="#section-assessment-only">Specific data for assessment-only candidates</a></li>
+      <li><a class="govuk-link" href="#section-provider-led">Specific data for provider-led trainees</a></li>
+    </ul>
   </div>
 </div>
 
@@ -27,7 +25,7 @@
         captionClasses: "govuk-visually-hidden",
         head: [
           {
-            text: "Data required for all routes",
+            text: "Standard data for all trainees",
 			classes: "govuk-heading-m"
           }
         ],
@@ -81,6 +79,7 @@
             {
               html: "
               <h2 class='govuk-heading-s'>Diversity information (optional)</h2>
+              <p class='govuk-body'>If the trainee chose not to share diversity information during the application process, you should not ask them for it for the purpose of registering them.</p>
               <ul class='govuk-list'>
                 <li>
                   Ethnicity
@@ -146,7 +145,7 @@
         captionClasses: "govuk-visually-hidden",
         head: [
           {
-            text: "Specific data for Assessment Only",
+            text: "Specific data for assessment-only candidates",
 			classes: "govuk-heading-m"
           }
         ],
@@ -181,7 +180,7 @@
         captionClasses: "govuk-visually-hidden",
         head: [
           {
-            text: "Specific data for Provider-led",
+            text: "Specific data for provider-led trainees",
 			classes: "govuk-heading-m"
           }
         ],
@@ -189,8 +188,8 @@
           [
             {
               html: "
-              <h2 class='govuk-heading-s'>This is a placeholder for Provider-led route data</h2>
-              
+              <h2 class='govuk-heading-s'>This is a placeholder for provider-led trainee data</h2>
+
               "
             }
           ]

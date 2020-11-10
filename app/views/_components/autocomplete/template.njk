@@ -31,14 +31,21 @@
   
 {% endfor %}
 
-{{ govukSelect({
-  label: params.label,
-  hint: params.hint,
-  id: params.id,
-  classes: params.classes,
-  name: params.name,
-  items: selectItems
-}) }}
+{# This needs margin manually applied because the design system removes
+ bottom margin from the last govuk-form-group in a div - which happens
+  for *each* autocomplete #}
+<div class="{{params.classes}} govuk-!-margin-bottom-6">
+  {{ govukSelect({
+    label: params.label,
+    hint: params.hint,
+    id: params.id,
+    classes: params.classes,
+    name: params.name,
+    items: selectItems
+  }) }}
+  {# <div class="govuk-form-group"></div> #}
+</div>
+
 
 {# {% if data.class %}
   {% set class = data.class %}

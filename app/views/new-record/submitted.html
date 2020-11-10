@@ -1,6 +1,6 @@
 {% extends "_templates/_new-record.html" %}
 
-{% set pageHeading = "Trainee submitted for TRN" %}
+{% set pageHeading = "Record submitted" %}
 
 {# {% set formAction = "./save" %} #}
 
@@ -16,31 +16,27 @@
 {% set recordArray = data.records | where("route", data.recordId) %}
 {% set record = recordArray[0] %}
 
+{% set panelTitleText %}
+
+  Record submitted {{ ("for " + record.personalDetails.shortName) if record.personalDetails.shortName }}
+
+{% endset %}
+
 {{ govukPanel({
-  titleText: "Trainee submitted for TRN",
+  titleText: panelTitleText,
   html: "Your reference number<br><strong>HDJ2123F</strong>" if false,
   classes: "govuk-!-margin-bottom-6"
 }) }}
 
-<p class="govuk-body">The Department for Education will issue the TRN within 3 working days.</p>
+<p class="govuk-body">The Department for Education (DfE) will issue a teacher reference number (TRN) within 3 working days. </p>
 
-<p class="govuk-body">When the TRN is received, the trainee record status will be automatically updated. You can <a href="/records" class="govuk-link">check trainee statuses from your list of records</a>.</p>
-
-{% if record.route == "Assessment Only" %}
-  <p class="govuk-body">You can recommend the trainee for QTS once their TRN is received and they’ve met the requirements.</p>
-{% endif %}
-
-<p class="govuk-body">Would you like to <a href="/new-record/new" class="govuk-link">add another trainee</a>?</p>
-
-{# {{ govukButton({
-  text: "View record",
-  href: "/record/" + data.recordId
-}) }}
+<p class="govuk-body govuk-!-margin-bottom-7">DfE will contact trainees to give them their TRN.</p>
 
 {{ govukButton({
   text: "Add another record",
   href: "/new-record/new"
 }) }}
- #}
+
+<p class="govuk-body">or <a href="/records" class="govuk-link">check trainee statuses and manage records</a> </p>
 
 {% endblock %}
