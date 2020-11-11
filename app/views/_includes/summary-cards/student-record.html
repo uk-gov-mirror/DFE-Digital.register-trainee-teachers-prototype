@@ -152,6 +152,7 @@
 {% if record.qtsNotPassedOutcomeDate | length %}
   {% set qtsOutcomeContent %}
       Not passed: {{previousQtsOutcome}}
+      <br>
   {% endset %}
 
   {% set studentRecordRows = studentRecordRows | push({
