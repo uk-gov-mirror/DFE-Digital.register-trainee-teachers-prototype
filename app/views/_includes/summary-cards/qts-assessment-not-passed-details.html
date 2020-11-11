@@ -26,10 +26,10 @@
   },
   {
     key: {
-      text: "Outcome recorded date"
+      text: "Outcome date"
     },
     value: {
-      text: record.qtsOutcomeRecordedDate | govukDate or 'Not provided'
+      text: record.qtsDetails.qtsOutcomeRecordedDate | govukDate or 'Not provided'
     },
     actions: {
       items: [
