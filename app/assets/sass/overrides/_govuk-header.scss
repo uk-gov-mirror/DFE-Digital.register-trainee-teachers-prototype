@@ -1,13 +1,20 @@
 
 // Remove the blue bottom border
-.govuk-header {
-  border-bottom: 0;
+
+
+.app-light-header {
+  border-bottom-color: $govuk-header-border-color;
 }
 
-.govuk-header__container {
-  border-bottom: none;
-  margin-bottom: 0;
+.app-dark-header {
+  border-bottom: 0;
+
+  .govuk-header__container {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
 }
+
 
 // More space for service name
 .govuk-header__logo {

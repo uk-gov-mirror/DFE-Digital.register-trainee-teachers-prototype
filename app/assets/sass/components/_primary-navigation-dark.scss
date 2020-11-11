@@ -3,7 +3,7 @@
 $govuk-header-border-color: $govuk-brand-colour;
 $govuk-header-border-width: govuk-spacing(2);
 
-.app-primary-navigation {
+.app-primary-navigation-dark {
   background-color: govuk-colour("black");
   // Uncomment this for non-full width blue bottom border
   // border-bottom: $govuk-header-border-width solid govuk-colour("white");
@@ -11,7 +11,7 @@ $govuk-header-border-width: govuk-spacing(2);
 }
 
 
-.app-primary-navigation__container {
+.app-primary-navigation-dark__container {
   @include app-width-container;
   font-size: 0; // Hide whitespace between elements
   text-align: justify; // Trick to remove the need for floats
@@ -28,7 +28,7 @@ $govuk-header-border-width: govuk-spacing(2);
 
 }
 
-.app-primary-navigation__nav {
+.app-primary-navigation-dark__nav {
   width: 100%;
   text-align: left;
   @include mq($from: desktop) {
@@ -38,7 +38,7 @@ $govuk-header-border-width: govuk-spacing(2);
 }
 
 
-.app-primary-navigation__list {
+.app-primary-navigation-dark__list {
   font-size: 0; // Removes white space when using inline-block on child element.
   list-style: none;
   margin: 0;
@@ -46,7 +46,7 @@ $govuk-header-border-width: govuk-spacing(2);
 }
 
 
-.app-primary-navigation__item {
+.app-primary-navigation-dark__item {
   @include govuk-font($size: 19, $weight: bold);
   display: inline-block;
   margin-right: govuk-spacing(4);
@@ -59,7 +59,7 @@ $govuk-header-border-width: govuk-spacing(2);
 }
 
 
-.app-primary-navigation__link {
+.app-primary-navigation-dark__link {
   display: block;
   padding-bottom: 13px;
   padding-top: 12px;
@@ -112,7 +112,7 @@ $govuk-header-border-width: govuk-spacing(2);
 }
 
 
-.app-primary-navigation__search {
+.app-primary-navigation-dark__search {
 
   @include mq($from: desktop) {
     display: inline-block;
