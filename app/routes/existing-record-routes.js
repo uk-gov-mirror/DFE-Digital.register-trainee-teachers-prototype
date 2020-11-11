@@ -76,45 +76,26 @@ module.exports = router => {
     }
   })
 
-  // Convert radio choices to real dates
-  // router.post('/record/:uuid/qts/outcome', (req, res) => {
-  //   const data = req.session.data
-  //   const newRecord = data.record
-
-  //   // Update failed or no data
-  //   if (!newRecord){
-  //     res.redirect(`/record/${req.params.uuid}`)
-  //   }
-  //   else {
-  //     let radioChoice = newRecord.qtsOutcomeRecordedDateRadio
-  //     if (radioChoice == "Today") {
-  //       newRecord.qtsOutcomeRecordedDate = filters.toDateArray(filters.today())
-  //     }
-  //     if (radioChoice == "Yesterday") {
-  //       newRecord.qtsOutcomeRecordedDate = filters.toDateArray(moment().subtract(1, "days"))
-  //     } 
-  //     // res.redirect(`/record/${req.params.uuid}/reinstate/confirm`)
-  //   }
-  // })
-
+  // Get dates from radios then check if QTS outcome is passed or not passed
   router.post('/record/:uuid/qts/outcome', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
 
+    // Convert radio choices to real dates
     if (!newRecord){
       res.redirect(`/record/${req.params.uuid}`)
     }
     else {
-      let radioChoice = newRecord.qtsOutcomeRecordedDateRadio
+      let radioChoice = newRecord.qtsDetails.qtsOutcomeRecordedDateRadio
       if (radioChoice == "Today") {
-        newRecord.qtsOutcomeRecordedDate = filters.toDateArray(filters.today())
+        newRecord.qtsDetails.qtsOutcomeRecordedDate = filters.toDateArray(filters.today())
       }
       if (radioChoice == "Yesterday") {
-        newRecord.qtsOutcomeRecordedDate = filters.toDateArray(moment().subtract(1, "days"))
+        newRecord.qtsDetails.qtsOutcomeRecordedDate = filters.toDateArray(moment().subtract(1, "days"))
       } 
-      // res.redirect(`/record/${req.params.uuid}/reinstate/confirm`)
     }
     
+    // Was the QTS outcome a pass?
     if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'Not passed'){
       res.redirect(`/record/${req.params.uuid}/qts/not-passed/reason`)
     }
@@ -122,18 +103,6 @@ module.exports = router => {
       res.redirect(`/record/${req.params.uuid}/qts/passed/confirm`)
     }
   })
-
-  // QTS outcome passed or not passed?
-  // router.post('/record/:uuid/qts/outcome', (req, res) => {
-  //   const data = req.session.data
-    
-  //   if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'Not passed'){
-  //     res.redirect(`/record/${req.params.uuid}/qts/not-passed/reason`)
-  //   }
-  //   else {
-  //     res.redirect(`/record/${req.params.uuid}/qts/passed/confirm`)
-  //   }
-  // })
 
   // Copy qts (passed) data back to real record
   router.post('/record/:uuid/qts/passed/update', (req, res) => {
@@ -186,20 +155,16 @@ module.exports = router => {
       delete newRecord.notPassedReason
       newRecord.previousQtsOutcomeOther = newRecord.notPassedReasonOther
       delete newRecord.notPassedReasonOther
-      newRecord.previousQtsOutcome = newRecord.notPassedReason
-      // todo add these 2 to the other withdraw flow
-      // todo delete these 2 from pass qts flow
-
       delete newRecord.qtsDetails.standardsAssessedOutcome
       delete newRecord.qtsDetails.withdrawalStatus
       // todo: add qtsDetails. to the path
-      delete newRecord.qtsOutcomeRecordedDateRadio
+      delete newRecord.qtsDetails.qtsOutcomeRecordedDateRadio
       utils.updateRecord(data, newRecord, false)
       res.redirect(`/record/${req.params.uuid}`)
     }
   })
 
-  // Convert radio choices to real datesso 
+  // Convert radio choices to real dates
   router.post('/record/:uuid/defer', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
