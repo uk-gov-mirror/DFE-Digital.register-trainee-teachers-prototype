@@ -157,7 +157,6 @@ module.exports = router => {
       delete newRecord.notPassedReasonOther
       delete newRecord.qtsDetails.standardsAssessedOutcome
       delete newRecord.qtsDetails.withdrawalStatus
-      // todo: add qtsDetails. to the path
       delete newRecord.qtsDetails.qtsOutcomeRecordedDateRadio
       utils.updateRecord(data, newRecord, false)
       res.redirect(`/record/${req.params.uuid}`)
