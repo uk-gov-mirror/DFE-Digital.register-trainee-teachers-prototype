@@ -68,14 +68,6 @@
     containerClasses: "govuk-width-container",
     navigation: [
       {
-        href: "/home",
-        text: "Home"
-      } if false,
-      {
-        href: "/records",
-        text: "Trainee records"
-      } if false,
-      {
         href: "#1",
         text: "Your account"
       },
@@ -90,15 +82,17 @@
       text: 'Home',
       href: '/home',
       active: true if navActive == 'home'
-    }, {
+    },
+    {
       text: 'Trainee records',
       href: '/records',
       active: true if navActive == 'records'
-    }, {
+    },
+    {
       text: 'Courses',
       href: '/root/case-list',
       active: true if navActive == 'courses'
-    },
+    } if false,
     {
       text: 'Your team',
       href: '/pages/teams/b1dab0f5-4651-4af8-9f15-fa8143ff338d',
