@@ -1,11 +1,12 @@
 let countries               = require('./countries')
 let ethnicities             = require('./ethnicities')
 let nationalities           = require('./nationalities')
+let statuses                = require('./status')
 
 // Degree stuff
 let awards                  = require('./awards') // Types of degree
 let degreeData              = require('./degree')()
-let degreeTypes             = degreeData.types.undergraduate.map(type => type.text)
+let degreeTypes             = degreeData.types.undergraduate.map(type => type.text).sort()
 let subjects                = degreeData.subjects
 let ukComparableDegrees     = degreeData.ukComparableDegrees
 let degreeOrganisations     = degreeData.orgs
@@ -68,6 +69,7 @@ module.exports = {
   records,
   settings,
   subjects,
+  statuses,
   trainingRoutes,
   ukComparableDegrees,
   withdrawalReasons
