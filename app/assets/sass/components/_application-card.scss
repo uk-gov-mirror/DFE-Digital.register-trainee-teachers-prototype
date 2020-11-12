@@ -14,14 +14,16 @@
   padding-top: 15px;
 }
 
-.app-application-card_col:nth-child(1) {
+// Trainee column
+.app-application-card_col:nth-last-child(3) {
   @include govuk-media-query($from: tablet) {
     width: 40%;
     padding-right: 15px;
   }
 }
 
-.app-application-card_col:nth-child(2) {
+// Course details column
+.app-application-card_col:nth-last-child(2) {
   @include govuk-media-query($until: tablet) {
     margin-top: govuk-spacing(2);
     margin-bottom: govuk-spacing(2);
@@ -31,7 +33,8 @@
   }
 }
 
-.app-application-card_col:nth-child(3) {
+// Status column
+.app-application-card_col:nth-last-child(1) {
   @include govuk-media-query($from: tablet) {
     display: flex;
     flex-direction: column;
