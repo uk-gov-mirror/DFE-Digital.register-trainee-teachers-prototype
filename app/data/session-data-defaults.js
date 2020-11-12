@@ -16,6 +16,7 @@ let assessmentOnlyAgeRanges = require('./assessmentOnlyAgeRanges')
 let ittSubjects = require('./itt-subjects').allSubjects
 console.log("subject length", ittSubjects.length)
 let withdrawalReasons       = require('./withdrawal-reasons')
+let notPassedReasons       = require('./not-passed-reasons')
 
 // Different training routes
 let trainingRouteData          = require('./training-route-data')
@@ -66,6 +67,7 @@ module.exports = {
   ethnicities,
   ittSubjects,
   nationalities,
+  notPassedReasons,
   records,
   settings,
   subjects,

@@ -1,15 +1,15 @@
 module.exports = [
     // 'Successful completion of course',
-    'Academic failure',
+    // 'Academic failure',
     'Death',
-    'Did not pass assessment',
+    // 'Did not pass assessment',
     'Exclusion',
     'Financial reasons',
     'Gone into employment',
     'Health reasons',
     'Other personal reasons and dropped out',
     'Transferred to another provider',
-    'Written off after lapse of time',
+    'Written off after lapse of time'
     // 'Completion of course - result unknown'
     // 'Unknown'
 

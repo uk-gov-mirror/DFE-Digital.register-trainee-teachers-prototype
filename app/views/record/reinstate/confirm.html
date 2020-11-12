@@ -1,12 +1,13 @@
 {% extends "_templates/_record-form.html" %}
-{% set pageHeadingTraineeName = data.record.personalDetails | getShortName %}
+
 {% set pageHeading = "Check reinstatement details" %}
 
-{% set formAction = "./confirm" %}
+{% set formAction = "./update" %}
 
 {% block formContent %}
+
   <h1 class="govuk-heading-l">
-    <span class="govuk-caption-l">{{pageHeadingTraineeName}}</span>
+    <span class="govuk-caption-l">{{ record.personalDetails | getShortName }}</span>
     {{pageHeading}}
   </h1>
 

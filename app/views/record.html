@@ -17,35 +17,38 @@
 
   <div class="govuk-grid-column-full">
     
-    <div class="record-actions">
-      {% if record.status | getCanRecommendForQts %}
-        {{ govukButton({
-          text: "Recommend for QTS",
-          href: referrer + '/qts/outcome',
-          classes: "govuk-!-margin-bottom-0"
-        }) }}
-        {% elseif record.status == "Pending TRN" %}
-          {{ govukInsetText({
-            text: "This record is pending a TRN",
-            classes: "govuk-!-margin-0"
+    {# Hide the record actions ui if it's empty #}
+    {% if (record.status | getCanDefer) or (record.status | getCanReinstate) %}
+      <div class="record-actions">
+        {% if record.status | getCanRecommendForQts %}
+          {{ govukButton({
+            text: "Record QTS outcome",
+            href: referrer + '/qts/outcome',
+            classes: "govuk-!-margin-bottom-0"
           }) }}
-        {% elseif record.status == "Deferred" %}
-          {{ govukInsetText({
-            text: "This record is deferred",
-            classes: "govuk-!-margin-0"
-          }) }}
-      {% endif %}
-
-      <div class="record-actions__links">
-        {% if record.status | getCanDefer %}
-          <p class="govuk-body govuk-!-margin-bottom-0"><a href="{{referrer}}/defer" class="govuk-link--no-visited-state">Defer</a> or <a href="{{referrer}}/withdraw" class="govuk-link--no-visited-state">withdraw</a> this trainee</p>
-        {% elseif record.status | getCanReinstate %}
-          <p class="govuk-body govuk-!-margin-bottom-0"><a href="{{referrer}}/reinstate" class="govuk-link--no-visited-state">Reinstate</a> or <a href="{{referrer}}/withdraw" class="govuk-link--no-visited-state">withdraw</a> this trainee</p>
+          {% elseif record.status == "Pending TRN" %}
+            {{ govukInsetText({
+              text: "This record is pending a TRN",
+              classes: "govuk-!-margin-0"
+            }) }}
+          {% elseif record.status == "Deferred" %}
+            {{ govukInsetText({
+              text: "This record is deferred",
+              classes: "govuk-!-margin-0"
+            }) }}
         {% endif %}
-      </div>
-    </div>
 
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        <div class="record-actions__links">
+          {% if record.status | getCanDefer %}
+            <p class="govuk-body govuk-!-margin-bottom-0"><a href="{{referrer}}/defer" class="govuk-link--no-visited-state">Defer</a> or <a href="{{referrer}}/withdraw" class="govuk-link--no-visited-state">withdraw</a> this trainee</p>
+          {% elseif record.status | getCanReinstate %}
+            <p class="govuk-body govuk-!-margin-bottom-0"><a href="{{referrer}}/reinstate" class="govuk-link--no-visited-state">Reinstate</a> or <a href="{{referrer}}/withdraw" class="govuk-link--no-visited-state">withdraw</a> this trainee</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
 
     <h2 class="govuk-heading-m">Trainee record</h2>
     {% include "_includes/summary-cards/student-record.html" %}

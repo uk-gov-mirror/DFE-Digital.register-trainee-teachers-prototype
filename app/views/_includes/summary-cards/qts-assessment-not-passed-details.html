@@ -1,3 +1,11 @@
+{% set notPassedReason %}
+  {% if record.notPassedReason == "For another reason" %}
+    {{record.notPassedReasonOther}}
+  {% else%}
+    {{record.notPassedReason}}
+  {% endif %}
+{% endset %}
+
 {% set qtsDetailsRows = [
   {
     key: {
@@ -18,7 +26,7 @@
   },
   {
     key: {
-      text: "Assessment end date"
+      text: "Outcome date"
     },
     value: {
       text: record.qtsDetails.qtsOutcomeRecordedDate | govukDate or 'Not provided'
@@ -28,7 +36,24 @@
         {
           href: recordPath + "/qts/outcome" | addReferrer(referrer),
           text: "Change",
-          visuallyHiddenText: "assessment end date"
+          visuallyHiddenText: "date outcome recorded"
+        }
+      ]
+    } if canAmend
+  },
+  {
+    key: {
+      text: "Reason for not passing"
+    },
+    value: {
+      text: notPassedReason or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/qts/not-passed/reason" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "reason for not passing"
         }
       ]
     } if canAmend
@@ -49,7 +74,25 @@
         }
       ]
     } if canAmend
-  } if false
+  } if false,
+  {
+    key: {
+      text: "Future status"
+    },
+    value: {
+      text: record.qtsDetails.withdrawalStatus or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/qts/not-passed/withdrawal" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "future course status"
+        }
+      ]
+    } if canAmend
+  }
+
   ] %}
 
 {% set qtsDetailsHtml %}
@@ -85,4 +128,3 @@
   }) }}
   
 {% endif %}
-

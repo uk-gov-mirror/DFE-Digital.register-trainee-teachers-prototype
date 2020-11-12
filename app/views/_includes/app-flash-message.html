@@ -1,0 +1,23 @@
+{% set flash = flash[0] %}
+
+{% set appFlashMessage %}
+  {% if flash | isString %}
+    <h2 class="govuk-heading-m">{{flash}}</h2>
+  {% else %}
+    {% if flash.title %}
+      <h2 class="govuk-heading-m">{{flash.title}}</h2>
+    {% endif %}
+    {% if flash.html %}
+      {{flash.html | safe}}      
+    {% elseif flash.text %}
+      <p class="govuk-body">{{flash.text}}</p>
+    {% endif %}
+  {% endif %}
+
+{% endset %}
+
+{{ appBanner({
+  html: appFlashMessage,
+  type: "success",
+  icon: false
+}) if flash | falsify }}

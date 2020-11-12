@@ -76,30 +76,36 @@ module.exports = router => {
     }
   })
 
-  // Get timeline items and pass to view
-  router.get('/record/:uuid/timeline', (req, res) => {
-    const data = req.session.data
-    const record = data.record
-    if (!record){
-      res.redirect('/record/:uuid')
-    }
-    let timeline = utils.getTimeline(record)
-    res.render(`record/timeline`, {timeline})
-  })
-
-  // Copy qts data back to real record
+  // Get dates from radios then check if QTS outcome is passed or not passed
   router.post('/record/:uuid/qts/outcome', (req, res) => {
     const data = req.session.data
-    if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'Not passed'){
-      res.redirect(`/record/${req.params.uuid}/qts/assessment-not-passed`)
+    const newRecord = data.record
+
+    // Convert radio choices to real dates
+    if (!newRecord){
+      res.redirect(`/record/${req.params.uuid}`)
     }
     else {
-      res.redirect(`/record/${req.params.uuid}/qts/confirm`)
+      let radioChoice = newRecord.qtsDetails.qtsOutcomeRecordedDateRadio
+      if (radioChoice == "Today") {
+        newRecord.qtsDetails.qtsOutcomeRecordedDate = filters.toDateArray(filters.today())
+      }
+      if (radioChoice == "Yesterday") {
+        newRecord.qtsDetails.qtsOutcomeRecordedDate = filters.toDateArray(moment().subtract(1, "days"))
+      } 
+    }
+    
+    // Was the QTS outcome a pass?
+    if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'Not passed'){
+      res.redirect(`/record/${req.params.uuid}/qts/not-passed/reason`)
+    }
+    else {
+      res.redirect(`/record/${req.params.uuid}/qts/passed/confirm`)
     }
   })
 
-  // Copy qts data back to real record
-  router.post('/record/:uuid/qts/confirm', (req, res) => {
+  // Copy qts (passed) data back to real record
+  router.post('/record/:uuid/qts/passed/update', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
     // Update failed or no data
@@ -112,31 +118,52 @@ module.exports = router => {
       utils.deleteTempData(data)
       utils.updateRecord(data, newRecord, "Trainee recommended for QTS")
       // req.flash('success', 'Trainee recommended for QTS')
-      res.redirect(`/record/${req.params.uuid}/qts/recommended`)
+      res.redirect(`/record/${req.params.uuid}/qts/passed/recommended`)
     }
   })
 
-  // Copy defer data back to real record
-  router.post('/record/:uuid/defer/confirm', (req, res) => {
+  // Copy qts (not passed data) back to real record
+  router.post('/record/:uuid/qts/not-passed/update', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
-
     // Update failed or no data
     if (!newRecord){
       res.redirect('/record/:uuid')
     }
     else {
-      newRecord.previousStatus = newRecord.status
-      newRecord.status = 'Deferred'
-      delete newRecord.deferredDateRadio
+      
+      // Trainees may withdraw at this stage
+      let isWithdrawing = (_.get(newRecord, "qtsDetails.withdrawalStatus") == "Withdrawing from programme")
+      // console.log('is withdrawing:', isWithdrawing)
+      newRecord.qtsNotPassedOutcomeDate = new Date()
       utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord, "Trainee deferred")
-      req.flash('success', 'Trainee deferred')
+      utils.addEvent(newRecord, "Trainee did not pass their QTS")
+      
+      if (isWithdrawing){
+        utils.addEvent(newRecord, "Trainee withdrawn")
+        newRecord.previousStatus = newRecord.status
+        newRecord.status = 'Withdrawn'
+        newRecord.withdrawalDate = newRecord.qtsNotPassedOutcomeDate
+        newRecord.withdrawalReason = newRecord.notPassedReason
+        req.flash( 'success', {title: 'QTS outcome recorded and trainee withdrawn', html: '<p class="govuk-body">If you think there is a problem, contact <a href="mailto:itt.datamanagement@education.gov.uk">itt.datamanagement@education.gov.uk</a>.</p>' } )
+      }
+      else {
+        // newRecord.status = 'TRN received' // TODO: should we have a new status?
+        req.flash('success', 'QTS outcome recorded')   
+      }
+      newRecord.previousQtsOutcome = newRecord.notPassedReason
+      delete newRecord.notPassedReason
+      newRecord.previousQtsOutcomeOther = newRecord.notPassedReasonOther
+      delete newRecord.notPassedReasonOther
+      delete newRecord.qtsDetails.standardsAssessedOutcome
+      delete newRecord.qtsDetails.withdrawalStatus
+      delete newRecord.qtsDetails.qtsOutcomeRecordedDateRadio
+      utils.updateRecord(data, newRecord, false)
       res.redirect(`/record/${req.params.uuid}`)
     }
   })
 
-  // Get dates for Defer flow
+  // Convert radio choices to real dates
   router.post('/record/:uuid/defer', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
@@ -157,25 +184,27 @@ module.exports = router => {
     }
   })
 
-  // Copy reinstate data back to real record
-  router.post('/record/:uuid/reinstate/confirm', (req, res) => {
+  // Copy defer data back to real record
+  router.post('/record/:uuid/defer/update', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
+
     // Update failed or no data
     if (!newRecord){
       res.redirect('/record/:uuid')
     }
     else {
-      newRecord.status = newRecord.previousStatus || 'TRN received'
-      delete newRecord.previousStatus
+      newRecord.previousStatus = newRecord.status
+      newRecord.status = 'Deferred'
+      delete newRecord.deferredDateRadio
       utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord, "Trainee reinstated")
-      req.flash('success', 'Trainee reinstated')
+      utils.updateRecord(data, newRecord, "Trainee deferred")
+      req.flash('success', 'Trainee deferred')
       res.redirect(`/record/${req.params.uuid}`)
     }
   })
 
-  // Get dates for reinstate flow
+  // Convert radio choices to real dates
   router.post('/record/:uuid/reinstate', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
@@ -196,8 +225,28 @@ module.exports = router => {
     }
   })
 
+  // Copy reinstate data back to real record
+  router.post('/record/:uuid/reinstate/update', (req, res) => {
+    const data = req.session.data
+    const newRecord = data.record
+    // Update failed or no data
+    if (!newRecord){
+      res.redirect('/record/:uuid')
+    }
+    else {
+      newRecord.status = newRecord.previousStatus || 'TRN received'
+      delete newRecord.previousStatus
+      utils.deleteTempData(data)
+      utils.updateRecord(data, newRecord, "Trainee reinstated")
+      req.flash('success', 'Trainee reinstated')
+      res.redirect(`/record/${req.params.uuid}`)
+    }
+  })
+
+
+
   // Copy withdraw data back to real record
-  router.post('/record/:uuid/withdraw/confirm', (req, res) => {
+  router.post('/record/:uuid/withdraw/update', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
 
@@ -213,7 +262,7 @@ module.exports = router => {
         delete newRecord.withdrawalReasonOther
       }
       utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord, "Trainee withdrawn")
+      utils.updateRecord(data, newRecord, 'Trainee withdrawn')
       req.flash('success', 'Trainee withdrawn')
       res.redirect('/record/' + req.params.uuid)
     }
@@ -262,6 +311,17 @@ module.exports = router => {
     }
   })
 
+  // Get timeline items and pass to view
+  router.get('/record/:uuid/timeline', (req, res) => {
+    const data = req.session.data
+    const record = data.record
+    if (!record){
+      res.redirect('/record/:uuid')
+    }
+    let timeline = utils.getTimeline(record)
+    console.log({timeline})
+    res.render(`record/timeline`, {timeline})
+  })
 
   // Existing record pages
   router.get('/record/:uuid/:page*', function (req, res, next) {
@@ -278,4 +338,6 @@ module.exports = router => {
       // res.render(path.join('record', req.params.page, req.params[0]))
     }
   })
+
+
 }

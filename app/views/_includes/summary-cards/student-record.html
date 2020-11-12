@@ -53,7 +53,7 @@
 {% endif %}
 
 {% if record.status == "QTS recommended" %}
-{% set recommendedDate = record.qtsRecommendedDate | formatDate('relative') %}
+  {% set recommendedDate = record.qtsRecommendedDate | formatDate('relative') %}
 
   {% set qtsContent %}
     {{govukTag({
@@ -118,9 +118,9 @@
   {% set withdrawalContent %}
       {{govukTag({
         text: "Withdrawn",
-        classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
+        classes: record.status | getStatusClass
       })}} <br>
-      Withdrawal date: {{record.withdrawalDate | govukDate}}
+      {# Withdrawal date: {{record.withdrawalDate | govukDate}} <br>  #}
   {% endset %}
 
   {% set studentRecordRows = studentRecordRows | push({
@@ -129,6 +129,37 @@
     },
     value: {
       html: withdrawalContent
+    }
+  }) %}
+{% endif %}
+
+{% set previousQtsOutcome %}
+  {% if record.previousQtsOutcome == "For another reason" %}
+    {{record.previousQtsOutcomeOther}}
+  {% else%}
+    {{record.previousQtsOutcome}}
+  {% endif %}
+{% endset %}
+
+{% set qtsRowText %}
+    {% if record.status == "QTS recommended" %}
+      Previous QTS outcome
+    {% else %}
+      QTS outcome
+    {% endif %}
+{% endset %}
+
+{% if record.qtsNotPassedOutcomeDate | length %}
+  {% set qtsOutcomeContent %}
+      Not passed: {{previousQtsOutcome}}
+  {% endset %}
+
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: qtsRowText
+    },
+    value: {
+      html: qtsOutcomeContent
     }
   }) %}
 {% endif %}
