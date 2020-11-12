@@ -96,7 +96,7 @@ module.exports = router => {
     }
     
     // Was the QTS outcome a pass?
-    if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'Not passed'){
+    if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'No'){
       res.redirect(`/record/${req.params.uuid}/qts/not-passed/reason`)
     }
     else {

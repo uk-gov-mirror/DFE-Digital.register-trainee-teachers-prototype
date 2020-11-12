@@ -1,7 +1,7 @@
 {% set qtsDetailsRows = [
   {
     key: {
-      text: "Assessment outcome"
+      text: "Standards met"
     },
     value: {
       text: record.qtsDetails.standardsAssessedOutcome or 'Not provided'
@@ -18,7 +18,7 @@
   },
   {
     key: {
-      text: "Assessment end date"
+      text: "Assessment date"
     },
     value: {
       text: record.qtsDetails.qtsOutcomeRecordedDate | govukDate or 'Not provided'
