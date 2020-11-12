@@ -30,6 +30,16 @@
         ]
       } | decorateAttributes(data, "data.settings.includeGuidance")) }}
 
+      {{ govukCheckboxes({
+        items: [
+          {
+            value: 'true',
+            text: "Use dark header"
+          }
+        ]
+      } | decorateAttributes(data, "data.settings.useDarkHeader")) }}
+
+
       {% set allTrainingRoutes = [] %}
       {% for route in data.allTrainingRoutes %}
         {% set allTrainingRoutes = allTrainingRoutes | push({

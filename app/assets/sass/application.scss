@@ -23,6 +23,10 @@ $govuk-assets-path: '/govuk/assets/';
 @import "components/banner";
 @import "components/footer";
 
+// Misc
+@import "helpers";
+@import "helpers/field-widths";
+@import "helpers/width-container";
 
 // Components that aren't in Frontend
 @import "components/application-card";
@@ -32,10 +36,12 @@ $govuk-assets-path: '/govuk/assets/';
 @import "components/record-header";
 @import "components/record-actions";
 @import "components/sub-navigation";
+@import "components/primary-navigation-dark";
 @import "components/timeline";
 @import "components/status-card";
 
 // Overrides
+@import "overrides/govuk-header";
 @import "overrides/govuk-panel";
 @import "overrides/govuk-error-summary";
 @import "overrides/moj-filter";
@@ -44,9 +50,7 @@ $govuk-assets-path: '/govuk/assets/';
 @import "overrides/dash-list";
 @import "overrides/summary-card";
 
-// Misc
-@import "helpers";
-@import "helpers/field-widths";
+
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 

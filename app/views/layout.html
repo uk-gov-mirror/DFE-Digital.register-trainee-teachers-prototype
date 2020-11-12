@@ -37,12 +37,15 @@
 {% from "_components/task-list/macro.njk"   import appTaskList %}
 {% from "_components/footer/macro.njk"   import appFooter %}
 {% from "_components/sub-navigation/macro.njk"   import appSubNavigation %}
+{% from "_components/primary-navigation-dark/macro.njk"   import appPrimaryNavigationDark %}
 {% from "_components/timeline/macro.njk"   import appTimeline %}
 
 {# moj components #}
 {%- from "moj/components/filter/macro.njk" import mojFilter -%}
 {%- from "moj/components/button-menu/macro.njk" import mojButtonMenu -%}
 {%- from "moj/components/pagination/macro.njk" import mojPagination -%}
+{%- from "moj/components/primary-navigation/macro.njk" import mojPrimaryNavigation -%}
+
 
 
 {% block head %}
@@ -56,23 +59,17 @@
 {% block header %}
   {% include "_includes/cookie-banner.html" %}
   {# Set serviceName in config.js. #}
+  {% set headerClass = 'app-dark-header' if data.settings.useDarkHeader else 'app-light-header' %}
   {{ govukHeader({
     homepageUrl: "/start-page",
-    serviceName: serviceName,
+    productName: serviceName,
     serviceUrl: "/records",
+    classes: headerClass,
     containerClasses: "govuk-width-container",
     navigation: [
       {
-        href: "/home",
-        text: "Home"
-      },
-      {
-        href: "/records",
-        text: "Trainee records"
-      },
-      {
         href: "#1",
-        text: "Support"
+        text: "Your account"
       },
       {
         href: "#3",
@@ -80,6 +77,44 @@
       }
     ] if not hideNav
   }) }}
+
+  {% set navItems = [{
+      text: 'Home',
+      href: '/home',
+      active: true if navActive == 'home'
+    },
+    {
+      text: 'Trainee records',
+      href: '/records',
+      active: true if navActive == 'records'
+    },
+    {
+      text: 'Courses',
+      href: '/root/case-list',
+      active: true if navActive == 'courses'
+    } if false,
+    {
+      text: 'Your team',
+      href: '/pages/teams/b1dab0f5-4651-4af8-9f15-fa8143ff338d',
+      active: true if navActive == 'teams',
+      classes: 'align-right'
+    } if false
+    ] %}
+
+  {% if data.settings.useDarkHeader %}
+    {{ appPrimaryNavigationDark({
+      label: 'Primary navigation',
+      items: navItems
+    }) }}
+  {% else %}
+    {{ mojPrimaryNavigation({
+    label: 'Primary navigation',
+    items: navItems
+    }) }}
+  {% endif %}
+  
+
+  
 {% endblock %}
 
 {% block beforeContent %}
@@ -87,7 +122,8 @@
   tag: {
     text: "prototype"
   },
-  html: 'This is a prototype of a new service. Some parts of this prototype do not work yet. '
+  classes: 'govuk-!-margin-top-1',
+  html: 'This is a prototype of a new service. Some parts of this prototype do not work yet.'
 }) }}
 {% block pageNavigation %}
 {% endblock %}
