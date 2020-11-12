@@ -1,8 +1,8 @@
 {% extends "_templates/_record-form.html" %}
 
-{% set pageHeading = 'When did the trainee defer?' %}
+{% set pageHeading = 'When did the trainee return?' %}
 {% set pageHeadingTraineeName = data.record.personalDetails | getShortName %}
-{# {% set formAction = "./defer/confirm" %} #}
+{# {% set formAction = "./reinstate/confirm" %} #}
   
 {% block formContent %}
 
@@ -10,6 +10,6 @@
     <span class="govuk-caption-l">{{pageHeadingTraineeName}}</span>
   </h1>
 
-  {% include "_includes/forms/defer.html" %}
+  {% include "_includes/forms/reinstate.html" %}
 
 {% endblock %}

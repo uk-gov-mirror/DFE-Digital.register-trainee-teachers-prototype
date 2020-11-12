@@ -1,8 +1,22 @@
 // Moj Filter panel overrides
 
+.moj-filter-layout__filter-wrapper {
+  max-width: 300px;
+  margin-right: 40px;
+  min-width: 260px;
+  width: 100%;
+  
+  @include govuk-media-query($from: desktop) {
+    float: left;
+  }
+}
+
 .moj-filter-layout__filter {
   box-shadow: none;
-  max-width: 300px;
+  
+  @include govuk-media-query($from: desktop) {
+    margin-bottom: govuk-spacing(3);
+  }
 }
 
 .moj-filter__header {
@@ -30,7 +44,7 @@
 .moj-action-bar {
   overflow: hidden;
 
-  @include govuk-media-query($from: tablet) {
+  @include govuk-media-query($from: desktop) {
     display: none;
   }
 }
