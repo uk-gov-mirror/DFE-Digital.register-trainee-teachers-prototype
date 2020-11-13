@@ -78,9 +78,9 @@
 }  %}
 
 {# End date only collected when submitting for QTS #}
-{% if record.status == "QTS recommended" or record.status == "QTS awarded" %}
+{# {% if record.status == "QTS recommended" or record.status == "QTS awarded" %} #}
   {% set programmeDetailsRows = programmeDetailsRows | push(endDateRow) %}  
-{% endif %}
+{# {% endif %} #}
 
 {% set programmeDetailsHtml %}
   {{ govukSummaryList({
