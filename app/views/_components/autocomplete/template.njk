@@ -96,13 +96,37 @@
   //   {% endif %}
   // }
 
+  let template =  {
+    inputValue: function (result) {
+      if (result) {
+        const name = result.split(' | ')
+        if (name[1]) {
+          return name[0] && name[0]
+        }
+        return result && result
+      }
+      return result && result
+    },
+    suggestion: function (result) {
+      const name = result.split(' | ')
+      if (name[1]) {
+        return name[0] && name[0] + '<span class="autocomplete__option-hint">' + name[1] + '</span>'
+      }
+      else {
+        return result && result
+      }
+      
+    }
+  }
+
   accessibleAutocomplete.enhanceSelectElement({
     selectElement: element,
     showAllValues: showAllValues,
     autoselect: autoSelect,
     minLength: minLength,
     // source: values,
-    defaultValue: defaultValue
+    defaultValue: defaultValue,
+    templates: template
 
   });
     // onConfirm: confirmFunction
