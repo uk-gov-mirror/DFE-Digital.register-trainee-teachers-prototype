@@ -46,8 +46,6 @@
 {%- from "moj/components/pagination/macro.njk" import mojPagination -%}
 {%- from "moj/components/primary-navigation/macro.njk" import mojPrimaryNavigation -%}
 
-
-
 {% block head %}
   {% include "_includes/head.html" %}
 {% endblock %}
@@ -101,19 +99,21 @@
     } if false
     ] %}
 
-  {% if data.settings.useDarkHeader %}
-    {{ appPrimaryNavigationDark({
+  {% if not hidePrimaryNav %}
+  
+    {% if data.settings.useDarkHeader %}
+      {{ appPrimaryNavigationDark({
+        label: 'Primary navigation',
+        items: navItems
+      }) }}
+    {% else %}
+      {{ mojPrimaryNavigation({
       label: 'Primary navigation',
       items: navItems
-    }) }}
-  {% else %}
-    {{ mojPrimaryNavigation({
-    label: 'Primary navigation',
-    items: navItems
-    }) }}
-  {% endif %}
-  
+      }) }}
+    {% endif %}
 
+  {% endif %}
   
 {% endblock %}
 
