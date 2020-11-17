@@ -3,8 +3,7 @@
 {% if sectionIsRequired %}
   {% if record.route == 'Assessment Only' %}
     {% include "_includes/summary-cards/programme-details/assessment-only.html" %}
-  {% endif %}
-  {% if record.route == 'Provider-led' %}
+  {% else %}
     {% include "_includes/summary-cards/programme-details/provider-led.html" %}
   {% endif %}
 {% endif %}

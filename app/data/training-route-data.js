@@ -1,6 +1,6 @@
 let mainTrainingRoutes = {
-  "Assessment Only": {
-    name: "Assessment Only",
+  "Assessment only": {
+    name: "Assessment only",
     defaultEnabled: true,
     sections: [
       'programmeDetails',
