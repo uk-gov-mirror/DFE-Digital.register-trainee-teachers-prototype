@@ -68,7 +68,7 @@ const generateFakeCourses = () => {
  */
 const generateCoursesFile = (filePath) => {
   const courses = generateFakeCourses()
-  console.log(courses)
+  // console.log(courses)
   console.log(`Generated fake courses`)
   const filedata = JSON.stringify(courses, null, 2)
   fs.writeFile(

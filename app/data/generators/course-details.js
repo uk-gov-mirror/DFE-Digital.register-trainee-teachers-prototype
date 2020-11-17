@@ -49,25 +49,27 @@ let qualificationOptions = {
   }
 }
 
+// These names need to align with those in training-route-data.js
 const pickRoute = (isPublishCourse = false) => {
   if (isPublishCourse){
     return faker.helpers.randomize([
       'School direct salaried',
       'School direct tuition fee',
       'Apprenticeship PG',
-      'Higher education programme',
-      'SCITT programme'
+      'Provider-led'
+      // 'Higher education programme', // falls under provider led
+      // 'SCITT programme'  // falls under provider led
     ])
   }
   else {
     return faker.helpers.randomize([
-      'Provider led',
+      'Provider-led',
       'Assessment only',
       'Teach first PG',
-      'Early years - grad amp',
+      // 'Early years - grad amp',
       'Early years - grad entry',
-      'Early years - assessment only',
-      'Early years undergraduate',
+      // 'Early years - assessment only',
+      'Early years - undergraduate',
       'Opt in undergraduate'
     ])
   }
