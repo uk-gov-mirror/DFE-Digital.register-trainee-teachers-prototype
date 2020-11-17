@@ -151,7 +151,7 @@
 
 {% if record.qtsNotPassedOutcomeDate | length %}
   {% set qtsOutcomeContent %}
-      Not passed: {{previousQtsOutcome}}
+      Not recommended: {{previousQtsOutcome}}
   {% endset %}
 
   {% set studentRecordRows = studentRecordRows | push({

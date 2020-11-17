@@ -1,10 +1,8 @@
 {% set qtsDetailsRowOutcomeText%}
   {% if record.qtsDetails.standardsAssessedOutcome == "Yes" %}
     Standards met 
-  {# {% elseif record.qtsDetails.standardsAssessedOutcome == "No" %} 
-    Standards not met  #}
   {% else %} 
-    'Not provided' 
+    Not provided
   {% endif %}
 {% endset %}
 
