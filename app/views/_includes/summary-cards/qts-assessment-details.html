@@ -1,10 +1,20 @@
+{% set qtsDetailsRowOutcomeText%}
+  {% if record.qtsDetails.standardsAssessedOutcome == "Yes" %}
+    Standards met 
+  {# {% elseif record.qtsDetails.standardsAssessedOutcome == "No" %} 
+    Standards not met  #}
+  {% else %} 
+    'Not provided' 
+  {% endif %}
+{% endset %}
+
 {% set qtsDetailsRows = [
   {
     key: {
-      text: "Standards met"
+      text: "Outcome"
     },
     value: {
-      text: record.qtsDetails.standardsAssessedOutcome or 'Not provided'
+      text: qtsDetailsRowOutcomeText
     },
     actions: {
       items: [
@@ -80,7 +90,7 @@
 
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    titleText: "Assessment details",
+    titleText: "QTS outcome details",
     html: qtsDetailsHtml
   }) }}
   
