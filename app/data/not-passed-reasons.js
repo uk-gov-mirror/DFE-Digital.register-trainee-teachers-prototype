@@ -6,6 +6,6 @@ module.exports = [
     // 'Skills tests not taken (standards not met)',
     // 'Withheld: skills test not met',
     // 'Withheld: standards & skills test not met',
-    'Withheld: standards not met',
+    'Withheld - standards not met',
     'Yet to complete the course'
 ]
