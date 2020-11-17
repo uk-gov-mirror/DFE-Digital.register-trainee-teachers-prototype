@@ -107,8 +107,7 @@ module.exports = (params) => {
     ])
   }
 
-  // Duration in years
-  const duration = parseInt(weighted.select({
+  const duration = (route == 'Assessment only') ? 1 : parseInt(weighted.select({
     '1': 0.8, // assume most courses are 1 year
     '2': 0.15,
     '3': 0.05
@@ -122,6 +121,7 @@ module.exports = (params) => {
       'two': 0.75,  // QTS with PGCE
       'three': 0.05 // QTS with PGDE
     })
+    if (route == 'Assessment only') selected = 'one'
     qualifications = qualificationOptions[selected].qualifications
     summary = qualificationOptions[selected].summary
   }
@@ -180,7 +180,9 @@ module.exports = (params) => {
       startDate,
       duration,
       endDate,
-      allocatedPlace
+      allocatedPlace,
+      qualifications,
+      summary
     }
   }
 
