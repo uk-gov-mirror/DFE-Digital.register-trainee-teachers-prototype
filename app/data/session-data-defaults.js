@@ -14,7 +14,7 @@ let degreeOrganisations     = degreeData.orgs
 // Assessment only
 let assessmentOnlyAgeRanges = require('./assessmentOnlyAgeRanges')
 let ittSubjects = require('./itt-subjects').allSubjects
-console.log("subject length", ittSubjects.length)
+
 let withdrawalReasons       = require('./withdrawal-reasons')
 let notPassedReasons       = require('./not-passed-reasons')
 
