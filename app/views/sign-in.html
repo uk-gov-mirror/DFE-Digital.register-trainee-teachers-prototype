@@ -1,0 +1,25 @@
+
+{% extends "_templates/_page.html" %}
+{% set backLink = '/start-page' %}
+{% set hideNav = true %}
+{% set hidePrimaryNav = true %}
+
+{% set pageHeading = 'Sign in' %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
+    <p class="govuk-body-l">You must sign in to your account to register trainee teachers.</p>
+
+    {{ govukButton({
+      "text": "Sign in using DfE Sign-in",
+      href: 'declaration' if data.settings.includeDeclaration else 'home'
+    }) }}
+  </div>
+</div>
+
+{% endblock %}
