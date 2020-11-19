@@ -33,7 +33,7 @@ let extraRoutes = [
   "Early years - grad entry",
   "Early years - assessment only",
   "Early years - undergraduate",
-  "School Direct salaried",
+  "School direct salaried",
   "School direct tuition fee",
   "Apprenticeship PG",
   "Opt in undergraduate"
