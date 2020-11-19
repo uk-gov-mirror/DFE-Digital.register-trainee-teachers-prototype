@@ -1,6 +1,6 @@
 let mainTrainingRoutes = {
-  "Assessment Only": {
-    name: "Assessment Only",
+  "Assessment only": {
+    name: "Assessment only",
     defaultEnabled: true,
     sections: [
       'programmeDetails',
@@ -32,8 +32,8 @@ let extraRoutes = [
   "Early years - grad emp",
   "Early years - grad entry",
   "Early years - assessment only",
-  "Early years undergraduate",
-  "School Direct salaried",
+  "Early years - undergraduate",
+  "School direct salaried",
   "School direct tuition fee",
   "Apprenticeship PG",
   "Opt in undergraduate"

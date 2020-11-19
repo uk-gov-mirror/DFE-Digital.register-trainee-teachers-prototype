@@ -87,21 +87,21 @@ filters.todayGovuk = () => {
 
 */
 
-filters.dateToGovukDate = (date) => {
+filters.dateToGovukDate = (date, format=false) => {
   if (date){
     let theDate = moment(date)
     if (theDate.isValid()){
-      return theDate.format('D MMMM YYYY')
+      return theDate.format(format || 'D MMMM YYYY')
     }
   }
   return ''
 }
 
-filters.govukDate = (date) => {
+filters.govukDate = (date, format) => {
   if (_.isArray(date)){
-    return filters.arrayToGovukDate(date)
+    return filters.arrayToGovukDate(date, format)
   }
-  else return filters.dateToGovukDate(date)
+  else return filters.dateToGovukDate(date, format)
 }
 
 
@@ -121,9 +121,9 @@ filters.govukDate = (date) => {
 
 */
 
-filters.arrayToGovukDate = (array) => {
+filters.arrayToGovukDate = (array, format) => {
   let dateObject = filters.arrayToDateObject(array)
-  let govukDate = filters.dateToGovukDate(dateObject)
+  let govukDate = filters.dateToGovukDate(dateObject, format)
   return govukDate
 }
 

@@ -5,6 +5,14 @@ const filters = require('./../filters.js')()
 const _ = require('lodash')
 const utils = require('./route-utils')
 
+const programmeDetailsDefaults = {
+  qualifications: [
+    "QTS"
+  ],
+  summary: "QTS",
+  duration: 1
+}
+
 
 module.exports = router => {
 
@@ -98,6 +106,11 @@ module.exports = router => {
     else {
       newRecord.status = "Pending TRN"
       newRecord.submittedDate = new Date()
+      // Suppliment programme details with stuff we know
+      newRecord.programmeDetails = {
+        ...programmeDetailsDefaults,
+        ...newRecord.programmeDetails
+      }
       utils.deleteTempData(data)
       utils.updateRecord(data, newRecord, "Trainee submitted for TRN")
       req.session.data.recordId = newRecord.id //temp store for id to link to the record
