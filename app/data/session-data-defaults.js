@@ -23,7 +23,7 @@ let trainingRouteData          = require('./training-route-data')
 let trainingRoutes = trainingRouteData.trainingRoutes
 let allTrainingRoutes       = Object.values(trainingRoutes).map(route => route.name)
 
-let courses                 = require('./courses')
+let courses                 = require('./courses.json')
 // Things that can be changed from the /admin page
 let settings = {}
 // Simplify structure so it can be worked with from admin page
