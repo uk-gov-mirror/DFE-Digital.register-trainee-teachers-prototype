@@ -23,23 +23,11 @@
     {% if (record.status | getCanDefer) or (record.status | getCanReinstate) %}
       <div class="record-actions">
         {% if record.status | getCanRecommendForQts %}
-<<<<<<< HEAD
-          {{ govukButton({
-            text: "Record training outcome",
-            href: referrer + '/qts/outcome',
-            classes: "govuk-!-margin-bottom-0"
-          }) }}
-          {% elseif record.status == "Pending TRN" %}
-            {{ govukInsetText({
-              text: "This record is pending a TRN",
-              classes: "govuk-!-margin-0"
-=======
           {% if hasCommencementDate%}
             {{ govukButton({
-              text: "Record QTS outcome",
+              text: "Record training outcome",
               href: referrer + '/qts/outcome',
               classes: "govuk-!-margin-bottom-0"
->>>>>>> origin/master
             }) }}
           {% else %}
             {{ govukInsetText({
