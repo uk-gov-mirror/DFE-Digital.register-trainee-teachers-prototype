@@ -1,12 +1,12 @@
 {% extends "_templates/_record-form.html" %}
 
 {% set pageHeadingTraineeName = data.record.personalDetails.shortName %}
-{% set formAction = "./outcome-date" %}
+{% set formAction = "./outcome-date-answer" %}
   
 {% block formContent %}
 
   <span class="govuk-caption-l">{{pageHeadingTraineeName}}</span>
 
-  {% include "_includes/forms/qts/outcome.html" %}
+  {% include "_includes/forms/qts/outcome-date.html" %}
 
 {% endblock %}

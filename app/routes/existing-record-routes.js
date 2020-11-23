@@ -76,8 +76,8 @@ module.exports = router => {
     }
   })
 
-  // Get dates from radios then check if QTS outcome is passed or not passed
-  router.post('/record/:uuid/qts/outcome', (req, res) => {
+  // Collect the QTS outcome date and set up the forking
+  router.post('/record/:uuid/qts/outcome-date-answer', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
 

@@ -19,14 +19,14 @@
         {
           href: recordPath + "/qts/outcome" | addReferrer(referrer),
           text: "Change",
-          visuallyHiddenText: "assessment outcome"
+          visuallyHiddenText: "outcome"
         }
       ]
     } if canAmend
   },
   {
     key: {
-      text: "Assessment date"
+      text: "Date standards met"
     },
     value: {
       text: record.qtsDetails.qtsOutcomeRecordedDate | govukDate or 'Not provided'
@@ -36,7 +36,7 @@
         {
           href: recordPath + "/qts/outcome" | addReferrer(referrer),
           text: "Change",
-          visuallyHiddenText: "assessment end date"
+          visuallyHiddenText: "date standards met"
         }
       ]
     } if canAmend
@@ -88,7 +88,7 @@
 
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    titleText: "Assessment details",
+    titleText: "Outcome details",
     html: qtsDetailsHtml
   }) }}
   
