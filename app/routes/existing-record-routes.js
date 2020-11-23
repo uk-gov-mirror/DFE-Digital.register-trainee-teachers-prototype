@@ -145,11 +145,11 @@ module.exports = router => {
         newRecord.status = 'Withdrawn'
         newRecord.withdrawalDate = newRecord.qtsNotPassedOutcomeDate
         newRecord.withdrawalReason = newRecord.notPassedReason
-        req.flash( 'success', {title: 'QTS outcome recorded and trainee withdrawn', html: '<p class="govuk-body">If you think there is a problem, contact <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk </a>.</p>' } )
+        req.flash( 'success', {title: 'Training outcome recorded and trainee withdrawn', html: '<p class="govuk-body">If you think there is a problem, contact <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk </a>.</p>' } )
       }
       else {
         // newRecord.status = 'TRN received' // TODO: should we have a new status?
-        req.flash('success', 'QTS outcome recorded')   
+        req.flash('success', 'Training outcome recorded')   
       }
       newRecord.previousQtsOutcome = newRecord.notPassedReason
       delete newRecord.notPassedReason

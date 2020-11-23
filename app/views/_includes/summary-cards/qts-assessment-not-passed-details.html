@@ -34,6 +34,23 @@
   },
   {
     key: {
+      text: "Date standards not met"
+    },
+    value: {
+      text: record.qtsDetails.qtsOutcomeRecordedDate | govukDate or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/qts/outcome-date" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "date standards not met"
+        }
+      ]
+    } if canAmend
+  },
+  {
+    key: {
       text: "Reason"
     },
     value: {
@@ -45,23 +62,6 @@
           href: recordPath + "/qts/not-passed/reason" | addReferrer(referrer),
           text: "Change",
           visuallyHiddenText: "reason for not passing"
-        }
-      ]
-    } if canAmend
-  },
-  {
-    key: {
-      text: "Date standards not met"
-    },
-    value: {
-      text: record.qtsDetails.qtsOutcomeRecordedDate | govukDate or 'Not provided'
-    },
-    actions: {
-      items: [
-        {
-          href: recordPath + "/qts/outcome" | addReferrer(referrer),
-          text: "Change",
-          visuallyHiddenText: "date standards not met"
         }
       ]
     } if canAmend

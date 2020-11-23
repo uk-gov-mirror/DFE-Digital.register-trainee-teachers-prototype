@@ -1,9 +1,10 @@
 module.exports = [
     // 'Course complete - standards not met',
-    'Did not do the assessment',
-    'Did not meet the academic requirements',
+    // 'Did not do the assessment',
+    'Did not pass the assessment',
+    'Did not pass the exams',
+    // 'Did not meet the academic requirements',
     //  (Did not pass academic exams)',
-    'Did not pass the assessment'
     // 'Failed the course',
     // 'Left course before the end',
     // 'Skills test not taken (standards met)',

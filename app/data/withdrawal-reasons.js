@@ -3,7 +3,7 @@ module.exports = [
     // 'Academic failure',
     'Death',
     'Did not pass the assessment',
-    'Did not meet the academic requirements',
+    'Did not pass the exams',
     'Exclusion',
     'Financial reasons',
     'Gone into employment',
