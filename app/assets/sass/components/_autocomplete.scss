@@ -142,3 +142,19 @@
 .autocomplete__dropdown-arrow-down {
   pointer-events: none;
 }
+
+
+.autocomplete__option-hint {
+  display: block;
+  @include govuk-font(16);
+  color: $govuk-secondary-text-colour;
+}
+
+.autocomplete__option--focused,
+.autocomplete__option:hover {
+  color: govuk-colour("white");
+
+  .autocomplete__option-hint {
+    color: govuk-colour("white");
+  }
+}

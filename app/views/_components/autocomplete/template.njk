@@ -74,12 +74,12 @@
 
   var values = [{% for value in params.items %}"{{value}}",{% endfor %}];
 
-  element = document.querySelector('#{{params.id}}');
+  var element = document.querySelector('#{{params.id}}');
   // id = '{{params.id}}--autocomplete';
-  defaultValue = '{{params.value}}';
-  showAllValues = ('{{params.showAllValues}}' == 'false') ? false : true;
-  autoSelect = ('{{params.autoSelect}}' == 'false') ? false : true;
-  minLength = ('{{params.minLength}}' == false) ? 0 : parseInt('{{params.minLength}}');
+  var defaultValue = '{{params.value}}';
+  var showAllValues = ('{{params.showAllValues}}' == 'false') ? false : true;
+  var autoSelect = ('{{params.autoSelect}}' == 'false') ? false : true;
+  var minLength = ('{{params.minLength}}' == false) ? 0 : parseInt('{{params.minLength}}');
 
   // Conditional not used
   // confirmFunction = function(val) {
@@ -96,13 +96,39 @@
   //   {% endif %}
   // }
 
+  var inputValue = (result) => {
+      if (result) {
+        const name = result.split(' | ')
+        if (name[1]) {
+          return name[0] && name[0]
+        }
+        return result && result
+      }
+      return result && result
+    }
+
+  var suggestion = (result) => {
+      const name = result.split(' | ')
+      if (name[1]) {
+        return name[0] && name[0] + '<span class="autocomplete__option-hint">' + name[1] + '</span>'
+      }
+      else {
+        return result && result
+      }
+      
+    }
+
+
   accessibleAutocomplete.enhanceSelectElement({
     selectElement: element,
     showAllValues: showAllValues,
     autoselect: autoSelect,
     minLength: minLength,
     // source: values,
-    defaultValue: defaultValue
+    defaultValue: defaultValue,
+    templates: {
+      inputValue,
+      suggestion}
 
   });
     // onConfirm: confirmFunction

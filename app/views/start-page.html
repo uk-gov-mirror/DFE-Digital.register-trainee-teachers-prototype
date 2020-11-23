@@ -1,6 +1,7 @@
-{% extends "layout.html" %}
+ {% extends "layout.html" %}
 {% set bodyClasses = "start-page" %}
 {% set hideNav = true %}
+{% set hidePrimaryNav = true %}
 
 {% block pageTitle %}
   {{ pageHeading }} - GOV.UK
@@ -8,21 +9,25 @@
 
 {% set pageHeading = 'Register trainee teachers' %}
 
+{% block beforeContent %}
+{# beforeContent is reseting default phase banner #}
+{% endblock %}
+
 {% block main %}
-  <div class="govuk-width-container">
-    {{ govukPhaseBanner({
-      tag: {
-        text: "prototype"
-      },
-      html: 'This is a prototype of a new service. Some parts of this prototype do not work yet. '
-    }) }}
-    {# this overrides the default phase banner from layout.html #}
-    {% block beforeContent %}
-    {% endblock %}
-  </div>
   <div class="start-page-banner">
 
     <div class="govuk-width-container">
+      <div class="govuk-phase-banner">
+        <p class="govuk-phase-banner__content">
+          {{ govukTag({
+            text: "prototype",
+            classes: "govuk-phase-banner__content__tag start-page-banner__tag"
+          }) | indent(4) | trim }}
+          <span class="govuk-phase-banner__text start-page-banner__text">
+            This is a prototype of a new service. Some parts of this prototype do not work yet.
+          </span>
+        </p>
+      </div>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
 
@@ -36,7 +41,7 @@
               isStartButton: true
             }) }}
             <p class="govuk-body start-page-banner__text">or
-            <a class="govuk-link govuk-link--no-visited-state" href="/home">sign in</a>
+            <a class="govuk-link govuk-link--no-visited-state" href="sign-in">sign in</a>
             if you’ve used it before</p>
           </div>
 

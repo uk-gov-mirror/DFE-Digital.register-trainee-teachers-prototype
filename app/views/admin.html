@@ -38,6 +38,15 @@
           }
         ]
       } | decorateAttributes(data, "data.settings.useDarkHeader")) }}
+      
+      {{ govukCheckboxes({
+        items: [
+          {
+            value: 'true',
+            text: "Show declaration page"
+          }
+        ]
+      } | decorateAttributes(data, "data.settings.includeDeclaration")) }}
 
 
       {% set allTrainingRoutes = [] %}

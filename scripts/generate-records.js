@@ -2,27 +2,38 @@
 
 // node scripts/generate-records.js
 
-const fs      = require('fs')
-const path    = require('path')
-const faker   = require('faker')
-faker.locale  = 'en_GB'
-const moment  = require('moment')
-const _       = require('lodash')
+// Re-run this script after generating new courses
+const fs                = require('fs')
+const path              = require('path')
+const faker             = require('faker')
+faker.locale            = 'en_GB'
+const moment            = require('moment')
+const _                 = require('lodash')
 const trainingRouteData = require('../app/data/training-route-data')
-const seedRecords = require('../app/data/seed-records')
-const statuses = require('../app/data/status')
+const seedRecords       = require('../app/data/seed-records')
+const statuses          = require('../app/data/status')
+const courses           = require('../app/data/courses.json')
 
 // Settings
-let simpleGcseGrades = true //output pass/fail rather than full detail
+let simpleGcseGrades    = true //output pass/fail rather than full detail
+const activeProvider    = "University of Southampton"
+const providerCourses   = courses[activeProvider].courses
 
 const sortBySubmittedDate = (x, y) => {
   return new Date(y.submittedDate) - new Date(x.submittedDate);
 }
 
+const generateTrainingDetails = require('../app/data/generators/training-details')
+
+
 // Route into teaching
 const trainingRoutes = Object.keys(trainingRouteData.trainingRoutes)
 const enabledTrainingRoutes = trainingRouteData.enabledTrainingRoutes
-const generateProgrammeDetails = require('../app/data/generators/programme-details')
+const generateProgrammeDetails = require('../app/data/generators/course-details')
+
+const getRandomEnabledRoute = () => {
+  return faker.helpers.randomize(enabledTrainingRoutes)
+}
 
 // Personal details
 const generatePersonalDetails = require('../app/data/generators/personal-details')
@@ -43,8 +54,39 @@ const generateFakeApplication = (params = {}) => {
   const status = params.status || faker.helpers.randomize(statuses)
   const events = generateEvents(faker, { status })
 
-  let route = params.route || faker.helpers.randomize(enabledTrainingRoutes)
 
+
+  let route = (params.route) ? params.route : undefined
+
+  // NB: this will in effect overwrite the route
+  let isPublishCourse
+  if (params?.programmeDetails?.isPublishCourse !== undefined){
+    if (params.programmeDetails.isPublishCourse == 'true'){
+      isPublishCourse = true
+    }
+    else isPublishCourse = false
+  }
+  else isPublishCourse = faker.helpers.randomize([true, false])
+
+  // Programme details
+  let programmeDetails
+  if (isPublishCourse) {
+    // Grab programme details from seed courses
+    programmeDetails = (params.programmeDetails === null) ? undefined : { ...faker.helpers.randomize(providerCourses), ...params.programmeDetails }
+  }
+  else {
+    // Generate some seed data
+    let programmeDetailsOptions = {
+      route, 
+      startYear: faker.helpers.randomize([2019,2020]),
+      isPublishCourse: false
+    }
+
+    programmeDetails = (params.programmeDetails === null) ? undefined : { ...generateProgrammeDetails(programmeDetailsOptions), ...params.programmeDetails }
+  }
+
+  // Copy route back up - generator may have randomly picked one
+  route = programmeDetails.route
 
   // Dates
   let updatedDate, submittedDate, deferredDate, withdrawalDate
@@ -79,8 +121,7 @@ const generateFakeApplication = (params = {}) => {
     withdrawalDate = params.updatedDate
   }
 
-  // Programme details
-  const programmeDetails = (params.programmeDetails === null) ? undefined : { ...generateProgrammeDetails(faker, route, status), ...params.programmeDetails }
+  const trainingDetails = (params.trainingDetails === null) ? undefined : { ...generateTrainingDetails({submittedDate, status}), ...params.trainingDetails }
 
   // Personal details
   const personalDetails = (params.personalDetails === null) ? null : { ...generatePersonalDetails(faker), ...params.personalDetails }
@@ -93,8 +134,6 @@ const generateFakeApplication = (params = {}) => {
   let person = Object.assign({}, personalDetails)
   person.isInternationalTrainee = isInternationalTrainee
   const contactDetails = (params.contactDetails === null) ? undefined : { ...generateContactDetails(faker, person), ...params.contactDetails }
-
-
 
   // Qualifications
 
@@ -114,14 +153,10 @@ const generateFakeApplication = (params = {}) => {
       'max': 9999999
     })
   }
-
-
-  // const provider = faker.helpers.randomize(organisations.filter(org => !org.isAccreditedBody))
-
+  
   return {
     id: params.id || faker.random.uuid(),
     route,
-    traineeId: params.traineeId || faker.random.alphaNumeric(8).toUpperCase(),
     status,
     trn,
     updatedDate,
@@ -132,15 +167,11 @@ const generateFakeApplication = (params = {}) => {
     diversity,
     isInternationalTrainee,
     contactDetails,
+    trainingDetails,
     programmeDetails,
     gcse,
     degree,
     events
-
-    // gcse: params.gcse || generateGcse(faker, personalDetails.isInternationalTrainee),
-    // englishLanguageQualification: params.englishLanguageQualification || generateEnglishLanguageQualification(faker),
-    // otherQualifications: params.otherQualifications || generateOtherQualifications(faker),
-    // schoolExperience: generateSchoolExperience(faker)
   }
 }
 
@@ -166,7 +197,7 @@ const generateFakeApplications = () => {
       },
       diversity: null,
       contactDetails: null,
-      route: "Assessment Only",
+      route: getRandomEnabledRoute(),
       updatedDate: faker.date.between(
         moment(),
         moment().subtract(16, 'days'))
@@ -187,7 +218,7 @@ const generateFakeApplications = () => {
       diversity: {
         status: 'Completed'
       },
-      route: "Assessment Only",
+      route: getRandomEnabledRoute(),
       updatedDate: faker.date.between(
         moment(),
         moment().subtract(16, 'days'))
@@ -217,7 +248,7 @@ const generateFakeApplications = () => {
       programmeDetails: {
         status: 'Completed'
       },
-      route: "Assessment Only",
+      route: getRandomEnabledRoute(),
       updatedDate: faker.date.between(
         moment(),
         moment().subtract(1, 'days'))
@@ -233,6 +264,7 @@ const generateFakeApplications = () => {
     const application = generateFakeApplication({
       status: 'Pending TRN',
       updatedDate,
+      route: getRandomEnabledRoute(),
       submittedDate: updatedDate
     })
     applications.push(application)
@@ -241,6 +273,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 5; i++) {
     const application = generateFakeApplication({
       status: 'TRN received',
+      route: getRandomEnabledRoute(),
       updatedDate: faker.date.between(
         moment().subtract(2, 'days'),
         moment().subtract(6, 'days'))
@@ -251,6 +284,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 15; i++) {
     const application = generateFakeApplication({
       status: 'TRN received',
+      route: getRandomEnabledRoute(),
       updatedDate: faker.date.between(
         moment().subtract(2, 'days'),
         moment().subtract(600, 'days'))
@@ -261,6 +295,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 10; i++) {
     const application = generateFakeApplication({
       status: 'QTS recommended',
+      route: getRandomEnabledRoute(),
       updatedDate: faker.date.between(
         moment().subtract(400, 'days'),
         moment().subtract(600, 'days'))
@@ -272,6 +307,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 15; i++) {
     const application = generateFakeApplication({
       status: 'QTS awarded',
+      route: getRandomEnabledRoute(),
       updatedDate: faker.date.between(
         moment().subtract(300, 'days'),
         moment().subtract(800, 'days'))
@@ -283,6 +319,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 3; i++) {
     const application = generateFakeApplication({
       status: 'Withdrawn',
+      route: getRandomEnabledRoute(),
       updatedDate: faker.date.between(
         moment().subtract(50, 'days'),
         moment().subtract(300, 'days'))
@@ -294,6 +331,7 @@ const generateFakeApplications = () => {
   for (var i = 0; i < 3; i++) {
     const application = generateFakeApplication({
       status: 'Deferred',
+      route: getRandomEnabledRoute(),
       updatedDate: faker.date.between(
         moment().subtract(50, 'days'),
         moment().subtract(300, 'days'))

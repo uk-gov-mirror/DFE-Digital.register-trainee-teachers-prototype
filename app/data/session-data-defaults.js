@@ -14,7 +14,7 @@ let degreeOrganisations     = degreeData.orgs
 // Assessment only
 let assessmentOnlyAgeRanges = require('./assessmentOnlyAgeRanges')
 let ittSubjects = require('./itt-subjects').allSubjects
-console.log("subject length", ittSubjects.length)
+
 let withdrawalReasons       = require('./withdrawal-reasons')
 let notPassedReasons       = require('./not-passed-reasons')
 
@@ -23,6 +23,7 @@ let trainingRouteData          = require('./training-route-data')
 let trainingRoutes = trainingRouteData.trainingRoutes
 let allTrainingRoutes       = Object.values(trainingRoutes).map(route => route.name)
 
+let courses                 = require('./courses.json')
 // Things that can be changed from the /admin page
 let settings = {}
 // Simplify structure so it can be worked with from admin page
@@ -62,6 +63,7 @@ module.exports = {
   assessmentOnlyAgeRanges,
   awards,
   countries,
+  courses,
   degreeOrganisations,
   degreeTypes,
   ethnicities,
