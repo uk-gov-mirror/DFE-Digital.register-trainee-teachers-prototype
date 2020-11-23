@@ -6,13 +6,21 @@
   {% endif %}
 {% endset %}
 
+{% set qtsDetailsRowOutcomeText%}
+  {% if record.qtsDetails.standardsAssessedOutcome == "No" %}
+    Standards not met
+  {% else %} 
+    Not provided
+  {% endif %}
+{% endset %}
+
 {% set qtsDetailsRows = [
   {
     key: {
-      text: "Assessment outcome"
+      text: "Outcome"
     },
     value: {
-      text: record.qtsDetails.standardsAssessedOutcome or 'Not provided'
+      text: qtsDetailsRowOutcomeText
     },
     actions: {
       items: [
@@ -26,7 +34,7 @@
   },
   {
     key: {
-      text: "Outcome date"
+      text: "Date standards not met"
     },
     value: {
       text: record.qtsDetails.qtsOutcomeRecordedDate | govukDate or 'Not provided'
@@ -34,16 +42,16 @@
     actions: {
       items: [
         {
-          href: recordPath + "/qts/outcome" | addReferrer(referrer),
+          href: recordPath + "/qts/outcome-date" | addReferrer(referrer),
           text: "Change",
-          visuallyHiddenText: "date outcome recorded"
+          visuallyHiddenText: "date standards not met"
         }
       ]
     } if canAmend
   },
   {
     key: {
-      text: "Reason for not passing"
+      text: "Reason"
     },
     value: {
       text: notPassedReason or 'Not provided'
@@ -123,7 +131,7 @@
 
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    titleText: "Assessment details",
+    titleText: "Outcome details",
     html: qtsDetailsHtml
   }) }}
   

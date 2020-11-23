@@ -76,8 +76,8 @@ module.exports = router => {
     }
   })
 
-  // Get dates from radios then check if QTS outcome is passed or not passed
-  router.post('/record/:uuid/qts/outcome', (req, res) => {
+  // Collect the QTS outcome date and set up the forking
+  router.post('/record/:uuid/qts/outcome-date-answer', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
 
@@ -96,7 +96,7 @@ module.exports = router => {
     }
     
     // Was the QTS outcome a pass?
-    if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'Not passed'){
+    if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'No'){
       res.redirect(`/record/${req.params.uuid}/qts/not-passed/reason`)
     }
     else {
@@ -145,11 +145,11 @@ module.exports = router => {
         newRecord.status = 'Withdrawn'
         newRecord.withdrawalDate = newRecord.qtsNotPassedOutcomeDate
         newRecord.withdrawalReason = newRecord.notPassedReason
-        req.flash( 'success', {title: 'QTS outcome recorded and trainee withdrawn', html: '<p class="govuk-body">If you think there is a problem, contact <a href="mailto:itt.datamanagement@education.gov.uk">itt.datamanagement@education.gov.uk</a>.</p>' } )
+        req.flash( 'success', {title: 'Training outcome recorded and trainee withdrawn', html: '<p class="govuk-body">If you think there is a problem, contact <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk </a>.</p>' } )
       }
       else {
         // newRecord.status = 'TRN received' // TODO: should we have a new status?
-        req.flash('success', 'QTS outcome recorded')   
+        req.flash('success', 'Training outcome recorded')   
       }
       newRecord.previousQtsOutcome = newRecord.notPassedReason
       delete newRecord.notPassedReason
