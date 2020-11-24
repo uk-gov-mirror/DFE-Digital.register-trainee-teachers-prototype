@@ -4,6 +4,7 @@ module.exports = [
     'Death',
     'Did not pass the assessment',
     'Did not pass the exams',
+    'Did not start the course',
     'Exclusion',
     'Financial reasons',
     'Gone into employment',
