@@ -61,6 +61,8 @@
   {%- endif -%} 
   {%- endset %}
 
+  {# {% set gridColumn = 'govuk-grid-column-full' %} #}
+
   <form {{formActionHtml}} method="post" novalidate>
     <div class="govuk-grid-row">
       <div class="{{ gridColumn or 'govuk-grid-column-two-thirds-from-desktop'}}">
