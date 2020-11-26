@@ -5,17 +5,21 @@
 
 
 {% set commencementDateInputHtml %}
+  {% set hintHtml %}
+    When this trainee started, rather than the programme start date.<br>
+    For example, {{ "" | today | toDateArray | spaceSeparate }}
+  {% endset %}
   {{ govukDateInput({
     id: "commencement-start-date",
     namePrefix: "record[trainingDetails][commencementDate]",
     fieldset: {
       legend: {
-        text: "Start date",
+        text: "Date trainee started",
         classes: "govuk-fieldset__legend--s"
       }
     },
     hint: {
-      text: "For example, " + "" | today | toDateArray | spaceSeparate
+      html: hintHtml
     },
     items: [
         {
