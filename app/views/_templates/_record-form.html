@@ -50,7 +50,7 @@
   {% block beforePageTitle %}{% endblock %}
   <form{% if formAction %} action="{{ formAction }}"{% endif %} method="post" novalidate>
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
+      <div class="{{ gridColumn or 'govuk-grid-column-two-thirds-from-desktop'}}">
         {% block formContent %}
 
         {% endblock %}
