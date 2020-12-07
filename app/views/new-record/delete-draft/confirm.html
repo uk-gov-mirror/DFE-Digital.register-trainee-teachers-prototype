@@ -1,0 +1,27 @@
+{% extends "_templates/_record-form.html" %}
+
+{% set pageHeading = "Delete this draft record" %}
+{% set backLink = './../overview' %}
+{% set backText = "Back to draft record" %}
+{% set gridColumn = 'govuk-grid-column-full' %}
+{% set formAction = "./../overview" | orReferrer(referrer) %}
+
+{% block formContent %}
+
+{% set draftRecordName %}
+  {% if record.personalDetails.shortName %}
+   for {{record.personalDetails.shortName}}
+  {% endif %}
+{% endset %}
+
+<span class="govuk-caption-l">{{'Draft record' + draftRecordName}}</span>
+<h1 class="govuk-heading-l govuk-!-margin-bottom-8">Do you want to delete this draft?</h1>
+
+{{ govukButton({
+  text: "Delete this draft",
+  href: "./delete",
+  classes: "govuk-button--warning"
+}) }}
+
+{% endblock %}
+
