@@ -1,10 +1,9 @@
-{% extends "_templates/_record-form.html" %}
+{% extends "_templates/_new-record.html" %}
 
 {% set pageHeading = "Delete this draft record" %}
 {% set backLink = './../overview' %}
 {% set backText = "Back to draft record" %}
-{% set gridColumn = 'govuk-grid-column-full' %}
-{% set formAction = "./../overview" | orReferrer(referrer) %}
+{% set cancelLink = true %}
 
 {% block formContent %}
 
