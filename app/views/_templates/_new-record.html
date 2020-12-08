@@ -67,8 +67,8 @@
         {% if returnLink %}
           <p class="govuk-body"><a href="{{returnLink.href}}" class="govuk-link">{{returnLink.text}}</a></p>
         {% endif %}
-        {% if cancelLink %}
-          <p class="govuk-body"><a href="{{recordPath}}" class="govuk-link">Cancel and return to record</a></p>
+        {% if returnLink %}
+          <p class="govuk-body"><a href="{{returnLink.href}}" class="govuk-link">{{returnLink.text}}</a></p>
         {% endif %}
 
         {# {% if not hideReturnLink %}
