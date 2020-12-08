@@ -63,7 +63,7 @@ module.exports = router => {
   })
 
   // Delete draft
-  router.get('/new-record/delete-draft', (req, res) => {
+  router.get('/new-record/delete-draft/delete', (req, res) => {
     const data = req.session.data
     const records = data.records
     let newRecord = data.record
