@@ -1,0 +1,17 @@
+{% extends "_templates/_form.html" %}
+
+{% set pageHeading = "Bulk actions" %}
+
+{% set formAction = "./bulk-action/select-trainees" | addReferrer(referrer) %}
+
+
+
+{% block formContent %}
+
+  {% include "_includes/forms/bulk/actions-and-filters.html" %}
+  
+  
+
+{% endblock %}
+
+

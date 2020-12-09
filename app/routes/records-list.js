@@ -23,6 +23,11 @@ module.exports = router => {
   router.get('/records', function (req, res) {
     const data = req.session.data
 
+    // We're not in a record, so make sure to flush record data
+    // Nb this only deletes on second page load because session data
+    // is already set at this point and we're not redirecting
+    delete req.session.data.record
+
     let query = Object.assign({}, req.query)
 
     // Clean up radio and checkbox data

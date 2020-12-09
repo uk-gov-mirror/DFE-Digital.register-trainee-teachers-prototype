@@ -1,0 +1,25 @@
+{% extends "_templates/_form.html" %}
+
+{% set pageHeading = "Confirm trainees" + ((" to " + data.bulk.action | lower) if data.bulk.action) %}
+
+{% set gridColumn = 'govuk-grid-column-full' %}
+{% set formAction = "./save" | addReferrer(referrer) %}
+
+
+{% block formContent %}
+
+{% set canAmend = true %}
+
+  <h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
+  {{ govukInsetText({
+    text: "These trainees must all have met the standards for QTS"
+  }) }}
+  {% include "_includes/summary-cards/bulk-details.html" %}
+
+  {{ govukButton({
+    text: "Recommend for QTS"
+  }) }}
+
+{% endblock %}
+

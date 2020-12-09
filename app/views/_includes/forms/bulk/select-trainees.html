@@ -1,0 +1,36 @@
+{% set records = data.records | where("status", "TRN received") | limitTo(10) | sortRecordsByLastName %}
+
+{% set checkboxItems = [] %}
+
+{#   {% set checkboxItems = checkboxItems | push({
+  text: "Select all"
+}) %}
+
+{% set checkboxItems = checkboxItems | push({divider: 'or'}) %} #}
+
+{% for trainee in records  %}
+ {{trainee | log}}
+  {% set checkboxItems = checkboxItems | push({
+    value: trainee.id,
+    text: trainee.personalDetails.fullName
+  }) %}
+  
+{% endfor %}
+
+{{ govukCheckboxes({
+  fieldset: {
+    legend: {
+      text: pageHeading,
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--l"
+    }
+  },
+  hint: {
+    text: ""
+  },
+  items: checkboxItems
+} | decorateAttributes(data, "data.bulk.selectedTrainees")) }}
+
+{{ govukButton({
+  text: "Continue"
+}) }}

@@ -1,0 +1,83 @@
+{% set selectedTrainees = data.records | getRecordsById(data.bulk.selectedTrainees) | sortRecordsByLastName %}
+{% set traineeList %}
+  <ul class="govuk-list govuk-list--bullet">
+    {# {% for traineeId in data.bulk.selectedTrainees %}
+      <li>{{data.records | getRecordById(traineeId) | log}}</li>
+    {% endfor %} #}
+    {% for trainee in selectedTrainees %}
+      <li>{{trainee.personalDetails.fullName}}</li>
+    {% endfor %}
+  </ul>
+{% endset %}
+
+{# {{ data.records | getRecordById(traineeId) }}
+{{ traineeId | lookUpRecord(data.records) }} #}
+
+{% set rows = [
+  {
+    key: {
+      text: "Action"
+    },
+    value: {
+      text: data.bulk.action or "Recommend for QTS"
+    },
+    actions: {
+      items: [
+        {
+          href: "/bulk-action" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "outcome"
+        }
+      ]
+    } if canAmend
+  },
+  {
+    key: {
+      text: "Trainees"
+    },
+    value: {
+      text: traineeList | safe or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: "/bulk-action/select-trainees" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "date standards met"
+        }
+      ]
+    } if canAmend
+  },
+  {
+    key: {
+      text: "Date of assessment"
+    },
+    value: {
+      text: data.bulk.date | govukDate or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: "/bulk-action/date" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "date of assessment"
+        }
+      ]
+    } if canAmend
+  }
+  ] %}
+
+{% set summaryListHtml %}
+  {{ govukSummaryList({
+    rows: rows
+  }) }}
+{% endset %}
+
+
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    titleText: "Outcome details",
+    html: summaryListHtml
+  }) }}
+  

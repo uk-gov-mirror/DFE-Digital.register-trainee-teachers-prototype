@@ -63,6 +63,16 @@ filters.orReferrer = (url, referrer) => {
   }
 }
 
+// Sort by last name or draft record
+filters.sortRecordsByLastName = records => {
+  let sorted = records.sort((a, b) => {
+    let aString = `${a?.personalDetails?.familyName}` || 'Draft record'
+    let bString = `${b?.personalDetails?.familyName}` || 'Draft record'
+    return recordUtils.sortAlphabetical(aString, bString)
+  })
+  return sorted
+}
+
 // Sort by subject, including course code
 filters.sortPublishCourses = courses => {
   let sorted = courses.sort((a, b) => {
@@ -82,5 +92,11 @@ filters.getCourseNamesForAutocomplete = (courses) => {
     return [`${course.subject} (${course.code})`, course.id]
   })
 }
+
+// Look up a record using it's UUID
+filters.getRecordById = recordUtils.getRecordById
+
+// Look up several records using array of  UUIDs
+filters.getRecordsById = recordUtils.getRecordsById
 
 exports.filters = filters
