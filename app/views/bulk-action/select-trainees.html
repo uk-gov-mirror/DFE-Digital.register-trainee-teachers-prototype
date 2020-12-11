@@ -1,16 +1,12 @@
 {% extends "_templates/_form.html" %}
 
 {% set pageHeading = "Select the trainees to submit for QTS" %}
+{% set navActive = 'bulk' %}
 
-{% set formAction = "./date" | addReferrer(referrer) %}
-
-
+{% set formAction = "./select-trainees-answer" | addReferrer(referrer) %}
 
 {% block formContent %}
 
   {% include "_includes/forms/bulk/select-trainees.html" %}
 
-
 {% endblock %}
-
-

@@ -2,6 +2,7 @@
 
 {% set pageHeading = "Confirm trainees" + ((" to " + data.bulk.action | lower) if data.bulk.action) %}
 
+{% set navActive = 'bulk' %}
 {% set gridColumn = 'govuk-grid-column-full' %}
 {% set formAction = "./save" | addReferrer(referrer) %}
 

@@ -1,18 +1,29 @@
-{% set records = data.records | where("status", "TRN received") | limitTo(10) | sortRecordsByLastName %}
+{# {% set records = data.records | where("route", "Provider-led") | where("status", "TRN received") | limitTo(100) | sortRecordsByLastName %} #}
 
 {% set checkboxItems = [] %}
 
-{#   {% set checkboxItems = checkboxItems | push({
-  text: "Select all"
-}) %}
+{% for trainee in filteredRecords  %}
 
-{% set checkboxItems = checkboxItems | push({divider: 'or'}) %} #}
+  {% set checkboxLabelHtml %}
+    {{trainee.personalDetails.fullName}} 
+  {% endset %}
 
-{% for trainee in records  %}
- {{trainee | log}}
+  {% set traineeHintHtml %}
+    <span class="govuk-hint">{{trainee.programmeDetails.subject}}, {{trainee.route | lower}}</span>
+    {{govukTag({
+      text: trainee.status,
+      classes: trainee.status | getStatusClass
+    })}}
+  {% endset %}
+
   {% set checkboxItems = checkboxItems | push({
     value: trainee.id,
-    text: trainee.personalDetails.fullName
+    _text: trainee.personalDetails.fullName,
+    checked: checked(selectedTrainees, trainee.id),
+    html: checkboxLabelHtml,
+    hint: {
+      html: traineeHintHtml
+    }
   }) %}
   
 {% endfor %}

@@ -30,7 +30,7 @@
         }
       ]
     } if canAmend
-  },
+  } if not data.bulk.directAction,
   {
     key: {
       text: "Trainees"
@@ -64,7 +64,7 @@
         }
       ]
     } if canAmend
-  }
+  } if data.bulk.action == 'Recommend for QTS'
   ] %}
 
 {% set summaryListHtml %}
