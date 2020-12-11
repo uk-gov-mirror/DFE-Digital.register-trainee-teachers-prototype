@@ -53,15 +53,15 @@
 {% endif %}
 
 {% if record.status == "QTS recommended" %}
-  {% set recommendedDate = record.qtsRecommendedDate | formatDate('relative') %}
+  {% set recommendedDate = record.qtsDetails.qtsOutcomeRecordedDate | govukDate %}
 
   {% set qtsContent %}
     {{govukTag({
       text: "QTS recommended",
       classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
     })}} <br>
-    {% if record.qtsRecommendedDate %}
-      Recommended: {{record.qtsRecommendedDate | govukDate}}
+    {% if record.qtsDetails.qtsOutcomeRecordedDate %}
+      Recommended: {{recommendedDate}}
     {% endif %}
   {% endset %}
 
