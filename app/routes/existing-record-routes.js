@@ -114,7 +114,6 @@ module.exports = router => {
     }
     else {
       newRecord.status = 'QTS recommended'
-      newRecord.qtsRecommendedDate = new Date()
       utils.deleteTempData(data)
       utils.updateRecord(data, newRecord, "Trainee recommended for QTS")
       // req.flash('success', 'Trainee recommended for QTS')
