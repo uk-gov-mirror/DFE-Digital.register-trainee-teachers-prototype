@@ -18,6 +18,7 @@ exports.deleteTempData = (data) => {
   delete data.record
 }
 
+// Add an event to a record’s timeline
 exports.addEvent = (record, content) => {
   record.events.items.push({
     title: content,
@@ -124,6 +125,26 @@ exports.updateRecord = (data, newRecord, timelineMessage) => {
   }
   return true
 }
+
+// Advance a record to 'QTS recommended' status
+exports.recommendForQTS = (record, params) => {
+  if (!record) return false
+  if (record.status != 'TRN received'){
+    console.log(`Recommend for QTS failed: ${record.id} has the wrong status (${record.status})`)
+    return false
+  }
+  else {
+    record.status = 'QTS recommended'
+    record.qtsRecommendedDate = params?.date || new Date()
+    // Implicitly passed
+    _.set(record, 'qtsDetails.qtsDetails.standardsAssessedOutcome', "Passed")
+    record.updatedDate = new Date()
+    exports.addEvent(record, "Trainee recommended for QTS")
+  }
+  return true
+  // utils.updateRecord(data, record, "QTS awarded") // doesn't seem to be needed?
+}
+
 
 // Loosely copied from lib/utils
 // Needed because some templates live at '/index' and default res.render

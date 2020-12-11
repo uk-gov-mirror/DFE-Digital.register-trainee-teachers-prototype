@@ -66,7 +66,6 @@ module.exports = router => {
     else {
       if (newRecord.status == 'QTS recommended' || newRecord.status == 'TRN received'){
         newRecord.status = 'QTS awarded'
-        _.set(newRecord, 'programmeDetails.endDate', (new Date()))
         _.set(newRecord, 'qtsDetails.qtsDetails.standardsAssessedOutcome', "Passed")
         utils.deleteTempData(data)
         utils.addEvent(newRecord, "Trainee recommended for QTS")

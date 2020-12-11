@@ -64,14 +64,7 @@ filters.orReferrer = (url, referrer) => {
 }
 
 // Sort by last name or draft record
-filters.sortRecordsByLastName = records => {
-  let sorted = records.sort((a, b) => {
-    let aString = `${a?.personalDetails?.familyName}` || 'Draft record'
-    let bString = `${b?.personalDetails?.familyName}` || 'Draft record'
-    return recordUtils.sortAlphabetical(aString, bString)
-  })
-  return sorted
-}
+filters.sortRecordsByLastName = recordUtils.sortRecordsByLastName
 
 // Sort by subject, including course code
 filters.sortPublishCourses = courses => {

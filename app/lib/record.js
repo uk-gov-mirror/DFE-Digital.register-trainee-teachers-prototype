@@ -46,6 +46,16 @@ exports.sortAlphabetical = (x, y) => {
   return x > y ? 1 : (x < y ? -1 : 0);
 }
 
+// Sort by last name or draft record
+exports.sortRecordsByLastName = records => {
+  let sorted = records.sort((a, b) => {
+    let aString = `${a?.personalDetails?.familyName}` || 'Draft record'
+    let bString = `${b?.personalDetails?.familyName}` || 'Draft record'
+    return exports.sortAlphabetical(aString, bString)
+  })
+  return sorted
+}
+
 // Look up a record using it's UUID
 exports.getRecordById = (records, id) => {
   let index = records.findIndex(record => record.id == id)
