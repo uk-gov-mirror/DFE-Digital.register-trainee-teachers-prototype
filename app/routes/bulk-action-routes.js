@@ -61,10 +61,14 @@ module.exports = router => {
     let selectedTrainees = (bulk?.selectedTrainees) ? bulk.selectedTrainees : []
 
     // Hardcode a list of trainees
-    _.set(bulk, "filteredTrainees", exampleTrainees)
+    // _.set(bulk, "filteredTrainees", exampleTrainees)
+
+    if (!bulk?.action){
+      res.redirect('/bulk-action')
+    }
 
     // Missing filtered trainees - can’t continue
-    if (!bulk?.filters && !bulk?.filteredTrainees){
+    else if (!bulk?.filters && !bulk?.filteredTrainees){
       console.log('Bulk action: no filtered trainees, returning to records')
       res.redirect(`/records`)
     }
@@ -81,12 +85,16 @@ module.exports = router => {
 
       // Coming from the filters page
       else if (bulk?.filters){
-        filteredRecords = allRecords
-        // TODO: do filtering in a function
-        filteredRecords = filteredRecords.filter(record => record?.route == "Provider-led")
-        // console.log(filteredRecords)
-        filteredRecords = filteredRecords.filter(record => record?.status == "TRN received")
-        filteredRecords
+        console.log('has filters')
+        console.log(bulk.filters)
+        filteredRecords = utils.filterRecords(allRecords, data, bulk.filters)
+        if (bulk.action == 'Register for TRN'){
+          filteredRecords = filteredRecords.filter(record => record.status == 'Draft')
+        }
+        if (bulk.action == 'Recommend for QTS'){
+          filteredRecords = filteredRecords.filter(record => record.status == 'TRN received')
+        }
+
       }
       res.render(`bulk-action/select-trainees`, {
         filteredRecords, 
@@ -138,7 +146,8 @@ module.exports = router => {
     let selectedRecords = recordUtils.getRecordsById(records, selectedTraineeIds)
 
     selectedRecords.forEach(record => {
-      let success = utils.recommendForQTS(record, {date: bulk.date})
+      let success = utils.doBulkAction(bulk.action, record, {date: bulk?.date})
+      // let success = utils.recommendForQTS(record, {date: bulk.date})
       if (success) successCount++ 
       else failCount++
     })

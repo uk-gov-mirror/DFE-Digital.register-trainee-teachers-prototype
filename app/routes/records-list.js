@@ -1,5 +1,7 @@
 const url = require('url')
 const _ = require('lodash')
+const utils = require('./route-utils')
+
 
 // Kit checkboxes will output a string or array depending on number of options
 // selected. This coerces to arrays so it's easier to work with.
@@ -29,21 +31,28 @@ module.exports = router => {
     delete req.session.data.record
 
     let query = Object.assign({}, req.query)
+    console.log({query})
 
-    // Clean up radio and checkbox data
-    if (query.filterStatus) query.filterStatus = cleanInputData(query.filterStatus)
-    if (query.filterCycle) query.filterCycle = cleanInputData(query.filterCycle)
-    if (query.filterTrainingRoutes) query.filterTrainingRoutes = cleanInputData(query.filterTrainingRoutes)
+    // Needed because this is coming via query string and not auto-data store
+    let filtersToClean = [
+    'filterStatus',
+    'filterCycle',
+    'filterTrainingRoutes']
+    filtersToClean.forEach(filter => query[filter] = cleanInputData(query[filter]))
 
-    let { filterStatus, searchQuery, filterSubject, filterCycle, filterTrainingRoutes } = query
+    let filters = { 
+      status: query.filterStatus,
+      cycle: query.filterCycle,
+      trainingRoutes: query.filterTrainingRoutes,
+      subject: query.filterSubject
+    }
 
-    const hasFilters = !!(filterStatus) || !!(searchQuery) || !!(filterSubject && filterSubject != 'All subjects') || !!(filterCycle) || !!(filterTrainingRoutes)
+    let searchQuery = query.searchQuery
 
-    let filteredRecords = data.records
+    const hasFilters = !!(filters.status) || !!(searchQuery) || !!(filters.subject && filters.subject != 'All subjects') || !!(filters.cycle) || !!(filters.trainingRoutes)
 
-    // Only show records for training routes that are enabled
-    let enabledTrainingRoutes = data.settings.enabledTrainingRoutes
-    filteredRecords = filteredRecords.filter(record => enabledTrainingRoutes.includes(record.route) || (record.route == undefined))
+    // Filter records using filters provided
+    let filteredRecords = utils.filterRecords(data.records, data, filters)
 
     // Search traineeId and full name
     if (searchQuery){
@@ -69,23 +78,6 @@ module.exports = router => {
       })
     }
 
-    // Cycle not implimented yet
-    // if (filterCycle){
-    //   filteredRecords = filteredRecords.filter(record => filterCycle.includes(record.cycle))
-    // }
-
-    if (filterTrainingRoutes){
-      filteredRecords = filteredRecords.filter(record => filterTrainingRoutes.includes(record.route))
-    }
-
-    if (filterStatus){
-      filteredRecords = filteredRecords.filter(record => filterStatus.includes(record.status))
-    }
-
-    if (filterSubject && filterSubject != "All subjects"){
-      filteredRecords = filteredRecords.filter(record => record.programmeDetails.subject == filterSubject)
-    }
-
     // Show selected filters as labels that can be individually removed
     let selectedFilters = null
     if (hasFilters) {
@@ -108,13 +100,13 @@ module.exports = router => {
         })
       }
 
-      if (filterCycle) {
+      if (filters.cycle) {
         selectedFilters.categories.push({
           heading: { text: 'Cycle' },
-          items: filterCycle.map((cycle) => {
+          items: filters.cycle.map((cycle) => {
 
             let newQuery = Object.assign({}, query)
-            newQuery.filterCycle = newQuery.filterCycle.filter(a => a != cycle)
+            newQuery.filterCycle = filters.cycle.filter(a => a != cycle)
             return {
               text: cycle,
               href: url.format({
@@ -126,13 +118,13 @@ module.exports = router => {
         })
       }
 
-      if (filterTrainingRoutes) {
+      if (filters.trainingRoutes) {
         selectedFilters.categories.push({
           heading: { text: 'Training route' },
-          items: filterTrainingRoutes.map((route) => {
+          items: filters.trainingRoutes.map((route) => {
 
             let newQuery = Object.assign({}, query)
-            newQuery.filterTrainingRoutes = newQuery.filterTrainingRoutes.filter(a => a != route)
+            newQuery.filterTrainingRoutes = filters.trainingRoutes.filter(a => a != route)
 
             return {
               text: route,
@@ -145,13 +137,13 @@ module.exports = router => {
         })
       }
 
-      if (filterStatus) {
+      if (filters.status) {
         selectedFilters.categories.push({
           heading: { text: 'Status' },
-          items: filterStatus.map((status) => {
+          items: filters.status.map((status) => {
 
             let newQuery = Object.assign({}, query)
-            newQuery.filterStatus = newQuery.filterStatus.filter(a => a != status)
+            newQuery.filterStatus = filters.status.filter(a => a != status)
 
             return {
               text: status,
@@ -164,13 +156,13 @@ module.exports = router => {
         })
       }
 
-      if (filterSubject && filterSubject != 'All subjects') {
+      if (filters.subject && filters.subject != 'All subjects') {
         let newQuery = Object.assign({}, query)
         delete newQuery.filterSubject
         selectedFilters.categories.push({
           heading: { text: "Subject" },
           items: [{
-            text: filterSubject,
+            text: filters.subject,
             href: url.format({
               pathname: '/records',
               query: newQuery,
@@ -231,7 +223,7 @@ module.exports = router => {
     //   pathname: '/records',
     //   query: newQuery,
     // })
-
+    console.log(`Original filtered length: ${filteredRecords.length}`)
 
     res.render('records', {
       filteredRecords,
@@ -241,7 +233,5 @@ module.exports = router => {
       linkSortByDateUpdated: createSortLink("dateUpdated")
     })
   })
-
-
 
 }

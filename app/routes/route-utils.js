@@ -5,6 +5,14 @@ const filters = require('./../filters.js')()
 const _ = require('lodash')
 const trainingRoutes = require('./../data/training-route-data').trainingRoutes
 
+const programmeDetailsDefaults = {
+  qualifications: [
+    "QTS"
+  ],
+  summary: "QTS",
+  duration: 1
+}
+
 
 // Return first part of url to use in redirects
 exports.getRecordPath = req => {
@@ -127,6 +135,27 @@ exports.updateRecord = (data, newRecord, timelineMessage) => {
 }
 
 // Advance a record to 'QTS recommended' status
+exports.registerForTRN = (record) => {
+  if (!record) return false
+  if (record.status != 'Draft'){
+    console.log(`Register for TRN failed: ${record.id} has the wrong status (${record.status})`)
+    return false
+  }
+  else {
+    record.status = 'Pending TRN'
+    record.submittedDate = new Date()
+    record.programmeDetails = {
+        ...programmeDetailsDefaults,
+        ...record.programmeDetails
+      }
+    record.updatedDate = new Date()
+    exports.addEvent(record, "Trainee submitted for TRN")
+  }
+  return true
+  // utils.updateRecord(data, record, "QTS awarded") // doesn't seem to be needed?
+}
+
+// Advance a record to 'QTS recommended' status
 exports.recommendForQTS = (record, params) => {
   if (!record) return false
   if (record.status != 'TRN received'){
@@ -145,6 +174,14 @@ exports.recommendForQTS = (record, params) => {
   // utils.updateRecord(data, record, "QTS awarded") // doesn't seem to be needed?
 }
 
+exports.doBulkAction = (action, record, params) => {
+  if (action == 'Register for TRN'){
+    return exports.registerForTRN(record)
+  }
+  if (action == 'Recommend for QTS'){
+    return exports.recommendForQTS(record, params)
+  }
+}
 
 // Loosely copied from lib/utils
 // Needed because some templates live at '/index' and default res.render
@@ -172,4 +209,35 @@ exports.render = (path, res, next, ...args) => {
     // We got template not found both times - call next to trigger the 404 page
     next()
   })
+}
+
+exports.filterRecords = (records, data, filters = {}) => {
+
+  let filteredRecords = records
+  console.log(`Initial record count ${records.length}`)
+
+  // Only show records for training routes that are enabled
+  let enabledTrainingRoutes = data.settings.enabledTrainingRoutes
+
+  filteredRecords = filteredRecords.filter(record => enabledTrainingRoutes.includes(record.route) || (record.route == undefined))
+
+  // if (filter.cycle){
+  //   filteredRecords = filteredRecords.filter(record => filter.cycle.includes(record.cycle))
+  // }
+
+  if (filters.trainingRoutes){
+    filteredRecords = filteredRecords.filter(record => filters.trainingRoutes.includes(record.route))
+  }
+
+  if (filters.status){
+    filteredRecords = filteredRecords.filter(record => filters.status.includes(record.status))
+  }
+
+  if (filters.subject && filters.subject != "All subjects"){
+    filteredRecords = filteredRecords.filter(record => record?.programmeDetails?.subject == filters.subject)
+  }
+
+  console.log(`Final record count ${filteredRecords.length}`)
+
+  return filteredRecords
 }

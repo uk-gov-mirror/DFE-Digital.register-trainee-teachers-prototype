@@ -30,8 +30,7 @@
   {% set routeItems = [] %}
   {% for route in enabledTrainingRoutes %}
     {% set routeItems = routeItems | push({
-      text: route,
-      checked: checked(query.filterTrainingRoutes, route)
+      text: route
     }) %}
   {% endfor %}
   {{ govukCheckboxes({
@@ -45,7 +44,7 @@
       text: ""
     },
     items: routeItems
-  } | decorateAttributes(data, "data.filterTrainingRoutes")) }}
+  } | decorateAttributes(data, "data.bulk.filters.trainingRoutes")) }}
   
 {% endif %}
 
@@ -55,7 +54,7 @@
 {% set subjectItems = subjectItems | push({
   value: "All subjects",
   text: "All subjects",
-  selected: true if (not query.filterSubject or query.filterSubject ==  "All subjects")
+  selected: true if (not data.bulk.filters.subject or data.bulk.filters.subject ==  "All subjects")
 }) %}
 
 {# Remaining subjects #}
@@ -63,13 +62,13 @@
   {% set subjectItems = subjectItems | push({
     value: subject,
     text: subject,
-    selected: true if (subject == query.filterSubject)
+    selected: true if (subject == data.bulk.filters.subject)
   }) %}
 {% endfor %}
 
 {{ govukSelect({
   id: "subject-select",
-  name: "filterSubject",
+  name: "bulk[filters][subject]",
   label: {
     text: "Subject",
     classes: "govuk-label--s"

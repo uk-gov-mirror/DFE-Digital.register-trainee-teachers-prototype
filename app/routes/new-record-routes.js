@@ -106,6 +106,7 @@ module.exports = router => {
     else {
       newRecord.status = "Pending TRN"
       newRecord.submittedDate = new Date()
+      newRecord.updatedDate = new Date()
       // Suppliment programme details with stuff we know
       newRecord.programmeDetails = {
         ...programmeDetailsDefaults,
