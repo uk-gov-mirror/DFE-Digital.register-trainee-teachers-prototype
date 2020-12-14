@@ -101,7 +101,7 @@
     ] %}
 
   {% if not hidePrimaryNav %}
-  
+
     {% if data.settings.useDarkHeader %}
       {{ appPrimaryNavigationDark({
         label: 'Primary navigation',
@@ -115,7 +115,7 @@
     {% endif %}
 
   {% endif %}
-  
+
 {% endblock %}
 
 {% block beforeContent %}
@@ -124,7 +124,7 @@
     text: "prototype"
   },
   classes: 'govuk-!-margin-top-1',
-  html: 'This is a prototype of a new service. Some parts of this prototype do not work yet.'
+  html: 'This is a prototype of a new service. <a href="#" class="govuk-link">Give feedback to help us improve this service</a>.'
 }) }}
 {% block pageNavigation %}
 {% endblock %}
