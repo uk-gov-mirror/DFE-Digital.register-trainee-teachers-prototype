@@ -1,0 +1,28 @@
+
+{{ govukRadios({
+  fieldset: {
+    legend: {
+      text: pageHeading,
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--l"
+    }
+  },
+  hint: {
+    text: ""
+  },
+  items: [
+    {
+      value: "Register for TRN",
+      text: "Submit draft records for TRN"
+    },
+    {
+      value: "Recommend for QTS",
+      text: "Recommend trainees for QTS"
+    }
+  ]
+} | decorateAttributes(data, "data.bulk.action")) }}
+
+
+{{ govukButton({
+  text: "Continue"
+}) }}

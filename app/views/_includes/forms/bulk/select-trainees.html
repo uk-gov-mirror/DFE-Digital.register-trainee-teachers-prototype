@@ -32,8 +32,9 @@
 
 
 {% set draftIncompleteMessage %}
+
   {% set incompleteDraftTextHtml %}
-    {{incompleteDraftCount}} draft records are not shown because they are not marked as complete.
+    {{incompleteDraftCount}} draft {{'records are' if incompleteDraftCount != 1 else 'record is'}} not shown because {{'they are' if incompleteDraftCount != 1 else 'it is'}} not marked as complete.
   {% endset %}
   {{ govukInsetText({
     text: incompleteDraftTextHtml

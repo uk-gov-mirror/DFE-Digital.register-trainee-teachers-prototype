@@ -1,6 +1,6 @@
 {% extends "_templates/_form.html" %}
 
-{% set pageHeading = "Select trainees" + ((" to " + data.bulk.action | startLowerCase ) if data.bulk.action) %}
+{% set pageHeading = "Select trainees" %}
 
 {% if filteredRecords | length == 0 %}
   {% set pageHeading = "No records found" %}
@@ -20,7 +20,7 @@
  {% set hideReturnLink = true if filteredRecords | length == 0 %}
 
 {% block formContent %}
-
+<span class="govuk-caption-l">{{data.bulk.action}}</span>
   {% include "_includes/forms/bulk/select-trainees.html" %}
 
 {% endblock %}

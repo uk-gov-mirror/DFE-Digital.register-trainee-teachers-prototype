@@ -1,32 +1,12 @@
+
+<span class="govuk-caption-l">{{data.bulk.action}}</span>
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
-{{ govukRadios({
-  fieldset: {
-    legend: {
-      text: "Choose an action",
-      classes: "govuk-fieldset__legend--m"
-    }
-  },
-  hint: {
-    text: ""
-  },
-  items: [
-    {
-      value: "Register for TRN",
-      text: "Submit draft records for TRN"
-    },
-    {
-      value: "Recommend for QTS",
-      text: "Recommend trainees for QTS"
-    }
-  ]
-} | decorateAttributes(data, "data.bulk.action")) }}
 
 {% set enabledTrainingRoutes = data.settings.enabledTrainingRoutes %}
 
-<h2 class="govuk-heading-m">Filter your trainees</h2>
 
-<p class="govuk-body govuk-hint">You can choose specific trainees on the next page</p>
+<p class="govuk-body govuk-hint">You can choose specific trainees on the next page.</p>
 
 {# Only show route filter if there's more than 1 route #}
 {% if enabledTrainingRoutes | length > 1 %}

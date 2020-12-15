@@ -1,0 +1,18 @@
+{% extends "_templates/_form.html" %}
+
+{% set pageHeading = 'Filter your trainees' %}
+{% set navActive = 'bulk' %}
+
+{% set formAction = "./select-trainees" | addReferrer(referrer) %}
+
+
+
+{% block formContent %}
+
+  {% include "_includes/forms/bulk/filter-trainees.html" %}
+  
+  
+
+{% endblock %}
+
+

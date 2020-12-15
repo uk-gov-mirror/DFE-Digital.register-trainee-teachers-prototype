@@ -15,6 +15,14 @@
   
 {% endset %}
 
+
+{% set filtersHtml %}
+  Route: {{ (data.bulk.filters.trainingRoutes | commaSeparate | lower) or 'all routes' }}
+  <br>
+  <br>
+  Subject: {{ data.bulk.filters.subject | lower }}
+{% endset %}
+
 {% set rows = [
   {
     key: {
@@ -35,7 +43,24 @@
   } if not data.bulk.directAction,
   {
     key: {
-      text: "Trainee" | pluralise(selectedTrainees | length)
+      text: "Filters"
+    },
+    value: {
+      html: filtersHtml | safe
+    },
+    actions: {
+      items: [
+        {
+          href: "/bulk-action/filter-trainees" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "filtered trainees"
+        }
+      ]
+    } if canAmend
+  } if not data.bulk.directAction and not data.bulk.filters,
+  {
+    key: {
+      text: "Trainee selected" if (selectedTrainees | length == 1) else "Trainees selected"
     },
     value: {
       text: traineeList | safe or 'Not provided'
@@ -77,6 +102,6 @@
 
 {{ appSummaryCard({
   classes: "govuk-!-margin-bottom-6",
-  titleText: "Outcome details",
+  titleText: "Bulk action",
   html: summaryListHtml
 }) }}
