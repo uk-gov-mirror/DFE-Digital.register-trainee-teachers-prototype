@@ -25,8 +25,8 @@
         {% if record.status | getCanRecommendForQts %}
           {% if hasCommencementDate%}
             {{ govukButton({
-              text: "Record training outcome",
-              href: referrer + '/qts/outcome',
+              text: "Recommend trainee for QTS",
+              href: referrer + '/qts/outcome-date',
               classes: "govuk-!-margin-bottom-0"
             }) }}
           {% else %}
