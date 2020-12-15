@@ -28,20 +28,56 @@
   
 {% endfor %}
 
-{{ govukCheckboxes({
-  fieldset: {
-    legend: {
-      text: pageHeading,
-      isPageHeading: true,
-      classes: "govuk-fieldset__legend--l"
-    }
-  },
-  hint: {
-    text: ""
-  },
-  items: checkboxItems
-} | decorateAttributes(data, "data.bulk.selectedTrainees")) }}
 
-{{ govukButton({
-  text: "Continue"
-}) }}
+
+
+{% set draftIncompleteMessage %}
+  {% set incompleteDraftTextHtml %}
+    {{incompleteDraftCount}} draft records are not shown because they are not marked as complete.
+  {% endset %}
+  {{ govukInsetText({
+    text: incompleteDraftTextHtml
+  }) }}
+{% endset %}
+
+<h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
+{% if incompleteDraftCount %}
+  {{ draftIncompleteMessage | safe }}
+{% endif %}
+
+{% if filteredRecords | length > 0 %}
+
+  {% if data.bulk.action == 'Recommend for QTS' %}
+    {{ govukInsetText({
+      text: "All trainees will be marked as having met the standards on the same day. If your trainees met the standards on different days, select your trainees in batches."
+    }) }}
+  {% endif %}
+
+  {{ govukCheckboxes({
+    fieldset: {
+      legend: {
+        text: "Your filtered trainees",
+        isPageHeading: false,
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: ""
+    },
+    items: checkboxItems
+  } | decorateAttributes(data, "data.bulk.selectedTrainees")) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+
+{% else %}
+ 
+  {{ govukButton({
+    text: "Return to records list",
+    href: "/records"
+  }) }}
+
+
+{% endif %}

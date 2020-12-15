@@ -1,6 +1,6 @@
 {% extends "_templates/_form.html" %}
 
-{% set pageHeading = "Bulk actions" %}
+{% set pageHeading = "Bulk actions" if not data.bulk.directAction else 'Filter your trainees' %}
 {% set navActive = 'bulk' %}
 
 {% set formAction = "./bulk-action/select-trainees" | addReferrer(referrer) %}

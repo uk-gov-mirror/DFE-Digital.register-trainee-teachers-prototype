@@ -3,8 +3,8 @@
 {{ govukRadios({
   fieldset: {
     legend: {
-      text: "What do you want to do?",
-      classes: "govuk-fieldset__legend--s"
+      text: "Choose an action",
+      classes: "govuk-fieldset__legend--m"
     }
   },
   hint: {
@@ -13,7 +13,7 @@
   items: [
     {
       value: "Register for TRN",
-      text: "Register trainees for TRN"
+      text: "Submit draft records for TRN"
     },
     {
       value: "Recommend for QTS",
@@ -23,6 +23,10 @@
 } | decorateAttributes(data, "data.bulk.action")) }}
 
 {% set enabledTrainingRoutes = data.settings.enabledTrainingRoutes %}
+
+<h2 class="govuk-heading-m">Filter your trainees</h2>
+
+<p class="govuk-body govuk-hint">You can choose specific trainees on the next page</p>
 
 {# Only show route filter if there's more than 1 route #}
 {% if enabledTrainingRoutes | length > 1 %}

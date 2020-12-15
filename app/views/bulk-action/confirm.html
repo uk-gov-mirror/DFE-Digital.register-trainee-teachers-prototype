@@ -1,6 +1,6 @@
 {% extends "_templates/_form.html" %}
 
-{% set pageHeading = "Confirm trainees" + ((" to " + data.bulk.action | lower) if data.bulk.action) %}
+{% set pageHeading = "Confirm trainees" + ((" to " + data.bulk.action | startLowerCase ) if data.bulk.action) %}
 
 {% set navActive = 'bulk' %}
 {% set gridColumn = 'govuk-grid-column-full' %}
@@ -13,13 +13,30 @@
 
   <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
-  {{ govukInsetText({
+  {# {{ govukInsetText({
     text: "These trainees must all have met the standards for QTS"
-  }) }}
+  }) }} #}
   {% include "_includes/summary-cards/bulk-details.html" %}
 
+  {% set traineeCount = data.bulk.selectedTrainees | length %}
+  
+{#   {% set traineeText %}
+    {{traineeCount}} {{ 'trainee'}}
+  {% endset %}
+  
+  {% set traineeText = traineeCount + " " + "" %}
+ #}
+  {% set submitButtonText %}
+    {% if data.bulk.action == 'Register for TRN' %}
+      Register {{traineeCount}} draft {{'record' | pluralise(traineeCount)}} for TRN
+    {% elseif data.bulk.action == 'Recommend for QTS' %}
+      Recommend {{traineeCount}} {{'trainee' | pluralise(traineeCount)}} for QTS
+    {% endif %}
+    
+  {% endset %}
+
   {{ govukButton({
-    text: "Recommend for QTS"
+    text: submitButtonText
   }) }}
 
 {% endblock %}

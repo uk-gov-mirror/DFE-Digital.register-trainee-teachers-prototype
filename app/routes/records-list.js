@@ -30,16 +30,22 @@ module.exports = router => {
     // is already set at this point and we're not redirecting
     delete req.session.data.record
 
+    // Copy the query
     let query = Object.assign({}, req.query)
-    console.log({query})
+    let searchQuery = query?.searchQuery || ""
+    let searchQueryLowercase = searchQuery.toLowerCase()
+
 
     // Needed because this is coming via query string and not auto-data store
+    // And these values may contain '_unchecked'
     let filtersToClean = [
     'filterStatus',
     'filterCycle',
     'filterTrainingRoutes']
     filtersToClean.forEach(filter => query[filter] = cleanInputData(query[filter]))
 
+    // Remap to an object so we can pass it to the filterRecords function
+    // that is shared by the
     let filters = { 
       status: query.filterStatus,
       cycle: query.filterCycle,
@@ -47,34 +53,26 @@ module.exports = router => {
       subject: query.filterSubject
     }
 
-    let searchQuery = query.searchQuery
-
+    // Todo: this could probably be simpler
     const hasFilters = !!(filters.status) || !!(searchQuery) || !!(filters.subject && filters.subject != 'All subjects') || !!(filters.cycle) || !!(filters.trainingRoutes)
 
-    // Filter records using filters provided
+    // Filter records using the filters provided
     let filteredRecords = utils.filterRecords(data.records, data, filters)
 
     // Search traineeId and full name
     if (searchQuery){
       filteredRecords = filteredRecords.filter(record => {
-        let recordIdMatch = (searchQuery) ? (record?.trainingDetails?.traineeId.toLowerCase().includes(searchQuery.toLowerCase())) : false
-        let nameMatch = false
+        let fullName = record?.personalDetails?.fullName.toLowerCase() || "" // Draft records might not have a full name
 
-        let fullName = _.get(record, "personalDetails.fullName")
-        // Draft records might not have a full name
-        fullName = (fullName) ? fullName : ""
+        // Check that every part exists in the trainee’s name
+        let searchParts = searchQueryLowercase.split(' ')
+        let nameMatch = searchParts.every(part => fullName.includes(part))
 
-        // Split query in to parts
-        let searchParts = searchQuery.split(' ')
-       
-        // Check that each part exists in the trainee's name
-        nameMatch = true
-        searchParts.forEach(part => {
-          if (!fullName.toLowerCase().includes(part.toLowerCase())) {
-            nameMatch = false
-          }
-        })
-        return recordIdMatch || nameMatch
+        let traineeIdMatch = searchParts.some(part => (record?.trainingDetails?.traineeId || "").toLowerCase().includes(part))
+
+        let trnMatch = searchParts.some(part => (record?.trn || "").toString().includes(part))
+
+        return traineeIdMatch || trnMatch || nameMatch
       })
     }
 

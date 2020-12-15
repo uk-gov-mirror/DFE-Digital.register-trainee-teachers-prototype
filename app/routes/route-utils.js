@@ -5,14 +5,6 @@ const filters = require('./../filters.js')()
 const _ = require('lodash')
 const trainingRoutes = require('./../data/training-route-data').trainingRoutes
 
-const programmeDetailsDefaults = {
-  qualifications: [
-    "QTS"
-  ],
-  summary: "QTS",
-  duration: 1
-}
-
 
 // Return first part of url to use in redirects
 exports.getRecordPath = req => {
@@ -136,42 +128,63 @@ exports.updateRecord = (data, newRecord, timelineMessage) => {
 
 // Advance a record to 'QTS recommended' status
 exports.registerForTRN = (record) => {
+
+  // We get this if it's a publish route - otherwise hardcode it
+  // Todo: in the future we could derive this from the route
+  const programmeDetailsDefaults = {
+    qualifications: [
+      "QTS"
+    ],
+    summary: "QTS",
+    duration: 1
+  }
+
   if (!record) return false
+
+  // Only draft records can be submitted for TRN
   if (record.status != 'Draft'){
-    console.log(`Register for TRN failed: ${record.id} has the wrong status (${record.status})`)
+    console.log(`Register for TRN failed: ${record.id} (${record?.personalDetails?.shortName}) has the wrong status (${record.status})`)
+    return false
+  }
+
+  // Hopefully we won't be supplied any records in the wrong status
+  // Just in case though...
+  else if (!exports.recordIsComplete(record)){
+    console.log(`Register for TRN failed: ${record.id} (${record?.personalDetails?.shortName}) is not complete`)
     return false
   }
   else {
     record.status = 'Pending TRN'
     record.submittedDate = new Date()
-    record.programmeDetails = {
-        ...programmeDetailsDefaults,
-        ...record.programmeDetails
-      }
     record.updatedDate = new Date()
+    record.programmeDetails = {
+      ...programmeDetailsDefaults,
+      ...record.programmeDetails
+    }
     exports.addEvent(record, "Trainee submitted for TRN")
   }
   return true
-  // utils.updateRecord(data, record, "QTS awarded") // doesn't seem to be needed?
 }
 
 // Advance a record to 'QTS recommended' status
 exports.recommendForQTS = (record, params) => {
+
   if (!record) return false
-  if (record.status != 'TRN received'){
-    console.log(`Recommend for QTS failed: ${record.id} has the wrong status (${record.status})`)
+  if (record.status == 'QTS recommended'){
+    // Nothing to do
+  }
+  else if (record.status != 'TRN received'){
+    console.log(`Recommend for QTS failed: ${record.id} (${record?.personalDetails?.shortName}) has the wrong status (${record.status})`)
     return false
   }
   else {
     record.status = 'QTS recommended'
-    record.qtsRecommendedDate = params?.date || new Date()
-    // Implicitly passed
-    _.set(record, 'qtsDetails.qtsDetails.standardsAssessedOutcome', "Passed")
+    _.set(record, 'qtsDetails.standardsAssessedOutcome', "Passed")
+    record.qtsRecommendedDate = record?.qtsDetails?.qtsOutcomeRecordedDate || params?.date || new Date()
     record.updatedDate = new Date()
     exports.addEvent(record, "Trainee recommended for QTS")
   }
   return true
-  // utils.updateRecord(data, record, "QTS awarded") // doesn't seem to be needed?
 }
 
 exports.doBulkAction = (action, record, params) => {
@@ -211,16 +224,18 @@ exports.render = (path, res, next, ...args) => {
   })
 }
 
+// Filter down a set of records for those that match provided filter object
 exports.filterRecords = (records, data, filters = {}) => {
 
   let filteredRecords = records
-  console.log(`Initial record count ${records.length}`)
 
   // Only show records for training routes that are enabled
   let enabledTrainingRoutes = data.settings.enabledTrainingRoutes
 
-  filteredRecords = filteredRecords.filter(record => enabledTrainingRoutes.includes(record.route) || (record.route == undefined))
+  // Only show records for currently enabled routes or draft records
+  filteredRecords = filteredRecords.filter(record => enabledTrainingRoutes.includes(record.route) || (record?.status === 'Draft'))
 
+  // Cycle not implimented yet
   // if (filter.cycle){
   //   filteredRecords = filteredRecords.filter(record => filter.cycle.includes(record.cycle))
   // }
@@ -236,8 +251,6 @@ exports.filterRecords = (records, data, filters = {}) => {
   if (filters.subject && filters.subject != "All subjects"){
     filteredRecords = filteredRecords.filter(record => record?.programmeDetails?.subject == filters.subject)
   }
-
-  console.log(`Final record count ${filteredRecords.length}`)
 
   return filteredRecords
 }

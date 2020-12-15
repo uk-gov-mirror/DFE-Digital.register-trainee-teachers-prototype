@@ -1,17 +1,19 @@
 {% set selectedTrainees = data.records | getRecordsById(data.bulk.selectedTrainees) | sortRecordsByLastName %}
-{% set traineeList %}
-  <ul class="govuk-list govuk-list--bullet">
-    {# {% for traineeId in data.bulk.selectedTrainees %}
-      <li>{{data.records | getRecordById(traineeId) | log}}</li>
-    {% endfor %} #}
-    {% for trainee in selectedTrainees %}
-      <li>{{trainee.personalDetails.fullName}}</li>
-    {% endfor %}
-  </ul>
-{% endset %}
 
-{# {{ data.records | getRecordById(traineeId) }}
-{{ traineeId | lookUpRecord(data.records) }} #}
+{% set traineeList %}
+  {% if selectedTrainees | length < 2 %}
+    {% for trainee in selectedTrainees %}
+      {{trainee.personalDetails.fullName}}
+    {% endfor %}
+  {% else %}
+    <ul class="govuk-list govuk-list--bullet">
+      {% for trainee in selectedTrainees %}
+        <li>{{trainee.personalDetails.fullName}}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  
+{% endset %}
 
 {% set rows = [
   {
@@ -33,7 +35,7 @@
   } if not data.bulk.directAction,
   {
     key: {
-      text: "Trainees"
+      text: "Trainee" | pluralise(selectedTrainees | length)
     },
     value: {
       text: traineeList | safe or 'Not provided'
@@ -73,11 +75,8 @@
   }) }}
 {% endset %}
 
-
-
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    titleText: "Outcome details",
-    html: summaryListHtml
-  }) }}
-  
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  titleText: "Outcome details",
+  html: summaryListHtml
+}) }}

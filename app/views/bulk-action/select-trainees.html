@@ -1,9 +1,23 @@
 {% extends "_templates/_form.html" %}
 
-{% set pageHeading = "Select the trainees to submit for QTS" %}
+{% set pageHeading = "Select trainees" + ((" to " + data.bulk.action | startLowerCase ) if data.bulk.action) %}
+
+{% if filteredRecords | length == 0 %}
+  {% set pageHeading = "No records found" %}
+{% endif %}
+
+{# {% if data.bulk.action == 'Recommend for QTS' %}
+  {% set pageHeading = "Select trainees to submit for QTS" if filteredRecords | length > 0 else "No records found" %}
+{% else %}
+  {% set pageHeading = "Select trainees to submit for QTS" if filteredRecords | length > 0 else "No records found" %}
+{% endif %} #}
+
+
 {% set navActive = 'bulk' %}
 
 {% set formAction = "./select-trainees-answer" | addReferrer(referrer) %}
+
+ {% set hideReturnLink = true if filteredRecords | length == 0 %}
 
 {% block formContent %}
 
