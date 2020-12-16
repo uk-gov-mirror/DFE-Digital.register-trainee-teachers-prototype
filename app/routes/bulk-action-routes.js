@@ -29,8 +29,28 @@ module.exports = router => {
     res.redirect(`/bulk-action`)
   })
 
+  // Bypass action page 
+  router.get('/bulk-action/new/register-for-trn', (req, res) => {
+    const data = req.session.data
+    // Overwrites existing bulk object
+    data.bulk = {
+      action: "Register for TRN",
+    }
+    res.redirect(`/bulk-action/filter-trainees`)
+  })
+
+  // Bypass action page
+  router.get('/bulk-action/new/recommend-for-qts', (req, res) => {
+    const data = req.session.data
+    // Overwrites existing bulk object
+    data.bulk = {
+      action: "Recommend for QTS",
+    }
+    res.redirect(`/bulk-action/filter-trainees`)
+  })
+
   // TODO: this should be a POST
-  router.get('/bulk-action/recommend-for-qts', (req, res) => {
+  router.get('/bulk-action/example', (req, res) => {
     const data = req.session.data
 
     // Grab list of trainees and delete everything else

@@ -1,14 +1,20 @@
 {% set selectedTrainees = data.records | getRecordsById(data.bulk.selectedTrainees) | sortRecordsByLastName %}
 
 {% set traineeList %}
-  {% if selectedTrainees | length < 2 %}
+
+  {% if selectedTrainees | length == 1 %}
+
     {% for trainee in selectedTrainees %}
-      {{trainee.personalDetails.fullName}}
+      {{trainee.personalDetails.fullName}}<br>
+      <span class="govuk-hint">{{trainee.programmeDetails.subject}}, {{trainee.route | lower}}</span>
     {% endfor %}
+
   {% else %}
     <ul class="govuk-list govuk-list--bullet">
       {% for trainee in selectedTrainees %}
-        <li>{{trainee.personalDetails.fullName}}</li>
+        <li>{{trainee.personalDetails.fullName}}<br>
+          <span class="govuk-hint">{{trainee.programmeDetails.subject}}, {{trainee.route | lower}}</span>
+        </li>
       {% endfor %}
     </ul>
   {% endif %}
@@ -40,7 +46,7 @@
         }
       ]
     } if canAmend
-  } if not data.bulk.directAction,
+  } if not data.bulk.directAction and false,
   {
     key: {
       text: "Filters"
@@ -57,7 +63,7 @@
         }
       ]
     } if canAmend
-  } if not data.bulk.directAction and not data.bulk.filters,
+  } if not data.bulk.directAction and false,
   {
     key: {
       text: "Trainee selected" if (selectedTrainees | length == 1) else "Trainees selected"
@@ -102,6 +108,6 @@
 
 {{ appSummaryCard({
   classes: "govuk-!-margin-bottom-6",
-  titleText: "Bulk action",
+  titleText: data.bulk.action,
   html: summaryListHtml
 }) }}

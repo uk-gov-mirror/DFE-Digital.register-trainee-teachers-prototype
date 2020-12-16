@@ -14,26 +14,29 @@
   <span class="govuk-caption-l">{{data.bulk.action}}</span>
   <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
-  {# {{ govukInsetText({
-    text: "These trainees must all have met the standards for QTS"
-  }) }} #}
   {% include "_includes/summary-cards/bulk-details.html" %}
 
   {% set traineeCount = data.bulk.selectedTrainees | length %}
-  
-{#   {% set traineeText %}
-    {{traineeCount}} {{ 'trainee'}}
-  {% endset %}
-  
-  {% set traineeText = traineeCount + " " + "" %}
- #}
+
   {% set submitButtonText %}
-    {% if data.bulk.action == 'Register for TRN' %}
-      Register {{traineeCount}} draft {{'record' | pluralise(traineeCount)}} for TRN
-    {% elseif data.bulk.action == 'Recommend for QTS' %}
-      Recommend {{traineeCount}} {{'trainee' | pluralise(traineeCount)}} for QTS
+
+    {# Singular #}
+    {% if traineeCount == 1 %}
+      {% if data.bulk.action == 'Register for TRN' %}
+        Register this trainee for TRN
+      {% elseif data.bulk.action == 'Recommend for QTS' %}
+        Recommend this trainee for QTS
+      {% endif %}
+
+    {# Plural #}
+    {% else %}
+      {% if data.bulk.action == 'Register for TRN' %}
+        Register {{traineeCount}} trainees for TRN
+      {% elseif data.bulk.action == 'Recommend for QTS' %}
+        Recommend {{traineeCount}} trainees for QTS
+      {% endif %}
     {% endif %}
-    
+
   {% endset %}
 
   {{ govukButton({
