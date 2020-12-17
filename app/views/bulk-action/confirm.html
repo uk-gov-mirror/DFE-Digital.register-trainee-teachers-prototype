@@ -23,15 +23,15 @@
     {# Singular #}
     {% if traineeCount == 1 %}
       {% if data.bulk.action == 'Submit a group of records and request TRNs' %}
-        Register this trainee for TRN
+        Submit record and request TRN
       {% elseif data.bulk.action == 'Recommend a group of trainees for QTS' %}
-        Recommend this trainee for QTS
+        Recommend trainee for QTS
       {% endif %}
 
     {# Plural #}
     {% else %}
       {% if data.bulk.action == 'Submit a group of records and request TRNs' %}
-        Register {{traineeCount}} trainees for TRN
+        Submit {{traineeCount}} records and request TRNs
       {% elseif data.bulk.action == 'Recommend a group of trainees for QTS' %}
         Recommend {{traineeCount}} trainees for QTS
       {% endif %}
