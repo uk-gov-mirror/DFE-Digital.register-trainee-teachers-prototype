@@ -22,17 +22,17 @@
 
     {# Singular #}
     {% if traineeCount == 1 %}
-      {% if data.bulk.action == 'Register for TRN' %}
+      {% if data.bulk.action == 'Submit a group of records and request TRNs' %}
         Register this trainee for TRN
-      {% elseif data.bulk.action == 'Recommend for QTS' %}
+      {% elseif data.bulk.action == 'Recommend a group of trainees for QTS' %}
         Recommend this trainee for QTS
       {% endif %}
 
     {# Plural #}
     {% else %}
-      {% if data.bulk.action == 'Register for TRN' %}
+      {% if data.bulk.action == 'Submit a group of records and request TRNs' %}
         Register {{traineeCount}} trainees for TRN
-      {% elseif data.bulk.action == 'Recommend for QTS' %}
+      {% elseif data.bulk.action == 'Recommend a group of trainees for QTS' %}
         Recommend {{traineeCount}} trainees for QTS
       {% endif %}
     {% endif %}
@@ -44,4 +44,3 @@
   }) }}
 
 {% endblock %}
-

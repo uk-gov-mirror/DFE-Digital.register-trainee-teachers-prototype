@@ -32,7 +32,7 @@ exports.getReferrer = referrer => {
   if (referrer && referrer != 'undefined'){
     return `?referrer=${referrer}`
   }
-  else return '' 
+  else return ''
 }
 
 // Stolen from manage
@@ -75,10 +75,10 @@ exports.recordIsComplete = record => {
 exports.updateRecord = (data, newRecord, timelineMessage) => {
 
   if (!newRecord) return false
-  
+
   let records = data.records
   newRecord.updatedDate = new Date()
-  
+
   if (timelineMessage !== false){
     let message = (timelineMessage) ? timelineMessage : "Record updated"
     exports.addEvent(newRecord, message)
@@ -143,14 +143,14 @@ exports.registerForTRN = (record) => {
 
   // Only draft records can be submitted for TRN
   if (record.status != 'Draft'){
-    console.log(`Register for TRN failed: ${record.id} (${record?.personalDetails?.shortName}) has the wrong status (${record.status})`)
+    console.log(`Submit a group of records and request TRNs failed: ${record.id} (${record?.personalDetails?.shortName}) has the wrong status (${record.status})`)
     return false
   }
 
   // Hopefully we won't be supplied any records in the wrong status
   // Just in case though...
   else if (!exports.recordIsComplete(record)){
-    console.log(`Register for TRN failed: ${record.id} (${record?.personalDetails?.shortName}) is not complete`)
+    console.log(`Submit a group of records and request TRNs failed: ${record.id} (${record?.personalDetails?.shortName}) is not complete`)
     return false
   }
   else {
@@ -174,7 +174,7 @@ exports.recommendForQTS = (record, params) => {
     // Nothing to do
   }
   else if (record.status != 'TRN received'){
-    console.log(`Recommend for QTS failed: ${record.id} (${record?.personalDetails?.shortName}) has the wrong status (${record.status})`)
+    console.log(`Recommend a group of trainees for QTS failed: ${record.id} (${record?.personalDetails?.shortName}) has the wrong status (${record.status})`)
     return false
   }
   else {
@@ -188,10 +188,10 @@ exports.recommendForQTS = (record, params) => {
 }
 
 exports.doBulkAction = (action, record, params) => {
-  if (action == 'Register for TRN'){
+  if (action == 'Submit a group of records and request TRNs'){
     return exports.registerForTRN(record)
   }
-  if (action == 'Recommend for QTS'){
+  if (action == 'Recommend a group of trainees for QTS'){
     return exports.recommendForQTS(record, params)
   }
 }

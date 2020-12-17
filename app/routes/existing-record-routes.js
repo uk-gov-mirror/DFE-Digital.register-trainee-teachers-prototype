@@ -65,7 +65,7 @@ module.exports = router => {
     }
     else {
       if (newRecord.status == 'QTS recommended' || newRecord.status == 'TRN received'){
-        utils.recommendForQTS(newRecord) // Recommend for qts first so data is correct
+        utils.recommendForQTS(newRecord) // Recommend a group of trainees for QTS first so data is correct
         utils.deleteTempData(data)
         newRecord.status = 'QTS awarded' // QTS awarded
         utils.updateRecord(data, newRecord, "QTS awarded")

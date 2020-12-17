@@ -29,12 +29,12 @@ module.exports = router => {
     res.redirect(`/bulk-action`)
   })
 
-  // Bypass action page 
+  // Bypass action page
   router.get('/bulk-action/new/register-for-trn', (req, res) => {
     const data = req.session.data
     // Overwrites existing bulk object
     data.bulk = {
-      action: "Register for TRN",
+      action: "Submit a group of records and request TRNs",
     }
     res.redirect(`/bulk-action/filter-trainees`)
   })
@@ -44,7 +44,7 @@ module.exports = router => {
     const data = req.session.data
     // Overwrites existing bulk object
     data.bulk = {
-      action: "Recommend for QTS",
+      action: "Recommend a group of trainees for QTS",
     }
     res.redirect(`/bulk-action/filter-trainees`)
   })
@@ -61,7 +61,7 @@ module.exports = router => {
     data.bulk = {
       filteredTrainees,
       selectedTrainees: filteredTrainees, // preselect all trainees
-      action: "Recommend for QTS",
+      action: "Recommend a group of trainees for QTS",
       directAction: true
     }
     res.redirect(`/bulk-action/date`)
@@ -116,7 +116,7 @@ module.exports = router => {
         filteredRecords = utils.filterRecords(allRecords, data, bulk.filters)
 
         // Filter for only draft records that are complete
-        if (bulk.action == 'Register for TRN'){
+        if (bulk.action == 'Submit a group of records and request TRNs'){
           filteredRecords = filteredRecords
             .filter(record => record.status == 'Draft')
             .filter(record => {
@@ -129,7 +129,7 @@ module.exports = router => {
         }
 
         // Filter for only records ready to be recommended for QTS
-        else if (bulk.action == 'Recommend for QTS'){
+        else if (bulk.action == 'Recommend a group of trainees for QTS'){
           filteredRecords = filteredRecords.filter(record => record.status == 'TRN received')
         }
 
@@ -158,7 +158,7 @@ module.exports = router => {
     }
 
     // Date not needed, go to confirm
-    else if (bulk.date || bulk.action != "Recommend for QTS") res.redirect(`/bulk-action/confirm`)
+    else if (bulk.date || bulk.action != "Recommend a group of trainees for QTS") res.redirect(`/bulk-action/confirm`)
 
     // Date answer needed
     else res.redirect(`/bulk-action/date`)
@@ -180,9 +180,9 @@ module.exports = router => {
       }
       if (radioChoice == "Yesterday") {
         bulk.date = filters.toDateArray(moment().subtract(1, "days"))
-      } 
+      }
     }
-    
+
     res.redirect(`/bulk-action/confirm`)
   })
 
@@ -201,7 +201,7 @@ module.exports = router => {
     // Loop through each record
     selectedRecords.forEach(record => {
       let success = utils.doBulkAction(bulk.action, record, {date: bulk?.date})
-      if (success) successCount++ 
+      if (success) successCount++
       else failCount++
     })
 
@@ -210,7 +210,7 @@ module.exports = router => {
     // Clear data for next time
     delete data.bulk
 
-    req.flash('success', `${successCount} ${filters.pluralise('record', successCount)} submitted for QTS`)
+    req.flash('success', `${successCount} ${filters.pluralise('record', successCount)} submitted`)
     res.redirect(`/records/`)
   })
 

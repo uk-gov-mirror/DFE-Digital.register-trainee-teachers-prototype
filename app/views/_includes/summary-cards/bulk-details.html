@@ -18,7 +18,7 @@
       {% endfor %}
     </ul>
   {% endif %}
-  
+
 {% endset %}
 
 
@@ -35,7 +35,7 @@
       text: "Action"
     },
     value: {
-      text: data.bulk.action or "Recommend for QTS"
+      text: data.bulk.action or "Recommend a group of trainees for QTS"
     },
     actions: {
       items: [
@@ -97,7 +97,7 @@
         }
       ]
     } if canAmend
-  } if data.bulk.action == 'Recommend for QTS'
+  } if data.bulk.action == 'Recommend a group of trainees for QTS'
   ] %}
 
 {% set summaryListHtml %}
