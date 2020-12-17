@@ -1,6 +1,6 @@
 {% extends "_templates/_record-form.html" %}
 {% set pageHeadingTraineeName = data.record.personalDetails.shortName %}
-{% set pageHeading = "Check outcome details" %}
+{% set pageHeading = "Check QTS details" %}
 {% set gridColumn = 'govuk-grid-column-full' %}
 {% set formAction = "./update" %}
 
@@ -24,7 +24,7 @@
   }) }} #}
 
   {{ govukButton({
-    text: "Recommend for QTS"
+    text: "Recommend trainee for QTS"
   }) }}
 
 {% endblock %}

@@ -8,8 +8,6 @@
 {% set backLink = '/records' %}
 {% set backText = 'All records' %}
 
-
-
 {% block formContent %}
 
 {# For this one page, we no longer have record in session data, so have to look it up #}
@@ -37,6 +35,15 @@
   href: "/new-record/new"
 }) }}
 
-<p class="govuk-body">or <a href="/records" class="govuk-link">check trainee statuses and manage records</a> </p>
+<p class="govuk-body govuk-!-margin-bottom-9">or <a href="/records" class="govuk-link">check trainee statuses and manage records</a></p>
+
+{% set insetTextHtml %}
+  <h2 class="govuk-heading-s">How are you finding this process?</h2>
+  <p class="govuk-body"><a href="#" class="govuk-link">Give feedback to help make the trainee registration process better</a></p>
+{% endset %}
+
+{{ govukInsetText({
+  html: insetTextHtml
+}) }}
 
 {% endblock %}
