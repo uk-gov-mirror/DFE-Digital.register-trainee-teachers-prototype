@@ -4,10 +4,6 @@
 
 {% for trainee in filteredRecords  %}
 
-  {% set checkboxLabelHtml %}
-    {{trainee.personalDetails.fullName}}
-  {% endset %}
-
   {% set traineeHintHtml %}
     <span class="govuk-hint">{{trainee.programmeDetails.subject}}, {{trainee.route | lower}}</span>
     {{govukTag({
@@ -20,7 +16,7 @@
     value: trainee.id,
     _text: trainee.personalDetails.fullName,
     checked: checked(selectedTrainees, trainee.id),
-    html: checkboxLabelHtml,
+    text: trainee.personalDetails.fullName,
     hint: {
       html: traineeHintHtml
     }
@@ -28,46 +24,80 @@
 
 {% endfor %}
 
-
-
-
 {% set draftIncompleteMessage %}
 
+  {% set draftLinkHtml %}
+    <p class="govuk-body govuk-!-margin-bottom-0">
+      <a href="/records" class="govuk-link">Complete the draft to add the trainee {{'trainee' | pluralise(inompleteDraftCount)}} to your list</a>
+    </p>
+    
+  {% endset %}
+
   {% set incompleteDraftTextHtml %}
-    There {{'are' if incompleteDraftCount != 1 else 'is'}} {{incompleteDraftCount}} more draft {{'records' if incompleteDraftCount != 1 else 'record'}} that {{'fit' if incompleteDraftCount != 1 else 'fits'}} your search criteria. Complete the {{'drafts' if incompleteDraftCount != 1 else 'draft'}} to add the {{'trainees' if incompleteDraftCount != 1 else 'trainee'}} to your list.
+    {% if incompleteDraftCount != 1 %}
+      <p class="govuk-body">
+        There are {{incompleteDraftCount}} {{'more ' if filteredRecords | length }}draft records that fit your search criteria. {{ draftLinkHtml | safe }}
+      </p>
+    {% else %}
+      <p class="govuk-body">
+        There is {{incompleteDraftCount}} {{'more ' if filteredRecords | length }}draft record that fits your search criteria. Complete the draft to add the trainee to your list.
+      </p>
+    {% endif %}
   {% endset %}
   {{ govukInsetText({
-    text: incompleteDraftTextHtml
+    html: incompleteDraftTextHtml
   }) }}
 {% endset %}
 
-<h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
 
 
 {% if filteredRecords | length > 0 %}
 
+  {# H1 separate from legend as we have inset text to put in between #}
   {% if data.bulk.action == 'Recommend a group of trainees for QTS' %}
+
+    <h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
     {{ govukInsetText({
       text: "Select trainees that met the QTS standards on the same day. You can submit as many groups as you need."
     }) }}
-  {% endif %}
 
-  {{ govukCheckboxes({
-    fieldset: {
-      legend: {
-        isPageHeading: false,
-        classes: "govuk-fieldset__legend--s"
-      }
-    },
-    hint: {
-      text: ""
-    },
-    items: checkboxItems
-  } | decorateAttributes(data, "data.bulk.selectedTrainees")) }}
+    {{ govukCheckboxes({
+      fieldset: {
+        legend: {
+          text: pageHeading,
+          isPageHeading: false,
+          classes: "govuk-visually-hidden"
+        }
+      },
+      hint: {
+        text: ""
+      },
+      items: checkboxItems
+    } | decorateAttributes(data, "data.bulk.selectedTrainees")) }}
 
-  {% if incompleteDraftCount %}
-    {{ draftIncompleteMessage | safe }}
+  {# No inset text, so legend is the h1 #}
+  {% else %}
+    
+    {{ govukCheckboxes({
+      fieldset: {
+        legend: {
+          text: pageHeading,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: {
+        text: ""
+      },
+      items: checkboxItems
+    } | decorateAttributes(data, "data.bulk.selectedTrainees")) }}
+
+    {% if incompleteDraftCount %}
+      {{ draftIncompleteMessage | safe }}
+    {% endif %}
+
   {% endif %}
 
   {{ govukButton({
@@ -75,6 +105,10 @@
   }) }}
 
 {% else %}
+
+  {% if incompleteDraftCount %}
+    {{ draftIncompleteMessage | safe }}
+  {% endif %}
 
   {{ govukButton({
     text: "Return to records list",
