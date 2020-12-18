@@ -28,7 +28,7 @@
 
   {% set draftLinkHtml %}
     <p class="govuk-body govuk-!-margin-bottom-0">
-      <a href="/records" class="govuk-link">Complete the draft to add the trainee {{'trainee' | pluralise(inompleteDraftCount)}} to your list</a>
+      <a href="/records" class="govuk-link">Complete the {{'draft' | pluralise(incompleteDraftCount)}} to add the {{'trainee' | pluralise(inompleteDraftCount)}} to your list</a>
     </p>
     
   {% endset %}
@@ -105,6 +105,8 @@
   }) }}
 
 {% else %}
+
+  <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
   {% if incompleteDraftCount %}
     {{ draftIncompleteMessage | safe }}
