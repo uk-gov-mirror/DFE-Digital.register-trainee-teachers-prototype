@@ -40,7 +40,7 @@
       </p>
     {% else %}
       <p class="govuk-body">
-        There is {{incompleteDraftCount}} {{'more ' if filteredRecords | length }}draft record that fits your search criteria. Complete the draft to add the trainee to your list.
+        There is {{incompleteDraftCount}} {{'more ' if filteredRecords | length }}draft record that fits your search criteria. {{ draftLinkHtml | safe }}
       </p>
     {% endif %}
   {% endset %}
