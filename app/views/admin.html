@@ -48,6 +48,15 @@
         ]
       } | decorateAttributes(data, "data.settings.includeDeclaration")) }}
 
+      {{ govukCheckboxes({
+        items: [
+          {
+            value: 'true',
+            text: "Show WIP bulk links"
+          }
+        ]
+      } | decorateAttributes(data, "data.settings.showBulkLinks")) }}
+
       {{ govukInput({
         label: {
           text: "Number of publish courses the provider offers",

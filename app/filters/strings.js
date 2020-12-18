@@ -29,6 +29,14 @@ filters.sentenceCase = (input) => {
   else return input
 }
 
+filters.startLowerCase = (input) => {
+  if (!input) return '' // avoid printing false to client
+  if (_.isString(input)){
+    return input.charAt(0).toLowerCase() + input.slice(1);
+  }
+  else return input
+}
+
 // Is it a string or not?
 filters.isString = str => {
   let isString = _.isString(str)

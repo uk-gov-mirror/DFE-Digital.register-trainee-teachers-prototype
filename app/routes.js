@@ -53,5 +53,10 @@ require('./routes/new-record-routes')(router)
 // =============================================================================
 require('./routes/existing-record-routes')(router)
 
+// =============================================================================
+// Bulk actions
+// =============================================================================
+require('./routes/bulk-action-routes')(router)
+
 
 module.exports = router

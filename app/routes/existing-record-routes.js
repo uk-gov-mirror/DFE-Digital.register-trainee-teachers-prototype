@@ -65,11 +65,9 @@ module.exports = router => {
     }
     else {
       if (newRecord.status == 'QTS recommended' || newRecord.status == 'TRN received'){
-        newRecord.status = 'QTS awarded'
-        _.set(newRecord, 'programmeDetails.endDate', (new Date()))
-        _.set(newRecord, 'qtsDetails.qtsDetails.standardsAssessedOutcome', "Passed")
+        utils.recommendForQTS(newRecord) // Recommend a group of trainees for QTS first so data is correct
         utils.deleteTempData(data)
-        utils.addEvent(newRecord, "Trainee recommended for QTS")
+        newRecord.status = 'QTS awarded' // QTS awarded
         utils.updateRecord(data, newRecord, "QTS awarded")
       }
       res.redirect(`/record/${req.params.uuid}`)
@@ -113,10 +111,9 @@ module.exports = router => {
       res.redirect('/record/:uuid')
     }
     else {
-      newRecord.status = 'QTS recommended'
+      utils.recommendForQTS(newRecord)
       utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord, "Trainee recommended for QTS")
-      // req.flash('success', 'Trainee recommended for QTS')
+      utils.updateRecord(data, newRecord, false)
       res.redirect(`/record/${req.params.uuid}/qts/passed/recommended`)
     }
   })
