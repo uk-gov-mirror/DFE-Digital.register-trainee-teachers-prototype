@@ -132,7 +132,8 @@
 
   {% set courseItems = courseItems | push({
     value: 'Other',
-    text: "Another course" if (data.settings.enabledTrainingRoutes | length < 3) else 'A course not on Publish'
+    text: "Another course" if (data.settings.enabledTrainingRoutes | length < 3) else 'A course not on Publish',
+    checked: checked(selectedCourse, "Other")
   }) %}
 
   {# Treat assessment only separately because we want it last #}
