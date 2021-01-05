@@ -8,7 +8,6 @@
 {% set internationalAddress = record.contactDetails.internationalAddress | nl2br %}
 
 {% if record.contactDetails.addressType == "domestic" %}
-{{ukAddress | log}}
   {% set address = ukAddress %}
 {% else %}
   {% set address = internationalAddress %}
