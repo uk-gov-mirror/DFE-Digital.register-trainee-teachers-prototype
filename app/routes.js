@@ -5,6 +5,7 @@ const path = require('path')
 const moment = require('moment')
 const _ = require('lodash')
 const utils = require('./../lib/utils')
+const url = require('url')
 
 // =============================================================================
 // Catch all
@@ -17,7 +18,20 @@ router.all('*', function(req, res, next){
   res.locals.referrer = req.query.referrer
   res.locals.query = req.query
   res.locals.flash = req.flash('success') // pass through 'success' messages only
+  res.locals.currentPageUrl = url.parse(req.url).pathname
   next()
+})
+
+// Delete query string if clearQuery set
+router.get('*', function(req, res, next){
+  let requestedUrl = url.parse(req.url).pathname
+  if (req?.query?.clearQuery){
+    delete req.session.data.clearQuery
+    res.redirect(requestedUrl)
+  }
+  else {
+    next()
+  }
 })
 
 router.post('*', function(req, res, next){
