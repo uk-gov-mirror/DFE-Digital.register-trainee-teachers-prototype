@@ -21,6 +21,38 @@
     ]
   } | decorateAttributes(data, "data.filterCycle"))}}
 
+  {% if data.settings.providerModel == 'blended-model' %}
+    
+    {% set enabledProviders = data.settings.enabledProviders %}
+
+    {# Only show route filter if there's more than 1 route #}
+    {% if enabledProviders | length > 1 %}
+
+      {% set providerItems = [] %}
+      {% for provider in enabledProviders %}
+        {% set providerItems = providerItems | push({
+          text: provider,
+          checked: checked(query.filterEnabledProviders, provider)
+        }) %}
+      {% endfor %}
+      {{ govukCheckboxes({
+        classes: "govuk-checkboxes--small js-auto-submit",
+        fieldset: {
+          legend: {
+            text: "Provider",
+            classes: "govuk-fieldset__legend--s"
+          }
+        },
+        hint: {
+          text: ""
+        },
+        items: providerItems
+      } | decorateAttributes(data, "data.filterEnabledProviders")) }}
+      
+    {% endif %}
+
+  {% endif %}
+
   {% set enabledTrainingRoutes = data.settings.enabledTrainingRoutes %}
 
   {# Only show route filter if there's more than 1 route #}

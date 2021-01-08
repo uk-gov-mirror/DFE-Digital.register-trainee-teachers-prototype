@@ -25,6 +25,8 @@ let allTrainingRoutes       = Object.values(trainingRoutes).map(route => route.n
 
 let courses                 = require('./courses.json')
 
+let providers               = require('./providers.js')
+
 // =============================================================================
 // Settings - things that can be changed from /admin
 // =============================================================================
@@ -33,6 +35,17 @@ let settings = {}
 
 // Currently enabled routes
 settings.enabledTrainingRoutes = Object.values(trainingRoutes).filter(route => route.defaultEnabled == true).map(route => route.name).sort()
+
+// The providers the signed in user belongs to
+settings.enabledProviders = [
+  "East Midlands Teacher Training Partnership",
+  "West Midlands Consortium"
+]
+
+// The currently signed in provider (hat model)
+settings.activeProvider = "West Midlands Consortium"
+
+settings.providerModel = "blended-model"
 
 // Enable timeline on records
 settings.includeTimeline = 'true'
@@ -92,10 +105,11 @@ module.exports = {
   ittSubjects,
   nationalities,
   notPassedReasons,
+  providers,
   records,
   settings,
-  subjects,
   statuses,
+  subjects,
   trainingRoutes,
   ukComparableDegrees,
   withdrawalReasons
