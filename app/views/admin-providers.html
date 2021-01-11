@@ -26,11 +26,17 @@
         items: [
           {
             text: "Hat model",
-            value: "hat-model" 
+            value: "hat-model",
+            hint: {
+              text: 'Trainees from just the current provider are shown'
+            }
           },
           {
             text: "Blended",
-            value: "blended-model"
+            value: "blended-model",
+            hint: {
+              text: 'Trainees from all providers are shown together'
+            }
           }
         ]
       } | decorateAttributes(data, "data.settings.providerModel")) }}
@@ -41,7 +47,7 @@
           classes: "govuk-label--s"
         },
         hint: {
-          text: 'The currently active provider (hat model)'
+          text: 'The currently active provider (hat model). Must match one of the enabled providers below.'
         },
         id: 'active-provider',
         showAllValues: true,
@@ -69,18 +75,26 @@
         {% endif %}
       {% endfor %}
 
-      {{ govukCheckboxes({
-        fieldset: {
-          legend: {
-            text: "Providers the current user belongs to",
-            classes: "govuk-fieldset__legend--s"
-          }
-        },
-        hint: {
-          text: "Providers the current signed in user belongs to"
-        },
-        items: providerItems
-      } | decorateAttributes(data, "data.settings.enabledProviders")) }}
+      {% set providersHtml %}
+        {{ govukCheckboxes({
+          fieldset: {
+            legend: {
+              text: "Providers the current user belongs to",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "Providers the current signed in user belongs to"
+          },
+          items: providerItems
+        } | decorateAttributes(data, "data.settings.enabledProviders")) }}
+      {% endset %}
+
+      {{ govukDetails({
+        summaryText: "Enabled providers",
+        html: trainingLinksHtml
+      }) }}
+
 
       {{ govukButton({
         "text": "Update"
