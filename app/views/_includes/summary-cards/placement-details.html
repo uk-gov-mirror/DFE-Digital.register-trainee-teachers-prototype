@@ -1,0 +1,41 @@
+{% set complete = true if (record.placementDetails | sectionIsCompleted ) %}
+{% set status  = record.placementDetails | getStatusText %}
+
+{% set placements = record.placement.items %}
+{% set sectionIsRequired = record | requiresSection("placementDetails") %}
+
+{# {% if not sectionIsRequired %} #}
+  {# Section not required #}
+{# {% elseif showIncomplete and not complete %} #}
+
+  {# {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "placement-details" %}
+  {% if status == "In progress" %}
+    {% set incompleteText = "Placement details not marked as complete" %}
+    {% set incompleteLink = recordPath + "/placements/confirm" | addReferrer(referrer) %}
+    {% set incompleteLinkText = "Complete section" %}
+  {% else %}
+    {% set incompleteText = "Placement details not started" %}
+    {% set incompleteLink = recordPath + "/placements/add" | addReferrer(referrer) %}
+    {% set incompleteLinkText = "Start section" %}
+  {% endif %}
+
+  {% include "_includes/incomplete.njk" %} #}
+
+{# {% else %} #}
+
+  {# Show a banner on existing records when last degree deleted #}
+  {# TODO: should this reuse the 'incomplete' above?
+  done separately as seed records don't have 'complete' as a concept #}
+  {# {% if degrees | length == 0 %}
+    {% set incompleteText = "Degree details not provided" %}
+    {% set incompleteLink = recordPath + "/degree/add" | addReferrer(referrer) %}
+    {% set incompleteLinkText = "Add degree details" %}
+    {% include "_includes/incomplete.njk" %}
+  {% endif %} #}
+
+  {# {% for placement in placements %} #}
+    {% include "_includes/summary-cards/single-placement-details.html" %}
+  {# {% endfor %} #}
+  
+{# {% endif %} #}

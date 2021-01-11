@@ -1,0 +1,27 @@
+<h1 class="govuk-heading-l">{{pageHeading}}</h1>
+
+{# 
+<p class="govuk-body">You don't need to add placement data to request a TRN.</p> #}
+
+{{ govukInput({
+  label: {
+    text: "Enter the name or URN of the placement location",
+    classes: "govuk-label--s"
+  },
+  hint: {
+    html: "<p class='govuk-hint'>Refer to the <a href='https://www.get-information-schools.service.gov.uk/'>Get information about schools service</a> for assitance.</p> "
+  },
+  classes: "govuk-!-width-two-thirds"
+}| decorateAttributes(record, "record.placementLocation"))}}
+
+{{ govukInput({
+  label: {
+    text: "How many weeks was the trainee placed there?",
+    classes: "govuk-label--s"
+  },
+  classes: "govuk-!-width-one-quarter"
+}| decorateAttributes(record, "record.placementDuration"))}}
+
+{{ govukButton({
+  text: "Continue"
+}) }}

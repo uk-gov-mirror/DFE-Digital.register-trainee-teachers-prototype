@@ -1,0 +1,69 @@
+{% set placementLocationRow = {
+  key: {
+    text: "Location name or URN"
+  },
+  value: {
+    text: record.placementLocation or 'Not provided'
+  },
+  actions: {
+    items: [
+      {
+        href: recordPath + "/placements/" + loop.index0 + "/details" | addReferrer(referrer),
+        text: "Change",
+        visuallyHiddenText: "placement location"
+      }
+    ]
+  } if canAmend
+} %}
+
+{# Is it week or plural, weeks? #}
+{% if record.placementDuration >= 2 %}
+    {% set titleText = ' weeks' %}
+  {% else %}
+    {% set titleText = ' week' %}
+{% endif %}
+
+{% set placementDurationRow = {
+  key: {
+    text: "Duration"
+  },
+  value: {
+    text: record.placementDuration + titleText or 'Not provided'
+  },
+  actions: {
+    items: [
+      {
+        href: recordPath + "/placements/" + loop.index0 + "/details" | addReferrer(referrer),
+        text: "Change",
+        visuallyHiddenText: "placement duration"
+      }
+    ]
+  } if canAmend
+} %}
+
+{% set placementDetailsRows = [
+  placementLocationRow,
+  placementDurationRow
+] %}
+
+{% set placementDetailsHtml %}
+  {{ govukSummaryList({
+    rows: placementDetailsRows
+  }) }}
+{% endset %}
+
+{# TODO count up placement number in the title text #}
+{% set placementLocationTitletext = 'Placement # details' %}
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  titleText: placementLocationTitletext,
+  actions: {
+    items: [{
+      href: recordPath + "/placements/" + loop.index0 + "/delete" | addReferrer(referrer),
+      text: "Delete placement"
+    }]
+  } if canAmend,
+  html: placementDetailsHtml
+}) }}
+
