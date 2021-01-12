@@ -31,6 +31,8 @@ const trainingRoutes = Object.keys(trainingRouteData.trainingRoutes)
 const enabledTrainingRoutes = trainingRouteData.enabledTrainingRoutes
 const generateProgrammeDetails = require('../app/data/generators/course-details')
 
+const generatePlacement = require('../app/data/generators/placement')
+
 const getRandomEnabledRoute = () => {
   return faker.helpers.randomize(enabledTrainingRoutes)
 }
@@ -162,6 +164,9 @@ const generateFakeApplication = (params = {}) => {
     })
   }
   
+  // Placements
+  let placement = (params.placement === null) ? undefined : { ...generatePlacement(), ...params.placement }
+
   return {
     id: params.id || faker.random.uuid(),
     route,
@@ -179,6 +184,7 @@ const generateFakeApplication = (params = {}) => {
     programmeDetails,
     gcse,
     degree,
+    placement,
     events
   }
 }

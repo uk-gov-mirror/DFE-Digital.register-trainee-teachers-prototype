@@ -1,7 +1,15 @@
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
-{# 
-<p class="govuk-body">You don't need to add placement data to request a TRN.</p> #}
+{% set placementCount = record.placement.items | length %}
+
+{# Placement data is stored in a temp location before being merged back to array #}
+
+{# Get placement (if it exists) from existing data #}
+{% set placement = record.placement.items | getRecordById(placementUuid) %}
+{# Merge with temp store #}
+{% set placementTemp = placement | mergeObjects(data.placementTemp) %}
+
+<p class="govuk-body">You will need to confirm these details before recommending them for QTS.</p>
 
 {{ govukInput({
   label: {
@@ -9,10 +17,10 @@
     classes: "govuk-label--s"
   },
   hint: {
-    html: "<p class='govuk-hint'>Refer to the <a href='https://www.get-information-schools.service.gov.uk/'>Get information about schools service</a> for assitance.</p> "
+    html: "<p class='govuk-hint'>Names and URNs can be found on the <a href='https://www.get-information-schools.service.gov.uk/'>Get information about schools service</a>.</p> "
   },
   classes: "govuk-!-width-two-thirds"
-}| decorateAttributes(record, "record.placementLocation"))}}
+}| decorateAttributes(placementTemp, "placementTemp.location"))}}
 
 {{ govukInput({
   label: {
@@ -20,7 +28,7 @@
     classes: "govuk-label--s"
   },
   classes: "govuk-!-width-one-quarter"
-}| decorateAttributes(record, "record.placementDuration"))}}
+}| decorateAttributes(placementTemp, "placementTemp.duration"))}}
 
 {{ govukButton({
   text: "Continue"

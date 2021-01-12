@@ -369,104 +369,78 @@ module.exports = router => {
   
   // Add a placement - sends you to index one greater than current number of placements
   router.get(['/:recordtype/:uuid/placements/add','/:recordtype/placements/add'], function (req, res) {
-    const data = req.session.data
-    let placements = _.get(data, "record.placement.items")
-    // console.log('degrees is', degrees)
-    let placementCount = (placements) ? placements.length : 0
-    // console.log('degree count', degreeCount)
     let recordPath = utils.getRecordPath(req)
     let referrer = utils.getReferrer(req.query.referrer)
-    res.redirect(`${recordPath}/placements/${placementCount}/add${referrer}`)
-  })
-
-  // Forward placement requests to the right template, including the index
-  router.get(['/:recordtype/:uuid/placements/:index/:page','/:recordtype/placements/:index/:page'], function (req, res) {
-    let recordPath = utils.getRecordPath(req)
-    let referrer = utils.getReferrer(req.query.referrer)
-
-    res.render(`${req.params.recordtype}/placements/${req.params.page}`, {itemIndex: req.params.index})
-  })
-
-  // Save placement data from temporary store
-  router.post(['/:recordtype/:uuid/placements/:index/confirm','/:recordtype/placements/:index/confirm'], function (req, res) {
-    const data = req.session.data
-    let newPlacement = data.placementTemp
-    delete data.placementTemp
-    let referrer = utils.getReferrer(req.query.referrer)
-
-    // Save the correct type
-    // if (newDegree.isInternational == "true" && newDegree.typeInt){
-    //   newDegree.type = newDegree.typeInt
-    //   delete newDegree.typeUK
-    //   delete newDegree.typeInt
-    // }
-    // if (newDegree.isInternational == "false" && newDegree.typeUK){
-    //   newDegree.type = newDegree.typeUK
-    //   delete newDegree.typeUK
-    //   delete newDegree.typeInt
-    // }
-
-    // Combine radio and text inputs
-    // if (newDegree.baseGrade){
-    //   if (newDegree.baseGrade == "Grade known"){
-    //     newDegree.grade = newDegree.otherGrade
-    //     delete newDegree.baseGrade
-    //     delete newDegree.otherGrade
-    //   }
-    //   else {
-    //     newDegree.grade = newDegree.baseGrade
-    //     delete newDegree.baseGrade
-    //     delete newDegree.otherGrade
-    //   }
-    // }
-
-    // let existingPlacements = _.get(data, "record.placement.items")
-    let placementIndex = req.params.index
-    let recordPath = utils.getRecordPath(req)
-
-    // if (existingPlacements && existingPlacements[placementIndex]) {
-    //   // Might be a partial update, so merge the new with the old
-    //   existing[placementIndex] = Object.assign({}, existing[placementIndex], newPlacement)
-    // }
-    // else {
-    //   existing = (!existing) ? [] : existing
-    //   existing.push(newPlacement)
-    // }
-
-    // _.set(data, 'record.placement.items', existing)
-
-    res.redirect(`${recordPath}/placements/confirm${referrer}`)
+    let placementUuid = faker.random.uuid()
+    res.redirect(`${recordPath}/placements/${placementUuid}/details${referrer}`)
   })
 
   // Delete placement at index
-  // router.get(['/:recordtype/:uuid/degree/:index/delete','/:recordtype/degree/:index/delete'], function (req, res) {
-  //   const data = req.session.data
-  //   let recordPath = utils.getRecordPath(req)
-  //   degreeIndex = req.params.index
-  //   let referrer = utils.getReferrer(req.query.referrer)
+  router.get(['/:recordtype/:uuid/placements/:placementUuid/delete','/:recordtype/placements/:placementUuid/delete'], function (req, res) {
+    const data = req.session.data
+    let recordPath = utils.getRecordPath(req)
+    let placementUuid = req.params.placementUuid
+    let referrer = utils.getReferrer(req.query.referrer)
+    let placements = data.record?.placement?.items || []
+    let placementIndex = placements.findIndex(placement => placement.id == placementUuid)
+    
+    if (_.get(data, "record.placement.items[" + placementIndex + "]")){
+      _.pullAt(data.record.placement.items, [placementIndex]) //delete item at index
+      // Clear data if there are no more degrees - so the task list thinks the section is not started
+      req.flash('success', 'Trainee placement deleted')
+      // Delete degree section if it’s empty
+      if (data.record.placement.items.length == 0){
+        delete data.record.placement
+      }
+    }
+    if (referrer){
+      if (req.params.recordtype == 'record'){
+        // This updates the record immediately without a confirmation.
+        // Probably needs a bespoke confirmation page as the empty placement
+        // confirmation page looks weird - and we probably don't want
+        // records without a placement anyway.
+        utils.updateRecord(data, data.record)
+      }
+      res.redirect(req.query.referrer)
+    }
+    else {
+      res.redirect(`${recordPath}/placements/confirm${referrer}`)
+    }
+  })
 
-  //   if (_.get(data, "record.degree.items[" + degreeIndex + "]")){
-  //     _.pullAt(data.record.degree.items, [degreeIndex]) //delete item at index
-  //     // Clear data if there are no more degrees - so the task list thinks the section is not started
-  //     req.flash('success', 'Trainee degree deleted')
-  //     // Delete degree section if it’s empty
-  //     if (data.record.degree.items.length == 0){
-  //       delete data.record.degree
-  //     }
-  //   }
-  //   if (referrer){
-  //     if (req.params.recordtype == 'record'){
-  //       // This updates the record immediately without a confirmation.
-  //       // Probably needs a bespoke confirmation page as the empty degree
-  //       // confirmation page looks weird - and we probably don't want
-  //       // records without a dregree anyway.
-  //       utils.updateRecord(data, data.record)
-  //     }
-  //     res.redirect(req.query.referrer)
-  //   }
-  //   else {
-  //     res.redirect(`${recordPath}/degree/confirm${referrer}`)
-  //   }
-  // })
+  // Forward placement requests to the right template, including the index
+  router.get(['/:recordtype/:uuid/placements/:placementUuid/:page','/:recordtype/placements/:placementUuid/:page'], function (req, res) {
+    let recordPath = utils.getRecordPath(req)
+    let referrer = utils.getReferrer(req.query.referrer)
+
+    res.render(`${req.params.recordtype}/placements/${req.params.page}`, {placementUuid: req.params.placementUuid})
+  })
+
+  // Save placement data from temporary store
+  router.post(['/:recordtype/:uuid/placements/:placementUuid/confirm','/:recordtype/placements/:placementUuid/confirm'], function (req, res) {
+    const data = req.session.data
+    let placement = data.placementTemp
+    delete data.placementTemp
+    let referrer = utils.getReferrer(req.query.referrer)
+    
+    let placementUuid = req.params.placementUuid
+    let existingPlacements = data.record?.placement?.items || []
+    let placementIndex = existingPlacements.findIndex(placement => placement.id == placementUuid)
+    let recordPath = utils.getRecordPath(req)
+
+    if (existingPlacements.length && existingPlacements[placementIndex]) {
+      // let newPlacement = existingPlacements.find(placement => placement.id = placementUuid)
+      // Might be a partial update, so merge the new with the old
+      existingPlacements[placementIndex] = Object.assign({}, existingPlacements[placementIndex], placement)
+    }
+    else {
+      placement.id = placementUuid
+      existingPlacements.push(placement)
+    }
+
+    _.set(data, 'record.placement.items', existingPlacements)
+
+    res.redirect(`${recordPath}/placements/confirm${referrer}`)
+  })
 
 }
