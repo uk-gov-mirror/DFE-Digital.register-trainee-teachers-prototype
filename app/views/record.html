@@ -12,6 +12,7 @@
 {% set canAmend = record.status | getAmendsAllowed %}
 
 {% set hasCommencementDate = record.trainingDetails.traineeStarted | falsify %}
+{% set placementCount = record.placement.items | length %}
 
 {% set recordPath = "/record/" + record.id %}
 
@@ -66,7 +67,7 @@
     {% include "_includes/summary-cards/student-record.html" %}
     {# <h2 class="govuk-heading-m">Programme details</h2> #}
     {% include "_includes/summary-cards/programme-details.html" %}
-    
+    {# <h2 class="govuk-heading-m">Placement details</h2> #}
     {% include "_includes/summary-cards/placements/placement-details.html" %}
 
   </div>

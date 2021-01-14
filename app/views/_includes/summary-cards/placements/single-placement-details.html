@@ -1,6 +1,7 @@
 {% set placementLocationRow = {
   key: {
-    text: "Location name or URN"
+    text: "Location",
+    _text: "Location name or URN"
   },
   value: {
     text: placement.location or 'Not provided'
@@ -16,7 +17,30 @@
   } if canAmend
 } %}
 
-{% set placementLabel  %}
+{% set placementStartMonth  %}
+  {{ placement.startMonth | prettyMonth }}
+{% endset %}
+
+{% set placementStartMonthRow = {
+  key: {
+    text: "Start month",
+    _text: "Location name or URN"
+  },
+  value: {
+    text: placementStartMonth or 'Not provided'
+  },
+  actions: {
+    items: [
+      {
+        href: recordPath + "/placements/" + placement.id + "/details" | addReferrer(referrer),
+        text: "Change",
+        visuallyHiddenText: "placement start month"
+      }
+    ]
+  } if canAmend
+} %}
+
+{% set placementDurationLabel  %}
   {{placement.duration}} {{ 'week' | pluralise (placement.duration | int) }}
 {% endset %}
 
@@ -25,7 +49,7 @@
     text: "Duration"
   },
   value: {
-    text: placementLabel or 'Not provided'
+    text: placementDurationLabel or 'Not provided'
   },
   actions: {
     items: [
@@ -40,6 +64,7 @@
 
 {% set placementDetailsRows = [
   placementLocationRow,
+  placementStartMonthRow,
   placementDurationRow
 ] %}
 

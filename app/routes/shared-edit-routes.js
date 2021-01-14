@@ -429,7 +429,6 @@ module.exports = router => {
     let recordPath = utils.getRecordPath(req)
 
     if (existingPlacements.length && existingPlacements[placementIndex]) {
-      // let newPlacement = existingPlacements.find(placement => placement.id = placementUuid)
       // Might be a partial update, so merge the new with the old
       existingPlacements[placementIndex] = Object.assign({}, existingPlacements[placementIndex], placement)
     }
@@ -437,7 +436,7 @@ module.exports = router => {
       placement.id = placementUuid
       existingPlacements.push(placement)
     }
-
+    
     _.set(data, 'record.placement.items', existingPlacements)
 
     res.redirect(`${recordPath}/placements/confirm${referrer}`)

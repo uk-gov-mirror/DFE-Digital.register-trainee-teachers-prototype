@@ -8,8 +8,8 @@
 {% set placement = record.placement.items | getRecordById(placementUuid) %}
 {# Merge with temp store #}
 {% set placementTemp = placement | mergeObjects(data.placementTemp) %}
-
-<p class="govuk-body">You will need to confirm these details before recommending them for QTS.</p>
+{# 
+<p class="govuk-body">You will need to confirm these details before recommending them for QTS.</p> #}
 
 {{ govukInput({
   label: {
@@ -21,6 +21,67 @@
   },
   classes: "govuk-!-width-two-thirds"
 }| decorateAttributes(placementTemp, "placementTemp.location"))}}
+
+{# TODO - add start month here #}
+
+{{ govukRadios({
+  fieldset: {
+    legend: {
+      text: "What month did this placement start?",
+      classes: "govuk-label--s"
+    }
+  },
+  items: [
+    {
+      value: "1",
+      text: "January"
+    },
+    {
+      value: "2",
+      text: "February"
+    },
+    {
+      value: "3",
+      text: "March"
+    },
+    {
+      value: "4",
+      text: 'April'
+    },
+    {
+      value: "5",
+      text: "May"
+    },
+    {
+      value: "6",
+      text: "June"
+    },
+    {
+      value: "7",
+      text: "July"
+    },
+    {
+      value: "8",
+      text: "August"
+    },
+    {
+      value: "9",
+      text: "September"
+    },
+    {
+      value: "10",
+      text: "October"
+    },
+    {
+      value: "11",
+      text: "November"
+    },
+    {
+      value: "12",
+      text: "December"
+    }
+  ]
+} | decorateAttributes(placementTemp, "placementTemp.startMonth"))}}
 
 {{ govukInput({
   label: {

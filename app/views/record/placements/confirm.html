@@ -17,8 +17,8 @@
   {% include "_includes/summary-cards/placements/placement-details.html" %}
 
   {# Don't show checkbox if there are no placements #}
-  {# {% if placementCount > 0 %} #}
-    {# {{ govukCheckboxes({
+  {% if placementCount > 0 %}
+    {{ govukCheckboxes({
       idPrefix: "placement-section-complete",
       name: "record[placement][status]",
       items: [
@@ -28,8 +28,8 @@
           checked: checked(record.placement.status, "Completed")
         }
       ]
-      }) }} #}
-  {# {% endif %} #}
+      }) }}
+  {% endif %}
 
   {{ govukButton({
     text: "Continue"
