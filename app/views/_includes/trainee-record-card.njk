@@ -42,7 +42,8 @@
     {% endif %}
     {% if data.settings.providerModel == 'blended-model' and data.settings.enabledProviders | length > 1 %}
       <p class="govuk-caption-m govuk-!-font-size-16 app-application-card__id govuk-!-margin-bottom-0 govuk-!-margin-top-2">
-        {{data.settings.activeProvider}}
+        {# {{data.settings.activeProvider}} #}
+        {{ record.provider }}
       </p>
     {% endif %}
   </div>

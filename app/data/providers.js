@@ -1,4 +1,4 @@
-module.exports = [
+const allProviders = [
   "2Schools Consortium",
   "AA Teamworks West Yorkshire SCITT",
   "Alban Federation",
@@ -295,3 +295,21 @@ module.exports = [
   "Yorkshire and Humber Teacher Training",
   "Yorkshire Wolds Teacher Training"
 ]
+
+const permProviders = [
+  "East Midlands Teacher Training Partnership",
+  "West Midlands Consortium"
+]
+
+// Returns a smaller set of providers as the real set is too big
+const getProviders = () => {
+  // One in 10 providers
+  let reducedProviders = allProviders.filter((provider, index) => { 
+    return (index % 10 === 0)
+  })
+  
+  reducedProviders = reducedProviders.concat(permProviders).sort()
+  return [...reducedProviders] // Uniq
+}
+
+module.exports = getProviders()
