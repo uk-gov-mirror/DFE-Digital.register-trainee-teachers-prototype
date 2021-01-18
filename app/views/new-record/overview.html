@@ -103,14 +103,23 @@
       classes: record.trainingDetails | getStatusText | getStatusClass,
       text: record.trainingDetails | getStatusText
     }
-  } if record | requiresSection("trainingDetails")
+  } if record | requiresSection("trainingDetails"),
+  {
+    text: "Placement details",
+    href: "placements/confirm" if (record.placement.items | length) else "placements/check",
+    id: "placement-details",
+    tag: {
+      classes: record.placementDetails | getStatusText | getStatusClass,
+      text: record.placementDetails | getStatusText
+    }
+  } 
   ]
 }) if not closed }}
-
-<h2 class="govuk-heading-m">Optional details</h2>
-
 {# TODO: add if record | requiresSection("placementDetails") #}
-{{ appTaskList({
+
+{# <h2 class="govuk-heading-m">Optional details</h2> #}
+
+{# {{ appTaskList({
   classes: "govuk-!-margin-bottom-8",
   items: [{
     text: "Placement details",
@@ -122,7 +131,7 @@
     }
   }
   ]
-}) if not closed }}
+}) if not closed }} #}
 
 <h2 class="govuk-heading-m">Review and submit</h2>
 
