@@ -63,6 +63,40 @@
       </span>
     {% endif %}
   </div>
+
+  <div class="govuk-error-summary govuk-error-summary--advisory" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+    <h2 class="govuk-error-summary__title" id="error-summary-title">
+      You need to provide more details before recording an outcome
+    </h2>
+    <div class="govuk-error-summary__body">
+      <ul class="govuk-list govuk-error-summary__list">
+        <li>
+          <a herf="">Confirm placement details are complete</a>
+        </li>      
+        <li>
+          <a herf="">Provide a start date</a>
+        </li>      
+      </ul>
+    </div>
+  </div>
+
+  {# {% set html %}
+    <p class="govuk-notification-banner__heading">
+      <ul class="govuk-list govuk-error-summary__list">
+        <li>
+          <a herf="">Confirm placement details are complete</a>
+        </li>      
+        <li>
+          <a herf="">Provide a start date</a>
+        </li>      
+      </ul>
+    </p>
+  {% endset %}
+
+  {{ govukNotificationBanner({
+    html: html,
+    titleText: 'Before you can record this trainees outcome'
+  }) }} #}
     
   {# Hide the record actions ui if it's empty #}
   {% if (record.status | getCanDefer) or (record.status | getCanReinstate) %}
@@ -75,13 +109,8 @@
             classes: "govuk-!-margin-bottom-0"
           }) }}
         {% else %}
-        {# {{ govukWarningText({
-            html: "You need to provide <a href=''>placement details</a> for this trainee",
-            iconFallbackText: "Warning",
-            classes: "govuk-!-margin-0"
-          }) }} #}
           {{ govukInsetText({
-            html: "You need to provide a <a href=''>start date</a> and <a href=''>placement details</a> for this trainee",
+            html: "This record is missing details",
             classes: "govuk-!-margin-0"
           }) }}
         {% endif %}

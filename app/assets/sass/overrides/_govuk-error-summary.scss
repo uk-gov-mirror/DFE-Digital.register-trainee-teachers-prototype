@@ -3,3 +3,30 @@
   font-weight: 700;
 }
 
+// The blue 'advisory' version
+.govuk-error-summary--advisory {
+  border-color: $govuk-brand-colour;
+}
+
+// TODO  why do I have to define these? Feel like some basic css is missing from our app 
+.govuk-notification-banner .govuk-error-summary__list a,
+.govuk-error-summary--advisory .govuk-error-summary__list a {
+  @include govuk-link-style-no-visited-state;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.govuk-notification-banner .govuk-error-summary__list a:hover,
+.govuk-error-summary--advisory .govuk-error-summary__list a:hover {
+  color: $govuk-brand-colour;
+}
+
+.govuk-notification-banner .govuk-error-summary__list,
+.govuk-notification-banner .govuk-error-summary__list a:link, 
+.govuk-notification-banner .govuk-error-summary__list a:visited,
+.govuk-error-summary--advisory .govuk-error-summary__list,
+.govuk-error-summary--advisory .govuk-error-summary__list a:link, 
+.govuk-error-summary--advisory .govuk-error-summary__list a:visited {
+  color: $govuk-brand-colour;
+}
+
