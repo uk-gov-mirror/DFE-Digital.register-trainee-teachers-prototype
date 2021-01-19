@@ -199,7 +199,7 @@ exports.getTimeline = (record) => {
 }
 
 // Update or create a record
-// Todo: this function is overcomplicated. Make simpler
+// Todo: this function is overcomplicated. Make simpler!
 exports.updateRecord = (data, newRecord, timelineMessage) => {
 
   if (!newRecord) return false
@@ -241,6 +241,17 @@ exports.updateRecord = (data, newRecord, timelineMessage) => {
       },
       enumerable: true
     })
+  }
+
+  if (!newRecord.provider){
+    if (data.signedInProviders.length == 1) { // Hat model or blended but one provider only
+      newRecord.provider = data.signedInProviders[0] // Implicitly a 1 item array
+    }
+    else {
+      // Something has gone wrong - if there are multiple providers we should force
+      // collection of one
+      console.log(`Error in updateRecord: no provider set for record ${newRecord?.id || ""}`)
+    }
   }
 
   if (!newRecord.id){
