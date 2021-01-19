@@ -2,12 +2,17 @@
 {% extends "_templates/_page.html" %}
 {% set backLink = '/home' %}
 
+{% if query.initialProvider %}
+  {% set hidePrimaryNav = true %}
+{% endif %}
+
 {% set pageHeading = 'Choose provider' %}
 
 {% set navActive = 'provider' %}
 
 {% block pageNavigation %}
-  {% if backLink %}
+
+  {% if backLink and not query.initialProvider %}
     {{ govukBackLink({
       text: backText,
       href: backLink
