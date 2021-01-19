@@ -27,6 +27,8 @@ let courses                 = require('./courses.json')
 
 let providers               = require('./providers.js')
 
+let currentYear             = 2020
+
 // =============================================================================
 // Settings - things that can be changed from /admin
 // =============================================================================
@@ -36,16 +38,18 @@ let settings = {}
 // Currently enabled routes
 settings.enabledTrainingRoutes = Object.values(trainingRoutes).filter(route => route.defaultEnabled == true).map(route => route.name).sort()
 
-// The providers the signed in user belongs to
-settings.enabledProviders = [
+// One of `blended-model` or `hat-model`
+settings.providerModel = "blended-model"
+
+// The providers the signed-in user belongs to
+settings.userProviders = [
   "East Midlands Teacher Training Partnership",
   "West Midlands Consortium"
 ]
 
-// The currently signed in provider (hat model)
-settings.activeProvider = "West Midlands Consortium"
-
-settings.providerModel = "blended-model"
+// The ‘active’ provider for the current user if using hat model
+// Must be one of the ones in settings.userProviders
+settings.userActiveProvider = "West Midlands Consortium"
 
 // Enable timeline on records
 settings.includeTimeline = 'true'
@@ -99,6 +103,7 @@ module.exports = {
   awards,
   countries,
   courses,
+  currentYear,
   degreeOrganisations,
   degreeTypes,
   ethnicities,

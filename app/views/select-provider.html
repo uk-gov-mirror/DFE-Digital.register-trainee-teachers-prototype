@@ -24,10 +24,10 @@
         <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
         <ul class="govuk-list">
-          {% for provider in data.settings.enabledProviders %}
+          {% for provider in data.settings.userProviders %}
             <li>
               {# TODO: make real stles for this element #}
-              <a href="/home?settings[activeProvider]={{provider}}&clearQuery=true" class="govuk-heading-m govuk-link govuk-link--no-visited-state">{{provider}}</a>
+              <a href="/home?settings[userActiveProvider]={{provider}}&clearQuery=true" class="govuk-heading-m govuk-link govuk-link--no-visited-state">{{provider}}</a>
             </li>
           {% endfor %}
         </ul>

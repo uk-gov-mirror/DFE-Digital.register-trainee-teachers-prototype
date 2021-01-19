@@ -106,19 +106,52 @@ exports.recordIsComplete = record => {
   return recordIsComplete
 }
 
-// Look up a record using it's UUID
+// Look up a record using it’s UUID
 exports.getRecordById = (records, id) => {
-  let index = records.findIndex(record => record.id == id)
-  return records[index]
+  return records.find(record => record.id == id)
+}
+
+// Utility function to filter by a key
+// Basically identical to the ‘where’ filter
+exports.filterRecordsBy = (records, key, array) => {
+  array = [].concat(array) // force to array
+  let filtered = records.filter(record => {
+    return array.includes(record[key])
+  })
+  return filtered
 }
 
 // Look up several records using UUID
 exports.getRecordsById = (records, array) => {
-  array = [].concat(array) // force to array
-  let filtered = records.filter(record => {
-    return array.includes(record.id)
-  })
-  return filtered
+  return exports.filterRecordsBy(records, 'id', array)
+}
+
+// Filter records for particular providers
+exports.filterByProvider = (records, array) => {
+  return exports.filterRecordsBy(records, 'provider', array)
+}
+
+// Filter records for currently signed in providers
+// Can’t be an arrow function because we need access to the context
+exports.filterBySignedIn = function(records, data=false){
+  // Needs session data to know which providers are signed-in
+  // This can either be passed in directly, or if being run via a
+  // filter then we can grab from the context
+  data = data || this?.ctx?.data || false
+  if (!data) {
+    console.log('Error with filterBySignedIn: session data not provided')
+    return []
+  }
+  if (!Array.isArray(data.signedInProviders) || data.signedInProviders.length < 1){
+    console.log('Error with filterBySignedIn: user doesn’t appear to be signed in to any providers')
+    return []
+  }
+  return exports.filterByProvider(records, data.signedInProviders)
+}
+
+// Only records from a specific academic year or years
+exports.filterByYear = (records, array) => {
+  return exports.filterRecordsBy(records, 'academicYear', array)
 }
 
 // Sort by last name or draft record
@@ -298,6 +331,9 @@ exports.recommendForQTS = (record, params) => {
 exports.filterRecords = (records, data, filters = {}) => {
 
   let filteredRecords = records
+
+  // Only allow records for the signed-in providers
+  filteredRecords = exports.filterBySignedIn(filteredRecords, data)
 
   // Only show records for training routes that are enabled
   let enabledTrainingRoutes = data.settings.enabledTrainingRoutes

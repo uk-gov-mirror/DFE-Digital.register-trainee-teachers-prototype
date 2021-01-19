@@ -4,7 +4,6 @@
 {% set backLink = '/records' %}
 {% set backText = 'All records' %}
 {% set pageHeading = 'Provider settings' %}
-{# {% set pageAction = value %} #}
 
 {% block content %}
 {{super()}}
@@ -43,32 +42,32 @@
 
       {{ appAutocomplete({
         label: {
-          text: "Active provider",
+          text: "Active provider (hat model only)",
           classes: "govuk-label--s"
         },
         hint: {
-          text: 'The currently active provider (hat model). Must match one of the enabled providers below.'
+          text: 'The currently active provider. Must match one of the enabled providers below.'
         },
         id: 'active-provider',
         showAllValues: true,
-        name: "settings[activeProvider]",
-        items: data.settings.enabledProviders,
+        name: "settings[userActiveProvider]",
+        items: data.settings.userProviders,
         classes: "app-!-autocomplete--max-width-two-thirds",
-        value: data.settings.activeProvider
+        value: data.settings.userActiveProvider
         }
       ) }}
 
 
       {% set providerItems = [] %}
       {# Sort selected to the front #}
-      {% for provider in data.settings.enabledProviders %}
+      {% for provider in data.settings.userProviders %}
         {% set providerItems = providerItems | push({
           text: provider
         }) %}
       {% endfor %}
 
       {% for provider in data.providers %}
-        {% if not data.settings.enabledProviders.includes(provider)  %}
+        {% if not data.settings.userProviders.includes(provider)  %}
           {% set providerItems = providerItems | push({
             text: provider
           }) %}
@@ -87,12 +86,12 @@
             text: "Providers the current signed in user belongs to"
           },
           items: providerItems
-        } | decorateAttributes(data, "data.settings.enabledProviders")) }}
+        } | decorateAttributes(data, "data.settings.userProviders")) }}
       {% endset %}
 
       {{ govukDetails({
         summaryText: "Enabled providers",
-        html: trainingLinksHtml
+        html: providersHtml
       }) }}
 
 
