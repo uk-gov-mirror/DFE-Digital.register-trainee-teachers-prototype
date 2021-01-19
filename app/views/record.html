@@ -21,12 +21,13 @@
   <div class="govuk-grid-column-full">
 
     {{referrer | log}}
+    {{record | log}}
 
-    {# <h2 class="govuk-heading-m">Trainee record</h2> #}
+    <h2 class="govuk-heading-s">Trainee progress</h2>
     {% include "_includes/summary-cards/student-record.html" %}
-    {# <h2 class="govuk-heading-m">Programme details</h2> #}
+    <h2 class="govuk-heading-s">Programme details</h2>
     {% include "_includes/summary-cards/programme-details.html" %}
-    {# <h2 class="govuk-heading-m">Placement details</h2> #}
+    <h2 class="govuk-heading-s">Placement details</h2>
     {% include "_includes/summary-cards/placements/placement-details.html" %}
 
   </div>

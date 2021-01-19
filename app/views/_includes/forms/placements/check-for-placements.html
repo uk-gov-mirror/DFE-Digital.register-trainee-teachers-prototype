@@ -1,0 +1,41 @@
+{# <p class="govuk-body">You can also add placeemnt detials after requesting a TRN for this tranee.</p> #}
+
+{% set customPlacementsNotRequiredReason %}
+  {{ govukInput({
+    label: {
+        text: "Enter the reason why",
+        classes: "govuk-label govuk-label--s"
+    },
+    classes: "govuk-!-width-two-thirds"
+  } | decorateAttributes(record, "record.placementsNotRequiredReason")) }}
+{% endset %}
+
+{{ govukRadios({
+  fieldset: {
+    legend: {
+      text: pageHeading,
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--l"
+    }
+  },
+  items: [
+    {
+      text: "Yes"
+    },
+    {
+      value: "No",
+      text: "Not yet, I will add placement details later"
+    },
+    {
+      value: "Not required",
+      text: "Placements are not required for this trainee",
+      conditional: {
+        html: customPlacementsNotRequiredReason
+      }
+    }
+  ]
+} | decorateAttributes(record, "record.placement.hasPlacements"))}}
+
+{{ govukButton({
+  text: "Continue"
+}) }}

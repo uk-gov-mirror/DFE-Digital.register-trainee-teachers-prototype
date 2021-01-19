@@ -11,6 +11,7 @@
 
 {% block formContent %}
   <h1 class="govuk-heading-l">{{pageHeading}}</h1>
+  {{record | log}}
 
   {% set placementCount = record.placement.items | length %}
 

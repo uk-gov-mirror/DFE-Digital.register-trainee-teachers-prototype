@@ -5,11 +5,18 @@
 {# Placement data is stored in a temp location before being merged back to array #}
 
 {# Get placement (if it exists) from existing data #}
-{% set placement = record.placement.items | getRecordById(placementUuid) %}
+
+{% set placement = {} %}
+
+{% if record.placement.items %}
+  {% set placement = record.placement.items | getRecordById(placementUuid) %}
+{% endif %}
+
 {# Merge with temp store #}
 {% set placementTemp = placement | mergeObjects(data.placementTemp) %}
 {# 
 <p class="govuk-body">You will need to confirm these details before recommending them for QTS.</p> #}
+{{record | log}}
 
 {{ govukInput({
   label: {
@@ -77,6 +84,13 @@
     {
       value: "12",
       text: "December"
+    },
+    {
+      divider: "or"
+    },
+    {
+      value: "Not provided",
+      text: "Not known"
     }
   ]
 } | decorateAttributes(placementTemp, "placementTemp.startMonth"))}}

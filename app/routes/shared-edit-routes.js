@@ -366,14 +366,59 @@ module.exports = router => {
   // =============================================================================
   // Placements
   // =============================================================================
+
+  // Check for placements - sends them onwards or back to the overview
+  router.post(['/:recordtype/placements/check-placement-answer','/:recordtype/placements/check-placement-answer'], function (req, res) {
+    const data = req.session.data
+    
+    let recordPath = utils.getRecordPath(req)
+    let referrer = utils.getReferrer(req.query.referrer)
+    let record = data.record // copy record
+
+    if (!record?.placement?.hasPlacements) {
+      res.redirect(`${recordPath}/placements/check-for-placements${referrer}`)
+    }
+
+    // Do they have placement detials yet?
+    else if (record.placement.hasPlacements == 'Yes'){
+      // carry on and add one
+      res.redirect(`${recordPath}/placements/add${referrer}`)
+    }
+    else if (record.placement.hasPlacements == 'Not required'){
+      // Send them to a confirm page but with a different summary card
+      res.redirect(`${recordPath}/placements/confirm${referrer}`)
+      // mark the Placements section as complete
+      _.set(record,'placement.status',"Completed")
+    }
+    else if (record.placement.hasPlacements == 'No'){
+      // mark the Placements section as complete
+      _.set(record,'placement.status',"Completed")
+      // send them back to the overview
+      if (referrer){
+        res.redirect(req.query.referrer)
+      }
+      else {
+        res.redirect(recordPath)
+      }
+    }
+
+    else {
+      res.redirect(`${recordPath}/placements/check-for-placements${referrer}`)
+    }
+    
+  })
   
   // Add a placement - sends you to index one greater than current number of placements
   router.get(['/:recordtype/:uuid/placements/add','/:recordtype/placements/add'], function (req, res) {
+    const data = req.session.data
     let recordPath = utils.getRecordPath(req)
     let referrer = utils.getReferrer(req.query.referrer)
     let placementUuid = faker.random.uuid()
+    
+    delete data.placementTemp
+    
     res.redirect(`${recordPath}/placements/${placementUuid}/details${referrer}`)
-  })
+  }) 
 
   // Delete placement at index
   router.get(['/:recordtype/:uuid/placements/:placementUuid/delete','/:recordtype/placements/:placementUuid/delete'], function (req, res) {

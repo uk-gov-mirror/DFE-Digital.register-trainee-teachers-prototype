@@ -1,0 +1,9 @@
+{% extends "_templates/_new-record.html" %}
+
+{% set pageHeading = "Do you know of any placement details for this trainee?" %}
+
+{% set formAction = "./../overview" | addReferrer(referrer) %}
+
+{% block formContent %}
+  {% include "_includes/forms/placements/check-for-placements.html" %}
+{% endblock %}
