@@ -398,7 +398,7 @@ module.exports = router => {
         res.redirect(req.query.referrer)
       }
       else {
-        res.redirect(recordPath)
+        res.redirect(`${recordPath}/overview`)
       }
     }
 
@@ -481,6 +481,9 @@ module.exports = router => {
       placement.id = placementUuid
       existingPlacements.push(placement)
     }
+
+    delete data.record.placement.hasPlacements
+    delete data.record.placement.placementsNotRequiredReason
     
     _.set(data, 'record.placement.items', existingPlacements)
 

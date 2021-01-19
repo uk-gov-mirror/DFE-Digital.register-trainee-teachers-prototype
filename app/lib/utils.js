@@ -143,6 +143,7 @@ exports.addEvent = (record, content) => {
 // Delete temporary stores of data
 exports.deleteTempData = (data) => {
   delete data.degreeTemp
+  delete data.placementTemp
   delete data.record
 }
 
@@ -260,6 +261,7 @@ exports.registerForTRN = (record) => {
   }
   else {
     record.status = 'Pending TRN'
+    delete record.placement.status
     record.submittedDate = new Date()
     record.updatedDate = new Date()
     record.programmeDetails = {

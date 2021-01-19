@@ -19,8 +19,6 @@
 <span class="govuk-caption-l">{{'Draft record' + draftRecordName}}</span>
 <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{pageHeading}}</h1>
 
-{{record | log}}
-
 <h2 class="govuk-heading-m">Personal details and education</h2>
 {{ appTaskList({
   classes: "govuk-!-margin-bottom-8",
@@ -106,16 +104,15 @@
   } if record | requiresSection("trainingDetails"),
   {
     text: "Placement details",
-    href: "placements/confirm" if (record.placement.items | length) else "placements/check-for-placements",
+    href: "placements/confirm" if (record.placement) else "placements/check-for-placements",
     id: "placement-details",
     tag: {
       classes: record.placement | getStatusText | getStatusClass,
       text: record.placement | getStatusText
     }
-  } 
+  } if record | requiresSection("placement") 
   ]
 }) if not closed }}
-{# TODO: add if record | requiresSection("placementDetails") #}
 
 <h2 class="govuk-heading-m">Review and submit</h2>
 

@@ -1,14 +1,14 @@
-{% set complete = true if (record.placementDetails | sectionIsCompleted ) %}
-{% set status  = record.placementDetails | getStatusText %}
+{% set complete = true if (record.placement | sectionIsCompleted ) %}
+{% set status  = record.placement | getStatusText %}
 
 {% set placements = record.placement.items %}
-{% set sectionIsRequired = record | requiresSection("placementDetails") %}
+{% set sectionIsRequired = record | requiresSection("placement") %}
 
-{# {% if not sectionIsRequired %} #}
+{% if not sectionIsRequired %}
   {# Section not required #}
-{# {% elseif showIncomplete and not complete %} #}
+{% elseif showIncomplete and not complete %}
 
-  {# {% set incompleteType = "warning" if errorList %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "placement-details" %}
   {% if status == "In progress" %}
     {% set incompleteText = "Placement details not marked as complete" %}
@@ -16,27 +16,33 @@
     {% set incompleteLinkText = "Complete section" %}
   {% else %}
     {% set incompleteText = "Placement details not started" %}
-    {% set incompleteLink = recordPath + "/placements/add" | addReferrer(referrer) %}
+    {% set incompleteLink = recordPath + "/placements/check-for-placements" | addReferrer(referrer) %}
     {% set incompleteLinkText = "Start section" %}
   {% endif %}
 
-  {% include "_includes/incomplete.njk" %} #}
+  {% include "_includes/incomplete.njk" %}
 
-{# {% else %} #}
+{% else %}
 
   {# Show a banner on existing records when last degree deleted #}
   {# TODO: should this reuse the 'incomplete' above?
   done separately as seed records don't have 'complete' as a concept #}
-  {# {% if degrees | length == 0 %}
-    {% set incompleteText = "Degree details not provided" %}
-    {% set incompleteLink = recordPath + "/degree/add" | addReferrer(referrer) %}
-    {% set incompleteLinkText = "Add degree details" %}
+  {# {% if placements | length == 0 %}
+    {% set incompleteText = "Placement details not provided" %}
+    {% set incompleteLink = recordPath + "/placements/add" | addReferrer(referrer) %}
+    {% set incompleteLinkText = "Add placement details" %}
     {% include "_includes/incomplete.njk" %}
-  {% endif %} #}
+  {% endif %}
+ #}
+  {% if record.placement.hasPlacements == "No" %}
+    <h2 class="govuk-heading-m">No placements</h2>
+    {# {% include "_includes/summary-cards/placements/single-placement-details.html" %} #}
+  {% endif %}
 
   {% for placement in placements %}
     {% include "_includes/summary-cards/placements/single-placement-details.html" %}
   {% endfor %}
+
 
   {# {% if placementCount > 0 %} #}
 
@@ -48,4 +54,4 @@
     }) }}
   </div>
   
-{# {% endif %} #}
+{% endif %}
