@@ -341,10 +341,13 @@ exports.filterRecords = (records, data, filters = {}) => {
   // Only show records for currently enabled routes or draft records
   filteredRecords = filteredRecords.filter(record => enabledTrainingRoutes.includes(record.route) || (record?.status === 'Draft'))
 
-  // Cycle not implimented yet
+  // Cycle not implimented yet§
   // if (filter.cycle){
   //   filteredRecords = filteredRecords.filter(record => filter.cycle.includes(record.cycle))
   // }
+  if (filters.providers){
+    filteredRecords = filteredRecords.filter(record => filters.providers.includes(record.provider))
+  }
 
   if (filters.trainingRoutes){
     filteredRecords = filteredRecords.filter(record => filters.trainingRoutes.includes(record.route))
