@@ -1,0 +1,38 @@
+{# TODO - consider rewording this one #}
+
+{% set placementsNotyetKnownRow = {
+  key: {
+    text: "Are placement details known?"
+  },
+  value: {
+    text: record.placement.hasPlacements or 'Not provided'
+  },
+  actions: {
+    items: [
+      {
+        href: recordPath + "/placements/check-for-placements" | addReferrer(referrer),
+        text: "Change",
+        visuallyHiddenText: "placement details"
+      }
+    ]
+  } if canAmend
+} %}
+
+{% set placementDetailsRows = [
+  placementsNotyetKnownRow
+] %}
+
+{% set placementDetailsHtml %}
+  {{ govukSummaryList({
+    rows: placementDetailsRows
+  }) }}
+{% endset %}
+
+{{referrer | log}}
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  titleText: 'Placement details',
+  html: placementDetailsHtml
+}) }}
+

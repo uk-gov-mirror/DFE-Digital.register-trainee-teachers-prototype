@@ -1,0 +1,36 @@
+{% set placementsNotRequiredReasonRow = {
+  key: {
+    text: "Reason placements are not required"
+  },
+  value: {
+    text: record.placement.placementsNotRequiredReason or 'Not provided'
+  },
+  actions: {
+    items: [
+      {
+        href: recordPath + "/placements/check-for-placements" | addReferrer(referrer),
+        text: "Change",
+        visuallyHiddenText: "reason why placements are not required"
+      }
+    ]
+  } if canAmend
+} %}
+
+{% set placementDetailsRows = [
+  placementsNotRequiredReasonRow
+] %}
+
+{% set placementDetailsHtml %}
+  {{ govukSummaryList({
+    rows: placementDetailsRows
+  }) }}
+{% endset %}
+
+{{referrer | log}}
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  titleText: 'Placement details',
+  html: placementDetailsHtml
+}) }}
+

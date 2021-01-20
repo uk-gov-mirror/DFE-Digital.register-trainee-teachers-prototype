@@ -34,9 +34,12 @@
     {% include "_includes/incomplete.njk" %}
   {% endif %}
  #}
+  {% if record.placement.hasPlacements == "Not required" %}
+    {% include "_includes/summary-cards/placements/placement-details-not-required.html" %}
+  {% endif %}
+  
   {% if record.placement.hasPlacements == "No" %}
-    <h2 class="govuk-heading-m">No placements</h2>
-    {# {% include "_includes/summary-cards/placements/single-placement-details.html" %} #}
+    {% include "_includes/summary-cards/placements/placement-details-not-yet-known.html" %}
   {% endif %}
 
   {% for placement in placements %}
