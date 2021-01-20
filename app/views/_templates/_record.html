@@ -45,6 +45,7 @@
 
 {# Used by summary cards #}
 {% set recordPath = "/record/" + record.id %}
+{% set referrer = recordPath %}
 
 {% block content %}
 
@@ -64,7 +65,7 @@
     {% endif %}
   </div>
 
-  <div class="govuk-error-summary govuk-error-summary--advisory" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+  {# <div class="govuk-error-summary govuk-error-summary--advisory" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
     <h2 class="govuk-error-summary__title" id="error-summary-title">
       You need to provide more details before recording an outcome
     </h2>
@@ -78,72 +79,77 @@
         </li>      
       </ul>
     </div>
-  </div>
+  </div> #}
 
-  {# {% set html %}
-    <p class="govuk-notification-banner__heading">
-      <ul class="govuk-list govuk-error-summary__list">
-        <li>
-          <a herf="">Confirm placement details are complete</a>
-        </li>      
-        <li>
-          <a herf="">Provide a start date</a>
-        </li>      
-      </ul>
-    </p>
-  {% endset %}
+  {% set placementCount = record.placement.items | length %}
+  {% set hasCommencementDate = record.trainingDetails.traineeStarted | falsify %}
 
-  {{ govukNotificationBanner({
-    html: html,
-    titleText: 'Before you can record this trainees outcome'
-  }) }} #}
-    
-  {# Hide the record actions ui if it's empty #}
-  {% if (record.status | getCanDefer) or (record.status | getCanReinstate) %}
-    <div class="record-actions">
-      {% if record.status | getCanRecommendForQts %}
-        {% if hasCommencementDate %}
-          {{ govukButton({
-            text: "Recommend trainee for QTS",
-            href: referrer + '/qts/outcome-date',
-            classes: "govuk-!-margin-bottom-0"
-          }) }}
-        {% else %}
-          {{ govukInsetText({
-            html: "This record is missing details",
-            classes: "govuk-!-margin-0"
-          }) }}
-        {% endif %}
-      {% elseif record.status == "Pending TRN" %}
-        {{ govukInsetText({
-          text: "This record is pending a TRN",
-          classes: "govuk-!-margin-0"
-        }) }}
-      {% elseif record.status == "Deferred" %}
-        {{ govukInsetText({
-          text: "This record is deferred",
-          classes: "govuk-!-margin-0"
-        }) }}
-      {% endif %}
+  {# if there are placements #}
+  {% if placementCount == 0 %}
+    {{ govukErrorSummary({
+      titleText: "You need to provide more details before recording an outcome",
+      classes: "govuk-error-summary--advisory",
+      errorList: [
+      {
+          text: "Add placement details",
+          href: recordPath + 'placements/check-for-placements'
+        }
+      ]
+    }) }}
+  {# if there are placements #}
+  {% elseif placementCount > 0 %}
+    {{ govukErrorSummary({
+      titleText: "You need to provide more details before recording an outcome",
+      classes: "govuk-error-summary--advisory",
+      errorList: [
+        {
+          text: "Confirm placement details are complete",
+          href: "/placements/confirm"
+        }
+      ]
+    }) }}
 
-      <div class="record-actions__links">
-        {% if record.status | getCanDefer %}
-          <p class="govuk-body govuk-!-margin-bottom-0"><a href="{{referrer}}/defer" class="govuk-link--no-visited-state">Defer</a> or <a href="{{referrer}}/withdraw" class="govuk-link--no-visited-state">withdraw</a> this trainee</p>
-        {% elseif record.status | getCanReinstate %}
-          <p class="govuk-body govuk-!-margin-bottom-0"><a href="{{referrer}}/reinstate" class="govuk-link--no-visited-state">Reinstate</a> or <a href="{{referrer}}/withdraw" class="govuk-link--no-visited-state">withdraw</a> this trainee</p>
-        {% endif %}
-      </div>
-    </div>
+  {# if there are placements and the trainee hasnt started #}
+  {% elseif placementCount > 0 and not hasCommencementDate %}
+    {{ govukErrorSummary({
+      titleText: "You need to provide more details before recording an outcome",
+      classes: "govuk-error-summary--advisory",
+      errorList: [
+        {
+          text: "Confirm placement details are complete",
+          href: "recordPath + 'placements/confirm' | addReferrer(referrer)"
+        },
+        {
+          text: "Provide a start date",
+          href: "recordPath + '/trainee-start-date' | addReferrer(referrer)"
+        }
+      ]
+    }) }}
 
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+  {# if there are no placements and the trainee hasnt started #}
+  {% elseif placementCount == 0 and traineeStarted == "false" %}
+    {{ govukErrorSummary({
+      titleText: "You need to provide more details before recording an outcome",
+      classes: "govuk-error-summary--advisory",
+      errorList: [
+        {
+          text: "Add placement details",
+          href: "recordPath + 'placements/check-for-placements' | addReferrer(referrer)"
+        },
+        {
+          text: "Provide a start date",
+          href: "recordPath + '/trainee-start-date' | addReferrer(referrer)"
+        }
+      ]
+    }) }}
   {% endif %}
 
   {% include "_includes/record-sub-nav.njk" %}
 
   {% block tabContent %}
-    
+  
   {% endblock %}
-
+    
 {% endblock %}
 
 
