@@ -6,6 +6,23 @@
 {% set studentRecordRows = [
   {
     key: {
+      text: "Provider"
+    },
+    value: {
+      text: record.provider or "Not provided"
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/pick-provider" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "provider"
+        }
+      ]
+    } if canAmend and false
+  } if data.settings.userProviders | length > 1,
+  {
+    key: {
       text: "Trainee ID"
     },
     value: {

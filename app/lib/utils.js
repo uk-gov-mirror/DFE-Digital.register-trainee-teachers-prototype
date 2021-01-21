@@ -243,21 +243,20 @@ exports.updateRecord = (data, newRecord, timelineMessage) => {
     })
   }
 
+  // All records should have a provider by this point
   if (!newRecord.provider){
-    if (data.signedInProviders.length == 1) { // Hat model or blended but one provider only
+    console.log(`Error in updateRecord - record has no provider`)
+    if (data.signedInProviders.length == 1) { // One provider only
       newRecord.provider = data.signedInProviders[0] // Implicitly a 1 item array
-    }
-    else {
-      // Something has gone wrong - if there are multiple providers we should force
-      // collection of one
-      console.log(`Error in updateRecord: no provider set for record ${newRecord?.id || ""}`)
     }
   }
 
+  // Must be a new record
   if (!newRecord.id){
     newRecord.id = faker.random.uuid()
     records.push(newRecord)
   }
+  // Is an existing record
   else {
     let recordIndex = records.findIndex(record => record.id == newRecord.id)
     records[recordIndex] = newRecord
