@@ -10,16 +10,8 @@
   <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
   {% set degreeCount = record.degree.items | length %}
-
-  {% include "_includes/summary-cards/degree-details.html" %}
-
-  <div class="govuk-form-group">
-    {{ govukButton({
-      "text": "Add another degree" if degreeCount > 0 else "Add a degree",
-      href: "./add",
-      classes: "govuk-button--secondary"
-    }) }}
-  </div>
+  
+  {% include "_includes/summary-cards/degree/details.html" %}
 
   {# Don't show checkbox if there are no degrees #}
   {% if degreeCount > 0 %}

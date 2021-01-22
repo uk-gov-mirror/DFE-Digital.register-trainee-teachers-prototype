@@ -270,9 +270,7 @@ module.exports = router => {
   router.get(['/:recordtype/:uuid/degree/add','/:recordtype/degree/add'], function (req, res) {
     const data = req.session.data
     let degrees = _.get(data, "record.degree.items")
-    console.log('degrees is', degrees)
     let degreeCount = (degrees) ? degrees.length : 0
-    console.log('degree count', degreeCount)
     let recordPath = utils.getRecordPath(req)
     let referrer = utils.getReferrer(req.query.referrer)
     res.redirect(`${recordPath}/degree/${degreeCount}/type${referrer}`)
@@ -350,22 +348,29 @@ module.exports = router => {
       }
     }
 
-    let existingDegrees = _.get(data, "record.degree.items")
+    newDegree.id = faker.random.uuid()
+
+    let existingDegrees = _.get(data, "record.degree.items") || []
     let degreeIndex = req.params.index
     let recordPath = utils.getRecordPath(req)
 
-    if (existingDegrees && existingDegrees[degreeIndex]) {
+    if (existingDegrees[degreeIndex]) {
       // Might be a partial update, so merge the new with the old
       existingDegrees[degreeIndex] = Object.assign({}, existingDegrees[degreeIndex], newDegree)
     }
     else {
-      existingDegrees = (!existingDegrees) ? [] : existingDegrees
       existingDegrees.push(newDegree)
     }
 
     _.set(data, 'record.degree.items', existingDegrees)
 
-    res.redirect(`${recordPath}/degree/confirm${referrer}`)
+    if (existingDegrees?.length > 1){
+      res.redirect(`${recordPath}/degree/bursary-selection${referrer}`)
+    }
+    else {
+      res.redirect(`${recordPath}/degree/confirm${referrer}`)
+    }
+
   })
 
 }
