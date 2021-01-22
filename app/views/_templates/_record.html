@@ -84,65 +84,27 @@
   {% set placementCount = record.placement.items | length %}
   {% set hasCommencementDate = record.trainingDetails.traineeStarted | falsify %}
 
-  {# if there are placements #}
-  {% if placementCount == 0 %}
-    {{ govukErrorSummary({
-      titleText: "You need to provide more details before recording an outcome",
-      classes: "govuk-error-summary--advisory",
-      errorList: [
-      {
-          text: "Add placement details",
-          href: recordPath + 'placements/check-for-placements'
-        }
-      ]
-    }) }}
-  {# if there are placements #}
-  {% elseif placementCount > 0 %}
+  {# {% if record | hasOutstandingActions %} #}
+
+    {# if there are placements - confirm placements #}
+    {# if there are no placements - add placements #}
+    {# if there are placements - confirm placements, if trainee hasnt started - add a start date #}
+    {# if there are no placements - add placements, if trainee hasnt started - add a start date #}
+
+    {# hasCommencementDate #}
+
     {{ govukErrorSummary({
       titleText: "You need to provide more details before recording an outcome",
       classes: "govuk-error-summary--advisory",
       errorList: [
         {
-          text: "Confirm placement details are complete",
-          href: "/placements/confirm"
+          text: "Confirm training placement details are complete" if placementCount > 0 else "Add placement details",
+          href: recordPath + "/placements/confirm" | addReferrer(referrer) if placementCount else recordPath + "/placements/details" | addReferrer(referrer)
         }
       ]
     }) }}
 
-  {# if there are placements and the trainee hasnt started #}
-  {% elseif placementCount > 0 and not hasCommencementDate %}
-    {{ govukErrorSummary({
-      titleText: "You need to provide more details before recording an outcome",
-      classes: "govuk-error-summary--advisory",
-      errorList: [
-        {
-          text: "Confirm placement details are complete",
-          href: "recordPath + 'placements/confirm' | addReferrer(referrer)"
-        },
-        {
-          text: "Provide a start date",
-          href: "recordPath + '/trainee-start-date' | addReferrer(referrer)"
-        }
-      ]
-    }) }}
-
-  {# if there are no placements and the trainee hasnt started #}
-  {% elseif placementCount == 0 and traineeStarted == "false" %}
-    {{ govukErrorSummary({
-      titleText: "You need to provide more details before recording an outcome",
-      classes: "govuk-error-summary--advisory",
-      errorList: [
-        {
-          text: "Add placement details",
-          href: "recordPath + 'placements/check-for-placements' | addReferrer(referrer)"
-        },
-        {
-          text: "Provide a start date",
-          href: "recordPath + '/trainee-start-date' | addReferrer(referrer)"
-        }
-      ]
-    }) }}
-  {% endif %}
+  {# {% endif %} #}
 
   {% include "_includes/record-sub-nav.njk" %}
 

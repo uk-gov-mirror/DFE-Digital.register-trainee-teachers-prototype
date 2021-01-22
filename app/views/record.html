@@ -12,8 +12,10 @@
 {% set canAmend = record.status | getAmendsAllowed %}
 
 {% set hasCommencementDate = record.trainingDetails.traineeStarted | falsify %}
+{% set placements = record.placement.items %}
 
 {% set recordPath = "/record/" + record.id %}
+
 
 <div class="govuk-grid-row">
 
