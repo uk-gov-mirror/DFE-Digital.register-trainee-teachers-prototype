@@ -1,7 +1,7 @@
 {# <h1 class="govuk-heading-l">{{pageHeading}}</h1> #}
 
 {# Todo: should the filtered data be passed to this view instead? #}
-{% set providerCourses = data.courses["University of Southampton"].courses %}
+{% set providerCourses = data.courses[data.record.provider].courses %}
 
 {# Filter out routes that aren't enabled yet #}
 {% set providerCourses = providerCourses | where("route", data.settings.enabledTrainingRoutes)   %}

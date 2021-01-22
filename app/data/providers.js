@@ -297,12 +297,18 @@ const allProviders = [
 ]
 
 const permProviders = [
-  "East Midlands Teacher Training Partnership",
-  "West Midlands Consortium"
+  "Coventry University",
+  "University of Buckingham",
+  "Leeds SCITT",
+  "Leeds Trinity University",
+  "Bournemouth Poole",
+  "Dorset Teacher Training Partnership",
+  "South Coast SCITT"
 ]
 
+
 // Returns a smaller set of providers as the real set is too big
-const getProviders = () => {
+const getSelectedProviders = () => {
   // One in 10 providers
   let reducedProviders = allProviders.filter((provider, index) => { 
     return (index % 10 === 0)
@@ -312,4 +318,7 @@ const getProviders = () => {
   return [...reducedProviders] // Uniq
 }
 
-module.exports = getProviders()
+module.exports = {
+  allProviders,
+  selectedProviders: getSelectedProviders()
+}

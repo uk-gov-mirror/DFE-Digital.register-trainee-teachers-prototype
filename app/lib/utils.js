@@ -177,6 +177,7 @@ exports.addEvent = (record, content) => {
 exports.deleteTempData = (data) => {
   delete data.degreeTemp
   delete data.record
+  delete data.submittedRecordId
 }
 
 // Stolen from Manage

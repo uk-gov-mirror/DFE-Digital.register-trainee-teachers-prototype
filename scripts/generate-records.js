@@ -16,7 +16,8 @@ const trainingRouteData = require('../app/data/training-route-data')
 const seedRecords       = require('../app/data/seed-records')
 const statuses          = require('../app/data/status')
 const courses           = require('../app/data/courses.json')
-const providers         = require('../app/data/providers.js')
+const providerData      = require('../app/data/providers.js')
+const providers         = providerData.selectedProviders
 
 // Settings
 let simpleGcseGrades    = true //output pass/fail rather than full detail
@@ -106,7 +107,7 @@ const generateFakeApplications = () => {
     // Hardcode provider and year
     // Todo - apply these back to seed records?
     let seed = {...seedRecord, ...{
-      provider: "West Midlands Consortium",
+      provider: "Coventry University",
       academicYear: currentYear
     }}
     applications.push(generateFakeApplication(seed))

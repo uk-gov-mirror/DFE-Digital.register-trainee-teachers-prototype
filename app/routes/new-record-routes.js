@@ -128,7 +128,8 @@ module.exports = router => {
       utils.registerForTRN(newRecord)
       utils.deleteTempData(data)
       utils.updateRecord(data, newRecord, false)
-      req.session.data.recordId = newRecord.id //temp store for id to link to the record
+      // Temporarily store the id so that we can look it up on the submitted page
+      req.session.data.submittedRecordId = newRecord.id 
       res.redirect('/new-record/submitted')
     }
   })

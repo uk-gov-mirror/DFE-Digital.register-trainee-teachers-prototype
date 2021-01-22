@@ -21,7 +21,7 @@
     ]
   } | decorateAttributes(data, "data.filterCycle"))}}
 
-  {% if data.isBlendedModel and data.signedInProviders | length > 1 %}
+  {% if data.signedInProviders | length > 1 %}
     
     {% set userProviders = data.settings.userProviders %}
 

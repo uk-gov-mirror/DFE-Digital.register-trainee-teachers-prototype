@@ -25,7 +25,9 @@ let allTrainingRoutes       = Object.values(trainingRoutes).map(route => route.n
 
 let courses                 = require('./courses.json')
 
-let providers               = require('./providers.js')
+let providerData            = require('./providers.js')
+let providers               = providerData.selectedProviders
+let allProviders            = providerData.allProviders
 
 let currentYear             = 2020
 
@@ -43,13 +45,13 @@ settings.providerModel = "blended-model"
 
 // The providers the signed-in user belongs to
 settings.userProviders = [
-  "East Midlands Teacher Training Partnership",
-  "West Midlands Consortium"
+  "Coventry University",
+  "University of Buckingham"
 ]
 
 // The ‘active’ provider for the current user if using hat model
 // Must be one of the ones in settings.userProviders
-settings.userActiveProvider = "West Midlands Consortium"
+settings.userActiveProvider = "Coventry University"
 
 // Enable timeline on records
 settings.includeTimeline = 'true'
@@ -111,6 +113,7 @@ module.exports = {
   nationalities,
   notPassedReasons,
   providers,
+  allProviders,
   records,
   settings,
   statuses,
