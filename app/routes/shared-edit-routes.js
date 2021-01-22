@@ -390,7 +390,7 @@ module.exports = router => {
       // mark the Placements section as complete
       _.set(record,'placement.status',"Completed")
     }
-    else if (record.placement.hasPlacements == 'No'){
+    else if (record.placement.hasPlacements == 'Not yet'){
       // mark the Placements section as complete
       _.set(record,'placement.status',"Completed")
       // send them back to the overview
