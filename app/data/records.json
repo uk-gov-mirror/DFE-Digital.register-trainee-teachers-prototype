@@ -250,8 +250,7 @@
     },
     "trainingDetails": {
       "traineeId": "EB7NLEQB",
-      "traineeStarted": "true",
-      "commencementDate": "2020-07-22T23:04:30.834Z",
+      "traineeStarted": "false",
       "status": "Completed"
     },
     "programmeDetails": {
