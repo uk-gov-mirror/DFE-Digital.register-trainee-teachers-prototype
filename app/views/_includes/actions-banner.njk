@@ -1,0 +1,43 @@
+{% set placementCount = record.placement.items | length %}
+{% set hasCommencementDate = record.trainingDetails.traineeStarted | falsify %}
+
+
+{# {% if record | hasOutstandingActions %} #}
+
+    {# if there are placements - confirm placements #}
+    {# if there are no placements - add placements #}
+    {# if there are placements - confirm placements, if trainee hasnt started - add a start date #}
+    {# if there are no placements - add placements, if trainee hasnt started - add a start date #}
+
+  {% if hasCommencementDate %}
+
+    {{ govukErrorSummary({
+      titleText: "You need to provide more details before recording an outcome",
+      classes: "govuk-error-summary--advisory",
+      errorList: [
+        {
+          text: "Confirm training placement details are complete" if placementCount > 0 else "Add placement details",
+          href: recordPath + "/placements/confirm" | addReferrer(referrer) if placementCount else recordPath + "/placements/details" | addReferrer(referrer)
+        }
+      ]
+    }) }}
+
+  {% else %}
+
+    {{ govukErrorSummary({
+      titleText: "You need to provide more details before recording an outcome",
+      classes: "govuk-error-summary--advisory",
+      errorList: [
+        {
+          text: "Confirm training placement details are complete" if placementCount > 0 else "Add placement details",
+          href: recordPath + "/placements/confirm" | addReferrer(referrer) if placementCount else recordPath + "/placements/details" | addReferrer(referrer),
+          text: "Provide a start date",
+          href: recordPath + "/trainee-start-date" | addReferrer(referrer)
+        }
+      ]
+    }) }}
+
+  {% endif %}
+
+{# {% endif %} #}
+

@@ -20,7 +20,8 @@
 <div class="govuk-grid-row">
 
   <div class="govuk-grid-column-full">
-    
+
+    {# TODO - set up a test for if hasOutstandingActions and replace hasCommencementDate  #}
     {# Hide the record actions ui if it's empty #}
     {% if (record.status | getCanDefer) or (record.status | getCanReinstate) %}
       <div class="record-actions">

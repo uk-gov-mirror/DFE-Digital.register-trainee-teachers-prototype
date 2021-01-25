@@ -65,46 +65,7 @@
     {% endif %}
   </div>
 
-  {# <div class="govuk-error-summary govuk-error-summary--advisory" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
-    <h2 class="govuk-error-summary__title" id="error-summary-title">
-      You need to provide more details before recording an outcome
-    </h2>
-    <div class="govuk-error-summary__body">
-      <ul class="govuk-list govuk-error-summary__list">
-        <li>
-          <a herf="">Confirm placement details are complete</a>
-        </li>      
-        <li>
-          <a herf="">Provide a start date</a>
-        </li>      
-      </ul>
-    </div>
-  </div> #}
-
-  {% set placementCount = record.placement.items | length %}
-  {% set hasCommencementDate = record.trainingDetails.traineeStarted | falsify %}
-
-  {# {% if record | hasOutstandingActions %} #}
-
-    {# if there are placements - confirm placements #}
-    {# if there are no placements - add placements #}
-    {# if there are placements - confirm placements, if trainee hasnt started - add a start date #}
-    {# if there are no placements - add placements, if trainee hasnt started - add a start date #}
-
-    {# hasCommencementDate #}
-
-    {{ govukErrorSummary({
-      titleText: "You need to provide more details before recording an outcome",
-      classes: "govuk-error-summary--advisory",
-      errorList: [
-        {
-          text: "Confirm training placement details are complete" if placementCount > 0 else "Add placement details",
-          href: recordPath + "/placements/confirm" | addReferrer(referrer) if placementCount else recordPath + "/placements/details" | addReferrer(referrer)
-        }
-      ]
-    }) }}
-
-  {# {% endif %} #}
+  {% include "_includes/actions-banner.njk" %}
 
   {% include "_includes/record-sub-nav.njk" %}
 
