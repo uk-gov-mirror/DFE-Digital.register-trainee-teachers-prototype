@@ -31,6 +31,25 @@
     }) }}
   {# {% endif %} #}
 
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Have you finished adding training placement details?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    items: [
+      {
+        value: "Incomplete",
+        text: "Not yet, I will finalise placement details later"
+      },
+      {
+        value: "Complete",
+        text: "Yes, all placements have been added for this trainee"
+      }
+    ]
+  } | decorateAttributes(record, "record.placement.status")) }}
+
   {{ govukButton({
     text: "Continue"
   }) }}

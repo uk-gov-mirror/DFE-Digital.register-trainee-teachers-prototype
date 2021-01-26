@@ -20,7 +20,7 @@
 
   {# Don't show checkbox if there are no placements #}
   {# {% if placementCount > 0 %} #}
-    {{ govukCheckboxes({
+    {# {{ govukCheckboxes({
       idPrefix: "placement-section-complete",
       name: "record[placement][status]",
       items: [
@@ -30,8 +30,28 @@
           checked: checked(record.placement.status, "Completed")
         }
       ]
-      }) }}
+      }) }} #}
   {# {% endif %} #}
+
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Have you finished adding training placement details?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    items: [
+      {
+        value: "Incomplete",
+        text: "Not yet, I will finalise placement details later"
+      },
+      {
+        value: "Complete",
+        text: "Yes, all placements have been added for this trainee"
+      }
+    ]
+  } | decorateAttributes(record, "record.placement.status")) }}
 
   {{ govukButton({
     text: "Continue"
