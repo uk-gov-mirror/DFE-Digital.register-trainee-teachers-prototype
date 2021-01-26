@@ -37,7 +37,7 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Have you finished adding training placement details?",
+        text: "Are all the placement details for this trainees course added?",
         classes: "govuk-fieldset__legend--s"
       }
     },
@@ -48,7 +48,7 @@
       },
       {
         value: "Complete",
-        text: "Yes, all placements have been added for this trainee"
+        text: "Yes, all placements have been added"
       }
     ]
   } | decorateAttributes(record, "record.placement.status")) }}

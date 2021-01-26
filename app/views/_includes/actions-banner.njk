@@ -10,7 +10,7 @@
       errorList: [
         {
           text: "Confirm training placement details are complete" if placementCount > 0 else "Add placement details",
-          href: recordPath + "/placements/confirm" | addReferrer(referrer) if placementCount > 0 else recordPath + "/placements/add" | addReferrer(referrer)
+          href: recordPath + "/placements/confirm" | addReferrer(referrer) if placementCount > 0 else recordPath + "/placements/can-add-placement" | addReferrer(referrer)
         } if needsPlacementDetails,
         {
           text: "Provide a start date",

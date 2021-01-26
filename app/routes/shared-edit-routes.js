@@ -397,9 +397,6 @@ module.exports = router => {
       else {
         res.redirect(`${recordPath}/overview`)
       }
-
-      // mark the Placements section as complete
-      _.set(record,'placement.status',"Completed")
     }
     else if (record.placement.hasPlacements == 'Not yet'){
       // mark the Placements section as complete
@@ -419,6 +416,42 @@ module.exports = router => {
     
   })
   
+  // Can they add placements? Sends them onwards or marks placements complete
+  router.post(['/:recordtype/placements/can-add-placement-answer','/:recordtype/placements/can-add-placement-answer'], function (req, res) {
+    const data = req.session.data
+    
+    let recordPath = utils.getRecordPath(req)
+    let referrer = utils.getReferrer(req.query.referrer)
+    let record = data.record // copy record
+
+    if (!record?.placement?.hasPlacements) {
+      res.redirect(`${recordPath}/placements/can-add-placements${referrer}`)
+    }
+
+    // Are they able to add placement details?
+    if (record.placement.canAddPlacements == 'Yes'){
+      // carry on and add one
+      res.redirect(`${recordPath}/placements/add${referrer}`)
+    }
+    else if (record.placement.canAddPlacements == 'Not required'){
+
+      // mark the Placements section as complete
+      _.set(record,'record.placement.status',"Complete")
+      // send them back to the record
+      if (referrer){
+        res.redirect(req.query.referrer)
+      }
+      else {
+        res.redirect(`${recordPath}`)
+      }
+    }
+
+    else {
+      res.redirect(`${recordPath}/placements/can-add-placement${referrer}`)
+    }
+    
+  })
+
   // Add a placement - sends you to index one greater than current number of placements
   router.get(['/:recordtype/:uuid/placements/add','/:recordtype/placements/add'], function (req, res) {
     const data = req.session.data

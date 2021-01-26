@@ -21,10 +21,6 @@
       text: "Yes"
     },
     {
-      value: "Not yet",
-      text: "Not yet, I will add placement details later"
-    },
-    {
       value: "Not required",
       text: "Placements are not required for this trainee",
       conditional: {
@@ -32,7 +28,7 @@
       }
     }
   ]
-} | decorateAttributes(record, "record.placement.hasPlacements"))}}
+} | decorateAttributes(record, "record.placement.canAddPlacements"))}}
 
 {{ govukButton({
   text: "Continue"

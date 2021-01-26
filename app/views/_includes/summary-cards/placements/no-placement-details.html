@@ -1,11 +1,18 @@
-{# TODO - consider rewording this one #}
+{% set valueText %}
+  {% if record.placement.hasPlacements == "Not yet" %}
+    {{record.placement.hasPlacements}}
+  {% else %}
+    Placements are not required for this trainee<br>
+    Reason: {{record.placement.placementsNotRequiredReason}}
+  {% endif %}
+{% endset %}
 
-{% set placementsNotyetKnownRow = {
+{% set placementsDetailsNotAvailableRow = {
   key: {
-    text: "Are placement details known?"
+    text: "Do you know of any placement details for this trainee?"
   },
   value: {
-    text: record.placement.hasPlacements or 'Not provided'
+    html: valueText or 'Not provided'
   },
   actions: {
     items: [
@@ -19,7 +26,7 @@
 } %}
 
 {% set placementDetailsRows = [
-  placementsNotyetKnownRow
+  placementsDetailsNotAvailableRow
 ] %}
 
 {% set placementDetailsHtml %}
@@ -35,4 +42,3 @@
   titleText: 'Placement details',
   html: placementDetailsHtml
 }) }}
-

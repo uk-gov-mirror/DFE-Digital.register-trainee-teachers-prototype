@@ -31,7 +31,7 @@
     }) }}
   {# {% endif %} #}
 
-  {{ govukRadios({
+  {# {{ govukRadios({
     fieldset: {
       legend: {
         text: "Have you finished adding training placement details?",
@@ -48,7 +48,7 @@
         text: "Yes, all placements have been added for this trainee"
       }
     ]
-  } | decorateAttributes(record, "record.placement.status")) }}
+  } | decorateAttributes(record, "record.placement.status")) }} #}
 
   {{ govukButton({
     text: "Continue"
