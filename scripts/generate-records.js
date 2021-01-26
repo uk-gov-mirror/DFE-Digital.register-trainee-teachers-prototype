@@ -131,7 +131,7 @@ const generateFakeApplication = (params = {}) => {
     withdrawalDate = params.updatedDate
   }
 
-  const trainingDetails = (params.trainingDetails === null) ? undefined : { ...generateTrainingDetails({submittedDate, status}), ...params.trainingDetails }
+  const trainingDetails = (params.trainingDetails === null) ? undefined : { ...generateTrainingDetails(params?.trainingDetails), ...params.trainingDetails }
 
   // Personal details
   const personalDetails = (params.personalDetails === null) ? null : { ...generatePersonalDetails(faker), ...params.personalDetails }
@@ -165,7 +165,7 @@ const generateFakeApplication = (params = {}) => {
   }
   
   // Placements
-  let placement = (params.placement === null) ? undefined : { ...generatePlacement(), ...params.placement }
+  let placement = (params.placement === null) ? undefined : { ...generatePlacement(params.placement), ...params.placement }
 
   return {
     id: params.id || faker.random.uuid(),

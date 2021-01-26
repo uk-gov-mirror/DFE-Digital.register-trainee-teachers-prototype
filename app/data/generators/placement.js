@@ -1,7 +1,7 @@
 const weighted = require('weighted')
 const faker   = require('faker')
 const placementSchools = require('../providers.js')
-module.exports = () => {
+module.exports = (params) => {
 
   const item = () => {
     const location = faker.helpers.randomize(placementSchools)
@@ -21,12 +21,16 @@ module.exports = () => {
     1: 0.5,
     2: 0.2
   })
+
   const items = []
   for (var i = 0; i < count; i++) {
     items.push(item(faker))
   }
 
-  console.log({items})
+  if (params?.hasPlacements == 'Not yet' || params?.hasPlacements == 'Not required') {
+    return {}
+  } else {
+    return {items: items}
+  }
 
-  return {items: items}
 }
