@@ -106,6 +106,29 @@ exports.recordIsComplete = record => {
   return recordIsComplete
 }
 
+// Check if there are outsanding actions (Either adding start date or placements stuff)
+exports.hasOutstandingActions = record => {
+
+  console.log(record)
+
+  let hasOutstandingActions = false
+  let traineeStarted = record?.trainingDetails?.commencementDate
+  let needsPlacementDetails = (record?.placement?.status != 'Complete') 
+
+  if (!traineeStarted) {
+    hasOutstandingActions = true
+  }
+  
+  else if (needsPlacementDetails) {
+    hasOutstandingActions = true
+  }
+
+  console.log({hasOutstandingActions})
+
+  return hasOutstandingActions
+
+}
+
 // Look up a record using it's UUID
 exports.getRecordById = (records, id) => {
   let index = records.findIndex(record => record.id == id)

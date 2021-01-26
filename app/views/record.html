@@ -21,21 +21,20 @@
 
   <div class="govuk-grid-column-full">
 
-    {# TODO - set up a test for if hasOutstandingActions and replace hasCommencementDate  #}
     {# Hide the record actions ui if it's empty #}
     {% if (record.status | getCanDefer) or (record.status | getCanReinstate) %}
       <div class="record-actions">
         {% if record.status | getCanRecommendForQts %}
-          {% if hasCommencementDate%}
+          {% if record | hasOutstandingActions %}
+            {{ govukInsetText({
+              text: "This record requires additional details",
+              classes: "govuk-!-margin-0"
+            }) }}
+          {% else %}
             {{ govukButton({
               text: "Recommend trainee for QTS",
               href: referrer + '/qts/outcome-date',
               classes: "govuk-!-margin-bottom-0"
-            }) }}
-          {% else %}
-            {{ govukInsetText({
-              text: "You need to give a start date for this trainee",
-              classes: "govuk-!-margin-0"
             }) }}
           {% endif %}
         {% elseif record.status == "Pending TRN" %}
