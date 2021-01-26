@@ -35,8 +35,6 @@
     {% include "_includes/incomplete.njk" %}
   {% endif %}
  #}
-  {{ record | log }}
-
   {# {% if record.placement.hasPlacements == "Not required" %}
     {% include "_includes/summary-cards/placements/placement-details-not-required.html" %}
   {% endif %}
@@ -47,6 +45,7 @@
 
   {% for placement in placements %}
     {% include "_includes/summary-cards/placements/single-placement-details.html" %}
+    {# {% include "_includes/summary-cards/placements/placement-details-summary.html" %} #}
   {% endfor %}
 
   {# {% if placementCount == 0 %}

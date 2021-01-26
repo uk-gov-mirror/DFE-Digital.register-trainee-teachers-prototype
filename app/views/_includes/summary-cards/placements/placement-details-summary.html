@@ -1,0 +1,34 @@
+{% set placements = record.placement.items %}
+
+{% set placementLocationRow = {
+  key: {
+    text: "Location " + loop.index
+  },
+  value: {
+    text: placement.location or 'Not provided'
+  }
+} %}
+
+{% set placementDetailsRows = [
+  placementLocationRow
+] %}
+
+{% set placementDetailsHtml %}
+  {% for placement in placements %}
+    {{ govukSummaryList({
+        rows: placementDetailsRows
+    }) }}
+  {% endfor %}
+{% endset %}
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  titleText: 'Placement details',
+  actions: {
+    items: [{
+      href: recordPath + "/placements/" + placement.id + "/confirm" | addReferrer(referrer),
+      text: "View placements"
+    }]
+  } if canAmend,
+  html: placementDetailsHtml
+}) }}
