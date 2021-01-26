@@ -386,7 +386,18 @@ module.exports = router => {
     }
     else if (record.placement.hasPlacements == 'Not required'){
       // Send them to a confirm page but with a different summary card
-      res.redirect(`${recordPath}/placements/confirm${referrer}`)
+      // res.redirect(`${recordPath}/placements/confirm${referrer}`)
+
+      // mark the Placements section as complete
+      _.set(record,'placement.status',"Completed")
+      // send them back to the overview
+      if (referrer){
+        res.redirect(req.query.referrer)
+      }
+      else {
+        res.redirect(`${recordPath}/overview`)
+      }
+
       // mark the Placements section as complete
       _.set(record,'placement.status',"Completed")
     }

@@ -22,6 +22,7 @@
 
   {% include "_includes/incomplete.njk" %}
 
+
 {% else %}
 
   {# Show a banner on existing records when last degree deleted #}
@@ -34,13 +35,15 @@
     {% include "_includes/incomplete.njk" %}
   {% endif %}
  #}
-  {% if record.placement.hasPlacements == "Not required" %}
+  {{ record | log }}
+
+  {# {% if record.placement.hasPlacements == "Not required" %}
     {% include "_includes/summary-cards/placements/placement-details-not-required.html" %}
   {% endif %}
   
   {% if record.placement.hasPlacements == "Not yet" %}
     {% include "_includes/summary-cards/placements/placement-details-not-yet-known.html" %}
-  {% endif %}
+  {% endif %} #}
 
   {% for placement in placements %}
     {% include "_includes/summary-cards/placements/single-placement-details.html" %}
