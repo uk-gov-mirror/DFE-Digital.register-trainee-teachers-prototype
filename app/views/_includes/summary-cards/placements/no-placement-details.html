@@ -1,6 +1,6 @@
 {% set valueText %}
   {% if record.placement.hasPlacements == "Not yet" %}
-    {{record.placement.hasPlacements}}
+    Placements are not yet known
   {% else %}
     Placements are not required for this trainee<br>
     {% if record.placement.placementsNotRequiredReason %}
@@ -13,7 +13,7 @@
 
 {% set placementsDetailsNotAvailableRow = {
   key: {
-    text: "Are placement details available for this trainee?"
+    text: "Placements"
   },
   value: {
     html: valueText or 'Not provided'
