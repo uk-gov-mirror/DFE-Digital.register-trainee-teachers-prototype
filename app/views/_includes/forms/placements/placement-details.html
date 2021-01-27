@@ -14,8 +14,7 @@
 
 {# Merge with temp store #}
 {% set placementTemp = placement | mergeObjects(data.placementTemp) %}
-{# 
-<p class="govuk-body">You will need to confirm these details before recommending them for QTS.</p> #}
+
 {{record | log}}
 
 {{ govukInput({

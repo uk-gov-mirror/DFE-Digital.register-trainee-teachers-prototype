@@ -3,13 +3,17 @@
     {{record.placement.hasPlacements}}
   {% else %}
     Placements are not required for this trainee<br>
-    Reason: {{record.placement.placementsNotRequiredReason}}
+    {% if record.placement.placementsNotRequiredReason %}
+      Reason: {{record.placement.placementsNotRequiredReason}} {
+    {% else %}
+      Reason:  Not provided
+    {% endif %}
   {% endif %}
 {% endset %}
 
 {% set placementsDetailsNotAvailableRow = {
   key: {
-    text: "Do you know of any placement details for this trainee?"
+    text: "Can you add placement details for this trainee?"
   },
   value: {
     html: valueText or 'Not provided'

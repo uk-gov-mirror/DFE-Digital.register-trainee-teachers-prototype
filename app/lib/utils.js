@@ -106,10 +106,8 @@ exports.recordIsComplete = record => {
   return recordIsComplete
 }
 
-// Check if there are outsanding actions (Either adding start date or placements stuff)
+// Check if there are outsanding actions (Either adding start date or placements details)
 exports.hasOutstandingActions = record => {
-
-  console.log(record)
 
   let hasOutstandingActions = false
   let traineeStarted = record?.trainingDetails?.commencementDate
@@ -118,15 +116,10 @@ exports.hasOutstandingActions = record => {
   if (!traineeStarted) {
     hasOutstandingActions = true
   }
-  
   else if (needsPlacementDetails) {
     hasOutstandingActions = true
   }
-
-  console.log({hasOutstandingActions})
-
   return hasOutstandingActions
-
 }
 
 // Look up a record using it's UUID

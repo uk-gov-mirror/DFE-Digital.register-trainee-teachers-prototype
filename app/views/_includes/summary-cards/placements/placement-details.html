@@ -38,12 +38,15 @@
 
   {% if record.placement.hasPlacements == "Not yet" or record.placement.hasPlacements == "Not required"  %}
     {% include "_includes/summary-cards/placements/no-placement-details.html" %}
-
   {% else %}
-    {% for placement in placements %}
-      {% include "_includes/summary-cards/placements/single-placement-details.html" %}
-      {# {% include "_includes/summary-cards/placements/placement-details-summary.html" %} #}
-    {% endfor %}
+    {% if placementCount == 0 %}
+      <p class="govuk-body">No placement details have been added.</p> 
+    {% else %}
+      {% for placement in placements %}
+        {# if there are no placements yet #}
+          {% include "_includes/summary-cards/placements/single-placement-details.html" %}
+      {% endfor %}
+      {% endif %}
   {% endif %}
   
   <div class="govuk-form-group">

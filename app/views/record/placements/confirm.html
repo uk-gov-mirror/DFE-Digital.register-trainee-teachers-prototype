@@ -12,7 +12,6 @@
 {% block formContent %}
 
   <h1 class="govuk-heading-l">{{pageHeading}}</h1>
-  {{record | log}}
 
   {% set placementCount = record.placement.items | length %}
 
@@ -37,18 +36,18 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Are all the placement details for this trainees course added?",
+        text: "Have all placement details been added for the duration of the course?",
         classes: "govuk-fieldset__legend--s"
       }
     },
     items: [
       {
         value: "Incomplete",
-        text: "Not yet, I will finalise placement details later"
+        text: "Not yet, I will finalise them later"
       },
       {
         value: "Complete",
-        text: "Yes, all placements have been added"
+        text: "Yes, all placements for the course have been added"
       }
     ]
   } | decorateAttributes(record, "record.placement.status")) }}
