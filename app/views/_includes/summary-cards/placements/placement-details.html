@@ -39,10 +39,9 @@
   
     {% if record.placement.hasPlacements == "Not yet" or record.placement.hasPlacements == "Not required" %}
       {% include "_includes/summary-cards/placements/no-placement-details.html" %}
-    {# {% else %} #}
     
     {# if there are no placements, let them add one #}
-    {# TODO deleting them all then and adding one is broken #}
+    {# TODO - deleting them all then and adding one is broken #}
     {% elseif placementCount == 0 %}
       <p class="govuk-body">No placement details have been added.</p>
       <div class="govuk-form-group">
