@@ -8,27 +8,59 @@
   } | decorateAttributes(record, "record.placement.placementsNotRequiredReason")) }}
 {% endset %}
 
-{{ govukRadios({
-  fieldset: {
-    legend: {
-      text: pageHeading,
-      isPageHeading: true,
-      classes: "govuk-fieldset__legend--l"
-    }
-  },
-  items: [
-    {
-      text: "Yes"
-    },
-    {
-      value: "Not required",
-      text: "Placements are not required for this trainee",
-      conditional: {
-        html: customPlacementsNotRequiredReason
+
+{# Use a specific form for draft records  #}
+{% if record.status == "Draft" %}
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: pageHeading,
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
       }
-    }
-  ]
-} | decorateAttributes(record, "record.placement.hasPlacements"))}}
+    },
+    items: [
+      {
+        text: "Yes"
+      },
+      {
+        value: "Not yet",
+        text: "Not yet, I will add placement details later"
+      },
+      {
+        value: "Not required",
+        text: "Placements are not required for this trainee",
+        conditional: {
+          html: customPlacementsNotRequiredReason
+        }
+      }
+    ]
+  } | decorateAttributes(record, "record.placement.hasPlacements"))}}
+{# Use a specific form for real records #}
+{% else %}
+  {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: pageHeading,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [
+        {
+          text: "Yes"
+        },
+        {
+          value: "Not required",
+          text: "Placements are not required for this trainee",
+          conditional: {
+            html: customPlacementsNotRequiredReason
+          }
+        }
+      ]
+    } | decorateAttributes(record, "record.placement.hasPlacements"))}}
+
+{% endif %}
 
 {{ govukButton({
   text: "Continue"

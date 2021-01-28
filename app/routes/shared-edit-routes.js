@@ -424,28 +424,51 @@ module.exports = router => {
     let referrer = utils.getReferrer(req.query.referrer)
     let record = data.record // copy record
 
+    
     if (!record?.placement?.hasPlacements) {
       res.redirect(`${recordPath}/placements/can-add-placement${referrer}`)
     }
 
-    // Are they able to add placement details?
+    // Are they able to add placement details? (Shared on both draft and record)
     if (record.placement.hasPlacements == 'Yes'){
       // carry on and add one
       res.redirect(`${recordPath}/placements/add${referrer}`)
     }
-    else if (record.placement.hasPlacements == 'Not required'){
-      
-      // mark the Placements section as complete
-      _.set(record,'record.placement.status',"Complete")
-      utils.updateRecord(data, record)
-      // req.flash('success', 'Trainee record updated')
 
-      // send them back to the record
-      if (referrer){
-        res.redirect(req.query.referrer)
+    // Record specific routes
+    if (req.params.recordtype == 'record') {
+      if (record.placement.hasPlacements == 'Not required'){
+      
+        // Set the placements status as complete
+        _.set(record,'record.placement.status',"Complete")
+        utils.updateRecord(data, record)
+
+        // req.flash('success', 'Trainee record updated')
+  
+        // send them back to the record
+        if (referrer){
+          res.redirect(req.query.referrer)
+        }
+        else {
+          res.redirect(`${recordPath}`)
+        }
       }
-      else {
-        res.redirect(`${recordPath}`)
+    } 
+    
+    // Draft specific routes
+    else if (req.params.recordtype != 'record') {
+      if (record.placement.hasPlacements == 'Not yet'|| record.placement.hasPlacements == 'Not required') {
+        
+        // mark the Placements section as complete
+        _.set(record,'placement.status',"Completed")
+        
+        // send them back to the overview
+        if (referrer){
+          res.redirect(req.query.referrer)
+        }
+        else {
+          res.redirect(`${recordPath}/overview`)
+        }
       }
     }
 

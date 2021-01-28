@@ -104,7 +104,7 @@
   } if record | requiresSection("trainingDetails"),
   {
     text: "Placement details",
-    href: "placements/confirm" if (record.placement) else "placements/check-for-placements",
+    href: "placements/confirm" if (record.placement) else "placements/can-add-placement",
     id: "placement-details",
     tag: {
       classes: record.placement | getStatusText | getStatusClass,
