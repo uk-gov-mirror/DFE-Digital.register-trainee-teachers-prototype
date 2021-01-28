@@ -423,18 +423,15 @@ module.exports = router => {
     let recordPath = utils.getRecordPath(req)
     let referrer = utils.getReferrer(req.query.referrer)
     let record = data.record // copy record
-
     
     if (!record?.placement?.hasPlacements) {
       res.redirect(`${recordPath}/placements/can-add-placement${referrer}`)
     }
-
     // Are they able to add placement details? (Shared on both draft and record)
     if (record.placement.hasPlacements == 'Yes'){
       // carry on and add one
       res.redirect(`${recordPath}/placements/add${referrer}`)
     }
-
     // Record specific routes
     if (req.params.recordtype == 'record') {
       if (record.placement.hasPlacements == 'Not required'){
@@ -454,7 +451,6 @@ module.exports = router => {
         }
       }
     } 
-    
     // Draft specific routes
     else if (req.params.recordtype != 'record') {
       if (record.placement.hasPlacements == 'Not yet'|| record.placement.hasPlacements == 'Not required') {
@@ -471,7 +467,6 @@ module.exports = router => {
         }
       }
     }
-
     else {
       res.redirect(`${recordPath}/placements/can-add-placement${referrer}`)
     }
