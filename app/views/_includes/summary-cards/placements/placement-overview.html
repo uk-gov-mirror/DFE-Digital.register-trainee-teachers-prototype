@@ -1,0 +1,76 @@
+{% set complete = true if (record.placement | sectionIsCompleted ) %}
+{% set status  = record.placement | getStatusText %}
+
+{% set placements = record.placement.items %}
+{% set placementCount = record.placement.items | length %}
+{% set sectionIsRequired = record | requiresSection("placement") %}
+
+{% if not sectionIsRequired %}
+  {# Section not required #}
+{% elseif showIncomplete and not complete %}
+
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "placement-details" %}
+  {% if status == "In progress" %}
+    {% set incompleteText = "Placement details not marked as complete" %}
+    {% set incompleteLink = recordPath + "/placements/confirm" | addReferrer(referrer) %}
+    {% set incompleteLinkText = "Complete section" %}
+  {% else %}
+    {% set incompleteText = "Placement details not started" %}
+    {% set incompleteLink = recordPath + "/placements/check-for-placements" | addReferrer(referrer) %}
+    {% set incompleteLinkText = "Start section" %}
+  {% endif %}
+
+  {% include "_includes/incomplete.njk" %}
+
+
+{% else %}
+
+  {# Show a banner on existing records when last degree deleted #}
+  {# TODO: should this reuse the 'incomplete' above?
+  done separately as seed records don't have 'complete' as a concept #}
+  {# {% if placements | length == 0 %}
+    {% set incompleteText = "Placement details not provided" %}
+    {% set incompleteLink = recordPath + "/placements/add" | addReferrer(referrer) %}
+    {% set incompleteLinkText = "Add placement details" %}
+    {% include "_includes/incomplete.njk" %}
+  {% endif %}
+ #}
+  
+    {% if record.placement.hasPlacements == "Not yet" or record.placement.hasPlacements == "Not required" %}
+      {% include "_includes/summary-cards/placements/no-placement-details.html" %}
+    
+    {# if there are no placements, let them add one #}
+    {# TODO - deleting them all then and adding one is broken #}
+    {% elseif placementCount == 0 %}
+      <p class="govuk-body">No placement details have been added.</p>
+      <div class="govuk-form-group">
+        {{ govukButton({
+          "text": "Add another placement" if placementCount > 0 else "Add a placement",
+          href: recordPath + '/placements/add' | addReferrer(referrer),
+          classes: "govuk-button--secondary govuk-!-margin-bottom-0"
+        }) }}
+      </div>
+    {# there are placements and its the record page  #}
+    {% elseif pageName == 'Record' %}
+      {% include "_includes/summary-cards/placements/placement-details-summary.html" %}
+
+    {# there are placements and it's the confirm page #}
+    {% else %}
+      {% for placement in placements %}
+        {% include "_includes/summary-cards/placements/single-placement-details.html" %}
+      {% endfor %}
+    {% endif %}
+    
+    
+  {# {% endif %} #}
+  
+  {# <div class="govuk-form-group">
+    {{ govukButton({
+      "text": "Add another placement" if placementCount > 0 else "Add a placement",
+      href: recordPath + '/placements/add' | addReferrer(referrer),
+      classes: "govuk-button--secondary govuk-!-margin-bottom-0"
+    }) }}
+  </div> #}
+  
+{% endif %}
