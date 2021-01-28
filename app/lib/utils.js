@@ -107,7 +107,9 @@ exports.recordIsComplete = record => {
 }
 
 // Check if there are outsanding actions (Either adding start date or placements details)
-exports.hasOutstandingActions = record => {
+exports.hasOutstandingActions = function(record, data = false) {
+
+  data = data || this.ctx.data || false
 
   let hasOutstandingActions = false
   let traineeStarted = record?.trainingDetails?.commencementDate
