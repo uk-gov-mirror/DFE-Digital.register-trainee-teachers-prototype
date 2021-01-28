@@ -36,25 +36,55 @@
   {% endif %}
  #}
 
-  {% if record.placement.hasPlacements == "Not yet" or record.placement.hasPlacements == "Not required"  %}
-    {% include "_includes/summary-cards/placements/no-placement-details.html" %}
-  {% else %}
-    {% if placementCount == 0 %}
-      <p class="govuk-body">No placement details have been added.</p> 
+  {% if record.status == "Draft" %}
+
+    {% if record.placement.hasPlacements == "Not yet" or record.placement.hasPlacements == "Not required" %}
+      {% include "_includes/summary-cards/placements/no-placement-details.html" %}
     {% else %}
-      {% for placement in placements %}
-        {# if there are no placements yet #}
+      {% if placementCount == 0 %}
+        <p class="govuk-body">No placement details have been added.</p> 
+      {% else %}
+        {% for placement in placements %}
           {% include "_includes/summary-cards/placements/single-placement-details.html" %}
-      {% endfor %}
+        {% endfor %}
       {% endif %}
+    {% endif %}
+
+  {# if record #}
+  {% else %}
+  
+    {% if record.placement.hasPlacements == "Not yet" or record.placement.hasPlacements == "Not required"  %}
+      {% include "_includes/summary-cards/placements/no-placement-details.html" %}
+    {% else %}
+      {# there are no placements #}
+      {% if placementCount == 0 %}
+        <p class="govuk-body">No placement details have been added.</p>
+          <div class="govuk-form-group">
+            {{ govukButton({
+              "text": "Add another placement" if placementCount > 0 else "Add a placement",
+              href: recordPath + '/placements/add' | addReferrer(referrer),
+              classes: "govuk-button--secondary govuk-!-margin-bottom-0"
+            }) }}
+          </div>
+      {# there are placements and its the confirm page  #}
+      {% elseif pageName == 'Confirm' %}
+        {% for placement in placements %}
+          {% include "_includes/summary-cards/placements/single-placement-details.html" %}
+        {% endfor %}
+      {# there are placements and it must the record page  #}
+      {% else %}
+        {% include "_includes/summary-cards/placements/placement-details-summary.html" %}
+      {% endif %}
+    {% endif %}
+
   {% endif %}
   
-  <div class="govuk-form-group">
+  {# <div class="govuk-form-group">
     {{ govukButton({
       "text": "Add another placement" if placementCount > 0 else "Add a placement",
       href: recordPath + '/placements/add' | addReferrer(referrer),
       classes: "govuk-button--secondary govuk-!-margin-bottom-0"
     }) }}
-  </div>
+  </div> #}
   
 {% endif %}
