@@ -18,6 +18,7 @@
 
 {% set recordPath = "/record/" + record.id %}
 
+{{ record | log }}
 
 <div class="govuk-grid-row">
 
@@ -71,13 +72,15 @@
     {% if placementCount > 0 or record.placement.hasPlacements == "Not required" %}
       <h2 class="govuk-heading-s">Placement details</h2>
       {# {% include "_includes/summary-cards/placements/placement-details.html" %} #}
+      
       {% if record.placement.hasPlacements == "Not required" %}
         {% include "_includes/summary-cards/placements/no-placement-details.html" %}
       {% else %}
         {% include "_includes/summary-cards/placements/placement-details-summary.html" %}
       {% endif %}
+
     {% endif %}
-    
+
 
   </div>
 <div>

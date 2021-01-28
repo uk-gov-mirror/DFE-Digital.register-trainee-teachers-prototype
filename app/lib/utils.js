@@ -111,7 +111,7 @@ exports.hasOutstandingActions = record => {
 
   let hasOutstandingActions = false
   let traineeStarted = record?.trainingDetails?.commencementDate
-  let needsPlacementDetails = (record?.placement?.status != 'Complete') 
+  let needsPlacementDetails = (record?.placement?.status != 'Complete') && (record?.placement?.hasPlacements != "Not required") 
 
   if (!traineeStarted) {
     hasOutstandingActions = true
