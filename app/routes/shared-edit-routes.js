@@ -33,18 +33,23 @@ module.exports = router => {
   // on Publish
   router.get(['/:recordtype/:uuid/programme-details','/:recordtype/programme-details'], function (req, res) {
     const data = req.session.data
+    const record = data.record
     let recordPath = utils.getRecordPath(req)
     let referrer = utils.getReferrer(req.query.referrer)
-    let providerCourses = data.courses["University of Southampton"].courses
+
+    // Todo: should this scope by academic year?
+    let providerCourses = data.courses[record.provider].courses
     // Filter routes we're not yet supporting
     let filteredCourses = providerCourses.filter(course => {
       return data.settings.enabledTrainingRoutes.includes(course.route)
     })
+    // Artificially limit count of courses for UR
     let limitedCourses = filteredCourses.splice(0, data.settings.courseLimit)
 
     if (limitedCourses.length) {
       res.redirect(`${recordPath}/programme-details/pick-course${referrer}`)
     }
+    // If no courses, go straight to route selection
     else {
       res.redirect(`${recordPath}/programme-details/pick-route${referrer}`)
     }
@@ -58,7 +63,7 @@ module.exports = router => {
     let referrer = utils.getReferrer(req.query.referrer)
     let enabledRoutes = data.settings.enabledTrainingRoutes
     // Todo: make this selection of providers dynamic
-    let providerCourses = data.courses["University of Southampton"].courses
+    let providerCourses = data.courses[record.provider].courses
     let selectedCourse = _.get(data, 'record.selectedCourseTemp')
 
     // No data, return to page

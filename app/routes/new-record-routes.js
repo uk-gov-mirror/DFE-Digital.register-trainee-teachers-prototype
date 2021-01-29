@@ -13,7 +13,15 @@ module.exports = router => {
     utils.deleteTempData(data)
     _.set(data, 'record', { status: 'Draft' })
     _.set(data, 'record.events.items', [])
-    res.redirect('/new-record/overview')
+    // If multiple providers, users must pick one as thier first action
+    if (data.signedInProviders.length > 1){
+      res.redirect('/new-record/pick-provider')
+    }
+    else {
+      // If single provider, directly assign them to the record
+      data.record.provider = data.signedInProviders[0]
+      res.redirect('/new-record/overview')
+    }
   })
 
   // Show error if route is not assessment only
@@ -40,6 +48,29 @@ module.exports = router => {
       }
     }
    
+  })
+
+  // We *really* need the provider to get set, so don't let users past
+  // the page without picking one
+  // Only relevant where users belong to multiple providers
+  router.post('/new-record/pick-provider-answer', function (req, res) {
+    const data = req.session.data
+    const record = data.record
+    let provider = record?.provider
+    let referrer = utils.getReferrer(req.query.referrer)
+    // No data, return to page
+    if (!provider){
+      res.redirect(`/new-record/pick-provider${referrer}`)
+    }
+    else {
+      // Coming from the check answers page
+      if (referrer){
+        res.redirect(req.query.referrer)
+      }
+      else {
+        res.redirect(`/new-record/overview`)
+      }
+    }
   })
 
   // Task list confirmation page - pass errors to page
@@ -97,7 +128,8 @@ module.exports = router => {
       utils.registerForTRN(newRecord)
       utils.deleteTempData(data)
       utils.updateRecord(data, newRecord, false)
-      req.session.data.recordId = newRecord.id //temp store for id to link to the record
+      // Temporarily store the id so that we can look it up on the submitted page
+      req.session.data.submittedRecordId = newRecord.id 
       res.redirect('/new-record/submitted')
     }
   })
