@@ -23,7 +23,6 @@
 
   {% include "_includes/incomplete.njk" %}
 
-
 {% else %}
 
   {# Show a banner on existing records when last degree deleted #}
@@ -37,11 +36,15 @@
   {% endif %}
  #}
   
-    {% if record.placement.hasPlacements == "Not yet" or record.placement.hasPlacements == "Not required" %}
-      {% include "_includes/summary-cards/placements/no-placement-details.html" %}
+    {# {% include "_includes/summary-cards/placements/no-placement-details.html" %} #}
+    {# {% include "_includes/summary-cards/placements/single-placement-details.html" %} #}
+
+    {% for placement in placements %}
+      {% include "_includes/summary-cards/placements/single-placement-details.html" %}
+    {% endfor %}
+
+    {# {% if record.placement.hasPlacements == "Not yet" %}
     
-    {# if there are no placements, let them add one #}
-    {# TODO - deleting them all then and adding one is broken #}
     {% elseif placementCount == 0 %}
       <p class="govuk-body">No placement details have been added.</p>
       <div class="govuk-form-group">
@@ -51,16 +54,14 @@
           classes: "govuk-button--secondary govuk-!-margin-bottom-0"
         }) }}
       </div>
-    {# there are placements and its the record page  #}
     {% elseif pageName == 'Record' %}
       {% include "_includes/summary-cards/placements/placement-details-summary.html" %}
 
-    {# there are placements and it's the confirm page #}
     {% else %}
       {% for placement in placements %}
         {% include "_includes/summary-cards/placements/single-placement-details.html" %}
       {% endfor %}
-    {% endif %}
+    {% endif %} #}
     
     
   {# {% endif %} #}

@@ -1,3 +1,6 @@
+{% set placements = record.placement.items %}
+{% set placementCount = record.placement.items | length %}
+
 {% set placementLocationRow = {
   key: {
     text: "Location"
@@ -67,11 +70,15 @@
   placementDurationRow
 ] %}
 
-{% set placementDetailsHtml %}
-  {{ govukSummaryList({
-    rows: placementDetailsRows
-  }) }}
-{% endset %}
+{# {% for placement in placements %} #}
+
+  {% set placementDetailsHtml %}
+    {{ govukSummaryList({
+      rows: placementDetailsRows
+    }) }}
+  {% endset %}
+
+{# {% endfor %} #}
 
 {{ appSummaryCard({
   classes: "govuk-!-margin-bottom-6",
