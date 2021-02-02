@@ -154,9 +154,7 @@ seedRecords.push({
   degree: {
     status: 'Completed'
   },
-  placement: {
-    status: 'Not started'
-  }
+  placement: null
 })
 
 seedRecords.push({
