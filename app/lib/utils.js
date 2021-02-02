@@ -115,7 +115,7 @@ exports.hasOutstandingActions = function(record, data = false) {
   let traineeStarted = record?.trainingDetails?.commencementDate
   let placementCount = record?.placement?.items.length
   let minPlacementsRequired = data.settings.minPlacementsRequired
-  let needsPlacementDetails = (record?.placement?.status != 'Complete') && (record?.placement?.hasPlacements != "Not required") && (placementCount <= minPlacementsRequired)
+  let needsPlacementDetails = (record?.placement?.status != 'Complete') && (placementCount <= minPlacementsRequired)
 
   console.log(minPlacementsRequired)
   console.log(placementCount)

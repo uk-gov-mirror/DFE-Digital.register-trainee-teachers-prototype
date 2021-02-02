@@ -1,4 +1,4 @@
-{% set valueText %}
+{# {% set valueText %}
   {% if record.placement.hasPlacements == "Not yet" %}
     Placements are not yet known
   {% else %}
@@ -9,14 +9,14 @@
       Reason:  Not provided
     {% endif %}
   {% endif %}
-{% endset %}
+{% endset %} #}
 
 {% set placementsDetailsNotAvailableRow = {
   key: {
     text: "Placements"
   },
   value: {
-    html: valueText or 'Not provided'
+    text: 'Placements are not yet known' or 'Not provided'
   },
   actions: {
     items: [
