@@ -17,8 +17,8 @@ module.exports = (params) => {
   }
 
   const count = weighted.select({
-    0: 0.3,
-    1: 0.5,
+    0: 0.5,
+    1: 0.3,
     2: 0.2
   })
 
@@ -27,7 +27,7 @@ module.exports = (params) => {
     items.push(item(faker))
   }
 
-  if (params?.hasPlacements == 'Not yet' || params?.hasPlacements == 'Not required') {
+  if (params?.hasPlacements == 'Not yet') {
     return {}
   } else {
     return {items: items}

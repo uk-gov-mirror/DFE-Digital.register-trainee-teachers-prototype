@@ -155,8 +155,7 @@ seedRecords.push({
     status: 'Completed'
   },
   placement: {
-    hasPlacements: 'Not yet',
-    status: 'Completed'
+    status: 'Not started'
   }
 })
 
