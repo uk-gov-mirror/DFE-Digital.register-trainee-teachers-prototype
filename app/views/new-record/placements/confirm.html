@@ -24,8 +24,6 @@
     }) }}
   </div>
 
-  {# Don't show checkbox if there are no placements #}
-  {# {% if placementCount > 0 %} #}
   {{ govukCheckboxes({
     idPrefix: "placement-section-complete",
     name: "record[placement][status]",
@@ -36,12 +34,10 @@
         checked: checked(record.placement.status, "Completed")
       }
     ]
-    }) }} 
-  {# {% endif %} #}
+  }) }}
 
   {{ govukButton({
     text: "Continue"
   }) }}
 
 {% endblock %}
-

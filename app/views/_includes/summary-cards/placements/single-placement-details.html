@@ -1,58 +1,46 @@
 {% set placements = record.placement.items %}
 {% set placementCount = record.placement.items | length %}
 
-{% set placementLocationRow = [] %}
-
-{% for placement in placements %}
-
-  {% set placementLocationRow = {
-    key: {
-      text: "Location"
-    },
-    value: {
-      text: placement.location or 'Not provided'
-    },
-    actions: {
-      items: [
-        {
-          href: recordPath + "/placements/" + placement.id + "/details" | addReferrer(referrer),
-          text: "Change",
-          visuallyHiddenText: "placement location"
-        }
-      ]
-    } if canAmend
-  } %}
-
-{% endfor %}
+{% set placementLocationRow = {
+  key: {
+    text: "Location"
+  },
+  value: {
+    text: placement.location or 'Not provided'
+  },
+  actions: {
+    items: [
+      {
+        href: recordPath + "/placements/" + placement.id + "/details" | addReferrer(referrer),
+        text: "Change",
+        visuallyHiddenText: "placement location"
+      }
+    ]
+  } if canAmend
+} %}
 
 {% set placementStartMonth  %}
   {{ placement.startMonth | prettyMonth }}
 {% endset %}
 
-{% set placementStartMonthRow = [] %}
-
-{% for placement in placements %}
-
-  {% set placementStartMonthRow = {
-    key: {
-      text: "Start month",
-      _text: "Location name or URN"
-    },
-    value: {
-      text: placementStartMonth or 'Not provided'
-    },
-    actions: {
-      items: [
-        {
-          href: recordPath + "/placements/" + placement.id + "/details" | addReferrer(referrer),
-          text: "Change",
-          visuallyHiddenText: "placement start month"
-        }
-      ]
-    } if canAmend
-  } %}
-
-{% endfor %}
+{% set placementStartMonthRow = {
+  key: {
+    text: "Start month",
+    _text: "Location name or URN"
+  },
+  value: {
+    text: placementStartMonth or 'Not provided'
+  },
+  actions: {
+    items: [
+      {
+        href: recordPath + "/placements/" + placement.id + "/details" | addReferrer(referrer),
+        text: "Change",
+        visuallyHiddenText: "placement start month"
+      }
+    ]
+  } if canAmend
+} %}
 
 {% set placementDurationLabel %}
   {{placement.duration}} {{ 'week' | pluralise (placement.duration | int) }}
@@ -76,115 +64,26 @@
   } if canAmend
 } %}
 
-{% set valueText %}
-  {% if record.placement.hasPlacements == "Not yet" %}
-    Placements are not yet known
-  {% else %}
-    Placements are not required for this trainee<br>
-    {% if record.placement.placementsNotRequiredReason %}
-      Reason: {{record.placement.placementsNotRequiredReason}}
-    {% else %}
-      Reason:  Not provided
-    {% endif %}
-  {% endif %}
-{% endset %}
+{% set placementDetailsRows = [
+  placementLocationRow,
+  placementStartMonthRow,
+  placementDurationRow
+] %}
 
-{% set placementsDetailsNotAvailableRow = {
-  key: {
-    text: "Placements"
-  },
-  value: {
-    html: valueText or 'Not provided'
-  },
-  actions: {
-    items: [
-      {
-        href: recordPath + "/placements/can-add-placement" | addReferrer(referrer),
-        text: "Change",
-        visuallyHiddenText: "placement details"
-      }
-    ]
-  } if canAmend
-} %}
-
-{# {% set placementDetailsRows = [] %} #}
-
-{# {% for placement in placements %} #}
-
-{% if placementCount == 0 %}
-
-    {% set placementDetailsRows = [
-      placementsDetailsNotAvailableRow
-    ] %}
-
-    {% set placementDetailsHtml %}
-      {{ govukSummaryList({
-        rows: placementDetailsRows
-      }) }}
-    {% endset %}
-
-    {{ appSummaryCard({
-      classes: "govuk-!-margin-bottom-6",
-      titleText: 'Placement details',
-      html: placementDetailsHtml
-    }) }}
-
-{% else %}
-
-  {% set placementDetailsRows = [
-    placementLocationRow,
-    placementStartMonthRow,
-    placementDurationRow
-  ] %}
-
-  {% set placementDetailsHtml %}
-    {{ govukSummaryList({
-      rows: placementDetailsRows
-    }) }}
-  {% endset %}
-
-  {% for placement in placements %}
-    {{ appSummaryCard({
-      classes: "govuk-!-margin-bottom-6",
-      titleText: 'Placement ' + loop.index + ' details',
-      actions: {
-        items: [{
-          href: recordPath + "/placements/" + placement.id + "/delete" | addReferrer(referrer),
-          text: "Delete placement"
-        }]
-      } if canAmend,
-      html: placementDetailsHtml
-    }) }}
-  {% endfor %}
-
-
-{% endif %}
-
-  {# {% set placementDetailsRows = placementDetailsRows | push(
-    placementLocationRow,
-    placementStartMonthRow,
-    placementDurationRow
-  ) %} #}
-
-{# {% endfor %} #}
-
-{# {% set placementDetailsHtml %}
+{% set placementDetailsHtml %}
   {{ govukSummaryList({
     rows: placementDetailsRows
   }) }}
-{% endset %} #}
+{% endset %}
 
-{# {% for placement in placements %} #}
-  {# {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    titleText: 'Placement ' + loop.index + ' details',
-    actions: {
-      items: [{
-        href: recordPath + "/placements/" + placement.id + "/delete" | addReferrer(referrer),
-        text: "Delete placement"
-      }]
-    } if canAmend,
-    html: placementDetailsHtml
-  }) }} #}
-{# {% endfor %} #}
-
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  titleText: 'Placement ' + loop.index + ' details',
+  actions: {
+    items: [{
+      href: recordPath + "/placements/" + placement.id + "/delete" | addReferrer(referrer),
+      text: "Delete placement"
+    }]
+  } if canAmend,
+  html: placementDetailsHtml
+}) }}

@@ -3,9 +3,6 @@
 {% set minPlacementsRequired = data.settings.minPlacementsRequired %}
 {% set needsPlacementDetails = record.placement.status != 'Complete'%}
 
-{{ placementCount | log }}
-{{ minPlacementsRequired | log }}
-
 {% if record | hasOutstandingActions %}
 
     {{ govukErrorSummary({

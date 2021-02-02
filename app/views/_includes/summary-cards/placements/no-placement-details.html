@@ -1,16 +1,3 @@
-{# {% set valueText %}
-  {% if record.placement.hasPlacements == "Not yet" %}
-    Placements are not yet known
-  {% else %}
-    Placements are not required for this trainee<br>
-    {% if record.placement.placementsNotRequiredReason %}
-      Reason: {{record.placement.placementsNotRequiredReason}}
-    {% else %}
-      Reason:  Not provided
-    {% endif %}
-  {% endif %}
-{% endset %} #}
-
 {% set placementsDetailsNotAvailableRow = {
   key: {
     text: "Placements"

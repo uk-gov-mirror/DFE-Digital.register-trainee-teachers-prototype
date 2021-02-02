@@ -27,22 +27,25 @@
     }) }}
   </div>
 
-  {# Don't show checkbox if there are no placements #}
-  {# {% if placementCount > 0 %} #}
-    {# {{ govukCheckboxes({
-      idPrefix: "placement-section-complete",
-      name: "record[placement][status]",
-      items: [
-        {
-          value: "Completed",
-          text: "All placements have been added for this trainee",
-          checked: checked(record.placement.status, "Completed")
-        }
-      ]
-      }) }} #}
-  {# {% endif %} #}
+  {{ govukCheckboxes({
+    fieldset: {
+      legend: {
+        text: "Have all placement details been added for the duration of the course?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    idPrefix: "placement-section-complete",
+    name: "record[placement][status]",
+    items: [
+      {
+        value: "Complete",
+        text: "Yes, all placements have been added",
+        checked: checked(record.placement.status, "Complete")
+      }
+    ]
+  }) }}
 
-
+{# 
   {{ govukRadios({
     fieldset: {
       legend: {
@@ -60,7 +63,7 @@
         text: "Yes, all placements for the course have been added"
       }
     ]
-  } | decorateAttributes(record, "record.placement.status")) }}
+  } | decorateAttributes(record, "record.placement.status")) }} #}
 
   {{ govukButton({
     text: "Continue"
