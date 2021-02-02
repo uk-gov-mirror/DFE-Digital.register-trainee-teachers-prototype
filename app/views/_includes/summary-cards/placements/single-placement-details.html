@@ -1,48 +1,60 @@
 {% set placements = record.placement.items %}
 {% set placementCount = record.placement.items | length %}
 
-{% set placementLocationRow = {
-  key: {
-    text: "Location"
-  },
-  value: {
-    text: placement.location or 'Not provided'
-  },
-  actions: {
-    items: [
-      {
-        href: recordPath + "/placements/" + placement.id + "/details" | addReferrer(referrer),
-        text: "Change",
-        visuallyHiddenText: "placement location"
-      }
-    ]
-  } if canAmend
-} %}
+{% set placementLocationRow = [] %}
+
+{% for placement in placements %}
+
+  {% set placementLocationRow = {
+    key: {
+      text: "Location"
+    },
+    value: {
+      text: placement.location or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/placements/" + placement.id + "/details" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "placement location"
+        }
+      ]
+    } if canAmend
+  } %}
+
+{% endfor %}
 
 {% set placementStartMonth  %}
   {{ placement.startMonth | prettyMonth }}
 {% endset %}
 
-{% set placementStartMonthRow = {
-  key: {
-    text: "Start month",
-    _text: "Location name or URN"
-  },
-  value: {
-    text: placementStartMonth or 'Not provided'
-  },
-  actions: {
-    items: [
-      {
-        href: recordPath + "/placements/" + placement.id + "/details" | addReferrer(referrer),
-        text: "Change",
-        visuallyHiddenText: "placement start month"
-      }
-    ]
-  } if canAmend
-} %}
+{% set placementStartMonthRow = [] %}
 
-{% set placementDurationLabel  %}
+{% for placement in placements %}
+
+  {% set placementStartMonthRow = {
+    key: {
+      text: "Start month",
+      _text: "Location name or URN"
+    },
+    value: {
+      text: placementStartMonth or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/placements/" + placement.id + "/details" | addReferrer(referrer),
+          text: "Change",
+          visuallyHiddenText: "placement start month"
+        }
+      ]
+    } if canAmend
+  } %}
+
+{% endfor %}
+
+{% set placementDurationLabel %}
   {{placement.duration}} {{ 'week' | pluralise (placement.duration | int) }}
 {% endset %}
 
@@ -64,31 +76,59 @@
   } if canAmend
 } %}
 
-{% set placementDetailsRows = [
-  placementLocationRow,
-  placementStartMonthRow,
-  placementDurationRow
-] %}
-
-{# {% for placement in placements %} #}
-
-  {% set placementDetailsHtml %}
-    {{ govukSummaryList({
-      rows: placementDetailsRows
-    }) }}
-  {% endset %}
-
-{# {% endfor %} #}
-
-{{ appSummaryCard({
-  classes: "govuk-!-margin-bottom-6",
-  titleText: 'Placement ' + loop.index + ' details',
+{% set placementsDetailsNotAvailableRow = {
+  key: {
+    text: "Placements"
+  },
+  value: {
+    text: 'Placements are not yet known' or 'Not provided'
+  },
   actions: {
-    items: [{
-      href: recordPath + "/placements/" + placement.id + "/delete" | addReferrer(referrer),
-      text: "Delete placement"
-    }]
-  } if canAmend,
-  html: placementDetailsHtml
-}) }}
+    items: [
+      {
+        href: recordPath + "/placements/can-add-placement" | addReferrer(referrer),
+        text: "Change",
+        visuallyHiddenText: "placement details"
+      }
+    ]
+  } if canAmend
+} %}
+
+{% set placementDetailsRows = [] %}
+
+{% for placement in placements %}
+
+  {% set placementDetailsRows = [
+    placementLocationRow,
+    placementStartMonthRow,
+    placementDurationRow
+  ] %}
+
+  {# {% set placementDetailsRows = placementDetailsRows | push(
+    placementLocationRow,
+    placementStartMonthRow,
+    placementDurationRow
+  ) %} #}
+
+{% endfor %}
+
+{% set placementDetailsHtml %}
+  {{ govukSummaryList({
+    rows: placementDetailsRows
+  }) }}
+{% endset %}
+
+{% for placement in placements %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    titleText: 'Placement ' + loop.index + ' details',
+    actions: {
+      items: [{
+        href: recordPath + "/placements/" + placement.id + "/delete" | addReferrer(referrer),
+        text: "Delete placement"
+      }]
+    } if canAmend,
+    html: placementDetailsHtml
+  }) }}
+{% endfor %}
 

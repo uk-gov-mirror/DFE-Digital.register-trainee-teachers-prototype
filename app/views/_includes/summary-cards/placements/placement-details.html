@@ -3,6 +3,7 @@
 
 {% set placements = record.placement.items %}
 {% set placementCount = record.placement.items | length %}
+
 {% set sectionIsRequired = record | requiresSection("placement") %}
 
 {% if not sectionIsRequired %}
@@ -39,9 +40,9 @@
     {# {% include "_includes/summary-cards/placements/no-placement-details.html" %} #}
     {# {% include "_includes/summary-cards/placements/single-placement-details.html" %} #}
 
-    {% for placement in placements %}
+    {# {% for placement in placements %} #}
       {% include "_includes/summary-cards/placements/single-placement-details.html" %}
-    {% endfor %}
+    {# {% endfor %} #}
 
     {# {% if record.placement.hasPlacements == "Not yet" %}
     
