@@ -1,6 +1,10 @@
 {% set placementCount = record.placement.items | length %}
 {% set hasCommencementDate = record.trainingDetails.traineeStarted | falsify %}
-{% set needsPlacementDetails = record.placement.status != 'Complete' and record.placement.hasPlacements != "Not required" %}
+{% set minPlacementsRequired = data.settings.minPlacementsRequired %}
+{% set needsPlacementDetails = record.placement.status != 'Complete' and record.placement.hasPlacements != "Not required"%}
+
+{{ placementCount | log }}
+{{ minPlacementsRequired | log }}
 
 {% if record | hasOutstandingActions %}
 
@@ -9,8 +13,8 @@
       classes: "govuk-error-summary--advisory",
       errorList: [
         {
-          text: "Confirm training placement details are complete" if placementCount > 0 else "Add placement details",
-          href: recordPath + "/placements/confirm" | addReferrer(referrer) if placementCount > 0 else recordPath + "/placements/can-add-placement" | addReferrer(referrer)
+          text: "Confirm training placement details are complete" if placementCount >= minPlacementsRequired else "Add placement details",
+          href: recordPath + "/placements/confirm" | addReferrer(referrer) if placementCount >= minPlacementsRequired else recordPath + "/placements/can-add-placement" | addReferrer(referrer)
         } if needsPlacementDetails,
         {
           text: "Provide a start date",
