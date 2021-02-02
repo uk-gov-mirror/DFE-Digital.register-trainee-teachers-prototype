@@ -18,7 +18,7 @@
     {% set incompleteLinkText = "Complete section" %}
   {% else %}
     {% set incompleteText = "Placement details not started" %}
-    {% set incompleteLink = recordPath + "/placements/check-for-placements" | addReferrer(referrer) %}
+    {% set incompleteLink = recordPath + "/placements/can-add-placement" | addReferrer(referrer) %}
     {% set incompleteLinkText = "Start section" %}
   {% endif %}
 
@@ -26,8 +26,10 @@
 
 {% else %}
 
-  {% if placementCount == 0 %}
+  {% if record.placement.hasPlacements == "Not yet"%}
     {% include "_includes/summary-cards/placements/no-placement-details.html" %}
+  {% elseif placementCount == 0 %}
+    <p class="govuk-body">No placements have been added.<p>
   {% else %}
     {% for placement in placements %}
       {% include "_includes/summary-cards/placements/single-placement-details.html" %}
