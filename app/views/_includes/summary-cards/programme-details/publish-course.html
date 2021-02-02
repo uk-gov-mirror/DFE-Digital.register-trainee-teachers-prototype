@@ -5,30 +5,13 @@
 {% endif %}
 
 {% set courseName %}
-  {{programmeDetails.subject}} ({{programmeDetails.code}})<br>
+  {{programmeDetails | getCourseName}}</br>
   {{programmeDetails.summary}}
 {% endset %}
 
 {# {% set canAmend = false %} #}
 
 {% set programmeDetailsRows = [
-  {
-    key: {
-      text: "Training course"
-    },
-    value: {
-      text: courseName | safe or 'Not provided'
-    },
-    actions: {
-      items: [
-        {
-          href: recordPath + "/programme-details" | addReferrer(referrer),
-          text: "Change course",
-          visuallyHiddenText: "training course"
-        }
-      ]
-    } if canAmend
-  },
   {
     key: {
       text: "Route"
@@ -45,6 +28,23 @@
         }
       ]
     } if canAmend and false
+  } if record.status !="Draft",
+  {
+    key: {
+      text: "Course details"
+    },
+    value: {
+      text: courseName | safe or 'Not provided'
+    },
+    actions: {
+      items: [
+        {
+          href: recordPath + "/programme-details" | addReferrer(referrer),
+          text: "Change course",
+          visuallyHiddenText: "course"
+        }
+      ]
+    } if canAmend
   },
   {
     key: {

@@ -26,7 +26,7 @@ exports.falsify = (input) => {
   return input;
 }
 
-// Sort two things alphabetically, case insentitively
+// Sort two things alphabetically, not case-sensitive
 exports.sortAlphabetical = (x, y) => {
   if(x.toLowerCase() !== y.toLowerCase()) {
     x = x.toLowerCase();
@@ -35,7 +35,7 @@ exports.sortAlphabetical = (x, y) => {
   return x > y ? 1 : (x < y ? -1 : 0);
 }
 
-// Loosely copied from lib/utils
+// Loosely copied from /lib/utils
 // Allows a template to live at 'foo/index' and be served from 'foo'
 // The kit normally does this by defualt, but not if you want to do your
 // own GET / POST routes
@@ -99,6 +99,44 @@ exports.requiresSection = (record, sectionName) => {
   return requiredSections.includes(sectionName)
 }
 
+// Sort by subject, including course code
+exports.sortPublishCourses = courses => {
+  let sorted = courses.sort((a, b) => {
+    let aString = `${a.subject} (${a.code})`
+    let bString = `${b.subject} (${b.code})`
+    return exports.sortAlphabetical(aString, bString)
+  })
+  return sorted
+}
+
+// Return courses run by the current provider
+// If run as a filter, data comes via Nunjucks context. If run from elsewhere,
+// we need to explicitly pass in data.
+exports.getProviderCourses = function(courses, provider, route=false, data=false){
+  data = data || this?.ctx?.data || false
+  if (!data) {
+    console.log("Error with getProviderCourses: session data not provided")
+  }
+  if (!provider) {
+    console.log('Error: no provider given')
+  }
+  let filteredCourses = data.courses[provider].courses
+  if (route) {
+    filteredCourses = filteredCourses.filter(course => route == course.route)
+  }
+  let limitedCourses = filteredCourses.slice(0, data.settings.courseLimit)
+  let sortedCourses = exports.sortPublishCourses(limitedCourses)
+  return sortedCourses
+}
+
+// Check if the selected provider offers publish courses for the selected route
+exports.routeHasPublishCourses = function(record){
+  if (!record) return false
+  const data = Object.assign({}, this.ctx.data)
+  let providerCourses = exports.getProviderCourses(data.courses, record?.provider, record.route, data)
+  return (providerCourses.length > 0)
+}
+
 // -------------------------------------------------------------------
 // Records
 // -------------------------------------------------------------------
@@ -146,11 +184,8 @@ exports.filterByProvider = (records, array) => {
 }
 
 // Filter records for currently signed in providers
-// Can’t be an arrow function because we need access to the context
+// Can’t be an arrow function because we need access to the Nunjucks context
 exports.filterBySignedIn = function(records, data=false){
-  // Needs session data to know which providers are signed-in
-  // This can either be passed in directly, or if being run via a
-  // filter then we can grab from the context
   data = data || this?.ctx?.data || false
   if (!data) {
     console.log('Error with filterBySignedIn: session data not provided')

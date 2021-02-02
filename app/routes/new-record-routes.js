@@ -20,34 +20,8 @@ module.exports = router => {
     else {
       // If single provider, directly assign them to the record
       data.record.provider = data.signedInProviders[0]
-      res.redirect('/new-record/overview')
+      res.redirect('/new-record/select-route')
     }
-  })
-
-  // Show error if route is not assessment only
-  router.post('/new-record/record-setup', function (req, res) {
-    const data = req.session.data
-    let recordType = _.get(data, 'record.route') // Assessment only or not
-    let referrer = utils.getReferrer(req.query.referrer)
-
-    // No data, return to page
-    if (!recordType){
-      res.redirect(`/new-record/record-setup${referrer}`)
-    }
-    // Route not supported
-    else if (recordType == "Other") {
-      res.redirect(`/new-record/route-not-supported${referrer}`)
-    }
-    else {
-      // Coming from the check answers page
-      if (referrer){
-        res.redirect(req.query.referrer)
-      }
-      else {
-        res.redirect(`/new-record/overview`)
-      }
-    }
-   
   })
 
   // We *really* need the provider to get set, so don't let users past
@@ -67,10 +41,49 @@ module.exports = router => {
       if (referrer){
         res.redirect(req.query.referrer)
       }
+      else if (record.route) {
+        res.redirect(`/new-record/overview`)
+      }
+      else {
+        res.redirect(`/new-record/select-route`)
+      }
+    }
+  })
+
+  // Show error if route is not assessment only
+  router.post('/new-record/select-route-answer', function (req, res) {
+    const data = req.session.data
+    let record = data.record
+    let route = record?.route
+    let referrer = utils.getReferrer(req.query.referrer)
+    let existingProgrammeDetails = record?.programmeDetails
+
+    // No data, return to page
+    if (!route){
+      res.redirect(`/new-record/select-route${referrer}`)
+    }
+    // Route not supported
+    else if (route == "Other") {
+      res.redirect(`/new-record/route-not-supported${referrer}`)
+    }
+    else {
+
+      // It’s possible for a user to pick a Publish course, then go back to change the
+      // route to one that doesn’t have publish courses. If they do this, we delete the
+      // programme details section
+      if (existingProgrammeDetails?.isPublishCourse && route != existingProgrammeDetails?.route){
+        delete record.programmeDetails
+      }
+      
+      // Coming from the check answers page
+      if (referrer){
+        res.redirect(req.query.referrer)
+      }
       else {
         res.redirect(`/new-record/overview`)
       }
     }
+   
   })
 
   // Task list confirmation page - pass errors to page

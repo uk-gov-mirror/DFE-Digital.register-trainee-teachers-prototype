@@ -31,27 +31,23 @@ module.exports = router => {
 
   // Show pick-course or pick-route depending on if current provider has courses
   // on Publish
+
   router.get(['/:recordtype/:uuid/programme-details','/:recordtype/programme-details'], function (req, res) {
     const data = req.session.data
     const record = data.record
     let recordPath = utils.getRecordPath(req)
     let referrer = utils.getReferrer(req.query.referrer)
 
-    // Todo: should this scope by academic year?
-    let providerCourses = data.courses[record.provider].courses
-    // Filter routes we're not yet supporting
-    let filteredCourses = providerCourses.filter(course => {
-      return data.settings.enabledTrainingRoutes.includes(course.route)
-    })
-    // Artificially limit count of courses for UR
-    let limitedCourses = filteredCourses.splice(0, data.settings.courseLimit)
+    let route = data.record?.route
+    let providerCourses = utils.getProviderCourses(data.courses, record.provider, route, data)
 
-    if (limitedCourses.length) {
+    // Some courses for selected route
+    if (providerCourses.length) {
       res.redirect(`${recordPath}/programme-details/pick-course${referrer}`)
     }
-    // If no courses, go straight to route selection
+    // If no courses, go straight to programme details
     else {
-      res.redirect(`${recordPath}/programme-details/pick-route${referrer}`)
+      res.redirect(`${recordPath}/programme-details/details${referrer}`)
     }
   })
 
@@ -62,37 +58,55 @@ module.exports = router => {
     let recordPath = utils.getRecordPath(req)
     let referrer = utils.getReferrer(req.query.referrer)
     let enabledRoutes = data.settings.enabledTrainingRoutes
-    // Todo: make this selection of providers dynamic
-    let providerCourses = data.courses[record.provider].courses
+    let route = record?.route
+    let providerCourses = utils.getProviderCourses(data.courses, record.provider, route, data)
     let selectedCourse = _.get(data, 'record.selectedCourseTemp')
 
+    // User shouldn’t have been on this page, send them to details
+    if (providerCourses.length == 0){
+      res.redirect(`${recordPath}/programme-details/details${referrer}`)
+    }
     // No data, return to page
-    if (!selectedCourse){
+    else if (!selectedCourse){
       res.redirect(`${recordPath}/programme-details/pick-course${referrer}`)
     }
     else if (selectedCourse == "Other"){
       if (_.get(record, 'programmeDetails.isPublishCourse')){
         // User has swapped from a publish to a non-publish course. Delete existing data
         delete record.programmeDetails
-        delete record.route
       }
-      res.redirect(`${recordPath}/programme-details/pick-route${referrer}`)
+      res.redirect(`${recordPath}/programme-details/details${referrer}`)
     }
 
     else {
       // selectedCourse could be an id of a course or a radio that contains an autocomplete
       if (selectedCourse == "publish-course") {
+
+        // Default value from select (used by defualt for no-js)
         selectedCourse = _.get(data, 'record.selectedCourseAutocompleteTemp')
+
+        // Read the raw autocomplete value.
+        // We can’t read the autocomplete value from the select because the Publish autocomplete
+        // values include hints, so the correct option in the select doesn’t get chosen by the js.
+        // Instead we read the raw value of the autocomplete input itself and map that string back
+        // to the id of the course.
+        let selectedCourseRawAutocomplete = req.body._autocompleteRawValue_publishCourse
+        // Will only exist if js
+        if (selectedCourseRawAutocomplete){
+          selectedCourse = providerCourses.find(course => {
+            return `${course.subject} (${course.code})` == req.body._autocompleteRawValue_publishCourse
+          })?.id
+        }
       }
       // Assume everything else is a course id
-      courseIndex = providerCourses.findIndex(course => course.id == selectedCourse)
-      if (courseIndex < 0){
+      let courseIndex = (selectedCourse) ? providerCourses.findIndex(course => course.id == selectedCourse) : false
+      if (!courseIndex || courseIndex < 0){
         // Nothing found for current provider (something has gone wrong)
         console.log(`Provider course ${selectedCourse} not recognised`)
         res.redirect(`${recordPath}/programme-details/pick-course${referrer}`)
       }
       else {
-        // Copy over that provider's course data
+        // Copy over that provider’s course data
         record.programmeDetails = providerCourses[courseIndex]
         res.redirect(`${recordPath}/programme-details/confirm-publish-details${referrer}`)
       }
@@ -110,7 +124,6 @@ module.exports = router => {
     let referrer = utils.getReferrer(req.query.referrer)
     let recordPath = utils.getRecordPath(req)
     // Copy route up to higher level
-    record.route = record.programmeDetails.route
     delete record.selectedCourseTemp
     delete record.selectedCourseAutocompleteTemp
 

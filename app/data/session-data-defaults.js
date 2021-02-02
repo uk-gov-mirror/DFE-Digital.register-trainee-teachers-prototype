@@ -21,6 +21,8 @@ let notPassedReasons       = require('./not-passed-reasons')
 // Different training routes
 let trainingRouteData          = require('./training-route-data')
 let trainingRoutes = trainingRouteData.trainingRoutes
+let publishRoutes = trainingRouteData.publishRoutes
+let nonPublishRoutes = trainingRouteData.nonPublishRoutes
 let allTrainingRoutes       = Object.values(trainingRoutes).map(route => route.name)
 
 let courses                 = require('./courses.json')
@@ -119,6 +121,8 @@ module.exports = {
   statuses,
   subjects,
   trainingRoutes,
+  publishRoutes,
+  nonPublishRoutes,
   ukComparableDegrees,
   withdrawalReasons
 }
