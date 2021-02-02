@@ -109,16 +109,13 @@ exports.recordIsComplete = record => {
 // Check if there are outsanding actions (Either adding start date or placements details)
 exports.hasOutstandingActions = function(record, data = false) {
 
-  data = data || this.ctx.data || false
+  data = Object.assign({}, (data || this.ctx.data || false))
 
   let hasOutstandingActions = false
   let traineeStarted = record?.trainingDetails?.commencementDate
-  let placementCount = record?.placement?.items.length
+  let placementCount = (record?.placement?.items) ? record.placement.items.length : 0
   let minPlacementsRequired = data.settings.minPlacementsRequired
   let needsPlacementDetails = (record?.placement?.status != 'Complete') && (placementCount <= minPlacementsRequired)
-
-  console.log(minPlacementsRequired)
-  console.log(placementCount)
 
   if (!traineeStarted) {
     hasOutstandingActions = true
