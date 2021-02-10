@@ -16,21 +16,34 @@ module.exports = (params) => {
     }
   }
 
-  const count = weighted.select({
+  let count = weighted.select({
     0: 0.5,
     1: 0.3,
     2: 0.2
   })
+
+  let status
+
+  console.log(params)
+
+  // override for these statuses
+  if (params?.status == 'QTS recommended' || params?.status == 'QTS awarded') {
+    count = 2
+    status = 'Complete'
+  }
 
   const items = []
   for (var i = 0; i < count; i++) {
     items.push(item(faker))
   }
 
-  if (params?.hasPlacements == 'Not yet') {
+  if (params?.placement?.hasPlacements == 'Not yet') {
     return {}
   } else {
-    return {items: items}
+    return {
+      items: items, 
+      status
+    }
   }
 
 }

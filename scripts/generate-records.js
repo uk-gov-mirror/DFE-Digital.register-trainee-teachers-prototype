@@ -165,7 +165,7 @@ const generateFakeApplication = (params = {}) => {
   }
   
   // Placements
-  let placement = (params.placement === null) ? undefined : { ...generatePlacement(params.placement), ...params.placement }
+  let placement = (params.placement === null) ? undefined : { ...generatePlacement(params), ...params.placement }
 
   return {
     id: params.id || faker.random.uuid(),
