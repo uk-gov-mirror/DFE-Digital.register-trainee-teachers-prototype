@@ -1,7 +1,7 @@
 {% set placementCount = record.placement.items | length %}
 {% set hasCommencementDate = record.trainingDetails.traineeStarted | falsify %}
 {% set minPlacementsRequired = data.settings.minPlacementsRequired %}
-{% set needsPlacementDetails = record.placement.status != 'Complete' or placementCount <= minPlacementsRequired %}
+{% set needsPlacementDetails = record.placement.status != 'Complete' or placementCount < minPlacementsRequired %}
 
 {% if record | hasOutstandingActions %}
 
