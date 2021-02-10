@@ -29,7 +29,7 @@
   {% if record.placement.hasPlacements == "Not yet"%}
     {% include "_includes/summary-cards/placements/no-placement-details.html" %}
   {% elseif placementCount == 0 %}
-    <p class="govuk-body">No placements have been added.<p>
+    <p class="govuk-body">You have not added any placements yet.<p>
   {% else %}
     {% for placement in placements %}
       {% include "_includes/summary-cards/placements/single-placement-details.html" %}
