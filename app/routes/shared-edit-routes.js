@@ -381,15 +381,14 @@ module.exports = router => {
     // Are they able to add placement details? (Shared on both draft and record)
     if (record.placement.hasPlacements == 'Yes'){
       // carry on and add one
+      delete record.placement.status
       res.redirect(`${recordPath}/placements/add${referrer}`)
     }
     // Record specific routes
     if (req.params.recordtype == 'record') {
-      if (record.placement.hasPlacements == 'Not yet'){
+      utils.updateRecord(data, record)
 
-        // if (data.record.placement.items.length == 0){
-        //   delete data.record.placement
-        // }
+      if (record.placement.hasPlacements == 'Not yet'){
     
         // send them back to the record
         if (referrer){
@@ -405,15 +404,15 @@ module.exports = router => {
       if (record.placement.hasPlacements == 'Not yet') {
         
         // mark the Placements section as complete
-        // _.set(record,'placement.status',"Completed")
+        _.set(record,'placement.status',"Completed")
         
         // send them to the confirmation
         if (referrer){
           res.redirect(req.query.referrer)
         }
         else {
-          // res.redirect(`${recordPath}/overview`)
-          res.redirect(`${recordPath}/placements/confirm${referrer}`)
+          res.redirect(`${recordPath}/overview`)
+          // res.redirect(`${recordPath}/placements/confirm${referrer}`)
         }
       }
     }
@@ -443,25 +442,33 @@ module.exports = router => {
     let referrer = utils.getReferrer(req.query.referrer)
     let placements = data.record?.placement?.items || []
     let placementIndex = placements.findIndex(placement => placement.id == placementUuid)
+    let minPlacementsRequired = data.settings.minPlacementsRequired
     
     if (_.get(data, "record.placement.items[" + placementIndex + "]")){
       _.pullAt(data.record.placement.items, [placementIndex]) //delete item at index
       // Clear data if there are no more degrees - so the task list thinks the section is not started
       req.flash('success', 'Trainee placement deleted')
+      
       // Delete degree section if it’s empty
       if (data.record.placement.items.length == 0){
-        res.redirect(`${recordPath}/placements/can-add-placement${referrer}`)
         delete data.record.placement
       }
-    }
-    if (referrer){
-      if (req.params.recordtype == 'record'){
-        // This updates the record immediately without a confirmation.
-        // Probably needs a bespoke confirmation page as the empty placement
-        // confirmation page looks weird - and we probably don't want
-        // records without a placement anyway.
-        utils.updateRecord(data, data.record)
+      // Ensure section can't be complete if less than required placements
+      else if (data.record.placement.items.length < minPlacementsRequired) {
+        delete data.record.placement.status
       }
+    }
+    if (req.params.recordtype == 'record'){
+      // This updates the record immediately without a confirmation.
+      // Probably needs a bespoke confirmation page as the empty placement
+      // confirmation page looks weird - and we probably don't want
+      // records without a placement anyway.
+      utils.updateRecord(data, data.record)
+    }
+    if (!data.record?.placement){
+      res.redirect(`${recordPath}/placements/can-add-placement${referrer}`)
+    } 
+    else if (referrer){
       res.redirect(req.query.referrer)
     }
     else {
