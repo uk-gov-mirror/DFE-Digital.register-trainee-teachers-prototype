@@ -405,14 +405,15 @@ module.exports = router => {
       if (record.placement.hasPlacements == 'Not yet') {
         
         // mark the Placements section as complete
-        _.set(record,'placement.status',"Completed")
+        // _.set(record,'placement.status',"Completed")
         
-        // send them back to the overview
+        // send them to the confirmation
         if (referrer){
           res.redirect(req.query.referrer)
         }
         else {
-          res.redirect(`${recordPath}/overview`)
+          // res.redirect(`${recordPath}/overview`)
+          res.redirect(`${recordPath}/placements/confirm${referrer}`)
         }
       }
     }
@@ -429,7 +430,7 @@ module.exports = router => {
     let referrer = utils.getReferrer(req.query.referrer)
     let placementUuid = faker.random.uuid()
     
-    delete data.placementTemp
+    // delete data.placementTemp
     
     res.redirect(`${recordPath}/placements/${placementUuid}/details${referrer}`)
   }) 
