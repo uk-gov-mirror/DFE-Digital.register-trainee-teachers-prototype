@@ -315,7 +315,7 @@ const getSelectedProviders = () => {
   })
   
   reducedProviders = reducedProviders.concat(permProviders).sort()
-  return [...reducedProviders] // Uniq
+  return [...new Set(reducedProviders)] // Uniq
 }
 
 module.exports = {
