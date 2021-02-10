@@ -366,55 +366,6 @@ module.exports = router => {
   // =============================================================================
   // Placements
   // =============================================================================
-
-  // Not used: Check for placements - sends them onwards or back to the overview
-  // router.post(['/:recordtype/placements/check-placement-answer','/:recordtype/placements/check-placement-answer'], function (req, res) {
-  //   const data = req.session.data
-    
-  //   let recordPath = utils.getRecordPath(req)
-  //   let referrer = utils.getReferrer(req.query.referrer)
-  //   let record = data.record // copy record
-
-  //   if (!record?.placement?.hasPlacements) {
-  //     res.redirect(`${recordPath}/placements/check-for-placements${referrer}`)
-  //   }
-
-  //   // Do they have placement detials yet?
-  //   else if (record.placement.hasPlacements == 'Yes'){
-  //     // carry on and add one
-  //     res.redirect(`${recordPath}/placements/add${referrer}`)
-  //   }
-  //   else if (record.placement.hasPlacements == 'Not required'){
-  //     // Send them to a confirm page but with a different summary card
-  //     // res.redirect(`${recordPath}/placements/confirm${referrer}`)
-
-  //     // mark the Placements section as complete
-  //     _.set(record,'placement.status',"Completed")
-  //     // send them back to the overview
-  //     if (referrer){
-  //       res.redirect(req.query.referrer)
-  //     }
-  //     else {
-  //       res.redirect(`${recordPath}/overview`)
-  //     }
-  //   }
-  //   else if (record.placement.hasPlacements == 'Not yet'){
-  //     // mark the Placements section as complete
-  //     _.set(record,'placement.status',"Completed")
-  //     // send them back to the overview
-  //     if (referrer){
-  //       res.redirect(req.query.referrer)
-  //     }
-  //     else {
-  //       res.redirect(`${recordPath}/overview`)
-  //     }
-  //   }
-
-  //   else {
-  //     res.redirect(`${recordPath}/placements/check-for-placements${referrer}`)
-  //   }
-    
-  // })
   
   // Record: Can they add placements? Sends them onwards or marks placements complete
   router.post(['/:recordtype/:uuid/placements/can-add-placement-answer','/:recordtype/placements/can-add-placement-answer'], function (req, res) {
@@ -433,24 +384,22 @@ module.exports = router => {
       res.redirect(`${recordPath}/placements/add${referrer}`)
     }
     // Record specific routes
-    // if (req.params.recordtype == 'record') {
-    //   if (record.placement.hasPlacements == 'Not required'){
-      
-    //     // Set the placements status as complete
-    //     _.set(record,'record.placement.status',"Complete")
-    //     utils.updateRecord(data, record)
+    if (req.params.recordtype == 'record') {
+      if (record.placement.hasPlacements == 'Not yet'){
 
-    //     // req.flash('success', 'Trainee record updated')
-  
-    //     // send them back to the record
-    //     if (referrer){
-    //       res.redirect(req.query.referrer)
-    //     }
-    //     else {
-    //       res.redirect(`${recordPath}`)
-    //     }
-    //   }
-    // } 
+        // if (data.record.placement.items.length == 0){
+        //   delete data.record.placement
+        // }
+    
+        // send them back to the record
+        if (referrer){
+          res.redirect(req.query.referrer)
+        }
+        else {
+          res.redirect(`${recordPath}`)
+        }
+      }
+    } 
     // Draft specific routes
     else if (req.params.recordtype != 'record') {
       if (record.placement.hasPlacements == 'Not yet') {
@@ -500,6 +449,7 @@ module.exports = router => {
       req.flash('success', 'Trainee placement deleted')
       // Delete degree section if it’s empty
       if (data.record.placement.items.length == 0){
+        res.redirect(`${recordPath}/placements/can-add-placement${referrer}`)
         delete data.record.placement
       }
     }
