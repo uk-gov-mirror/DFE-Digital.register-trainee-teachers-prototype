@@ -1,13 +1,3 @@
-{% set customPlacementsNotRequiredReason %}
-  {{ govukInput({
-    label: {
-        text: "Enter the reason why",
-        classes: "govuk-label govuk-label--s"
-    },
-    classes: "govuk-!-width-two-thirds"
-  } | decorateAttributes(record, "record.placement.placementsNotRequiredReason")) }}
-{% endset %}
-
 {{ govukRadios({
   fieldset: {
     legend: {

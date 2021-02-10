@@ -422,7 +422,7 @@ module.exports = router => {
     
   })
 
-  // Add a placement - sends you to index one greater than current number of placements
+  // Add a placement - generate a UUID and send the user to it
   router.get(['/:recordtype/:uuid/placements/add','/:recordtype/placements/add'], function (req, res) {
     const data = req.session.data
     let recordPath = utils.getRecordPath(req)
@@ -434,7 +434,7 @@ module.exports = router => {
     res.redirect(`${recordPath}/placements/${placementUuid}/details${referrer}`)
   }) 
 
-  // Delete placement at index
+  // Delete placement at a given UUID
   router.get(['/:recordtype/:uuid/placements/:placementUuid/delete','/:recordtype/placements/:placementUuid/delete'], function (req, res) {
     const data = req.session.data
     let recordPath = utils.getRecordPath(req)
