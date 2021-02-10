@@ -15,15 +15,13 @@
 {# Merge with temp store #}
 {% set placementTemp = placement | mergeObjects(data.placementTemp) %}
 
-{{record | log}}
-
 {{ govukInput({
   label: {
     text: "Enter the school, college name or reference number (URN)",
     classes: "govuk-label--s"
   },
   hint: {
-    html: "<p class='govuk-hint'>Names and URNs can be found on the <a href='https://www.get-information-schools.service.gov.uk/'>Get information about schools service</a>.</p> "
+    html: "You can <a href='https://www.get-information-schools.service.gov.uk/'>find URNs on the Get information about schools service</a>."
   },
   classes: "govuk-!-width-two-thirds"
 }| decorateAttributes(placementTemp, "placementTemp.location"))}}
@@ -96,8 +94,11 @@
 
 {{ govukInput({
   label: {
-    text: "How many weeks was the trainee placed there?",
+    text: "Approximate number of weeks",
     classes: "govuk-label--s"
+  },
+  suffix: {
+    text: "weeks"
   },
   classes: "govuk-!-width-one-quarter"
 }| decorateAttributes(placementTemp, "placementTemp.duration"))}}
