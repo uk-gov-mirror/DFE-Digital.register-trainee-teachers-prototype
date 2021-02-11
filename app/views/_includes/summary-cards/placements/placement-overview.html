@@ -1,22 +1,28 @@
 {% set placements = record.placement.items %}
 {% set placementCount = record.placement.items | length %}
 
-{% set placementLocationRows = [] %}
+{% set placementsList %}
+  <ul class="govuk-list">
+    {% for placement in placements %}
+    <li>
+      {{placement.location}}
+    </li>
+    {% endfor %}
+  </ul>
+{% endset %}
 
-{% for placement in placements %}
+{% set placementLocationRow = {
+  key: {
+    text: "Placements"
+  },
+  value: {
+    html: placementsList
+  }
+} %}
 
-  {% set placementLocationRows = placementLocationRows | push(
-    {
-      key: {
-        text: "Placement " + loop.index
-      },
-      value: {
-        text: placement.location or 'Not provided'
-      }
-    }
-  ) %}
-
-{% endfor %}
+{% set placementLocationRows = [
+  placementLocationRow
+] %}
 
 {% set placementDetailsHtml %}
   {{ govukSummaryList({
