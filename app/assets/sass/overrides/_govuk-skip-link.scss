@@ -38,10 +38,6 @@ $important: true;
 
 // The :focus parts of @mixin govuk-visually-hidden-focusable and .govuk-skip-link
 @mixin clear-visually-hidden-focusable {
-  outline: $govuk-focus-width solid $govuk-focus-colour;
-  outline-offset: 0;
-  background-color: $govuk-focus-colour;
-
   position: static if($important, !important, null);
 
   width: auto if($important, !important, null);
@@ -55,10 +51,10 @@ $important: true;
   white-space: inherit if($important, !important, null);
 }
 
-// Selecting on :focus-within and :not(:focus-within) should mean this rule only
-// applies to browsers that support the :focus-within pseudo property. Using this instead
-// of @supports as it doens't support pseudo properties well yet.
-// Many of the stiles within are from the .govuk-skip-link class
+// Selecting :focus-within and :not(:focus-within) together should mean this rule only
+// applies to browsers that support the :focus-within pseudo property. 
+// Using this instead of @supports as it doens’t support pseudo properties well yet.
+// Many of the styles within are from the .govuk-skip-link class
 .app-skip-link--container:focus-within, .app-skip-link--container:not(:focus-within) {
   @include visually-hidden-focus-withinable;
   display: block;
@@ -75,24 +71,26 @@ $important: true;
     padding-left: unquote("max(#{govuk-spacing(3)}, #{$padding-safe-area-left})");
   }
 
+  // Override default .govuk-skip-link styles
   .govuk-skip-link {
     display: inline-block;
     padding: 0;
-    // margin: govuk-spacing(2);
+    outline: $govuk-focus-width solid $govuk-focus-colour;
+    outline-offset: 0;
+    background-color: $govuk-focus-colour;
     @include clear-visually-hidden-focusable; // Override design system styles
+
+    &:focus {
+      @include govuk-focused-text; // Thick black underline on focus
+    }
   }
 
-  .govuk-skip-link:focus {
-    @include govuk-focused-text; // Thick black underline on focus
-  }
-
-  // Spacing around links
   .app-skip-link--item {
     padding: govuk-spacing(1);
-    text-decoration: none;
   }
 }
 
+// Same styling as .govuk-skip-link
 .app-skip-link--container:focus-within {
   outline: $govuk-focus-width solid $govuk-focus-colour;
   outline-offset: 0;
