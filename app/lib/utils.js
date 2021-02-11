@@ -110,13 +110,15 @@ exports.recordIsComplete = record => {
 exports.hasOutstandingActions = function(record, data = false) {
 
   data = Object.assign({}, (data || this.ctx.data || false))
-
+  
   let hasOutstandingActions = false
   let traineeStarted = record?.trainingDetails?.commencementDate
   let placementCount = (record?.placement?.items) ? record.placement.items.length : 0
   let minPlacementsRequired = data.settings.minPlacementsRequired
   let needsPlacementDetails = (record?.placement?.status != 'Complete') || (placementCount < minPlacementsRequired)
-
+  
+  exports.requiresSection(record, 'placement')
+  
   if (!traineeStarted) {
     hasOutstandingActions = true
   }
