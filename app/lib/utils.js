@@ -117,7 +117,7 @@ exports.hasOutstandingActions = function(record, data = false) {
   let minPlacementsRequired = data.settings.minPlacementsRequired
   let needsPlacementDetails = (record?.placement?.status != 'Complete') || (placementCount < minPlacementsRequired)
   
-  // Use this to test if placemetns is required
+  // TODO Use this to test if placemetns is required
   // exports.requiresSection(record, 'placement')
   
   if (!traineeStarted) {
