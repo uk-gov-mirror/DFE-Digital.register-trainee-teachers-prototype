@@ -117,7 +117,7 @@ exports.hasOutstandingActions = function(record, data = false) {
   let minPlacementsRequired = data.settings.minPlacementsRequired
   let needsPlacementDetails = (record?.placement?.status != 'Complete') || (placementCount < minPlacementsRequired)
   
-  exports.requiresSection(record, 'placement')
+  // exports.requiresSection(record, 'placement')
   
   if (!traineeStarted) {
     hasOutstandingActions = true
