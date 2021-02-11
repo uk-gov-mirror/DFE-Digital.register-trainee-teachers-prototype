@@ -9,6 +9,9 @@
 
 {% set formAction = "./update" | addReferrer(referrer) %}
 
+{% set placementCount = record.placement.items | length %}
+{% set minPlacementsRequired = data.settings.minPlacementsRequired %}
+
 {% block formContent %}
 
   <h1 class="govuk-heading-l">{{pageHeading}}</h1>
@@ -27,23 +30,26 @@
     }) }}
   </div>
 
-  {{ govukCheckboxes({
-    fieldset: {
-      legend: {
-        text: "Have all placements been added?",
-        classes: "govuk-fieldset__legend--s"
-      }
-    },
-    idPrefix: "placement-section-complete",
-    name: "record[placement][status]",
-    items: [
-      {
-        value: "Complete",
-        text: "Yes, all placements have been added",
-        checked: checked(record.placement.status, "Complete")
-      }
-    ]
-  }) }}
+  {# Hide the checkbox until enough placements have been added #}
+  {% if placementCount >= minPlacementsRequired %}
+    {{ govukCheckboxes({
+      fieldset: {
+        legend: {
+          text: "Have all placements been added?",
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      idPrefix: "placement-section-complete",
+      name: "record[placement][status]",
+      items: [
+        {
+          value: "Complete",
+          text: "Yes, all placements have been added",
+          checked: checked(record.placement.status, "Complete")
+        }
+      ]
+    }) }}
+  {% endif %}
 
   {{ govukButton({
     text: "Continue"
