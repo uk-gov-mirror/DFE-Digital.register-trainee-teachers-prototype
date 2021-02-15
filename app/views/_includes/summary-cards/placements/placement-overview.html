@@ -46,9 +46,9 @@
     actions: {
       items: [{
         href: recordPath + "/placements/confirm" | addReferrer(referrer),
-        text: "Manage placements"
+        text: "Manage placements" if canAmend else "View placements"
       }]
-    } if canAmend,
+    },
     html: placementDetailsHtml
   }) }}
 {% endif %}
