@@ -5,21 +5,20 @@
 {% set navActive = "records" %}
 
 {% block skipLink %}
- 
-<div class="app-skip-link--container">
-  <span class="app-skip-link--item">
-    {{ govukSkipLink({
-      href: '#main-content',
-      text: 'Skip to main content'
-    }) }}
-  </span>
-  <span class="app-skip-link--item">
-    {{ govukSkipLink({
-      href: '#records-list',
-      text: 'Skip to results' if selectedFilters else 'Skip to records'
-    }) }}
-  </span>
-</div>
+  <div class="app-skip-link--container">
+    <span class="app-skip-link--item">
+      {{ govukSkipLink({
+        href: '#main-content',
+        text: 'Skip to main content'
+      }) }}
+    </span>
+    <span class="app-skip-link--item">
+      {{ govukSkipLink({
+        href: '#records-list',
+        text: 'Skip to results' if selectedFilters else 'Skip to records'
+      }) }}
+    </span>
+  </div>
 {% endblock %}
 
 {% block content %}
