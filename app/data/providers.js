@@ -196,7 +196,7 @@ const allProviders = [
   "Thamesmead SCITT",
   "The Arthur Terry School SCITT",
   "The Basingstoke Alliance SCITT",
-  "The Bedfordshire Schools  Training Partnership",
+  "The Bedfordshire Schools Training Partnership",
   "The Buckingham Partnership",
   "The Cambridge Partnership",
   "The Cambridge Teaching Schools Network SCITT",
