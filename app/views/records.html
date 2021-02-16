@@ -4,6 +4,23 @@
 {% set backLink = 'false' %}
 {% set navActive = "records" %}
 
+{% block skipLink %}
+  <div class="app-skip-link--container">
+    <span class="app-skip-link--item">
+      {{ govukSkipLink({
+        href: '#main-content',
+        text: 'Skip to main content'
+      }) }}
+    </span>
+    <span class="app-skip-link--item">
+      {{ govukSkipLink({
+        href: '#records-list',
+        text: 'Skip to results' if selectedFilters else 'Skip to records'
+      }) }}
+    </span>
+  </div>
+{% endblock %}
+
 {% block content %}
 {# super pulling in flash message banner #}
 {{super()}}
@@ -82,7 +99,7 @@
         <p class="govuk-body"><a href="#" class="govuk-link">Export these records</a></p>
       </div>
 
-      <div class="moj-filter-layout__content">
+      <div class="moj-filter-layout__content" id="records-list">
 
         <div class="moj-action-bar">
           <div class="moj-action-bar__filter">   
