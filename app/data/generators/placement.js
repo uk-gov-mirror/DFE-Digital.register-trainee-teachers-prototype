@@ -1,7 +1,7 @@
 const weighted = require('weighted')
 const faker   = require('faker')
 const placementSchools = require('../providers.js').allProviders
-// console.log({placementSchools})
+
 module.exports = (params) => {
 
   const item = () => {
@@ -24,8 +24,6 @@ module.exports = (params) => {
   })
 
   let status
-
-  // console.log(params)
 
   // override for these statuses
   if (params?.status == 'QTS recommended' || params?.status == 'QTS awarded') {
