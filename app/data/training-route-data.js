@@ -91,11 +91,11 @@ allocatedSubjects = [
 let enabledTrainingRoutes = Object.values(trainingRoutes).filter(route => route.defaultEnabled == true).map(route => route.name)
 
 let levels = {
-  "early years": {
+  "Early years": {
     "hint": "ages 0 to 5",
     "ageRanges": null
   },
-  "primary": {
+  "Primary": {
     "hint": "ages 3 to 11",
     "ageRanges": [
       "3 to 7 programme", // 6.51%
@@ -103,11 +103,11 @@ let levels = {
       "5 to 11 programme", // 40.97%
     ]
   },
-  "middle": {
+  "Middle": {
     "hint": "ages 7 to 14",
     "ageRanges": null
   },
-  "secondary": {
+  "Secondary": {
     "hint": "ages 11 to 19",
     "ageRanges": [
       "11 to 16 programme", // 26.42%
@@ -115,6 +115,24 @@ let levels = {
     ]
   }
 }
+
+let publishRoutes = [
+  'School direct salaried',
+  'School direct tuition fee',
+  'Apprenticeship PG',
+  'Provider-led'
+]
+
+let nonPublishRoutes = [
+  'Provider-led',
+  'Assessment only',
+  'Teach first PG',
+  // 'Early years - grad amp',
+  'Early years - grad entry',
+  // 'Early years - assessment only',
+  'Early years - undergraduate',
+  'Opt in undergraduate'
+]
 
 // remainingAgeRanges = [
 //   "0 to 5 programme", // 0.99%
@@ -141,5 +159,7 @@ module.exports = {
   allocatedSubjects,
   enabledTrainingRoutes,
   levels,
-  defaultSections
+  defaultSections,
+  publishRoutes,
+  nonPublishRoutes
 }

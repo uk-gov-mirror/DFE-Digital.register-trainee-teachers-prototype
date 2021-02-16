@@ -1,6 +1,7 @@
 const weighted = require('weighted')
 const faker   = require('faker')
-const placementSchools = require('../providers.js')
+const placementSchools = require('../providers.js').allProviders
+// console.log({placementSchools})
 module.exports = (params) => {
 
   const item = () => {
@@ -24,7 +25,7 @@ module.exports = (params) => {
 
   let status
 
-  console.log(params)
+  // console.log(params)
 
   // override for these statuses
   if (params?.status == 'QTS recommended' || params?.status == 'QTS awarded') {
@@ -34,7 +35,7 @@ module.exports = (params) => {
 
   const items = []
   for (var i = 0; i < count; i++) {
-    items.push(item(faker))
+    items.push(item())
   }
 
   if (params?.placement?.hasPlacements == 'Not yet') {

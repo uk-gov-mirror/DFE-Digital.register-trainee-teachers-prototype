@@ -37,34 +37,75 @@
     <span class="govuk-caption-l">{{'Draft record' + draftRecordName}}</span>
     <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{pageHeading}}</h1>
 
-    {% if recordIsComplete %}
-      {# <p class="govuk-body-l">
-        You have completed all sections of the trainee's record. Check that the information is correct before submitting for TRN registration.
-      </p> #}
-      {% else %}
+    {# Show a warning if the record isn’t ready to be submitted #}
+    {% if not recordIsComplete %}
       {% set insetTextHtml %}
         <p class="govuk-body">This record is not complete and cannot be submitted for TRN. If you do not have all the required information now, you can <a href="./save-as-draft" class="govuk-link">save as a draft record</a>.</p>
       {% endset %}
         {{ govukInsetText({
           html: insetTextHtml
         }) }}
-
     {% endif %}
+
+    {# Text shown if user belongs to multiple providers #}
+    {% set providerText %}
+      {# Include a link if using blended model #}
+      {% if data.signedInProviders | length > 1 %}
+        Training with <a href="{{'./pick-provider' | addReferrer(referrer) }}" class="govuk-link">{{record.provider}}</a>
+      {# Don’t link if using hat model - they need to back out and pick a different provider to work as #}
+      {% else %}
+        Training with {{record.provider}}
+      {% endif %}
+    {% endset %}
+
+    {% set routeText %}
+      on the <a href="{{ './select-route' | addReferrer(referrer) }}" class="govuk-link">{{ record.route | lower or "route not set" }}</a> route.
+    {% endset %}
+
+    {# Don’t show anything if user doesn't have multiple providers #}
+    {% if data.settings.userProviders | length > 1  %}
+      {% set insetTextHtml %}
+        {{providerText | safe}} {{routeText | safe}}
+      {% endset %}
+
+    {% else %}
+      {% set insetTextHtml %}
+        Trainee {{routeText | safe}}
+      {% endset %}
+    {% endif %}
+
+    {{ govukInsetText({
+      html: insetTextHtml 
+    }) }}
 
   </div>
 </div>
 
+
 <h2 class="govuk-heading-m">Personal details and education</h2>
+
 {% include "_includes/summary-cards/personal-details.html" %}
+
 {% include "_includes/summary-cards/contact-details.html" %}
+
 {% include "_includes/summary-cards/diversity.html" %}
+
 {% include "_includes/summary-cards/gcse-details.html" %}
-{% include "_includes/summary-cards/degree-details.html" %}
+
+{% include "_includes/summary-cards/degree/details.html" %}
 
 <h2 class="govuk-heading-m">About their training</h2>
-{% include "_includes/summary-cards/record-setup.html" %}
+
+{# Provider summary card not used - inset text instead #}
+{# {% include "_includes/summary-cards/provider-details.html" %} #} 
+
+{# Record setup not currently used - can probably delete soon #}
+{# {% include "_includes/summary-cards/record-setup.html" %} #}
+
 {% include "_includes/summary-cards/programme-details.html" %}
+
 {% include "_includes/summary-cards/training-details.html" %}
+
 {% include "_includes/summary-cards/placements/placement-details.html" %}
 
 {{ govukButton({

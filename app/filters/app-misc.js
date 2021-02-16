@@ -63,24 +63,54 @@ filters.orReferrer = (url, referrer) => {
   }
 }
 
-// Sort by subject, including course code
-filters.sortPublishCourses = courses => {
-  let sorted = courses.sort((a, b) => {
-    let aString = `${a.subject} (${a.code})`
-    let bString = `${b.subject} (${b.code})`
-    return utils.sortAlphabetical(aString, bString)
-  })
-  return sorted
+// eg Biology (J482)
+filters.getCourseName = (course) => {
+  return `${course.subject} (${course.code})`
 }
 
-// Map course names so in autocomplete we get:
-// Subject (code)
-// Route
+// Biology (J482)
+filters.getCourseNamesForSelect = (courses) => {
+  return courses.map(course => {
+    return [`${filters.getCourseName(course)}`, course.id]
+  })
+}
+
+// Map course names so in autocomplete we get the name with
+// a hint on a second line
+// Biology (J482)
+// QTS with PGCE full-time
 filters.getCourseNamesForAutocomplete = (courses) => {
   return courses.map(course => {
-    // return [`${course.subject} (${course.code}) | ${course.route}`, course.id]
-    return [`${course.subject} (${course.code})`, course.id]
+    return [`${filters.getCourseName(course)} | ${course.summary}`, course.id]
   })
+}
+
+// Return a pretty name for the degree
+filters.getDegreeName = (degree) => {
+  if (!degree) return ''
+
+  let typeText
+
+  if (utils.falsify(degree.isInternational)){
+    if (degree.type == 'NARIC not provided'){
+      typeText = "Non-UK degree"
+    }
+    else typeText = `Non-UK ${degree.type}`
+  }
+  else {
+    typeText = degree.type
+  }
+  return `${typeText}: ${degree.subject.toLowerCase()}`
+}
+
+filters.getDegreeHint = (degree) =>{
+  if (!degree) return ''
+  if (utils.falsify(degree.isInternational)){
+    return `${degree.country} (${degree.endDate})`
+  }
+  else {
+    return `${degree.org} (${degree.endDate})`
+  } 
 }
 
 exports.filters = filters

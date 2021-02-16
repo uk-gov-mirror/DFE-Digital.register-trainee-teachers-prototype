@@ -12,7 +12,21 @@ const trainingRoutes = trainingRouteData.trainingRoutes
 // General
 // -------------------------------------------------------------------
 
-// Sort two things alphabetically, case insentitively
+// Cooerce falsy inputs to real true and false
+// Needed as Nunjucks doesn't treat all falsy values as false
+exports.falsify = (input) => {
+  if (_.isNumber(input)) return input
+  else if (input == false) return false
+  if (_.isString(input)){
+    let truthyValues = ['yes', 'true']
+    let falsyValues = ['no', 'false']
+    if (truthyValues.includes(input.toLowerCase())) return true
+    else if (falsyValues.includes(input.toLowerCase())) return false
+  }
+  return input;
+}
+
+// Sort two things alphabetically, not case-sensitive
 exports.sortAlphabetical = (x, y) => {
   if(x.toLowerCase() !== y.toLowerCase()) {
     x = x.toLowerCase();
@@ -21,7 +35,7 @@ exports.sortAlphabetical = (x, y) => {
   return x > y ? 1 : (x < y ? -1 : 0);
 }
 
-// Loosely copied from lib/utils
+// Loosely copied from /lib/utils
 // Allows a template to live at 'foo/index' and be served from 'foo'
 // The kit normally does this by defualt, but not if you want to do your
 // own GET / POST routes
@@ -85,6 +99,44 @@ exports.requiresSection = (record, sectionName) => {
   return requiredSections.includes(sectionName)
 }
 
+// Sort by subject, including course code
+exports.sortPublishCourses = courses => {
+  let sorted = courses.sort((a, b) => {
+    let aString = `${a.subject} (${a.code})`
+    let bString = `${b.subject} (${b.code})`
+    return exports.sortAlphabetical(aString, bString)
+  })
+  return sorted
+}
+
+// Return courses run by the current provider
+// If run as a filter, data comes via Nunjucks context. If run from elsewhere,
+// we need to explicitly pass in data.
+exports.getProviderCourses = function(courses, provider, route=false, data=false){
+  data = data || this?.ctx?.data || false
+  if (!data) {
+    console.log("Error with getProviderCourses: session data not provided")
+  }
+  if (!provider) {
+    console.log('Error: no provider given')
+  }
+  let filteredCourses = data.courses[provider].courses
+  if (route) {
+    filteredCourses = filteredCourses.filter(course => route == course.route)
+  }
+  let limitedCourses = filteredCourses.slice(0, data.settings.courseLimit)
+  let sortedCourses = exports.sortPublishCourses(limitedCourses)
+  return sortedCourses
+}
+
+// Check if the selected provider offers publish courses for the selected route
+exports.routeHasPublishCourses = function(record){
+  if (!record) return false
+  const data = Object.assign({}, this.ctx.data)
+  let providerCourses = exports.getProviderCourses(data.courses, record?.provider, record.route, data)
+  return (providerCourses.length > 0)
+}
+
 // -------------------------------------------------------------------
 // Records
 // -------------------------------------------------------------------
@@ -117,7 +169,7 @@ exports.hasOutstandingActions = function(record, data = false) {
   let minPlacementsRequired = data.settings.minPlacementsRequired
   let needsPlacementDetails = (record?.placement?.status != 'Complete') || (placementCount < minPlacementsRequired)
   
-  // TODO Use this to test if placemetns is required
+  // TODO Use this to test if placements are required
   // exports.requiresSection(record, 'placement')
   
   if (!traineeStarted) {
@@ -129,19 +181,49 @@ exports.hasOutstandingActions = function(record, data = false) {
   return hasOutstandingActions
 }
 
-// Look up a record using it's UUID
+// Look up a record using it’s UUID
 exports.getRecordById = (records, id) => {
-  let index = records.findIndex(record => record.id == id)
-  return records[index]
+  return records.find(record => record.id == id)
+}
+
+// Utility function to filter by a key
+// Basically identical to the ‘where’ filter
+exports.filterRecordsBy = (records, key, array) => {
+  array = [].concat(array) // force to array
+  let filtered = records.filter(record => {
+    return array.includes(record[key])
+  })
+  return filtered
 }
 
 // Look up several records using UUID
 exports.getRecordsById = (records, array) => {
-  array = [].concat(array) // force to array
-  let filtered = records.filter(record => {
-    return array.includes(record.id)
-  })
-  return filtered
+  return exports.filterRecordsBy(records, 'id', array)
+}
+
+// Filter records for particular providers
+exports.filterByProvider = (records, array) => {
+  return exports.filterRecordsBy(records, 'provider', array)
+}
+
+// Filter records for currently signed in providers
+// Can’t be an arrow function because we need access to the Nunjucks context
+exports.filterBySignedIn = function(records, data=false){
+  data = data || this?.ctx?.data || false
+  if (!data) {
+    console.log('Error with filterBySignedIn: session data not provided')
+    return []
+  }
+  if (!Array.isArray(data.signedInProviders) || data.signedInProviders.length < 1){
+    console.log('Error with filterBySignedIn: user doesn’t appear to be signed in to any providers')
+    return []
+  }
+  return exports.filterByProvider(records, data.signedInProviders)
+}
+
+// Only records from a specific academic year or years
+exports.filterByYear = (records, array) => {
+  return exports.filterRecordsBy(records, 'academicYear', array)
 }
 
 // Sort by last name or draft record
@@ -166,8 +248,9 @@ exports.addEvent = (record, content) => {
 // Delete temporary stores of data
 exports.deleteTempData = (data) => {
   delete data.degreeTemp
-  delete data.placementTemp
   delete data.record
+  delete data.submittedRecordId
+  delete data.placementTemp
 }
 
 // Stolen from Manage
@@ -190,7 +273,7 @@ exports.getTimeline = (record) => {
 }
 
 // Update or create a record
-// Todo: this function is overcomplicated. Make simpler
+// Todo: this function is overcomplicated. Make simpler!
 exports.updateRecord = (data, newRecord, timelineMessage) => {
 
   if (!newRecord) return false
@@ -234,10 +317,20 @@ exports.updateRecord = (data, newRecord, timelineMessage) => {
     })
   }
 
+  // All records should have a provider by this point
+  if (!newRecord.provider){
+    console.log(`Error in updateRecord - record has no provider`)
+    if (data.signedInProviders.length == 1) { // One provider only
+      newRecord.provider = data.signedInProviders[0] // Implicitly a 1 item array
+    }
+  }
+
+  // Must be a new record
   if (!newRecord.id){
     newRecord.id = faker.random.uuid()
     records.push(newRecord)
   }
+  // Is an existing record
   else {
     let recordIndex = records.findIndex(record => record.id == newRecord.id)
     records[recordIndex] = newRecord
@@ -324,6 +417,9 @@ exports.filterRecords = (records, data, filters = {}) => {
 
   let filteredRecords = records
 
+  // Only allow records for the signed-in providers
+  filteredRecords = exports.filterBySignedIn(filteredRecords, data)
+
   // Only show records for training routes that are enabled
   let enabledTrainingRoutes = data.settings.enabledTrainingRoutes
 
@@ -334,6 +430,9 @@ exports.filterRecords = (records, data, filters = {}) => {
   // if (filter.cycle){
   //   filteredRecords = filteredRecords.filter(record => filter.cycle.includes(record.cycle))
   // }
+  if (filters.providers){
+    filteredRecords = filteredRecords.filter(record => filters.providers.includes(record.provider))
+  }
 
   if (filters.trainingRoutes){
     filteredRecords = filteredRecords.filter(record => filters.trainingRoutes.includes(record.route))

@@ -1,29 +1,32 @@
+const faker   = require('faker')
 const weighted = require('weighted')
 const degreeData = require('../degree')
 
-module.exports = (faker, isInternationalTrainee) => {
+module.exports = (isInternationalTrainee) => {
   const item = (faker) => {
     const subject = faker.helpers.randomize(degreeData().subjects)
     const predicted = faker.random.boolean()
     const endDate = faker.helpers.randomize(['2020','2019','2018','2017','2016','2015'])
     const startDate = (parseInt(endDate) - 4).toString()
+    const id = faker.random.uuid()
 
     if (isInternationalTrainee) {
       return {
         // type: 'Diplôme',
-        type: 'Bachelor (Honours) degree',
+        type: 'Bachelor degree', // NARIC equivalent
         subject,
         isInternational: "true",
         org: 'University of Paris',
         country: 'France',
         // grade: 'Pass',
         predicted,
-        naric: {
+        naric: { // Naric key not used? probably copied from Manage
           reference: '4000228363',
-          comparable: 'Bachelor (Honours) degree'
+          comparable: 'Bachelor degree'
         },
         startDate,
-        endDate
+        endDate,
+        id
       }
     } else {
       const type = faker.helpers.randomize(degreeData().types.all)
@@ -49,7 +52,8 @@ module.exports = (faker, isInternationalTrainee) => {
         grade,
         predicted,
         startDate,
-        endDate
+        endDate,
+        id
       }
     }
   }
@@ -63,5 +67,15 @@ module.exports = (faker, isInternationalTrainee) => {
     items.push(item(faker))
   }
 
-  return {items: items}
+  // Trainees with multiple degrees must have a single degree selected for the
+  // purposes of bursaries
+  let degreeToBeUsedForBursaries
+  if (items.length > 1){
+    degreeToBeUsedForBursaries = faker.helpers.randomize(items).id
+  }
+
+  return {
+    items: items,
+    degreeToBeUsedForBursaries
+  }
 }

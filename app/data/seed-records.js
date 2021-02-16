@@ -15,7 +15,7 @@ seedRecords.push({
     ]
   },
   "programmeDetails": {
-    "isPublishCourse" : true,
+    "isPublishCourse" : false,
     "subject": "Physical education",
     "ageRange": "14 to 19 programme",
     "startDate": [
@@ -85,7 +85,8 @@ seedRecords.push({
         "subject": "Biology",
         "country": "United States",
         "endDate": "2013",
-        "type": "Bachelor degree"
+        "type": "Bachelor degree",
+        "id": "31dc5e93-b521-425c-98d8-dec96eb2388c"
       },
       {
         "isInternational": "false",
@@ -93,9 +94,11 @@ seedRecords.push({
         "org": "The University of Manchester",
         "endDate": "2016",
         "type": "BSc - Bachelor of Science",
-        "grade": "First-class honours"
+        "grade": "First-class honours",
+        "id": "1faf0ae6-4c01-4224-9e49-06beffc0c5d0"
       }
     ],
+    "degreeToBeUsedForBursaries": "31dc5e93-b521-425c-98d8-dec96eb2388c",
     "status": [
       "Completed"
     ]
@@ -135,7 +138,7 @@ seedRecords.push({
   },
   route: 'Assessment only',
   "trainingDetails": {
-    "traineeStarted": "false",
+    // "traineeStarted": "true",
     "traineeId": "2020/21-053",
     "status": [
       "Completed"
