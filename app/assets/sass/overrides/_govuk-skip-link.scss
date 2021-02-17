@@ -55,7 +55,7 @@ $important: true;
 // applies to browsers that support the :focus-within pseudo property. 
 // Using this instead of @supports as it doens’t support pseudo properties well yet.
 // Many of the styles within are from the .govuk-skip-link class
-.app-skip-link--container:focus-within, .app-skip-link--container:not(:focus-within) {
+.app-skip-link__container:focus-within, .app-skip-link__container:not(:focus-within) {
   @include visually-hidden-focus-withinable;
   display: block;
   padding: govuk-spacing(2) govuk-spacing(3);
@@ -85,13 +85,13 @@ $important: true;
     }
   }
 
-  .app-skip-link--item {
+  .app-skip-link__item {
     padding: govuk-spacing(1);
   }
 }
 
 // Same styling as .govuk-skip-link
-.app-skip-link--container:focus-within {
+.app-skip-link__container:focus-within {
   outline: $govuk-focus-width solid $govuk-focus-colour;
   outline-offset: 0;
   background-color: $govuk-focus-colour;
