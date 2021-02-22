@@ -1,7 +1,6 @@
 {% set placementCount = record.placement.items | length %}
 {% set hasCommencementDate = record.trainingDetails.commencementDate | length > 0 %}
 {% set minPlacementsRequired = data.settings.minPlacementsRequired %}
-{% set needsPlacementDetails = record.placement.status != 'Complete' or placementCount < minPlacementsRequired %}
 
 {{ hasCommencementDate | log }}
 
@@ -14,7 +13,7 @@
         {
           text: "Confirm training placement details are complete" if placementCount >= minPlacementsRequired else "Add placement details",
           href: recordPath + "/placements/confirm" | addReferrer(referrer) if placementCount >= minPlacementsRequired else recordPath + "/placements/add" | addReferrer(referrer)
-        } if needsPlacementDetails,
+        } if record | needsPlacementDetails,
         {
           text: "Provide a start date",
           href: recordPath + "/trainee-start-date" | addReferrer(referrer)

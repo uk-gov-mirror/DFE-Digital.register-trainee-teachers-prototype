@@ -158,6 +158,23 @@ exports.recordIsComplete = record => {
   return recordIsComplete
 }
 
+// Check if the placment criteria has been met
+exports.needsPlacementDetails = function(record, data = false) {
+
+  data = Object.assign({}, (data || this.ctx.data || false))
+
+  let needsPlacementDetails = false
+  let placementCount = (record?.placement?.items) ? record.placement.items.length : 0
+  let minPlacementsRequired = data.settings.minPlacementsRequired
+
+  if (exports.requiresSection(record, 'placement')) {
+    if ((record?.placement?.status != 'Complete') || (placementCount < minPlacementsRequired)) {
+      needsPlacementDetails = true
+    }
+  }
+  return needsPlacementDetails
+}
+
 // Check if there are outsanding actions (Either adding start date or placements details)
 exports.hasOutstandingActions = function(record, data = false) {
 
@@ -165,17 +182,11 @@ exports.hasOutstandingActions = function(record, data = false) {
   
   let hasOutstandingActions = false
   let traineeStarted = record?.trainingDetails?.commencementDate
-  let placementCount = (record?.placement?.items) ? record.placement.items.length : 0
-  let minPlacementsRequired = data.settings.minPlacementsRequired
-  let needsPlacementDetails = (record?.placement?.status != 'Complete') || (placementCount < minPlacementsRequired)
-  
-  // TODO Use this to test if placements are required
-  // exports.requiresSection(record, 'placement')
-  
+
   if (!traineeStarted) {
     hasOutstandingActions = true
   }
-  else if (needsPlacementDetails) {
+  else if (exports.needsPlacementDetails(record, data)) {
     hasOutstandingActions = true
   }
   return hasOutstandingActions
