@@ -9,12 +9,13 @@
 
 {% set formAction = "./update" | addReferrer(referrer) %}
 
-{% set placementCount = record.placement.items | length %}
 {% set minPlacementsRequired = data.settings.minPlacementsRequired %}
 {% set canAmend = record.status | getAmendsAllowed %}
 
 {% block formContent %}
 
+  {% set placementCount = record.placement.items | length %}
+  
   <h1 class="govuk-heading-l">{{pageHeading}}</h1>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
