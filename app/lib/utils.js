@@ -158,7 +158,7 @@ exports.recordIsComplete = record => {
   return recordIsComplete
 }
 
-// Check if the placment criteria has been met
+// Checks if the placement criteria has been met
 exports.needsPlacementDetails = function(record, data = false) {
 
   data = Object.assign({}, (data || this.ctx.data || false))
