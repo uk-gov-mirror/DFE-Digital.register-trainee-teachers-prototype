@@ -18,7 +18,6 @@ let mainTrainingRoutes = {
       'trainingDetails',
       'programmeDetails',
       'personalDetails',
-      'placement',
       'contactDetails',
       'diversity',
       'degree'
