@@ -6,10 +6,9 @@
 
 {% if record | hasOutstandingActions %}
 
-    {{ govukErrorSummary({
+    {{ appNoticeBanner({
       titleText: "You need to provide additional details before recording an outcome",
-      classes: "notice-banner",
-      errorList: [
+      itemList: [
         {
           text: "Confirm training placement details are complete" if placementCount >= minPlacementsRequired else "Add placement details",
           href: recordPath + "/placements/confirm" | addReferrer(referrer) if placementCount >= minPlacementsRequired else recordPath + "/placements/add" | addReferrer(referrer)

@@ -1,0 +1,16 @@
+<div class="app-notice-banner 
+  {%- if params.classes %} {{ params.classes }}{% endif %}"
+  aria-labelledby="app-notice-banner-title" role="alert">
+  <h2 class="app-notice-banner__title" id="app-notice-banner-title">
+    {{ params.titleHtml | safe if params.titleHtml else params.titleText }}
+  </h2>
+  <div class="app-notice-banner__body">
+    <ul class="govuk-list app-notice-banner__list">
+      {% for item in params.itemList %}
+        <li>
+          <a href="{{ item.href }}">{{ item.html | safe if item.html else item.text }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
