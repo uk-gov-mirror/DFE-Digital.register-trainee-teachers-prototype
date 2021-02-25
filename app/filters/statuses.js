@@ -120,7 +120,6 @@ filters.getCanReinstate = status => {
   return statusesThatAllowReinstating.includes(status)
 }
 
-
 // -------------------------------------------------------------------
 // keep the following line to return your filters to the app
 // -------------------------------------------------------------------
