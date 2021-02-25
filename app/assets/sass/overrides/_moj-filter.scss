@@ -21,11 +21,11 @@
 
 
 .js-enabled .moj-filter-layout__filter {
-  @include govuk-media-query($until: desktop) {
+  @include govuk-media-query($until: tablet) {
     // only display a scrollbar if it there is overflow to scroll
     overflow: auto;
     // At this width the filter has `position: fixed`. We should set a max width that will safely include the filter and a scrollbar if present 
-    max-width: 300px;
+    max-width: calc(100% - calc(100vw - 100%));
   }
 }
 
