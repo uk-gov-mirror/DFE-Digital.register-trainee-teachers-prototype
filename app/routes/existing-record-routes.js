@@ -154,12 +154,12 @@ module.exports = router => {
         req.flash('success', 'Training outcome recorded')   
       }
       newRecord.previousQtsOutcome = newRecord.notPassedReason
-      delete newRecord.notPassedReason
+      delete newRecord?.notPassedReason
       newRecord.previousQtsOutcomeOther = newRecord.notPassedReasonOther
-      delete newRecord.notPassedReasonOther
-      delete newRecord.qtsDetails.standardsAssessedOutcome
-      delete newRecord.qtsDetails.withdrawalStatus
-      delete newRecord.qtsDetails.qtsOutcomeRecordedDateRadio
+      delete newRecord?.notPassedReasonOther
+      delete newRecord?.qtsDetails?.standardsAssessedOutcome
+      delete newRecord?.qtsDetails?.withdrawalStatus
+      delete newRecord?.qtsDetails?.qtsOutcomeRecordedDateRadio
       utils.updateRecord(data, newRecord, false)
       res.redirect(`/record/${req.params.uuid}`)
     }

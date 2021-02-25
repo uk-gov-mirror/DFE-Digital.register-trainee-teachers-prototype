@@ -7,6 +7,15 @@ const utils = require('./../lib/utils')
 
 module.exports = router => {
 
+  // Hacky solution to manually import a record to draft state
+  // Useful for testing bugs so we can quickly restore a state
+  router.get('/new-record/direct-add', function (req, res) {
+    const data = req.session.data
+    utils.deleteTempData(data)
+    data.record = require('./../data/direct-add-record.json')
+    res.redirect('/new-record/check-record')
+  })
+
   // Delete data when starting new
   router.get(['/new-record/new', '/new-record'], function (req, res) {
     const data = req.session.data

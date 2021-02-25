@@ -1,0 +1,100 @@
+{
+  "status": "Draft",
+  "events": {
+    "items": []
+  },
+  "provider": "Coventry University",
+  "route": "Assessment only",
+  "personalDetails": {
+    "nationality": [
+      "Irish",
+      "American"
+    ],
+    "givenName": "Sarah Lilia",
+    "middleNames": "",
+    "familyName": "Jones",
+    "dateOfBirth": [
+      "3",
+      "12",
+      "1987"
+    ],
+    "sex": "Female",
+    "status": [
+      "Completed"
+    ]
+  },
+  "contactDetails": {
+    "internationalAddress": "",
+    "addressType": "domestic",
+    "address": {
+      "line1": "260 Bradford Street",
+      "line2": "Deritend",
+      "level2": "Birmingham",
+      "postcode": "B12 0QY"
+    },
+    "phoneNumber": "07700 900941",
+    "email": "s.jones@example.com",
+    "status": [
+      "Completed"
+    ]
+  },
+  "diversity": {
+    "diversityDisclosed": "false",
+    "status": [
+      "Completed"
+    ]
+  },
+  "degree": {
+    "items": [
+      {
+        "isInternational": "true",
+        "subject": "Biology",
+        "country": "United States",
+        "endDate": "2013",
+        "type": "Bachelor degree",
+        "id": "31dc5e93-b521-425c-98d8-dec96eb2388c"
+      },
+      {
+        "isInternational": "false",
+        "subject": "Sport and exercise sciences",
+        "org": "The University of Manchester",
+        "endDate": "2016",
+        "type": "BSc - Bachelor of Science",
+        "grade": "First-class honours",
+        "id": "1faf0ae6-4c01-4224-9e49-06beffc0c5d0"
+      }
+    ],
+    "degreeToBeUsedForBursaries": "31dc5e93-b521-425c-98d8-dec96eb2388c",
+    "status": [
+      "Completed"
+    ]
+  },
+  "programmeDetails": {
+    "subject": "Business studies",
+    "ageRange": "3 to 11 programme",
+    "startDate": [
+      "1",
+      "2",
+      "2021"
+    ],
+    "endDate": [
+      "1",
+      "6",
+      "2021"
+    ],
+    "status": [
+      "Completed"
+    ]
+  },
+  "trainingDetails": {
+    "commencementDate": [
+      "1",
+      "2",
+      "2021"
+    ],
+    "traineeId": "AO/03/21",
+    "status": [
+      "Completed"
+    ]
+  }
+}
