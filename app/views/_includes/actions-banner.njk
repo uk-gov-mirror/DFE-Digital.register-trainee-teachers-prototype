@@ -4,7 +4,7 @@
 
 {{ hasCommencementDate | log }}
 
-{% if record | hasOutstandingActions %}
+{% if record | hasOutstandingActions and canAmend %}
 
     {{ appNoticeBanner({
       titleText: "You need to provide additional details before recording an outcome",
