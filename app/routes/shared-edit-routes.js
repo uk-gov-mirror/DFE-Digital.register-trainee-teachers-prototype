@@ -19,7 +19,7 @@ module.exports = router => {
     let recordPath = utils.getRecordPath(req)
     let referrer = utils.getReferrer(req.query.referrer)
     if (traineeStarted == "false"){
-      delete record.trainingDetails.commencementDate
+      delete record?.trainingDetails?.commencementDate
     }   
     res.redirect(`${recordPath}/training-details/confirm${referrer}`)
 
@@ -302,7 +302,7 @@ module.exports = router => {
       req.flash('success', 'Trainee degree deleted')
       // Delete degree section if it’s empty
       if (data.record.degree.items.length == 0){
-        delete data.record.degree
+        delete data?.record?.degree
       }
     }
     if (referrer){
@@ -404,7 +404,7 @@ module.exports = router => {
     // Are they able to add placement details? (Shared on both draft and record)
     if (record.placement.hasPlacements == 'Yes'){
       // carry on and add one
-      delete record.placement.status
+      delete record?.placement.status
       res.redirect(`${recordPath}/placements/add${referrer}`)
     }
     // Record specific routes

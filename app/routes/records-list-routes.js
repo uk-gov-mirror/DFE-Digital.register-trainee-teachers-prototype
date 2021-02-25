@@ -28,7 +28,7 @@ module.exports = router => {
     // We're not in a record, so make sure to flush record data
     // Nb this only deletes on second page load because session data
     // is already set at this point and we're not redirecting
-    delete req.session.data.record
+    delete req.session?.data?.record
 
     // Copy the query
     let query = Object.assign({}, req.query)

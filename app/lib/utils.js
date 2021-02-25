@@ -297,10 +297,10 @@ exports.updateRecord = (data, newRecord, timelineMessage) => {
     exports.addEvent(newRecord, message)
   }
   if (newRecord.addressType == "domestic"){
-    delete newRecord.contactDetails.internationalAddress
+    delete newRecord?.contactDetails?.internationalAddress
   }
   if (newRecord.addressType == "international"){
-    delete newRecord.contactDetails.address
+    delete newRecord?.contactDetails?.address
   }
   data.record = newRecord
 
@@ -388,7 +388,7 @@ exports.registerForTRN = (record) => {
   }
   else {
     record.status = 'Pending TRN'
-    delete record.placement.status
+    delete record?.placement?.status
     record.submittedDate = new Date()
     record.updatedDate = new Date()
     record.programmeDetails = {
