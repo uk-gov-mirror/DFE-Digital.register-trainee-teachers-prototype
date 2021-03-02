@@ -58,6 +58,7 @@ const generateGce = require('../app/data/generators/gce')
 const generateGcse = require('../app/data/generators/gcse')
 const generateEvents = require('../app/data/generators/events')
 const generatePlacement = require('../app/data/generators/placement')
+const generateUndergraduateQualification = require('../app/data/generators/ug-entry-qualifications')
 
 // Populate application data object with fake data
 const generateFakeApplication = (params = {}) => {
@@ -91,11 +92,24 @@ const generateFakeApplication = (params = {}) => {
   application.gcse             = (params.gcse === null) ? undefined : { ...generateGcse(application.isInternationalTrainee, simpleGcseGrades), ...params.gcse }
   // A Levels - not used currently
   // application.gce = (params.gce === null) ? undefined : generateGce(faker, isInternationalTrainee)
-  // Degrees
-  application.degree           = (params.degree === null) ? undefined : { ...generateDegree(application.isInternationalTrainee), ...params.degree }
-  // Placements
-  application.placement        = (params.placement === null) ? undefined : { ...generatePlacement(application), ...params.placement }
+  
+  let requiredSections = trainingRouteData.trainingRoutes[application.route].sections
 
+  // Postgraduate qualification
+  if (requiredSections.includes('degree')) {
+    application.degree           = (params.degree === null) ? undefined : { ...generateDegree(application.isInternationalTrainee), ...params.degree } 
+  }
+
+  // Undergraduate Qualification
+  if (requiredSections.includes('undergraduateQualification')) {
+    application.undergraduateQualification           = (params.undergraduateQualification === null) ? undefined : { ...generateUndergraduateQualification(), ...params.undergraduateQualification }  
+  }
+  
+  // Placements
+  if (requiredSections.includes('placement')) {
+    application.placement        = (params.placement === null) ? undefined : { ...generatePlacement(application), ...params.placement } 
+  }
+  
   return application
 
 }
