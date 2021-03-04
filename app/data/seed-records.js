@@ -7,32 +7,8 @@ seedRecords.push({
     "items": []
   },
   "route": "Provider-led (postgrad)",
-  "trainingDetails": {
-    "traineeStarted": "false",
-    "traineeId": "2020/21-053",
-    "status": [
-      "Completed"
-    ]
-  },
-  "programmeDetails": {
-    "isPublishCourse" : false,
-    "subject": "Physical education",
-    "ageRange": "14 to 19 programme",
-    "startDate": [
-      "3",
-      "10",
-      "2021"
-    ],
-    "endDate": [
-      "10",
-      "06",
-      "2024"
-    ],
-    "allocatedPlace": "Yes",
-    "status": [
-      "Completed"
-    ]
-  },
+  trainingDetails: null,
+  programmeDetails: null,
   "personalDetails": {
     "nationality": [
       "Irish",
@@ -102,7 +78,8 @@ seedRecords.push({
     "status": [
       "Completed"
     ]
-  }
+  },
+  placement: null
 })
 
 // Partially complete draft
