@@ -7,6 +7,8 @@ faker.locale  = 'en_GB'
 
 // Not all trainees have start dates - but to get these statuses you must have
 const statusesWhereTraineesMustHaveStarted = [
+  'EYTS recommended',
+  'EYTS awarded',
   'QTS recommended',
   'QTS awarded'
 ]

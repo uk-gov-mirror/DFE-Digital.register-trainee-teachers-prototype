@@ -44,6 +44,19 @@ if (status == 'TRN received'){
   addEvent("TRN received")
 }
 
+if (status == 'EYTS recommended'){
+  addEvent("Trainee submitted for TRN")
+  addEvent("TRN received")
+  addEvent("Trainee recommended for EYTS")
+}
+
+if (status == 'EYTS awarded'){
+  addEvent("Trainee submitted for TRN")
+  addEvent("TRN received")
+  addEvent("Trainee recommended for EYTS")
+  addEvent("EYTS awarded")
+}
+
 if (status == 'QTS recommended'){
   addEvent("Trainee submitted for TRN")
   addEvent("TRN received")

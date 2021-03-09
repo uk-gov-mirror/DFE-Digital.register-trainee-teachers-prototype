@@ -86,8 +86,6 @@ module.exports = (params) => {
 
   let ageRange = (Array.isArray(ageRanges)) ? faker.helpers.randomize(ageRanges) : null
 
-  console.log(ageRange)
-
   let subject
 
   // TODO do we need a subject for early years at all?

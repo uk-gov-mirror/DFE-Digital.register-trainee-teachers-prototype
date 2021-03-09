@@ -23,7 +23,7 @@ const providers         = providerData.selectedProviders
 let simpleGcseGrades    = true //output pass/fail rather than full detail
 
 // const yearsToGenerate   = [2016, 2017, 2018, 2019, 2020]
-const yearsToGenerate = [2020]
+const yearsToGenerate = [2019, 2020]
 const currentYear     = 2020
 
 const sortBySubmittedDate = (x, y) => {
@@ -72,6 +72,7 @@ const generateFakeApplication = (params = {}) => {
   application.provider        = params.provider || faker.helpers.randomize(providers)
   application.route           = (params.route === null) ? undefined : (params.route || getRandomEnabledRoute())
   application.status          = params.status || faker.helpers.randomize(statuses)
+  
   if (application.status == "Deferred") {
     application.previousStatus = "TRN received" // set a state to go back to
   }
@@ -109,11 +110,16 @@ const generateFakeApplication = (params = {}) => {
   if (requiredSections.includes('placement')) {
     application.placement        = (params.placement === null) ? undefined : { ...generatePlacement(application), ...params.placement } 
   }
-  
+
+  // Make sure statuses match qualifications
+  let routeQualifications = trainingRouteData.trainingRoutes[application.route].qualifications
+  if (routeQualifications.includes('EYTS')) {  
+    application.status = application.status.replace('QTS', 'EYTS')
+  }
+
   return application
 
 }
-
 
 const generateFakeApplications = () => {
 
@@ -178,8 +184,8 @@ const generateFakeApplicationsForProvider = (provider, year, count) => {
       draft: 0.05,
       pendingTrn: 0.05,
       trnReceived: 0.76,
-      qtsRecommended: 0.05,
-      qtsAwarded: 0.05,
+      qualificationRecommended: 0.05,
+      qualificationAwarded: 0.05,
       deferred: 0.02,
       withdrawn: 0.02,
     }
@@ -190,8 +196,8 @@ const generateFakeApplicationsForProvider = (provider, year, count) => {
       draft: 0,
       pendingTrn: 0,
       trnReceived: 0,
-      qtsRecommended: 0,
-      qtsAwarded: 0.95,
+      qualificationRecommended: 0,
+      qualificationAwarded: 0.95,
       deferred: (year == 2019) ? 0.05 : 0, // allow for a couple deferred students from previous year
       withdrawn: 0.05,
     }
@@ -228,12 +234,12 @@ const generateFakeApplicationsForProvider = (provider, year, count) => {
     status: 'TRN received'
   }
 
-  stubApplication.qtsRecommended = {
+  stubApplication.qualificationRecommended = {
     status: 'QTS recommended',
     route: (year == currentYear) ? "Assessment only" : undefined // AO is the only route likely to be recommended
   }
 
-  stubApplication.qtsAwarded = {
+  stubApplication.qualificationAwarded = {
     status: 'QTS awarded',
     route: (year == currentYear) ? "Assessment only" : undefined // AO is the only route likely to be recommended
   }
