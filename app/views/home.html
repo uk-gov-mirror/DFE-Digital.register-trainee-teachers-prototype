@@ -66,9 +66,17 @@
       {% endfor %}
     </div>
     <div class="govuk-grid-row govuk-!-margin-bottom-6">
-      {% set statuses = ['QTS recommended', 'QTS awarded', 'Deferred', 'Withdrawn'] %}
+      {% set statuses = ['EYTS recommended', 'EYTS awarded', 'QTS recommended', 'QTS awarded'] %}
       {% for status in statuses %}
         <div class="govuk-grid-column-one-quarter">
+          {{ statusCard(records, status) }}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="govuk-grid-row govuk-!-margin-bottom-6">
+      {% set statuses = ['Deferred', 'Withdrawn'] %}
+      {% for status in statuses %}
+        <div class="govuk-grid-column-one-half">
           {{ statusCard(records, status) }}
         </div>
       {% endfor %}
