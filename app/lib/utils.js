@@ -372,7 +372,7 @@ exports.doBulkAction = (action, record, params) => {
     return exports.registerForTRN(record)
   }
   if (action == 'Recommend a group of trainees for QTS'){
-    return exports.recommendForQTS(record, params)
+    return exports.recommendForAward(record, params)
   }
 }
 
@@ -417,10 +417,10 @@ exports.registerForTRN = (record) => {
 }
 
 // Advance a record to 'QTS recommended' status
-exports.recommendForQTS = (record, params) => {
+exports.recommendForAward = (record, params) => {
 
   if (!record) return false
-  if (record.status == 'QTS recommended'){
+  if (record.status.includes('recommended')){
     // Nothing to do
   }
   else if (record.status != 'TRN received'){
@@ -428,16 +428,14 @@ exports.recommendForQTS = (record, params) => {
     return false
   }
   else {
-    record.status = 'QTS recommended'
+    record.status = `${exports.getQualificationText(record)} recommended`
     _.set(record, 'qtsDetails.standardsAssessedOutcome', "Passed")
     record.qtsRecommendedDate = record?.qtsDetails?.qtsOutcomeRecordedDate || params?.date || new Date()
     record.updatedDate = new Date()
-    exports.addEvent(record, "Trainee recommended for QTS")
+    exports.addEvent(record, `Trainee recommended for ${exports.getQualificationText(record)}`)
   }
   return true
 }
-
-
 
 // Filter down a set of records for those that match provided filter object
 exports.filterRecords = (records, data, filters = {}) => {

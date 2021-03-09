@@ -54,8 +54,8 @@ module.exports = router => {
     }
   })
 
-  // Manually advance an application from Pending QTS to QTS awarded
-  router.get('/record/:uuid/qts', (req, res) => {
+  // Manually advance an application from Pending EYTS/QTS to EYTS/QTS. Awarded by typing 'awarded'
+  router.get('/record/:uuid/awarded', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
     // Update failed or no data
@@ -63,11 +63,13 @@ module.exports = router => {
       res.redirect('/record/:uuid')
     }
     else {
-      if (newRecord.status == 'QTS recommended' || newRecord.status == 'TRN received'){
-        utils.recommendForQTS(newRecord) // Recommend a group of trainees for QTS first so data is correct
+      if (newRecord.status.includes('recommended') || newRecord.status == 'TRN received'){
+        utils.recommendForAward(newRecord) // Recommend a group of trainees for EYTS/QTS first so data is correct
         utils.deleteTempData(data)
-        newRecord.status = 'QTS awarded' // QTS awarded
-        utils.updateRecord(data, newRecord, "QTS awarded")
+        
+        newRecord.status = `${utils.getQualificationText(newRecord)} awarded` // EYTS/QTS awarded
+        
+        utils.updateRecord(data, newRecord, `${utils.getQualificationText(newRecord)} awarded`)
       }
       res.redirect(`/record/${req.params.uuid}`)
     }
@@ -101,7 +103,7 @@ module.exports = router => {
     }
   })
 
-  // Copy qts (passed) data back to real record
+  // Copy EYTS/QTS (passed) data back to real record
   router.post('/record/:uuid/qts/passed/update', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
@@ -110,7 +112,7 @@ module.exports = router => {
       res.redirect('/record/:uuid')
     }
     else {
-      utils.recommendForQTS(newRecord)
+      utils.recommendForAward(newRecord)
       utils.deleteTempData(data)
       utils.updateRecord(data, newRecord, false)
       res.redirect(`/record/${req.params.uuid}/qts/passed/recommended`)
