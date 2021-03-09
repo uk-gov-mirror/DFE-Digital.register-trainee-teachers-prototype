@@ -69,6 +69,48 @@
   }) %}
 {% endif %}
 
+{% if record.status == "EYTS recommended" %}
+
+  {% set qtsContent %}
+    {{govukTag({
+      text: "EYTS recommended",
+      classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
+    })}} <br>
+    {% if record.eytsDetails.eytsOutcomeRecordedDate %}
+      Recommended: {{recommendedDate}}
+    {% endif %}
+  {% endset %}
+
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: "EYTS"
+    },
+    value: {
+      html: eytsContent
+    }
+  }) %}
+{% endif %}
+
+{% if record.status == "EYTS awarded" %}
+
+  {% set eytsContent %}
+    {{govukTag({
+      text: "EYTS awarded",
+      classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
+    })}} <br>
+    Awarded: 2 September 2020
+  {% endset %}
+
+  {% set studentRecordRows = studentRecordRows | push({
+    key: {
+      text: "EYTS"
+    },
+    value: {
+      html: eytsContent
+    }
+  }) %}
+{% endif %}
+
 {% if record.status == "QTS recommended" %}
 
   {% set qtsContent %}
