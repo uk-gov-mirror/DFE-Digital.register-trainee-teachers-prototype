@@ -85,17 +85,17 @@ module.exports = router => {
       res.redirect(`/record/${req.params.uuid}`)
     }
     else {
-      let radioChoice = newRecord.qtsDetails.qtsOutcomeRecordedDateRadio
+      let radioChoice = newRecord.awardDetails.qtsOutcomeRecordedDateRadio
       if (radioChoice == "Today") {
-        newRecord.qtsDetails.qtsOutcomeRecordedDate = filters.toDateArray(filters.today())
+        newRecord.awardDetails.qtsOutcomeRecordedDate = filters.toDateArray(filters.today())
       }
       if (radioChoice == "Yesterday") {
-        newRecord.qtsDetails.qtsOutcomeRecordedDate = filters.toDateArray(moment().subtract(1, "days"))
+        newRecord.awardDetails.qtsOutcomeRecordedDate = filters.toDateArray(moment().subtract(1, "days"))
       } 
     }
     
     // Was the QTS outcome a pass?
-    if (_.get(data, "record.qtsDetails.standardsAssessedOutcome") == 'No'){
+    if (_.get(data, "record.awardDetails.standardsAssessedOutcome") == 'No'){
       res.redirect(`/record/${req.params.uuid}/qts/not-passed/reason`)
     }
     else {
@@ -130,7 +130,7 @@ module.exports = router => {
     else {
       
       // Trainees may withdraw at this stage
-      let isWithdrawing = (_.get(newRecord, "qtsDetails.withdrawalStatus") == "Withdrawing from programme")
+      let isWithdrawing = (_.get(newRecord, "awardDetails.withdrawalStatus") == "Withdrawing from programme")
       // console.log('is withdrawing:', isWithdrawing)
       newRecord.qtsNotPassedOutcomeDate = new Date()
       utils.deleteTempData(data)
@@ -159,9 +159,9 @@ module.exports = router => {
       delete newRecord?.notPassedReason
       newRecord.previousQtsOutcomeOther = newRecord.notPassedReasonOther
       delete newRecord?.notPassedReasonOther
-      delete newRecord?.qtsDetails?.standardsAssessedOutcome
-      delete newRecord?.qtsDetails?.withdrawalStatus
-      delete newRecord?.qtsDetails?.qtsOutcomeRecordedDateRadio
+      delete newRecord?.awardDetails?.standardsAssessedOutcome
+      delete newRecord?.awardDetails?.withdrawalStatus
+      delete newRecord?.awardDetails?.qtsOutcomeRecordedDateRadio
       utils.updateRecord(data, newRecord, false)
       res.redirect(`/record/${req.params.uuid}`)
     }

@@ -429,8 +429,8 @@ exports.recommendForAward = (record, params) => {
   }
   else {
     record.status = `${exports.getQualificationText(record)} recommended`
-    _.set(record, 'qtsDetails.standardsAssessedOutcome', "Passed")
-    record.qtsRecommendedDate = record?.qtsDetails?.qtsOutcomeRecordedDate || params?.date || new Date()
+    _.set(record, 'awardDetails.standardsAssessedOutcome', "Passed")
+    record.qtsRecommendedDate = record?.awardDetails?.qtsOutcomeRecordedDate || params?.date || new Date()
     record.updatedDate = new Date()
     exports.addEvent(record, `Trainee recommended for ${exports.getQualificationText(record)}`)
   }

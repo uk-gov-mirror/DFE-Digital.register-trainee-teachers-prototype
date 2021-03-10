@@ -1,12 +1,12 @@
-{% set customQtsOutcomeRecordedDateArray = record.qtsDetails.qtsOutcomeRecordedDate | toDateArray %}
-{% if record.qtsDetails.qtsOutcomeRecordedDate | isInLast(2, "days") and record.qtsDetails.qtsOutcomeRecordedDateRadio != "On another day" %}
+{% set customQtsOutcomeRecordedDateArray = record.awardDetails.qtsOutcomeRecordedDate | toDateArray %}
+{% if record.awardDetails.qtsOutcomeRecordedDate | isInLast(2, "days") and record.awardDetails.qtsOutcomeRecordedDateRadio != "On another day" %}
   {% set customQtsOutcomeRecordedDateArray = undefined %}
 {% endif %}
 
 {% set customQtsOutcomeRecordedDateArray %}
   {{ govukDateInput({
     id: "custom-qtsOutcomeRecorded-date",
-    namePrefix: "record[qtsDetails][qtsOutcomeRecordedDate]",
+    namePrefix: "record[awardDetails][qtsOutcomeRecordedDate]",
     fieldset: {
       legend: {
         text: "On what date?",
@@ -58,7 +58,7 @@
       }
     }
   ]
-} | decorateAttributes(record, "record.qtsDetails.qtsOutcomeRecordedDateRadio")) }}
+} | decorateAttributes(record, "record.awardDetails.qtsOutcomeRecordedDateRadio")) }}
 
 {{ govukButton({
   text: "Continue"

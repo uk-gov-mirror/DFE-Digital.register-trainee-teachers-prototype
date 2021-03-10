@@ -6,21 +6,21 @@
   {% endif %}
 {% endset %}
 
-{% set qtsDetailsRowOutcomeText%}
-  {% if record.qtsDetails.standardsAssessedOutcome == "No" %}
+{% set awardDetailsRowOutcomeText%}
+  {% if record.awardDetails.standardsAssessedOutcome == "No" %}
     Standards not met
   {% else %} 
     Not provided
   {% endif %}
 {% endset %}
 
-{% set qtsDetailsRows = [
+{% set awardDetailsRows = [
   {
     key: {
       text: "Outcome"
     },
     value: {
-      text: qtsDetailsRowOutcomeText
+      text: awardDetailsRowOutcomeText
     },
     actions: {
       items: [
@@ -37,7 +37,7 @@
       text: "Date standards not met"
     },
     value: {
-      text: record.qtsDetails.qtsOutcomeRecordedDate | govukDate or 'Not provided'
+      text: record.awardDetails.qtsOutcomeRecordedDate | govukDate or 'Not provided'
     },
     actions: {
       items: [
@@ -71,7 +71,7 @@
       text: "Date of assessment"
     },
     value: {
-      text: record.qtsDetails.dateAssessmentPassed | govukDate or 'Not provided'
+      text: record.awardDetails.dateAssessmentPassed | govukDate or 'Not provided'
     },
     actions: {
       items: [
@@ -88,7 +88,7 @@
       text: "Future status"
     },
     value: {
-      text: record.qtsDetails.withdrawalStatus or 'Not provided'
+      text: record.awardDetails.withdrawalStatus or 'Not provided'
     },
     actions: {
       items: [
@@ -103,9 +103,9 @@
 
   ] %}
 
-{% set qtsDetailsHtml %}
+{% set awardDetailsHtml %}
   {{ govukSummaryList({
-    rows: qtsDetailsRows
+    rows: awardDetailsRows
   }) }}
   
 {% endset %}
@@ -132,7 +132,7 @@
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     titleText: "Outcome details",
-    html: qtsDetailsHtml
+    html: awardDetailsHtml
   }) }}
   
 {% endif %}

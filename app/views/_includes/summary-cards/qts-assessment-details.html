@@ -1,10 +1,10 @@
-{% set qtsDetailsRows = [
+{% set awardDetailsRows = [
   {
     key: {
       text: "Date standards met"
     },
     value: {
-      text: record.qtsDetails.qtsOutcomeRecordedDate | govukDate or 'Not provided'
+      text: record.awardDetails.qtsOutcomeRecordedDate | govukDate or 'Not provided'
     },
     actions: {
       items: [
@@ -21,7 +21,7 @@
       text: "Date of assessment"
     },
     value: {
-      text: record.qtsDetails.dateAssessmentPassed | govukDate or 'Not provided'
+      text: record.awardDetails.dateAssessmentPassed | govukDate or 'Not provided'
     },
     actions: {
       items: [
@@ -35,9 +35,9 @@
   } if false
   ] %}
 
-{% set qtsDetailsHtml %}
+{% set awardDetailsHtml %}
   {{ govukSummaryList({
-    rows: qtsDetailsRows
+    rows: awardDetailsRows
   }) }}
   
 {% endset %}
@@ -64,7 +64,7 @@
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     titleText: (data.record | getQualificationText) + " details",
-    html: qtsDetailsHtml
+    html: awardDetailsHtml
   }) }}
   
 {% endif %}
