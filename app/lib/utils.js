@@ -371,7 +371,7 @@ exports.doBulkAction = (action, record, params) => {
   if (action == 'Submit a group of records and request TRNs'){
     return exports.registerForTRN(record)
   }
-  if (action == 'Recommend a group of trainees for QTS'){
+  if (action == 'Recommend a group of trainees for EYTS or QTS'){
     return exports.recommendForAward(record, params)
   }
 }
@@ -424,7 +424,7 @@ exports.recommendForAward = (record, params) => {
     // Nothing to do
   }
   else if (record.status != 'TRN received'){
-    console.log(`Recommend a group of trainees for QTS failed: ${record.id} (${record?.personalDetails?.shortName}) has the wrong status (${record.status})`)
+    console.log(`Recommend a group of trainees for EYTS or QTS failed: ${record.id} (${record?.personalDetails?.shortName}) has the wrong status (${record.status})`)
     return false
   }
   else {
