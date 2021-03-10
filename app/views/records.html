@@ -36,7 +36,7 @@
         classes: "govuk-button--secondary"
       },
       {
-        text: "Recommend a group of trainees for QTS",
+        text: "Recommend a group of trainees for " + (data.record | getQualificationText),
         href: "/bulk-action/new/recommend-for-qts",
         classes: "govuk-button--secondary"
       }

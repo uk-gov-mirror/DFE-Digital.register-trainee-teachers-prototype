@@ -10,7 +10,7 @@
   {% endif %}
 {% endset %} #}
 
-{% set pageHeading = 'When did they meet the QTS standards?' %}
+{% set pageHeading = "When did they meet the " + (data.record | getQualificationText) + " standards?" %}
 
 {% set formAction = "./outcome-date-answer" %}
   

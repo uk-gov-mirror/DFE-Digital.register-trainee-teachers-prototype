@@ -63,7 +63,7 @@
 
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    titleText: "QTS details",
+    titleText: (data.record | getQualificationText) + " details",
     html: qtsDetailsHtml
   }) }}
   
