@@ -50,12 +50,22 @@ $statuses: (
     "background-colour": $govuk-brand-colour,
     "hover":             govuk-shade($govuk-brand-colour, 15%)
   ),
+  "recommended": (
+    "colour":            govuk-shade(govuk-colour("purple"), 20),
+    "background-colour": govuk-tint(govuk-colour("purple"), 80),
+    "hover":             govuk-tint(govuk-colour("purple"), 70)
+  ),
   "qts-recommended": (
     "colour":            govuk-shade(govuk-colour("purple"), 20),
     "background-colour": govuk-tint(govuk-colour("purple"), 80),
     "hover":             govuk-tint(govuk-colour("purple"), 70)
   ),
   "qts-awarded": (
+    "colour":            #fff,
+    "background-colour": $govuk-brand-colour,
+    "hover":             govuk-shade($govuk-brand-colour, 15%)
+  ),
+  "awarded": (
     "colour":            #fff,
     "background-colour": $govuk-brand-colour,
     "hover":             govuk-shade($govuk-brand-colour, 15%)
