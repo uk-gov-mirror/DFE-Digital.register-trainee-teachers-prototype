@@ -113,7 +113,9 @@ exports.qualificationIsPGCE = record => exports.qualificationIs(record, "PGCE")
 exports.qualificationIsPGDE = record => exports.qualificationIs(record, "PGDE")
 
 exports.getQualificationText = record => {
-  return (exports.qualificationIsEYTS(record)) ? "EYTS" : "QTS"
+  if (exports.qualificationIsEYTS(record)) return "EYTS"
+  else if (exports.qualificationIsQTS(record)) return "QTS"
+  else return "Unknown"
 }
 
 // Sort by subject, including course code
