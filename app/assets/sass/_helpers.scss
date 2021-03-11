@@ -19,3 +19,16 @@ body:not(.js-enabled) .app-js-only {
     color: govuk-colour("red");
   }
 }
+
+// Ensure all status boxes are equal height
+.home-statuses__flex-row {
+  display: flex;
+
+  div {
+    display: flex;
+  }
+
+  a {
+    width: 100%;
+  }
+}
