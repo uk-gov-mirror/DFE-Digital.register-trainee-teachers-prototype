@@ -22,13 +22,16 @@ body:not(.js-enabled) .app-js-only {
 
 // Ensure all status boxes are equal height
 .home-statuses__flex-row {
-  display: flex;
 
-  div {
+  @include govuk-media-query($from: tablet) {
     display: flex;
-  }
-
-  a {
-    width: 100%;
+  
+    div {
+      display: flex;
+    }
+  
+    a {
+      width: 100%;
+    }
   }
 }
