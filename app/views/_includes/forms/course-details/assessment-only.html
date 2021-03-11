@@ -1,7 +1,5 @@
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
-{{data.ittSubjects | log}}
-
 {{ appAutocomplete({
   label: {
     text: "Subject",
@@ -17,6 +15,29 @@
   value: record.courseDetails.subject
   }
 ) }}
+
+{# {% set additionalSubjectHtml %}
+  {{ appAutocomplete({
+    label: {
+      text: "Second subject (optional)",
+      classes: "govuk-label--s"
+    },
+    classes: "govuk-!-margin-bottom-0",
+    id: 'subject2',
+    autoSelect: false,
+    name: "record[courseDetails][secondSubject]",
+    items: data.ittSubjects,
+    value: record.courseDetails.secondSubject
+    }
+  ) }}
+  
+{% endset %}
+
+{{ govukDetails({
+  summaryText: "Add a second subject (optional)",
+  html: additionalSubjectHtml,
+  open: false
+}) }} #}
 
 {# These account for 91% of choices #}
 {% set commonAgeRanges = [
