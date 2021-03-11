@@ -32,7 +32,7 @@
             }) }}
           {% else %}
             {{ govukButton({
-              text: "Recommend trainee for " + (data.record | getQualificationText),
+              text: "Recommend trainee for " + (record | getQualificationText),
               href: referrer + '/qts/outcome-date',
               classes: "govuk-!-margin-bottom-0"
             }) }}

@@ -73,17 +73,17 @@
 
   {% set awardContent %}
     {{govukTag({
-      text: (data.record | getQualificationText) + " recommended",
+      text: (record | getQualificationText) + " recommended",
       classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
     })}} <br>
-    {% if record.awardDetails.qtsOutcomeRecordedDate %}
-      Recommended: {{record.awardDetails.qtsOutcomeRecordedDate | govukDate}}
+    {% if record.qtsDetails.qtsOutcomeRecordedDate %}
+      Recommended: {{record.qtsDetails.qtsOutcomeRecordedDate | govukDate}}
     {% endif %}
   {% endset %}
 
   {% set studentRecordRows = studentRecordRows | push({
     key: {
-      text: (data.record | getQualificationText)
+      text: (record | getQualificationText)
     },
     value: {
       html: awardContent
@@ -95,7 +95,7 @@
 
   {% set awardContent %}
     {{govukTag({
-      text: (data.record | getQualificationText) + " awarded",
+      text: (record | getQualificationText) + " awarded",
       classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
     })}} <br>
     Awarded: 2 September 2020
@@ -103,7 +103,7 @@
 
   {% set studentRecordRows = studentRecordRows | push({
     key: {
-      text: (data.record | getQualificationText)
+      text: (record | getQualificationText)
     },
     value: {
       html: awardContent

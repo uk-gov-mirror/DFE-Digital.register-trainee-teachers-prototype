@@ -15,20 +15,8 @@
   </h1>
   {% include "_includes/summary-cards/qts-assessment-details.html" %}
 
-  {# {{ govukCheckboxes({
-  idPrefix: "waste",
-  name: "record[contactDetails][status]",
-  items: [
-    {
-      value: "Completed",
-      text: "I have completed this section",
-      checked: checked(record.contactDetails.status, "Completed")
-    }
-  ]
-  }) }} #}
-
   {{ govukButton({
-    text: "Recommend trainee for " + (data.record | getQualificationText)
+    text: "Recommend trainee for " + (record | getQualificationText)
   }) }}
 
 {% endblock %}
