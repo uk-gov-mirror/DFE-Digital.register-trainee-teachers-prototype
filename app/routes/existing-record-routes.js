@@ -54,7 +54,7 @@ module.exports = router => {
     }
   })
 
-  // Manually advance an application from Pending EYTS/QTS to EYTS/QTS. Awarded by typing 'awarded'
+  // Manually advance an application from Pending EYTS/QTS to EYTS/QTS.
   router.get('/record/:uuid/awarded', (req, res) => {
     const data = req.session.data
     const newRecord = data.record
@@ -85,12 +85,12 @@ module.exports = router => {
       res.redirect(`/record/${req.params.uuid}`)
     }
     else {
-      let radioChoice = newRecord.awardDetails.qtsOutcomeRecordedDateRadio
+      let radioChoice = newRecord.awardDetails.awardOutcomeRecordedDateRadio
       if (radioChoice == "Today") {
-        newRecord.awardDetails.qtsOutcomeRecordedDate = filters.toDateArray(filters.today())
+        newRecord.awardDetails.awardOutcomeRecordedDate = filters.toDateArray(filters.today())
       }
       if (radioChoice == "Yesterday") {
-        newRecord.awardDetails.qtsOutcomeRecordedDate = filters.toDateArray(moment().subtract(1, "days"))
+        newRecord.awardDetails.awardOutcomeRecordedDate = filters.toDateArray(moment().subtract(1, "days"))
       } 
     }
     
@@ -161,7 +161,7 @@ module.exports = router => {
       delete newRecord?.notPassedReasonOther
       delete newRecord?.awardDetails?.standardsAssessedOutcome
       delete newRecord?.awardDetails?.withdrawalStatus
-      delete newRecord?.awardDetails?.qtsOutcomeRecordedDateRadio
+      delete newRecord?.awardDetails?.awardOutcomeRecordedDateRadio
       utils.updateRecord(data, newRecord, false)
       res.redirect(`/record/${req.params.uuid}`)
     }
