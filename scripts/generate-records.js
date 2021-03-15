@@ -43,13 +43,20 @@ const getRandomArbitrary = (min, max) => {
 // Training routes
 const trainingRoutes = Object.keys(trainingRouteData.trainingRoutes)
 const enabledTrainingRoutes = trainingRouteData.enabledTrainingRoutes
+const enabledApplyRoutes = enabledTrainingRoutes.filter(route => trainingRouteData.applyRoutes.includes(route))
 const getRandomEnabledRoute = () => faker.helpers.randomize(enabledTrainingRoutes)
+const getRandomEnabledApplyRoute = () => faker.helpers.randomize(enabledApplyRoutes)
+
+const getRandomRoute = (params) => {
+  if (params?.source == 'Apply') return getRandomEnabledApplyRoute()
+  else return getRandomEnabledRoute()
+}
 
 // Generators
 const generateTrainingDetails = require('../app/data/generators/training-details')
 const generateDates = require('../app/data/generators/dates')
 const generateTrn = require('../app/data/generators/trn')
-const generateProgrammeDetails = require('../app/data/generators/programme-details')
+const generateCourseDetails = require('../app/data/generators/course-details')
 const generatePersonalDetails = require('../app/data/generators/personal-details')
 const generateContactDetails = require('../app/data/generators/contact-details')
 const generateDiversity = require('../app/data/generators/diversity')
@@ -59,6 +66,8 @@ const generateGcse = require('../app/data/generators/gcse')
 const generateEvents = require('../app/data/generators/events')
 const generatePlacement = require('../app/data/generators/placement')
 const generateUndergraduateQualification = require('../app/data/generators/ug-entry-qualifications')
+const generateSource = require('../app/data/generators/source')
+const generateApplyData = require('../app/data/generators/apply-data')
 
 // Populate application data object with fake data
 const generateFakeApplication = (params = {}) => {
@@ -70,7 +79,7 @@ const generateFakeApplication = (params = {}) => {
   application.id              = params.id || faker.random.uuid()
   application.personalDetails = (params.personalDetails === null) ? undefined : { ...generatePersonalDetails(), ...params.personalDetails }
   application.provider        = params.provider || faker.helpers.randomize(providers)
-  application.route           = (params.route === null) ? undefined : (params.route || getRandomEnabledRoute())
+  application.route           = (params.route === null) ? undefined : (params.route || getRandomRoute(params))
   application.status          = params.status || faker.helpers.randomize(statuses)
   
   if (application.status == "Deferred") {
@@ -81,10 +90,22 @@ const generateFakeApplication = (params = {}) => {
 
   // Dates
   application                  = { ...application, ...generateDates(params, application) }
-  application.events           = generateEvents(application.status)
   // Training
-  application.trn              = (params.trn === null) ? undefined : (params.trn || generateTrn(application.status) )
-  application.programmeDetails = (params.programmeDetails === null) ? undefined : { ...generateProgrammeDetails(params, application), ...params.programmeDetails }
+  application.trn              = (params.trn === null) ? undefined : (params.trn || generateTrn(application))
+
+  application.courseDetails = (params.courseDetails === null) ? undefined : { ...generateCourseDetails(params, application), ...params.courseDetails }
+  // There's a slight edge case that programme details might return with a different route - if so save it back up
+  if (application?.courseDetails?.route && application.courseDetails.route != application.route){
+    console.log("Overwriting route") // hacky, and hopefully doesn’t happen often
+    application.route = application.courseDetails.route
+  }
+  application.source          = (params.source) ? params.source : generateSource(application)
+  if (application.source == "Apply"){
+    application.applyData = { ...generateApplyData(application), ...params.applyData}
+    // if (params.applyData) application.applyData = params.applyData
+  }
+  application.events           = generateEvents(application)
+
   application.trainingDetails  = (params.trainingDetails === null) ? undefined : { ...generateTrainingDetails(application), ...params.trainingDetails }
   // Contact details
   application.isInternationalTrainee = !(application.personalDetails.nationality.includes('British') || application.personalDetails.nationality.includes('Irish'))
@@ -135,11 +156,8 @@ const generateFakeApplications = () => {
     applications.push(generateFakeApplication(seed))
   })
 
-  // let reducedProviders = providers.slice(0, 5) // shorter for testing
-  let reducedProviders = providers
-
   // Generate trainees for each provider
-  reducedProviders.forEach(provider => {
+  providers.forEach(provider => {
 
     // Approximate size of provider
     // TODO: store provider size somewhere so it can be used here and
@@ -149,17 +167,11 @@ const generateFakeApplications = () => {
     yearsToGenerate.forEach((year) => {
       // Years can be ±10% in size
       let traineeCount = getRandomArbitrary((providerSize * 0.9), (providerSize * 1.1))
+      if (provider == "Coventry University") traineeCount = 100
       applications = applications.concat(generateFakeApplicationsForProvider(provider, year, traineeCount))
     })
 
   })
-
-  // Logging
-  let applicationCounts = {}
-  statuses.forEach(status => {
-    applicationCounts[status] = applications.filter(application => application.status == status).length
-  })
-  console.log({applicationCounts})
 
   applications = applications.sort(sortBySubmittedDate)
 
@@ -182,8 +194,9 @@ const generateFakeApplicationsForProvider = (provider, year, count) => {
   if (year == currentYear){
     targetCounts = {
       draft: 0.05,
+      applyEnrolled: 0.05,
       pendingTrn: 0.05,
-      trnReceived: 0.76,
+      trnReceived: 0.71,
       qualificationRecommended: 0.05,
       qualificationAwarded: 0.05,
       deferred: 0.02,
@@ -224,6 +237,43 @@ const generateFakeApplicationsForProvider = (provider, year, count) => {
     updatedDate: faker.date.between(
       moment(),
       moment().subtract(16, 'days'))
+  }
+
+  let applyStubUpdatedDate = faker.date.between(
+    moment(),
+    moment().subtract(16, 'days')
+  )
+
+  stubApplication.applyEnrolled = {
+    source: "Apply",
+    status: "Apply enrolled",
+    updatedDate: applyStubUpdatedDate,
+    applyData: {
+      recruitedDate: applyStubUpdatedDate,
+      applicationDate: faker.date.between(
+        moment().subtract(30, 'days'),
+        moment().subtract(60, 'days')
+      )
+    },
+    personalDetails: {
+      status: 'Completed'
+    },
+    contactDetails: {
+      status: 'Completed'
+    },
+    diversity: {
+      status: 'Completed'
+    },
+    degree: {
+      status: 'Completed'
+    },
+    academicYear: currentYear,
+    programmeDetails: {
+      isPublishCourse: true,
+      status: 'Completed'
+    },
+    placement: null,
+    trainingDetails: null
   }
 
   stubApplication.pendingTrn = {
@@ -281,7 +331,15 @@ const generateFakeApplicationsForProvider = (provider, year, count) => {
 const generateApplicationsFile = (filePath) => {
   const applications = generateFakeApplications()
   // console.log(applications)
-  console.log(`Generated ${applications.length} fake records`)
+  console.log(`Generated ${applications.length} records`)
+
+  // Logging
+  let applicationCounts = {}
+  statuses.forEach(status => {
+    applicationCounts[status] = applications.filter(application => application.status == status).length
+  })
+  console.log({applicationCounts})
+
   const filedata = JSON.stringify(applications, null, 2)
   fs.writeFile(
     filePath,

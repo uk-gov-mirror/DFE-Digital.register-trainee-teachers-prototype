@@ -47,7 +47,7 @@
     {% endif %}
   </div>
   <div class="app-application-card_col">
-    <p class="govuk-body govuk-!-font-size-16 govuk-!-margin-bottom-0">{{record.programmeDetails.subject}}</p>
+    <p class="govuk-body govuk-!-font-size-16 govuk-!-margin-bottom-0">{{record.courseDetails.subject}}</p>
     <p class="govuk-body govuk-!-font-size-16 govuk-hint govuk-!-margin-bottom-0">{{record.route}}</p>
   </div>
   <div class="app-application-card_col">
@@ -55,6 +55,12 @@
       text: record.status,
       classes: record.status | getStatusClass
     })}}
+    {% if data.settings.enableApplyIntegration %}
+      {{govukTag({
+        text: record.source,
+        classes: record.source | getStatusClass
+      })}}
+    {% endif %}
     <p class="govuk-caption-m govuk-!-font-size-16 govuk-!-margin-top-2 govuk-!-margin-bottom-0 app-application-card__submitted">
       {% if query.sortOrder == "dateAdded" %}
         Added: <span>{{record.submittedDate | govukDate}}

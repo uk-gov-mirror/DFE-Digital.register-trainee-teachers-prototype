@@ -7,32 +7,8 @@ seedRecords.push({
     "items": []
   },
   "route": "Provider-led (postgrad)",
-  "trainingDetails": {
-    "traineeStarted": "false",
-    "traineeId": "2020/21-053",
-    "status": [
-      "Completed"
-    ]
-  },
-  "programmeDetails": {
-    "isPublishCourse" : false,
-    "subject": "Physical education",
-    "ageRange": "14 to 19 programme",
-    "startDate": [
-      "3",
-      "10",
-      "2021"
-    ],
-    "endDate": [
-      "10",
-      "06",
-      "2024"
-    ],
-    "allocatedPlace": "Yes",
-    "status": [
-      "Completed"
-    ]
-  },
+  trainingDetails: null,
+  courseDetails: null,
   "personalDetails": {
     "nationality": [
       "Irish",
@@ -102,7 +78,8 @@ seedRecords.push({
     "status": [
       "Completed"
     ]
-  }
+  },
+  placement: null
 })
 
 // Partially complete draft
@@ -118,7 +95,7 @@ seedRecords.push({
   trainingDetails: {
     status: 'Completed'
   },
-  programmeDetails: {
+  courseDetails: {
     status: 'Completed',
     isPublishCourse: false
   },
@@ -144,7 +121,7 @@ seedRecords.push({
       "Completed"
     ]
   },
-  programmeDetails: {
+  courseDetails: {
     "isPublishCourse" : false,
     status: 'Completed'
   },
@@ -158,6 +135,72 @@ seedRecords.push({
     status: 'Completed'
   },
   placement: null
+})
+
+seedRecords.push({
+  status: 'Draft',
+  personalDetails: {
+    givenName: "Rachel",
+    familyName: "Laverty",
+    sex: 'Female',
+    status: 'Completed'
+  },
+  route: 'Provider-led (postgrad)',
+  trainingDetails: {
+    "traineeStarted": "true",
+    "traineeId": "2020/21-085",
+    status: [
+      "Completed"
+    ]
+  },
+  courseDetails: {
+    status: 'Completed'
+  },
+  contactDetails: {
+    status: 'Completed'
+  },
+  diversity: {
+    status: 'Completed'
+  },
+  degree: {
+    status: 'Completed'
+  },
+  placement: {
+    status: 'Completed'
+  }
+})
+
+seedRecords.push({
+  status: 'Draft',
+  personalDetails: {
+    givenName: "George",
+    familyName: "Briggs",
+    sex: 'Male',
+    status: 'Completed'
+  },
+  route: 'Provider-led (postgrad)',
+  trainingDetails: {
+    "traineeStarted": "true",
+    "traineeId": "2020/21-102",
+    status: [
+      "Completed"
+    ]
+  },
+  courseDetails: {
+    status: 'Completed'
+  },
+  contactDetails: {
+    status: 'Completed'
+  },
+  diversity: {
+    status: 'Completed'
+  },
+  degree: {
+    status: 'Completed'
+  },
+  placement: {
+    status: 'Completed'
+  }
 })
 
 seedRecords.push({
@@ -176,7 +219,7 @@ seedRecords.push({
     "disabledAnswer": "Not provided"
   },
   route: 'Assessment only',
-  programmeDetails: {
+  courseDetails: {
     isPublishCourse: false
   }
 })
@@ -190,7 +233,7 @@ seedRecords.push({
   updatedDate: "2020-08-04T04:26:19.269Z",
   trn: 8405624,
   route: 'Provider-led (postgrad)',
-  programmeDetails: {
+  courseDetails: {
     isPublishCourse: false
   },
   personalDetails: {
@@ -210,7 +253,7 @@ seedRecords.push({
   updatedDate: "2020-07-04T04:26:19.269Z",
   trn: 8594837,
   route: 'Provider-led (postgrad)',
-  programmeDetails: {
+  courseDetails: {
     isPublishCourse: 'false'
   },
   personalDetails: {
@@ -226,7 +269,7 @@ seedRecords.push({
     traineeId: "2020/21-092"
   },
   route: 'Provider-led (postgrad)',
-  programmeDetails: {
+  courseDetails: {
     isPublishCourse: false
   },
   submittedDate: "2020-05-28T12:37:21.384Z",

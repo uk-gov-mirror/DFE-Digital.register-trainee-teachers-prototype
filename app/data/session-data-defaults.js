@@ -6,7 +6,8 @@ let statuses                = require('./status')
 // Degree stuff
 let awards                  = require('./awards') // Types of degree
 let degreeData              = require('./degree')()
-let degreeTypes             = degreeData.types.undergraduate.map(type => type.text).sort()
+let degreeTypes             = degreeData.types.all
+let degreeTypesSimple             = degreeData.types.all.map(type => type.text).sort()
 let subjects                = degreeData.subjects
 let ukComparableDegrees     = degreeData.ukComparableDegrees
 let degreeOrganisations     = degreeData.orgs
@@ -51,7 +52,7 @@ settings.providerModel = "blended-model"
 // The providers the signed-in user belongs to
 settings.userProviders = [
   "Coventry University",
-  "University of Buckingham"
+  // "University of Buckingham"
 ]
 
 // The ‘active’ provider for the current user if using hat model
@@ -60,6 +61,9 @@ settings.userActiveProvider = "Coventry University"
 
 // Enable timeline on records
 settings.includeTimeline = 'true'
+
+// Enable apply integration
+settings.enableApplyIntegration = false
 
 // Enable timeline on records
 settings.includeGuidance = false
@@ -116,6 +120,7 @@ module.exports = {
   currentYear,
   degreeOrganisations,
   degreeTypes,
+  degreeTypesSimple,
   ethnicities,
   ittSubjects,
   nationalities,

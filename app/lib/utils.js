@@ -72,7 +72,7 @@ exports.render = (path, res, next, ...args) => {
 exports.hasAllocatedPlaces = (record) => {
   let routeHasAllocatedPlaces = (_.get(trainingRoutes, `[${record.route}]hasAllocatedPlaces`) == true)
   let allocatedSubjects = trainingRouteData.allocatedSubjects
-  let subjectIsAllocated = allocatedSubjects.includes(_.get(record, 'programmeDetails.subject'))
+  let subjectIsAllocated = allocatedSubjects.includes(_.get(record, 'courseDetails.subject'))
   return (routeHasAllocatedPlaces && subjectIsAllocated)
 }
 
@@ -101,7 +101,7 @@ exports.requiresSection = (record, sectionName) => {
 
 // Check if qualifications array contains an item
 exports.qualificationIs = (record, qualification) => {
-  return (record?.programmeDetails?.qualifications) ? record.programmeDetails.qualifications.includes(qualification) : false
+  return (record?.courseDetails?.qualifications) ? record.courseDetails.qualifications.includes(qualification) : false
 }
 
 exports.qualificationIsQTS = record => exports.qualificationIs(record, "QTS")
@@ -409,9 +409,9 @@ exports.registerForTRN = (record) => {
     delete record?.placement?.status
     record.submittedDate = new Date()
     record.updatedDate = new Date()
-    record.programmeDetails = {
+    record.courseDetails = {
       ...routeDefaults,
-      ...record.programmeDetails
+      ...record.courseDetails
     }
     exports.addEvent(record, "Trainee submitted for TRN")
   }
@@ -443,6 +443,7 @@ exports.recommendForAward = (record, params) => {
 exports.filterRecords = (records, data, filters = {}) => {
 
   let filteredRecords = records
+  let applyEnabled = data.settings.enableApplyIntegration
 
   // Only allow records for the signed-in providers
   filteredRecords = exports.filterBySignedIn(filteredRecords, data)
@@ -452,6 +453,11 @@ exports.filterRecords = (records, data, filters = {}) => {
 
   // Only show records for currently enabled routes or draft records
   filteredRecords = filteredRecords.filter(record => enabledTrainingRoutes.includes(record.route) || (record?.status === 'Draft'))
+
+  if (!applyEnabled){
+    filteredRecords = filteredRecords.filter(record => record?.source != "Apply")
+  }
+
 
   // Cycle not implimented yet
   // if (filter.cycle){
@@ -470,7 +476,7 @@ exports.filterRecords = (records, data, filters = {}) => {
   }
 
   if (filters.subject && filters.subject != "All subjects"){
-    filteredRecords = filteredRecords.filter(record => record?.programmeDetails?.subject == filters.subject)
+    filteredRecords = filteredRecords.filter(record => record?.courseDetails?.subject == filters.subject)
   }
 
   return filteredRecords
