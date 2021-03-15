@@ -19,19 +19,3 @@ body:not(.js-enabled) .app-js-only {
     color: govuk-colour("red");
   }
 }
-
-// Ensure all status boxes are equal height
-.home-statuses__flex-row {
-
-  @include govuk-media-query($from: tablet) {
-    display: flex;
-  
-    div {
-      display: flex;
-    }
-  
-    a {
-      width: 100%;
-    }
-  }
-}
