@@ -1,12 +1,11 @@
-{% extends "_templates/_new-record.html" %}
+{% extends "_templates/_record-form.html" %}
 
 {% set pageHeading = "Confirm undergraduate qualification" %}
 
-{% set backLink = './../overview' %}
-{% set backText = "Back to draft record" %}
+{% set backLink = referrer or ("/record/" + data.record.id) %}
+{% set backText = "Back to record" %}
 
 {% set gridColumn = 'govuk-grid-column-full' %}
-{# {% set formAction = "./../overview"  | orReferrer(referrer) %} #}
 {% set formAction = "./update" | addReferrer(referrer) %}
 
 {% block formContent %}
@@ -14,7 +13,7 @@
   {% include "_includes/summary-cards/undergraduate-qualification.html" %}
 
   {{ govukButton({
-    text: "Continue"
+    text: "Update record"
   }) }}
 
 {% endblock %}

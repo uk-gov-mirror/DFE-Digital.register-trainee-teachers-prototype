@@ -104,7 +104,7 @@ module.exports = ({updatedDate, submittedDate, deferredDate, withdrawalDate, qua
     withdrawalDate = withdrawalDate || updatedDate
   }
 
-  if (application.status.includes('Awarded')) {    
+  if (application.status.includes('awarded')) {    
     // Make sure withdrawal date is the same as the last updated date
     qualificationAwardedDate = qualificationAwardedDate || updatedDate
   }

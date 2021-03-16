@@ -65,7 +65,7 @@ const generateGce = require('../app/data/generators/gce')
 const generateGcse = require('../app/data/generators/gcse')
 const generateEvents = require('../app/data/generators/events')
 const generatePlacement = require('../app/data/generators/placement')
-const generateUndergraduateQualification = require('../app/data/generators/ug-entry-qualifications')
+const generateUndergraduateQualification = require('../app/data/generators/undergraduate-qualifications')
 const generateSource = require('../app/data/generators/source')
 const generateApplyData = require('../app/data/generators/apply-data')
 
