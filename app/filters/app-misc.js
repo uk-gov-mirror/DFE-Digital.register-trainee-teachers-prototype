@@ -130,4 +130,12 @@ filters.getDegreeHint = (degree) =>{
   } 
 }
 
+filters.includes = (route, string) =>{
+  if (route && route.includes(string)) {
+    return true
+  } else {
+    return false
+  }
+}
+
 exports.filters = filters
