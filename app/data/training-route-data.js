@@ -109,7 +109,7 @@ let baseRouteData = {
     defaultEnabled: true,
     sections: [
       'trainingDetails',
-      'programmeDetails',
+      'courseDetails',
       'personalDetails',
       'contactDetails',
       'diversity',
