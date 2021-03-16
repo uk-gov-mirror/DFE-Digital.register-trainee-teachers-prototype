@@ -12,6 +12,9 @@ let subjects                = degreeData.subjects
 let ukComparableDegrees     = degreeData.ukComparableDegrees
 let degreeOrganisations     = degreeData.orgs
 
+// Undergraduate qualification
+let ugEntryQualifications   = require('./undergraduate-qualifications')
+
 // Assessment only
 let assessmentOnlyAgeRanges = require('./assessmentOnlyAgeRanges')
 let ittSubjects = require('./itt-subjects').allSubjects
@@ -132,5 +135,6 @@ module.exports = {
   publishRoutes,
   nonPublishRoutes,
   ukComparableDegrees,
-  withdrawalReasons
+  withdrawalReasons,
+  ugEntryQualifications
 }

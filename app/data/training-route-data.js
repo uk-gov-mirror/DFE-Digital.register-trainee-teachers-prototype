@@ -107,6 +107,15 @@ let baseRouteData = {
   },
   "Early years (undergrad)": {
     defaultEnabled: true,
+    sections: [
+      'trainingDetails',
+      'courseDetails',
+      'personalDetails',
+      'contactDetails',
+      'diversity',
+      'undergraduateQualification',
+      'placement'
+    ],
     qualifications: [
       "EYTS"
     ],
