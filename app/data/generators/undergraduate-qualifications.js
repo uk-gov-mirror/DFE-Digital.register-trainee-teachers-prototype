@@ -1,5 +1,5 @@
 const faker   = require('faker')
-const ugEntryQualifications = require('../ug-entry-qualifications.js')
+const ugEntryQualifications = require('../undergraduate-qualifications.js')
 
 module.exports = () => {
 

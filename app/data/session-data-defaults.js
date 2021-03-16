@@ -13,7 +13,7 @@ let ukComparableDegrees     = degreeData.ukComparableDegrees
 let degreeOrganisations     = degreeData.orgs
 
 // Undergraduate qualification
-let ugEntryQualifications   = require('./ug-entry-qualifications')
+let ugEntryQualifications   = require('./undergraduate-qualifications')
 
 // Assessment only
 let assessmentOnlyAgeRanges = require('./assessmentOnlyAgeRanges')
