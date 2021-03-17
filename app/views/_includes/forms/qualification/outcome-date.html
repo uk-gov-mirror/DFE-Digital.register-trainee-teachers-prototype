@@ -1,12 +1,13 @@
-{% set customQtsOutcomeRecordedDateArray = record.qualificationDetails.qualificationOutcomeRecordedDateRadio | toDateArray %}
-{% if record.qualificationDetails.qualificationOutcomeRecordedDateRadio | isInLast(2, "days") and record.qualificationDetails.qualificationOutcomeRecordedDateRadio != "On another day" %}
+{% set customQtsOutcomeRecordedDateArray = record.qualificationDetails.qualificationOutcomeRecordedDate | toDateArray %}
+
+{% if record.qualificationDetails.qualificationOutcomeRecordedDate | isInLast(2, "days") and record.qualificationDetails.qualificationOutcomeRecordedDateRadio != "On another day" %}
   {% set customQtsOutcomeRecordedDateArray = undefined %}
 {% endif %}
 
 {% set customQtsOutcomeRecordedDateArray %}
   {{ govukDateInput({
     id: "custom-qtsOutcomeRecorded-date",
-    namePrefix: "record[qualificationDetails][qualificationOutcomeRecordedDateRadio]",
+    namePrefix: "record[qualificationDetails][qualificationOutcomeRecordedDate]",
     fieldset: {
       legend: {
         text: "On what date?",
