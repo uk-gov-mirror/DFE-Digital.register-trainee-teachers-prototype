@@ -76,8 +76,8 @@
       text: (record | getQualificationText) + " recommended",
       classes: record.status | getStatusClass + " govuk-!-margin-bottom-2"
     })}} <br>
-    {% if record.qtsDetails.awardOutcomeRecordedDate %}
-      Recommended: {{record.qtsDetails.awardOutcomeRecordedDate | govukDate}}
+    {% if record.qualificationDetails.qualificationOutcomeRecordedDateRadio %}
+      Recommended: {{record.qualificationDetails.qualificationOutcomeRecordedDateRadio | govukDate}}
     {% endif %}
   {% endset %}
 

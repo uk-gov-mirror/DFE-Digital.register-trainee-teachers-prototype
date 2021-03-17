@@ -80,7 +80,7 @@ settings.requireTraineeStartDate = 'true'
 // Default number of Publish courses that the provider offers
 settings.courseLimit = 20
 
-// the minimum number of placements before QTS can be awarded
+// the minimum number of placements before EYTS/QTS can be awarded
 settings.minPlacementsRequired = 2
 
 // Supliment records with getter for name
