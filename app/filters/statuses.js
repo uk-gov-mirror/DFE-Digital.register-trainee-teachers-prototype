@@ -71,7 +71,7 @@ filters.getStatusClass = (status) => {
     case 'Manual':
       return 'govuk-tag--grey'
     default:
-      return
+      return 'govuk-tag--blue'
   }
 }
 
