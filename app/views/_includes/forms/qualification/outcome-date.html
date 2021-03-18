@@ -1,10 +1,10 @@
-{% set customQualificationOutcomeRecordedDateArray = record.qualificationDetails.outcomeDate | toDateArray %}
+{% set customOutcomeDateArray = record.qualificationDetails.outcomeDate | toDateArray %}
 
 {% if record.qualificationDetails.outcomeDate | isInLast(2, "days") and record.qualificationDetails.outcomeDateRadio != "On another day" %}
-  {% set customQualificationOutcomeRecordedDateArray = undefined %}
+  {% set customOutcomeDateArray = undefined %}
 {% endif %}
 
-{% set customQualificationOutcomeRecordedDateArray %}
+{% set customOutcomeDateArray %}
   {{ govukDateInput({
     id: "custom-qualificationOutcomeRecorded-date",
     namePrefix: "record[qualificationDetails][outcomeDate]",
@@ -21,17 +21,17 @@
         {
           name: "day",
           classes: "govuk-input--width-2",
-          value: customQualificationOutcomeRecordedDateArray["0"]
+          value: customOutcomeDateArray["0"]
         },
         {
           name: "month",
           classes: "govuk-input--width-2",
-          value: customQualificationOutcomeRecordedDateArray["1"]
+          value: customOutcomeDateArray["1"]
         },
         {
           name: "year",
           classes: "govuk-input--width-4",
-          value: customQualificationOutcomeRecordedDateArray["2"]
+          value: customOutcomeDateArray["2"]
         }
       ]
   }) }}
@@ -55,7 +55,7 @@
     {
       text: "On another day",
       conditional: {
-        html: customQualificationOutcomeRecordedDateArray
+        html: customOutcomeDateArray
       }
     }
   ]
