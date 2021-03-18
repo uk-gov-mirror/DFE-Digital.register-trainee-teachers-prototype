@@ -1,13 +1,13 @@
-{% set customQualificationOutcomeRecordedDateArray = record.qualificationDetails.qualificationOutcomeRecordedDate | toDateArray %}
+{% set customQualificationOutcomeRecordedDateArray = record.qualificationDetails.outcomeDate | toDateArray %}
 
-{% if record.qualificationDetails.qualificationOutcomeRecordedDate | isInLast(2, "days") and record.qualificationDetails.qualificationOutcomeRecordedDateRadio != "On another day" %}
+{% if record.qualificationDetails.outcomeDate | isInLast(2, "days") and record.qualificationDetails.outcomeDateRadio != "On another day" %}
   {% set customQualificationOutcomeRecordedDateArray = undefined %}
 {% endif %}
 
 {% set customQualificationOutcomeRecordedDateArray %}
   {{ govukDateInput({
     id: "custom-qualificationOutcomeRecorded-date",
-    namePrefix: "record[qualificationDetails][qualificationOutcomeRecordedDate]",
+    namePrefix: "record[qualificationDetails][outcomeDate]",
     fieldset: {
       legend: {
         text: "On what date?",
@@ -59,7 +59,7 @@
       }
     }
   ]
-} | decorateAttributes(record, "record.qualificationDetails.qualificationOutcomeRecordedDateRadio")) }}
+} | decorateAttributes(record, "record.qualificationDetails.outcomeDateRadio")) }}
 
 {{ govukButton({
   text: "Continue"

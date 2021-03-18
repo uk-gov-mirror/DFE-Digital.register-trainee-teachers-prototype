@@ -80,17 +80,19 @@ module.exports = router => {
     const data = req.session.data
     const newRecord = data.record
 
+    console.log('hello Ed')
+
     // Convert radio choices to real dates
     if (!newRecord){
       res.redirect(`/record/${req.params.uuid}`)
     }
     else {
-      let radioChoice = newRecord.qualificationDetails.qualificationOutcomeRecordedDateRadio
+      let radioChoice = newRecord.qualificationDetails.outcomeDateRadio
       if (radioChoice == "Today") {
-        newRecord.qualificationDetails.qualificationOutcomeRecordedDateRadio = filters.toDateArray(filters.today())
+        newRecord.qualificationDetails.outcomeDate = filters.toDateArray(filters.today())
       }
       if (radioChoice == "Yesterday") {
-        newRecord.qualificationDetails.qualificationOutcomeRecordedDateRadio = filters.toDateArray(moment().subtract(1, "days"))
+        newRecord.qualificationDetails.outcomeDate = filters.toDateArray(moment().subtract(1, "days"))
       } 
     }
     
@@ -163,7 +165,7 @@ module.exports = router => {
       delete newRecord?.notPassedReasonOther
       delete newRecord?.qualificationDetails?.standardsAssessedOutcome
       delete newRecord?.qualificationDetails?.withdrawalStatus
-      delete newRecord?.qualificationDetails?.qualificationOutcomeRecordedDateRadio
+      delete newRecord?.qualificationDetails?.outcomeDateRadio
       utils.updateRecord(data, newRecord, false)
       res.redirect(`/record/${req.params.uuid}`)
     }
