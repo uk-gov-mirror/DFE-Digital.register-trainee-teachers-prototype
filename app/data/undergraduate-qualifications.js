@@ -60,4 +60,3 @@ module.exports = [
   'Welsh Baccalaureate Advanced Diploma (level 2)',
   'Welsh Baccalaureate Advanced Diploma (level 3)'
 ]
-
