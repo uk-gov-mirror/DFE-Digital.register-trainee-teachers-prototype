@@ -26,7 +26,7 @@
   classes: "govuk-!-width-two-thirds"
 }| decorateAttributes(placementTemp, "placementTemp.location"))}}
 
-{{ govukRadios({
+{# {{ govukRadios({
   fieldset: {
     legend: {
       text: "Select the start month for this placement",
@@ -90,7 +90,36 @@
       text: "Not known"
     }
   ]
-} | decorateAttributes(placementTemp, "placementTemp.startMonth"))}}
+} | decorateAttributes(placementTemp, "placementTemp.startMonth"))}} #}
+
+{% set placementStartDateArray = record.placementTemp.startDate | toDateArray %}
+
+{{ govukDateInput({
+  id: "placement-start-date",
+  namePrefix: "record[placementTemp][startDate]",
+  fieldset: {
+    legend: {
+      text: "Select the start month and year for this placement",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    _text: "For example, " + "" | today | toDateArray | spaceSeparate,
+    text: "For example, 3 2021"
+  },
+  items: [
+      {
+        name: "month",
+        classes: "govuk-input--width-2",
+        value: placementStartDateArray["0"]
+      },
+      {
+        name: "year",
+        classes: "govuk-input--width-4",
+        value: placementStartDateArray["1"]
+      }
+    ]
+}) }}
 
 {{ govukInput({
   label: {
