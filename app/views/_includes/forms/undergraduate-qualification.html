@@ -15,37 +15,37 @@
   }
 ) }} #}
 
-{% set customQualification %}
+{% set customUndergraduateQualification %}
   {{ govukInput({
     label: {
         text: "Add the qualification",
         classes: "govuk-label govuk-label--s"
     },
     classes: "govuk-!-width-two-thirds"
-  } | decorateAttributes(record, "record.qualificationOther")) }}
+  } | decorateAttributes(record, "record.undergraduateQualification.typeOther")) }}
 {% endset %}
 
-{% set withdrawalReasonsItems = []  %}
+{% set undergraduateQualifications = []  %}
 
-{% for reason in data.ugEntryQualifications %}
-  {% set withdrawalReasonsItems = withdrawalReasonsItems | push ({ 
-    text: reason
+{% for undergraduateQualification in data.ugEntryQualifications %}
+  {% set undergraduateQualifications = undergraduateQualifications | push ({ 
+    text: undergraduateQualification
   }) %}
 {% endfor %}
 
-{% set withdrawalReasonsItems = withdrawalReasonsItems | push ({ 
+{% set undergraduateQualifications = undergraduateQualifications | push ({ 
   divider: "or"
 }) %}
 
-{% set withdrawalReasonsItems = withdrawalReasonsItems | push ({ 
+{% set undergraduateQualifications = undergraduateQualifications | push ({ 
   text: "Another qualification not listed",
   checked: storeQualificationOther,
   conditional: {
-    html: customQualification
+    html: customUndergraduateQualification
   }
 }) %}
 
-{% set withdrawalReasonsItems = withdrawalReasonsItems | push ({ 
+{% set undergraduateQualifications = undergraduateQualifications | push ({ 
   text: "Unknown"
 }) %}
 
@@ -56,8 +56,8 @@
       classes: "govuk-fieldset__legend--s govuk-!-margin-bottom-4"
     }
   },
-  items: withdrawalReasonsItems
-} | decorateAttributes(record, "record.withdrawalReason")) }}
+  items: undergraduateQualifications
+} | decorateAttributes(record, "record.undergraduateQualification.type")) }}
 
 {{ govukButton({
   text: "Continue"

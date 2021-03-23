@@ -1,9 +1,20 @@
+{% set undergraduateQualification %}
+  {% if record.undergraduateQualification.type == "Another qualification not listed" %}
+    {{record.undergraduateQualification.typeOther}}
+  {% else%}
+    {{record.undergraduateQualification.type}}
+  {% endif %}
+{% endset %}
+
+{{ record.undergraduateQualification | log }}
+{{ record | log }}
+
 {% set undergraduateQualificationRow = {
   key: {
     text: "Highest qualification"
   },
   value: {
-    text: record.undergraduateQualification.highestQualification
+    text: undergraduateQualification or 'Not provided'
   },
   actions: {
       items: [
