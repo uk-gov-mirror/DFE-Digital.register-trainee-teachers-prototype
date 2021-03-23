@@ -37,7 +37,7 @@ module.exports = [
   'Level 3 qualifications of which some are subject to UCAS Tariff',
   'Level 3 qualifications of which some or all are subject to UCAS Tariff',
   'Mature student admitted on basis of previous experience and/or admissions test',
-  'Not known',
+  // 'Not known',
   'NVQ/SVQ level 3',
   'ONC or OND (including BTEC & SQA equivalents)',
   'Other higher qualification',
