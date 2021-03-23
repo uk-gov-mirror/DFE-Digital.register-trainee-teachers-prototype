@@ -110,6 +110,15 @@ let baseRouteData = {
     qualificationsSummary: "EYTS full time"
   },
   "Early years (assessment only)": {
+    defaultEnabled: true,
+    sections: [
+      'trainingDetails',
+      'courseDetails',
+      'personalDetails',
+      'contactDetails',
+      'diversity',
+      'degree'
+    ],
     qualifications: [
       "EYTS"
     ],
