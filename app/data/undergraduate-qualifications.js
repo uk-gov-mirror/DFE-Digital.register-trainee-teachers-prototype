@@ -7,11 +7,11 @@ module.exports = [
   'ACCESS course',
   'Access course (not QAA recognised)',
   'Access course (QAA recognised)',
-  'Advanced Modern Apprenticeships',
-  'Any combinations of GCE "A"/SQA, "Higher"/SQA, "Advanced Higher" and GNVQ/GSVQ or NVQ/SVQ at level 3',
+  'Advanced Modern Apprenticeships', // Commonly chosen in DTTP
+  'Any combinations of GCE "A"/SQA, "Higher"/SQA, "Advanced Higher" and GNVQ/GSVQ or NVQ/SVQ at level 3', // Commonly chosen in DTTP
   'AQA Baccalaureate (Bacc)',
   'Award at level 3',
-  'Baccalaureate',
+  'Baccalaureate', // Commonly chosen in DTTP
   'Cambridge Pre-U Certificate',
   'Cambridge Pre-U Diploma',
   'Certificate at level 3',
@@ -21,7 +21,7 @@ module.exports = [
   'Diploma at level 3',
   'Diploma at level M',
   'Diploma of Higher Education (DipHE)',
-  'Foundation course at FE level',
+  'Foundation course at FE level', // Commonly chosen in DTTP
   'Foundation course at level J',
   'Foundation degree',
   'GNVQ/GSVQ level 3',
@@ -38,9 +38,9 @@ module.exports = [
   'Level 3 qualifications of which some or all are subject to UCAS Tariff',
   'Mature student admitted on basis of previous experience and/or admissions test',
   // 'Not known',
-  'NVQ/SVQ level 3',
-  'ONC or OND (including BTEC & SQA equivalents)',
-  // 'Other higher qualification',
+  'NVQ/SVQ level 3', // Commonly chosen in DTTP
+  'ONC or OND (including BTEC & SQA equivalents)', // Commonly chosen in DTTP
+  // 'Other higher qualification', // Commonly chosen in DTTP 
   'Other non-UK qualification, level not known',
   // 'Other qualification at level 1',
   // 'Other qualification at level 2',
