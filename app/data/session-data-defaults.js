@@ -30,6 +30,7 @@ let nonPublishRoutes = trainingRouteData.nonPublishRoutes
 let allTrainingRoutes       = Object.values(trainingRoutes).map(route => route.name)
 
 let courses                 = require('./courses.json')
+let schools                 = require('./schools.json')
 
 let providerData            = require('./providers.js')
 let providers               = providerData.selectedProviders
@@ -78,7 +79,7 @@ settings.showBulkLinks = false
 settings.requireTraineeStartDate = 'true'
 
 // Default number of Publish courses that the provider offers
-settings.courseLimit = 20
+settings.courseLimit = 12
 
 // the minimum number of placements before EYTS/QTS can be awarded
 settings.minPlacementsRequired = 2
@@ -128,6 +129,7 @@ module.exports = {
   providers,
   allProviders,
   records,
+  schools,
   settings,
   statuses,
   subjects,

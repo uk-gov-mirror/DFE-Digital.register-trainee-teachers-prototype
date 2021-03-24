@@ -79,10 +79,17 @@ let baseRouteData = {
     hasAllocatedPlaces: true,
   },
   "School direct (salaried)": {
-    defaultEnabled: true
+    defaultEnabled: true,
+    fields: [
+      "leadSchool",
+      "employingSchool"
+    ]
   },
   "School direct (tuition fee)": {
-    defaultEnabled: true
+    defaultEnabled: true,
+    fields: [
+      "leadSchool",
+    ]
   },
   "Teach first (postgrad)": {},
   "Apprenticeship (postgrad)": {},
@@ -94,12 +101,31 @@ let baseRouteData = {
     qualificationsSummary: "EYTS full time"
   },
   "Early years (graduate entry)": {
+    defaultEnabled: true,
+    sections: [
+      'trainingDetails',
+      'courseDetails',
+      'personalDetails',
+      'contactDetails',
+      'diversity',
+      'degree',
+      'placement'
+    ],
     qualifications: [
       "EYTS"
     ],
     qualificationsSummary: "EYTS full time"
   },
   "Early years (assessment only)": {
+    defaultEnabled: true,
+    sections: [
+      'trainingDetails',
+      'courseDetails',
+      'personalDetails',
+      'contactDetails',
+      'diversity',
+      'degree'
+    ],
     qualifications: [
       "EYTS"
     ],
