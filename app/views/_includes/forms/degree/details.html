@@ -52,6 +52,7 @@
     itemsAutocomplete: degreeTypesAutocomplete,
     displayStyle: "bold",
     autoSelect: false,
+    showAllValues: false,
     classes: "app-!-autocomplete--max-width-two-thirds",
     value: (degreeTemp.type or degreeTemp.typeUK) if not isInternational
     }
@@ -72,22 +73,26 @@
     name: "degreeTemp[country]",
     items: data.countries,
     classes: "app-!-autocomplete--max-width-two-thirds",
-    value: degreeTemp.country
+    value: degreeTemp.country,
+    autoSelect: false,
+    showAllValues: false
     }
   ) }}
 
 {% else %}
 
   {{ appAutocomplete({
-  label: {
-    text: "Institution",
-    classes: "govuk-label--s"
-  },
-  id: 'degree-organisations',
-  name: "degreeTemp[org]",
-  items: data.degreeOrganisations,
-  classes: "app-!-autocomplete--max-width-two-thirds",
-  value: degreeTemp.org
+    label: {
+      text: "Institution",
+      classes: "govuk-label--s"
+    },
+    id: 'degree-organisations',
+    name: "degreeTemp[org]",
+    items: data.degreeOrganisations,
+    classes: "app-!-autocomplete--max-width-two-thirds",
+    value: degreeTemp.org,
+    autoSelect: false,
+    showAllValues: false
   }
 ) }}
 {% endif %}
