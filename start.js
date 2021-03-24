@@ -1,6 +1,7 @@
 // Core dependencies
 const path = require('path')
 const fs = require('fs')
+const lunr = require('./scripts/generate_search_index') // generate search index
 
 checkFiles()
 
@@ -62,6 +63,9 @@ if (!sessionDataDefaultsFileExists) {
   fs.createReadStream(path.join(__dirname, '/lib/template.session-data-defaults.js'))
     .pipe(fs.createWriteStream(sessionDataDefaultsFile))
 }
+
+// Generate search index
+lunr()
 
 // Run gulp
 function runGulp () {

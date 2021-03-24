@@ -3,7 +3,8 @@
 
 {{ appSchoolAutocomplete({
   name: "record[trainingDetails][employingSchool][uuid]",
-  value: record.trainingDetails.employingSchool.schoolName
+  value: record.trainingDetails.employingSchool.schoolName,
+  uuid: record.trainingDetails.leadSchool.uuid
 }) }}
 
 {{ govukButton({

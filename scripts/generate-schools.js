@@ -6,7 +6,7 @@ faker.locale  = 'en_GB'
 const placesData = require('../app/data/places.js')
 const fakePlaces = placesData.fakePlaces
 
-let countToGenerate = 3000
+let countToGenerate = 40000
 
 let schoolSuffixes = {
   "School": 0.1,
@@ -118,13 +118,13 @@ const generateSchool = (params = {}) => {
 
   // Not all schools have addresses
   let hasAddress = (params.addressLine1) ? true : weighted.select([true, false], [0.9, 0.1])
-  let ukprn, addressLine1, city, postcode
+  let ukprn, addressLine1, town, postcode
 
   if (hasAddress) {
     addressLine1 = params.addressLine1 || faker.address.streetAddress()
-    city = params.city || weighted.select(placesData.weightedCities)
+    town = params.town || weighted.select(placesData.weightedCities)
     let fakePostcode = faker.address.zipCode()
-    if (city == "London"){
+    if (town == "London"){
       fakePostcode = fakePostcode.split(" ").pop()
       fakePostcode = `${faker.helpers.randomize(cardinalDirections)}${faker.random.number({'min': 1, 'max': 20})} ${fakePostcode}`
     }
@@ -137,7 +137,7 @@ const generateSchool = (params = {}) => {
     uuid,
     ...(ukprn && {ukprn}),
     ...(addressLine1 && {addressLine1}),
-    ...(city && {city}),
+    ...(town && {town}),
     ...(postcode && {postcode}),
   }
   return output
@@ -178,7 +178,7 @@ const generateSchoolsFile = (filePath) => {
   )
 }
 
-generateSchoolsFile(path.join(__dirname, '../app/data/schools.json'))
+generateSchoolsFile(path.join(__dirname, '../app/data/fake-schools.json'))
 
 // Code below used to work out which are the most common cities and use that to make
 // an object for the weighted module. Takes in the cities column from real list of schools.

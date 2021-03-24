@@ -6,6 +6,7 @@ const path = require('path')
 const router = express.Router()
 const url = require('url')
 const utils = require('./lib/utils')
+const fs = require('fs');
 
 // =============================================================================
 // Catch all
@@ -62,6 +63,14 @@ router.post('*', function(req, res, next){
     delete req.session.data.successFlash
   }
   next()
+})
+
+router.get('/search-index', function(req, res){
+  fs.readFile('./app/lib/search-index.json', 'utf8', (err, data) => {
+    if (err) throw err
+    let searchIndex = JSON.parse(data)
+    res.send(searchIndex)
+  })
 })
 
 // =============================================================================
