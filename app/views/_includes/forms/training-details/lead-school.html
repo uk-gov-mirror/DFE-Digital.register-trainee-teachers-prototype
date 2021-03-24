@@ -2,7 +2,8 @@
 
 {{ appSchoolAutocomplete({
   name: "record[trainingDetails][leadSchool][uuid]",
-  value: record.trainingDetails.leadSchool.schoolName
+  value: record.trainingDetails.leadSchool.schoolName,
+  uuid: record.trainingDetails.leadSchool.uuid
 }) }}
 
 {# Show a checkbox only if employing school isn’t already set and we’re on a route that has employing school #}

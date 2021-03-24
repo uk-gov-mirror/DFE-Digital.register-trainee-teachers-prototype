@@ -31,7 +31,6 @@ let allTrainingRoutes       = Object.values(trainingRoutes).map(route => route.n
 
 let courses                 = require('./courses.json')
 let schools                 = require('./schools.json')
-
 let providerData            = require('./providers.js')
 let providers               = providerData.selectedProviders
 let allProviders            = providerData.allProviders

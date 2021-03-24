@@ -1,26 +1,108 @@
-{% from "_components/autocomplete/macro.njk" import appAutocomplete %}
+<div class="govuk-form-group">
+  <label class="govuk-label" for="school-picker">Select your country</label>
+  <div id="school-picker-hint" class="govuk-hint">Search by URN, school name or postcode</div>
+  <div id="school-picker"></div>
+</div>
 
-{# Adds in a hint with urn, city, and postcode #}
-{% set schoolsDefault = data.schools | getSchoolNamesForAutocomplete %}
+<input name='{{params.name}}' type="hidden" id="school-picker-uuid-input" value='{{params.uuid}}'>
 
-{% set schools = params.items or schoolsDefault %}
-{% set name = params.name %}
-{% set value = params.value %}
+<script src="/public/javascripts/autocomplete.min.js"></script>
+<script src="https://unpkg.com/lunr/lunr.js"></script>
+<script src="/public/javascripts/jquery-1.11.3.js"></script>
 
-{{ appAutocomplete({
-  label: {
-    text: "Search for a school by it's unique reference number (URN), name or postcode" 
-  },
-  _hint: {
-    text: 'Search by URN, school name or postcode'
-  },
-  id: 'school-picker',
-  autoSelect: true,
-  showAllValues: false,
-  minLength: 2,
-  name: name,
-  items: schools,
-  classes: "app-!-autocomplete--max-width-two-thirds",
-  value: value
+<script>
+  var element = document.querySelector('#school-picker')
+
+  // LunrJS Search index
+  var searchIndex = null
+  var documentStore = null
+
+  var statusMessage = null
+  var searchQuery = ''
+  var searchCallback = function () {}
+
+  // Results that are rendered by the autocomplete
+  var searchResults = []
+
+  var debounce = (fn, delay) => {
+    var timer = null
+    return function () {
+      var context = this
+      var args = arguments
+      clearTimeout(timer)
+      timer = setTimeout(function () {
+        fn.apply(context, args)
+      }, delay)
+    }
   }
-) }}
+
+  var fetchSearchIndex = (callback) => {
+    $.ajax({
+      type: 'GET',
+      url: `/search-index`,
+      success: function(response) {
+        statusMessage = 'No results found'
+        searchIndex = lunr.Index.load(response.index)
+        documentStore = response.store
+        callback(response)
+      }
+    });
+  }
+
+  var renderResults = () => {
+    if (!searchIndex || !documentStore) {
+      return searchCallback(searchResults)
+    }
+    var lunrSearchResults = searchIndex.query(function (q) {
+      q.term(lunr.tokenizer(searchQuery), {
+        wildcard: lunr.Query.wildcard.TRAILING
+      })
+    })
+    searchResults = lunrSearchResults.map(function (result) {
+      return documentStore[result.ref]
+    })
+    searchCallback(searchResults)
+  }
+
+  var handleSearchQuery = (query, callback) => {
+    searchQuery = query
+    searchCallback = callback
+
+    renderResults()
+  }
+
+  var updateInput = (result) => {
+    var element = document.querySelector('#school-picker-uuid-input')
+    element.value = result.uuid
+  }
+
+  var inputValue = (result) => {
+    if (result) { return result.name }
+  }
+
+  var suggestion = (result) => {
+    if (result) {
+      var hint = `URN ${result.urn}, ${result.city}, ${result.postcode}`
+      return `${result.name}<span class="autocomplete__option-hint">${hint}</span>`
+    }
+  }
+
+  accessibleAutocomplete({
+    element: element,
+    id: 'school-picker',
+    source: debounce(handleSearchQuery, 200),
+    onConfirm: updateInput,
+    showAllValues: false,
+    autoselect: true,
+    minLength: 3,
+    defaultValue: '{{params.value}}',
+    name: 'autocomplete-raw-value',
+    templates: {
+      inputValue,
+      suggestion
+    },
+  })
+
+  fetchSearchIndex(function () { renderResults() })
+
+</script>
