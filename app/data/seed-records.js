@@ -300,7 +300,6 @@ seedRecords.push({
     sex: "Female"
   },
   "placement": {
-    status: 'Complete',
     "items": [
       {
         "location": "Sacred Heart Newcastle SCITT",
