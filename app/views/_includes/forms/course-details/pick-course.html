@@ -69,8 +69,9 @@ defer to an id if one exists. #}
         text: 'Search by subject or course code'
       },
       id: 'publishCourse',
-      autoSelect: false,
-      showAllValues: true,
+      minLength: 2,
+      autoSelect: true,
+      showAllValues: false,
       name: "record[selectedCourseAutocompleteTemp]",
       items: courseNamesSelect,
       itemsAutocomplete: courseNamesAutocomplete,
