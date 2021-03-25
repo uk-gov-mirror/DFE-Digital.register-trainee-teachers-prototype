@@ -112,7 +112,7 @@ exports.getSectionName = (record, section) => {
     }
     else {
       if (exports.requiresField(record, ['leadSchool', 'employingSchool'])){
-        return "Trainee start date, ID and school details"
+        return "Training details"
       }
       else return "Trainee start date and ID"
     }
