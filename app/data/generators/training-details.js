@@ -50,7 +50,7 @@ module.exports = (params) => {
 
   if (routeData.fields && routeData.fields.includes("employingSchool")) {
     let tempEmploying = faker.helpers.randomize(schools.filter(school => {
-      if (!school.postcode || !leadSchool.postcode) return false
+      if (!school.postcode || !leadSchool?.postcode) return false
       else return school.postcode.startsWith(leadSchool.postcode.charAt(0))
     }))
     employingSchool = (!tempEmploying) ? faker.helpers.randomize(schools) : tempEmploying
