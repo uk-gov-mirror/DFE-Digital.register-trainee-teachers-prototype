@@ -1,7 +1,7 @@
 <div class="govuk-form-group">
-  <label class="govuk-label" for="school-picker">Select your country</label>
-  <div id="school-picker-hint" class="govuk-hint">Search by URN, school name or postcode</div>
-  <div id="school-picker"></div>
+  <label class="govuk-label" for="school-picker">Search for a school by it’s unique reference number (URN), name or postcode</label>
+  {# <div id="school-picker-hint" class="govuk-hint">Search by URN, school name or postcode</div> #}
+  <div id="school-picker" class="app-!-autocomplete--max-width-two-thirds"></div>
 </div>
 
 <input name='{{params.name}}' type="hidden" id="school-picker-uuid-input" value='{{params.uuid}}'>
@@ -65,8 +65,10 @@
   }
 
   var updateInput = (result) => {
-    var element = document.querySelector('#school-picker-uuid-input')
-    element.value = result.uuid
+    if (result){
+      var element = document.querySelector('#school-picker-uuid-input')
+      element.value = result.uuid
+    }
   }
 
   var inputValue = (result) => {
