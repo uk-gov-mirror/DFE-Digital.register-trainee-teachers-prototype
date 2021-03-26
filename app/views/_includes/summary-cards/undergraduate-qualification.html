@@ -1,9 +1,17 @@
+{% set undergraduateQualification %}
+  {% if record.undergraduateQualification.type == "Another qualification not listed" %}
+    {{record.undergraduateQualification.typeOther}}
+  {% else%}
+    {{record.undergraduateQualification.type}}
+  {% endif %}
+{% endset %}
+
 {% set undergraduateQualificationRow = {
   key: {
     text: "Highest qualification"
   },
   value: {
-    text: record.undergraduateQualification.highestQualification
+    text: undergraduateQualification
   },
   actions: {
       items: [
@@ -37,11 +45,11 @@
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "undergraduateQualification" %}
   {% if status == "In progress" %}
-    {% set incompleteText = "Undergraduate qualification not marked as complete" %}
+    {% set incompleteText = "Academic qualification not marked as complete" %}
     {% set incompleteLink = recordPath + "/undergraduate-qualification/confirm" | addReferrer(referrer) %}
     {% set incompleteLinkText = "Continue section" %}
   {% else %}
-    {% set incompleteText = "Undergraduate qualification not started" %}
+    {% set incompleteText = "Academic qualification not started" %}
     {% set incompleteLink = recordPath + "/undergraduate-qualification" | addReferrer(referrer) %}
     {% set incompleteLinkText = "Start section" %}
   {% endif %}
@@ -52,7 +60,7 @@
 
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    titleText: "Undergraduate qualification details",
+    titleText: "Academic qualification details",
     html: undergraduateQualificationDetailsHtml
   }) }}
   

@@ -96,6 +96,19 @@ let baseRouteData = {
   "Apprenticeship (postgrad)": {},
   "Opt-in undergrad": {},
   "Early years (graduate placement)": {
+    defaultEnabled: true,
+    sections: [
+      'trainingDetails',
+      'courseDetails',
+      'personalDetails',
+      'contactDetails',
+      'diversity',
+      'degree',
+      'placement'
+    ],
+    fields: [
+      "employingSchool"
+    ],
     qualifications: [
       "EYTS"
     ],

@@ -1,19 +1,51 @@
-<h1 class="govuk-heading-l">{{pageHeading}}</h1>
+{% set customUndergraduateQualification %}
+  {{ govukInput({
+    label: {
+        text: "Add the qualification",
+        classes: "govuk-label govuk-label--s"
+    },
+    classes: "govuk-!-width-two-thirds"
+  } | decorateAttributes(record, "record.undergraduateQualification.typeOther")) }}
+{% endset %}
 
-{{ appAutocomplete({
-  label: {
-    text: "Qualification",
-    classes: "govuk-label--s"
-  },
-  hint: {
-    text: 'Select the closest match'
-  },
-  id: 'qualification',
-  name: "record[undergraduateQualification][highestQualification]",
-  items: data.ugEntryQualifications,
-  value: record.undergraduateQualification.highestQualification
+{% set undergraduateQualifications = []  %}
+
+{% for undergraduateQualification in data.ugEntryQualifications %}
+  {% set undergraduateQualifications = undergraduateQualifications | push ({ 
+    text: undergraduateQualification
+  }) %}
+{% endfor %}
+
+{% set undergraduateQualifications = undergraduateQualifications | push ({ 
+  divider: "or"
+}) %}
+
+{% set undergraduateQualifications = undergraduateQualifications | push ({ 
+  text: "Another qualification not listed",
+  checked: storeQualificationOther,
+  conditional: {
+    html: customUndergraduateQualification
   }
-) }}
+}) %}
+
+{% set undergraduateQualifications = undergraduateQualifications | push ({ 
+  text: "No formal qualification"
+}) %}
+
+{% set undergraduateQualifications = undergraduateQualifications | push ({ 
+  text: "Unknown"
+}) %}
+
+{{ govukRadios({
+  fieldset: {
+    legend: {
+      text: pageHeading,
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--l"
+    }
+  },
+  items: undergraduateQualifications
+} | decorateAttributes(record, "record.undergraduateQualification.type")) }}
 
 {{ govukButton({
   text: "Continue"
