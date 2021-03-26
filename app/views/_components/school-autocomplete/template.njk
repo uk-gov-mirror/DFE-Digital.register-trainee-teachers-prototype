@@ -61,7 +61,7 @@
     searchResults = lunrSearchResults.map(function (result) {
       return documentStore[result.ref]
     })
-    searchCallback(searchResults)
+    searchCallback(searchResults.slice(0, 15))
   }
 
   var handleSearchQuery = (query, callback) => {
