@@ -24,24 +24,12 @@
   // Results that are rendered by the autocomplete
   var searchResults = []
 
-  var debounce = (fn, delay) => {
-    var timer = null
-    return function () {
-      var context = this
-      var args = arguments
-      clearTimeout(timer)
-      timer = setTimeout(function () {
-        fn.apply(context, args)
-      }, delay)
-    }
-  }
-
   var fetchSearchIndex = (callback) => {
+    statusMessage = 'Loading...'
     $.ajax({
       type: 'GET',
       url: `/search-index`,
       success: function(response) {
-        statusMessage = 'No results found'
         searchIndex = lunr.Index.load(response.index)
         documentStore = response.store
         callback(response)
@@ -61,10 +49,14 @@
     searchResults = lunrSearchResults.map(function (result) {
       return documentStore[result.ref]
     })
+    if (searchResults.length === 0) {
+      statusMessage = 'No results found'
+    }
     searchCallback(searchResults)
   }
 
   var handleSearchQuery = (query, callback) => {
+    statusMessage = 'Loading...'
     searchQuery = query
     searchCallback = callback
 
@@ -90,7 +82,7 @@
   accessibleAutocomplete({
     element: element,
     id: 'school-picker',
-    source: debounce(handleSearchQuery, 200),
+    source: handleSearchQuery,
     onConfirm: updateInput,
     showAllValues: false,
     autoselect: true,
@@ -101,6 +93,7 @@
       inputValue,
       suggestion
     },
+    tNoResults: function () { return statusMessage }
   })
 
   fetchSearchIndex(function () { renderResults() })
