@@ -30,7 +30,7 @@ let nonPublishRoutes = trainingRouteData.nonPublishRoutes
 let allTrainingRoutes       = Object.values(trainingRoutes).map(route => route.name)
 
 let courses                 = require('./courses.json')
-let schools                 = require('./schools.json')
+// let schools                 = require('./schools.json') // too big to load in to session
 let providerData            = require('./providers.js')
 let providers               = providerData.selectedProviders
 let allProviders            = providerData.allProviders
@@ -128,7 +128,7 @@ module.exports = {
   providers,
   allProviders,
   records,
-  schools,
+  // schools,
   settings,
   statuses,
   subjects,
