@@ -1,12 +1,24 @@
 const fs = require('fs');
 const lunr = require('lunr')
 
-module.exports = function buildIndex () {
+
+const buildIndex = type => {
   console.log('Building lunr index...');
 
-  const filePath = require('path').resolve(__dirname, '../app/data/gis-schools.js')
+  let filePath, documents
 
-  const documents = require(filePath)
+  if (type == 'real'){
+    filePath = require('path').resolve(__dirname, `../app/data/schools-real.js`)
+
+    documents = require(filePath)
+  }
+  else {
+    filePath = require('path').resolve(__dirname, '../app/data/schools-fake.json')
+
+    documents = JSON.parse(fs.readFileSync(filePath))
+  }
+
+
 
   // The search index only contains what's needed to match and identify a
   // document, but won't give us back anything other than the document's
@@ -38,7 +50,13 @@ module.exports = function buildIndex () {
     })
   })
 
-  fs.writeFileSync(__dirname + '/../app/lib/search-index.json', JSON.stringify({ index, store }))
+  fs.writeFileSync(__dirname + `/../app/lib/search-index-${type}.json`, JSON.stringify({ index, store }))
 
   console.log('...done!');
+
+}
+
+module.exports = function buildIndexes () {
+  buildIndex('fake')
+  buildIndex('real')
 }

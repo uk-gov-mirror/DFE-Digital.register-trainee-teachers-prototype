@@ -79,6 +79,15 @@
         items: [
           {
             value: 'true',
+            text: "Use real school data"
+          }
+        ]
+      } | decorateAttributes(data, "data.settings.useRealSchoolData")) }}
+
+      {{ govukCheckboxes({
+        items: [
+          {
+            value: 'true',
             text: "Trainees need a start date to register for TRN"
           }
         ]

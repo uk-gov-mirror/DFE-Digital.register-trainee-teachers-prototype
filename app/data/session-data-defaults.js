@@ -77,6 +77,8 @@ settings.showBulkLinks = false
 // Start date is required when registering trainees
 settings.requireTraineeStartDate = 'true'
 
+settings.useRealSchoolData = false
+
 // Default number of Publish courses that the provider offers
 settings.courseLimit = 12
 

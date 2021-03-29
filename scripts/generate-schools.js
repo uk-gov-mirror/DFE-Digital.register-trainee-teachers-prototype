@@ -6,7 +6,7 @@ faker.locale  = 'en_GB'
 const placesData = require('../app/data/places.js')
 const fakePlaces = placesData.fakePlaces
 
-let countToGenerate = 40000
+let countToGenerate = 4000
 
 let schoolSuffixes = {
   "School": 0.1,
@@ -178,7 +178,7 @@ const generateSchoolsFile = (filePath) => {
   )
 }
 
-generateSchoolsFile(path.join(__dirname, '../app/data/fake-schools.json'))
+generateSchoolsFile(path.join(__dirname, '../app/data/schools-fake.json'))
 
 // Code below used to work out which are the most common cities and use that to make
 // an object for the weighted module. Takes in the cities column from real list of schools.

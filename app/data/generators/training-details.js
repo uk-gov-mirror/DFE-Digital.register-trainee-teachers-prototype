@@ -3,7 +3,7 @@
 const moment = require('moment')
 const weighted = require('weighted')
 const faker   = require('faker')
-const schools = require('../gis-schools.js')
+const schools = require('../schools-real.js')
 const trainingRouteData = require('../training-route-data')
 
 faker.locale  = 'en_GB'

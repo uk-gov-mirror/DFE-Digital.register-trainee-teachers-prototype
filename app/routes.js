@@ -66,7 +66,8 @@ router.post('*', function(req, res, next){
 })
 
 router.get('/search-index', function(req, res){
-  fs.readFile('./app/lib/search-index.json', 'utf8', (err, data) => {
+  let schoolDataType = (req.session.data.settings.useRealSchoolData == 'true') ? 'gis' : 'fake'
+  fs.readFile(`./app/lib/search-index-${schoolDataType}.json`, 'utf8', (err, data) => {
     if (err) throw err
     let searchIndex = JSON.parse(data)
     res.send(searchIndex)
