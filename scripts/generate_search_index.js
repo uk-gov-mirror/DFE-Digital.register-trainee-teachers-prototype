@@ -4,9 +4,9 @@ const lunr = require('lunr')
 module.exports = function buildIndex () {
   console.log('Building lunr index...');
 
-  const filePath = require('path').resolve(__dirname, '../app/data/schools.json')
+  const filePath = require('path').resolve(__dirname, '../app/data/gis-schools.js')
 
-  const documents = JSON.parse(fs.readFileSync(filePath));
+  const documents = require(filePath)
 
   // The search index only contains what's needed to match and identify a
   // document, but won't give us back anything other than the document's
@@ -31,7 +31,7 @@ module.exports = function buildIndex () {
         uuid: doc.uuid,
         name: doc.schoolName,
         urn: doc.urn,
-        city: doc.city,
+        town: doc.town,
         postcode: doc.postcode
       }
       this.add(doc)

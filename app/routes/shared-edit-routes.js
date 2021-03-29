@@ -3,7 +3,7 @@ const path = require('path')
 const moment = require('moment')
 const utils = require('./../lib/utils')
 const _ = require('lodash')
-const schools = require('./../data/schools.json') // Loaded manually because this is too big to pass around in session
+const schools = require('./../data/gis-schools.js') // Loaded manually because this is too big to pass around in session
 
 
 module.exports = router => {
