@@ -29,12 +29,21 @@ let commonPlaces = [
   "Cherry",
   "Church Hill",
   "Christchurch",
+  "Forest",
+  "Green",
+  "King’s",
   "Langley",
   "Manor",
   "New",
+  "Nelson",
+  "Old",
+  "North",
   "North",
   "North East",
   "Stratford",
+  "Queen Elizabeth",
+  "Westbrook",
+  "Westbury",
 ]
 
 // Faith schools
@@ -50,11 +59,14 @@ let primarySchools = [
 let faithSchoolPlaces = [
   "All Saints",
   "St Andrew’s",
+  "St Francis",
   "St John's",
   "St Paul’s",
   "St Peter’s",
   "St Peter and St Paul",
   "St Clement’s",
+  "St Matthew’s",
+  "St Mary’s",
   "St Thomas’s",
   "St Vincent’s",
 ]
@@ -98,9 +110,9 @@ generators.generateSchoolWithUncommonName = () => {
 // Chosen arbitrarily to provide a mix of very similar names, familiar names, and 
 // less common names.
 let schoolNameMix = {
-  generateSchoolWithCommonName: 0.5,
+  generateSchoolWithCommonName: 0.2,
   generateFaithSchool: 0.3,
-  generateSchoolWithUncommonName: 0.2
+  generateSchoolWithUncommonName: 0.5
 }
 
 const generateSchool = (params = {}) => {
