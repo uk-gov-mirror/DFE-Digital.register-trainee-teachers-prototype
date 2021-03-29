@@ -41,19 +41,25 @@
     if (!searchIndex || !documentStore) {
       return searchCallback(searchResults)
     }
+
     var lunrSearchResults = searchIndex.query(function (q) {
-      q.term(lunr.tokenizer(searchQuery), {
+      let tokens = lunr.tokenizer(searchQuery)
+      let lastToken = tokens.pop()
+      q.term(tokens)
+      q.term(lastToken, {
         wildcard: lunr.Query.wildcard.TRAILING
       })
-    })
+    }).slice(0, 15)
+
     searchResults = lunrSearchResults.map(function (result) {
       return documentStore[result.ref]
     })
+
     if (searchResults.length === 0) {
       statusMessage = 'No results found'
     }
-    searchCallback(searchResults.slice(0, 15))
 
+    searchCallback(searchResults)
   }
 
   var handleSearchQuery = (query, callback) => {
@@ -77,7 +83,7 @@
 
   var suggestion = (result) => {
     if (result) {
-      var hint = `URN ${result.urn}, ${result.city}, ${result.postcode}`
+      var hint = `URN ${result.urn}, ${result.town}, ${result.postcode}`
       return `${result.name}<span class="autocomplete__option-hint">${hint}</span>`
     }
   }
