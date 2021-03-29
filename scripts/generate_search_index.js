@@ -3,7 +3,7 @@ const lunr = require('lunr')
 
 
 const buildIndex = type => {
-  console.log('Building lunr index...');
+  console.log(`Building lunr index for ${type} schools...`);
 
   let filePath, documents
 
