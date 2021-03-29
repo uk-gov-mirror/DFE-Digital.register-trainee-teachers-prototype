@@ -3,6 +3,7 @@ const path = require('path')
 const moment = require('moment')
 const utils = require('./../lib/utils')
 const _ = require('lodash')
+const schools = require('./../data/gis-schools.js') // Loaded manually because this is too big to pass around in session
 
 
 module.exports = router => {
@@ -50,8 +51,7 @@ module.exports = router => {
       res.redirect(`${recordPath}/training-details/lead-school${referrer}`)
     }
     else {
-
-      let selectedSchool = data.schools.find(school => school.uuid == schoolUuid)
+      let selectedSchool = schools.find(school => school.uuid == schoolUuid)
       // Seed records might have schools that aren't in our schools list
       // This may happen if a user tries to edit an existing seed record
       if (!selectedSchool) {
@@ -94,7 +94,7 @@ module.exports = router => {
       res.redirect(`${recordPath}/training-details/employing-school${referrer}`)
     }
     else {
-      let selectedSchool = data.schools.find(school => school.uuid == schoolUuid)
+      let selectedSchool = schools.find(school => school.uuid == schoolUuid)
 
       // Seed records might have schools that aren't in our schools list
       // This may happen if a user tries to edit an existing seed record

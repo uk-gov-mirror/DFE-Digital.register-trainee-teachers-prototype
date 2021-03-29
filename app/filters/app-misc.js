@@ -67,7 +67,7 @@ filters.orReferrer = (url, referrer) => {
 // URN 1234567, City, Postcode
 filters.getSchoolHint = (school) => {
   let hint = `URN ${school.urn}`
-  if (school.city) hint += `, ${school.city}` // Not all schools have cities
+  if (school.town) hint += `, ${school.town}` // Not all schools have cities
   if (school.postcode) hint += `, ${school.postcode}` // Not all schools have postcodes
   return hint
 }
