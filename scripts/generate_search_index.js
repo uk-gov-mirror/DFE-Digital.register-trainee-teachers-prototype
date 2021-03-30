@@ -6,7 +6,12 @@ module.exports = function buildIndex () {
 
   const filePath = require('path').resolve(__dirname, '../app/data/gis-schools.js')
 
-  const documents = require(filePath)
+  let documents = require(filePath)
+
+  // Store postcode with and without space so we can easily search on both.
+  documents.forEach((doc, index) =>  {
+    if (doc.postcode) doc.postcodeCombined = doc.postcode.replace(/\s/g, "")
+  })
 
   // The search index only contains what's needed to match and identify a
   // document, but won't give us back anything other than the document's
@@ -20,6 +25,8 @@ module.exports = function buildIndex () {
     this.ref('uuid')
     this.field('schoolName')
     this.field('urn')
+    this.field('postcode')
+    this.field('postcodeCombined')
 
     // Disable stemming of documents when generating the index
     this.pipeline.remove(lunr.stemmer)
@@ -32,7 +39,8 @@ module.exports = function buildIndex () {
         name: doc.schoolName,
         urn: doc.urn,
         town: doc.town,
-        postcode: doc.postcode
+        postcode: doc.postcode,
+        postcodeCombined: doc.postcodeCombined
       }
       this.add(doc)
     })
