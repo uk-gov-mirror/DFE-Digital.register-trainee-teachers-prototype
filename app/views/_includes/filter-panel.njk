@@ -11,12 +11,12 @@
     },
     items: [
       {
-        text: "2020 to 2021 (current)",
-        checked: checked(query.filterCycle, "2020 to 2021 (current)") if query.filterCycle else 'checked'
+        text: "2020/21 (current)",
+        checked: checked(query.filterCycle, "2020/21 (current)") if query.filterCycle else 'checked'
       },
       {
-        text: "2019 to 2020",
-        checked: checked(query.filterCycle, "2019 to 2020")
+        text: "2019/20",
+        checked: checked(query.filterCycle, "2019/20")
       }
     ]
   } | decorateAttributes(data, "data.filterCycle"))}}
