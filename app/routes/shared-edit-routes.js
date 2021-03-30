@@ -434,11 +434,16 @@ module.exports = router => {
     let degreeIndex = req.params.index
     let recordPath = utils.getRecordPath(req)
 
-    console.log(newDegree)
-
-    // This is so we can look up isInternational
+    // This is so we can look up isInternational if already answered
     if (existingDegrees[degreeIndex]) {
       newDegree = Object.assign({}, existingDegrees[degreeIndex], newDegree)
+    }
+
+    // This is a hack because the autocomplete doesn’t pick the righ type 
+    // in the select - so we defer to the autocomplete value instead
+    let selectedTypeRawAutocomplete = req.body?._autocompleteRawValue_degreeTypeUK
+    if (selectedTypeRawAutocomplete){
+      newDegree.typeUK = selectedTypeRawAutocomplete
     }
 
     // Save the correct type
