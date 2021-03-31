@@ -31,7 +31,9 @@ module.exports = function buildIndex () {
     // Disable stemming of documents when generating the index
     this.pipeline.remove(lunr.stemmer)
     // Disable stemming of search terms run against this index
-    this.searchPipeline.remove(lunr.stemmer)
+    this.pipeline.remove(lunr.stemmer)
+    // Stop lunar from disregarding stop words like "the"
+    this.pipeline.remove(lunr.stopWordFilter)
 
     documents.forEach(doc => {
       store[doc.uuid] = {

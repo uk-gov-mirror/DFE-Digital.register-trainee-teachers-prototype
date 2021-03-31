@@ -20,6 +20,7 @@
   var statusMessage = null
   var searchQuery = ''
   var searchCallback = function () {}
+  var debug = ({{ data.settings.searchDebug or false }}) ? true : false
 
   // Results that are rendered by the autocomplete
   var searchResults = []
@@ -54,7 +55,9 @@
     }).slice(0, 15)
 
     searchResults = lunrSearchResults.map(function (result) {
-      return documentStore[result.ref]
+      let item = documentStore[result.ref]
+      item.score = result.score.toFixed(2)
+      return item
     })
 
     if (searchResults.length === 0) {
@@ -84,8 +87,15 @@
 
   var suggestion = (result) => {
     if (result) {
+      var name
+      if (debug){
+        name = `${result.score}: ${result.name}`
+      }
+      else {
+        name = result.name
+      }
       var hint = `URN ${result.urn}, ${result.town}, ${result.postcode}`
-      return `${result.name}<span class="autocomplete__option-hint">${hint}</span>`
+      return `${name}<span class="autocomplete__option-hint">${hint}</span>`
     }
   }
 
