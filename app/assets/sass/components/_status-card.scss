@@ -104,4 +104,7 @@ $statuses: (
 
 .status-card__type {
   text-decoration: underline;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }

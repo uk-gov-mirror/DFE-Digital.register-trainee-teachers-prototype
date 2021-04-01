@@ -67,8 +67,8 @@
       {% set eytsCount = records | where("status", ['EYTS recommended', 'EYTS awarded']) | length %}
       {% set qtsCount = records | where("status", ['QTS recommended', 'QTS awarded']) | length %}
       
-      {% if eytsCount == 0 %}
-        <div class="govuk-grid-row govuk-!-margin-bottom-6">
+      {% if qtsCount == 0 %}
+        <div class="govuk-grid-row govuk-!-margin-bottom-6 home-statuses__flex-row">
           {% set statuses = ['QTS recommended','QTS awarded', 'Deferred', 'Withdrawn'] %}
           {% for status in statuses %}
             <div class="govuk-grid-column-one-quarter">
@@ -76,8 +76,8 @@
             </div>
           {% endfor %}
         </div>
-      {% elseif qtsCount == 0 %}
-        <div class="govuk-grid-row govuk-!-margin-bottom-6">
+      {% elseif eytsCount == 0 %}
+        <div class="govuk-grid-row govuk-!-margin-bottom-6 home-statuses__flex-row">
           {% set statuses = ['EYTS recommended', 'EYTS awarded', 'Deferred', 'Withdrawn'] %}
           {% for status in statuses %}
             <div class="govuk-grid-column-one-quarter">
