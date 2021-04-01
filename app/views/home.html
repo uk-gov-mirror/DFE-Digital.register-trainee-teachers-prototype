@@ -50,7 +50,7 @@
       <a href="/records?filterStatus={{status}}" class="status-card status-card--{{status | lower | kebabCase }}">
         {% set recordCount = records | where("status", status) | length %}
         <span class="status-card__count">{{recordCount}}</span>
-        <span class="status-card__type">{{status}}</span><span class="govuk-visually-hidden"> records. View these records.</span>
+        <span class="status-card__status">{{status}}</span><span class="govuk-visually-hidden"> records. View these records.</span>
       </a>
     {% endmacro %}
 
@@ -91,14 +91,14 @@
             <a href="/records?filterStatus=EYTS recommended&filterStatus=QTS recommended" class="status-card status-card--recommended">
               {% set recordCount = records | where("status", ['EYTS recommended','QTS recommended']) | length %}
               <span class="status-card__count">{{recordCount}}</span>
-              <span class="status-card__type">Qualification recommended</span> <span class="govuk-visually-hidden"> records. View these records.</span>
+              <span class="status-card__status">Qualification recommended</span> <span class="govuk-visually-hidden"> records. View these records.</span>
             </a>
           </div>
           <div class="govuk-grid-column-one-quarter">
             <a href="/records?filterStatus=EYTS awarded&filterStatus=QTS awarded" class="status-card status-card--awarded">
               {% set recordCount = records | where("status", ['EYTS awarded','QTS awarded']) | length %}
               <span class="status-card__count">{{recordCount}}</span>
-              <span class="status-card__type">Qualification awarded</span><span class="govuk-visually-hidden"> records. View these records.</span>
+              <span class="status-card__status">Qualification awarded</span><span class="govuk-visually-hidden"> records. View these records.</span>
             </a>
           </div>
           {% set statuses = ['Deferred', 'Withdrawn'] %}
