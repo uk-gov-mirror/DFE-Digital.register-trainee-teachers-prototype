@@ -50,7 +50,7 @@
       <a href="/records?filterStatus={{status}}" class="status-card status-card--{{status | lower | kebabCase }}">
         {% set recordCount = records | where("status", status) | length %}
         <span class="status-card__count">{{recordCount}}</span>
-        {{status}}
+        <span class="status-card__status">{{status}}</span><span class="govuk-visually-hidden"> records. View these records.</span>
       </a>
     {% endmacro %}
 
@@ -63,31 +63,56 @@
           </div>
         {% endfor %}
       </div>
-      <div class="govuk-grid-row govuk-!-margin-bottom-6 home-statuses__flex-row">
-        <div class="govuk-grid-column-one-quarter">
-          <a href="/records?filterStatus=EYTS recommended&filterStatus=QTS recommended" class="status-card status-card--recommended">
-            {% set recordCount = records | where("status", ['EYTS recommended','QTS recommended']) | length %}
-            <span class="status-card__count">{{recordCount}}</span>
-            Qualification recommended
-          </a>
-        </div>
-        <div class="govuk-grid-column-one-quarter">
-          <a href="/records?filterStatus=EYTS awarded&filterStatus=QTS awarded" class="status-card status-card--awarded">
-            {% set recordCount = records | where("status", ['EYTS awarded','QTS awarded']) | length %}
-            <span class="status-card__count">{{recordCount}}</span>
-            Qualification awarded
-          </a>
-        </div>
-        {% set statuses = ['Deferred', 'Withdrawn'] %}
-        {% for status in statuses %}
-          <div class="govuk-grid-column-one-quarter">
-            {{ statusCard(records, status) }}
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
 
+      {% set eytsCount = records | where("status", ['EYTS recommended', 'EYTS awarded']) | length %}
+      {% set qtsCount = records | where("status", ['QTS recommended', 'QTS awarded']) | length %}
+      
+      {% if eytsCount == 0 %}
+        <div class="govuk-grid-row govuk-!-margin-bottom-6 home-statuses__flex-row">
+          {% set statuses = ['QTS recommended','QTS awarded', 'Deferred', 'Withdrawn'] %}
+          {% for status in statuses %}
+            <div class="govuk-grid-column-one-quarter">
+              {{ statusCard(records, status) }}
+            </div>
+          {% endfor %}
+        </div>
+      {% elseif qtsCount == 0 %}
+        <div class="govuk-grid-row govuk-!-margin-bottom-6 home-statuses__flex-row">
+          {% set statuses = ['EYTS recommended', 'EYTS awarded', 'Deferred', 'Withdrawn'] %}
+          {% for status in statuses %}
+            <div class="govuk-grid-column-one-quarter">
+              {{ statusCard(records, status) }}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="govuk-grid-row govuk-!-margin-bottom-6 home-statuses__flex-row">
+          <div class="govuk-grid-column-one-quarter">
+            <a href="/records?filterStatus=EYTS recommended&filterStatus=QTS recommended" class="status-card status-card--recommended">
+              {% set recordCount = records | where("status", ['EYTS recommended','QTS recommended']) | length %}
+              <span class="status-card__count">{{recordCount}}</span>
+              <span class="status-card__status">Qualification recommended</span> <span class="govuk-visually-hidden"> records. View these records.</span>
+            </a>
+          </div>
+          <div class="govuk-grid-column-one-quarter">
+            <a href="/records?filterStatus=EYTS awarded&filterStatus=QTS awarded" class="status-card status-card--awarded">
+              {% set recordCount = records | where("status", ['EYTS awarded','QTS awarded']) | length %}
+              <span class="status-card__count">{{recordCount}}</span>
+              <span class="status-card__status">Qualification awarded</span><span class="govuk-visually-hidden"> records. View these records.</span>
+            </a>
+          </div>
+          {% set statuses = ['Deferred', 'Withdrawn'] %}
+          {% for status in statuses %}
+            <div class="govuk-grid-column-one-quarter">
+              {{ statusCard(records, status) }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+    </div>
+
+  </div>
 </div>
 
 
