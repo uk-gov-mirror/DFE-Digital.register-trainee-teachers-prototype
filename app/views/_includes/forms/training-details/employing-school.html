@@ -1,11 +1,30 @@
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
+{% set label = "Search for a school by its unique reference number (URN), name or postcode" %}
 
-{{ appSchoolAutocomplete({
-  name: "_autocomplete_result_uuid",
-  value: record.trainingDetails.employingSchool.schoolName,
-  uuid: record.trainingDetails.employingSchool.uuid
-}) }}
+{# Todo - this could probably be the default that the autocomplete progressively enhances #}
+<div class="app-no-js-only">
+  {{ govukInput({
+    id: "schoolSearch",
+    name: "_schoolSearch",
+    label: {
+      text: label
+    },
+    value: query._schoolSearch,
+    classes: 'app-!-max-width-two-thirds'
+  }) }}
+</div>
+
+<div class="app-js-only">
+  {{ appSchoolAutocomplete({
+    name: "_autocomplete_result_uuid",
+    value: record.trainingDetails.employingSchool.schoolName,
+    uuid: record.trainingDetails.employingSchool.uuid,
+    label: {
+      text: label
+    }
+  }) }}
+</div>
 
 {{ govukButton({
   text: "Continue"

@@ -66,7 +66,7 @@
     isPageHeading: true,
     fieldset: {
       legend: {
-        text: "Select the lead school",
+        text: "Select the " + schoolType + " school",
         classes: "govuk-fieldset__legend--l"
       }
     },
@@ -82,7 +82,7 @@
     {% set remainingCount = resultsCount - 15 %}
 
     {% set insetTextHtml %}
-      {% if remainingCount == 0 %}
+      {% if remainingCount == 1 %}
         1 more school matches your search for ‘{{ query._schoolSearch}}’. Try narrowing down your search if the school you’re looking for is not listed.
       {% else %}
         {{remainingCount}} more schools match your search for ‘{{ query._schoolSearch}}’. Try narrowing down your search if the school you’re looking for is not listed.
