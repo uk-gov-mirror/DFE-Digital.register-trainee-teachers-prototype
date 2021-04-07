@@ -140,6 +140,28 @@ module.exports = router => {
 
   })
 
+
+  router.get(['/:recordtype/:uuid/training-details/employing-school','/:recordtype/training-details/employing-school'], function (req, res) {
+    let data = req.session.data
+    let record = data.record
+    let recordPath = utils.getRecordPath(req)
+    let referrer = utils.getReferrer(req.query.referrer)
+    let schoolSearchTerm = req.query?._schoolSearch
+
+    if (schoolSearchTerm){
+      let results = false
+      let resultsCount = 0
+      results = utils.searchSchools(schools, schoolSearchTerm)
+      resultsCount = results.length
+      results = results.slice(0, 15) // truncate results
+      res.render(`${req.params.recordtype}/training-details/employing-school-results`, { searchResults: results, resultsCount })
+    }
+    else {
+      res.render(`${req.params.recordtype}/training-details/employing-school`)
+    }
+
+  })
+
   router.post(['/:recordtype/:uuid/training-details/employing-school','/:recordtype/training-details/employing-school'], function (req, res) {
     let data = req.session.data
     let record = data.record
