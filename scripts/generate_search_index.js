@@ -1,6 +1,9 @@
 const fs = require('fs');
 const lunr = require('lunr')
 
+const removePunctuation = input => input.replace(/['’‘.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
+
+
 module.exports = function buildIndex () {
   console.log('Building lunr index...');
 
@@ -11,6 +14,7 @@ module.exports = function buildIndex () {
   // Store postcode with and without space so we can easily search on both.
   documents.forEach((doc, index) =>  {
     if (doc.postcode) doc.postcodeCombined = doc.postcode.replace(/\s/g, "")
+    doc.schoolNameWithoutPunctuation = removePunctuation(doc.schoolName)
   })
 
   // The search index only contains what's needed to match and identify a
@@ -23,7 +27,7 @@ module.exports = function buildIndex () {
 
   const index = lunr(function () {
     this.ref('uuid')
-    this.field('schoolName')
+    this.field('schoolNameWithoutPunctuation')
     this.field('urn')
     this.field('postcode')
     this.field('postcodeCombined')

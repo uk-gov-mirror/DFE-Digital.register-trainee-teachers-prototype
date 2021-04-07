@@ -36,6 +36,7 @@ module.exports = router => {
     }
   })
 
+  // Toggle between an autocomplete page and a search results page on the basis of there being a search query
   router.get(['/:recordtype/:uuid/training-details/lead-school','/:recordtype/training-details/lead-school'], function (req, res) {
     let data = req.session.data
     let record = data.record
@@ -57,6 +58,8 @@ module.exports = router => {
 
   })
 
+  // This route deals with users searching for schools by string or having selected a
+  // school from a set of results.
   router.post(['/:recordtype/:uuid/training-details/lead-school','/:recordtype/training-details/lead-school'], function (req, res) {
     let data = req.session.data
     let record = data.record
@@ -140,7 +143,7 @@ module.exports = router => {
 
   })
 
-
+  // Toggle between an autocomplete page and a search results page on the basis of there being a search query
   router.get(['/:recordtype/:uuid/training-details/employing-school','/:recordtype/training-details/employing-school'], function (req, res) {
     let data = req.session.data
     let record = data.record
@@ -162,17 +165,50 @@ module.exports = router => {
 
   })
 
+  // This route deals with users searching for schools by string or having selected a
+  // school from a set of results.
   router.post(['/:recordtype/:uuid/training-details/employing-school','/:recordtype/training-details/employing-school'], function (req, res) {
     let data = req.session.data
     let record = data.record
     let recordPath = utils.getRecordPath(req)
     let referrer = utils.getReferrer(req.query.referrer)
 
-    let autocompleteUuid = req.body?._autocomplete_raw_value_school_picker && req.body?._autocomplete_result_uuid
+    // Input added with js by the autocomplete
+    let autocompleteRawValue = req.body?._autocomplete_raw_value_school_picker
 
-    let schoolUuid = autocompleteUuid
+    // School selected via autocomplete
+    let autocompleteUuid = req.body?._autocomplete_result_uuid
 
-    if (!schoolUuid){
+    // AutocompleteUuid isn’t always reliable
+    // If a user has made a valid selection then goes back to edit their answer, autocompleteUuid will be filled
+    // with their previous answer. If they then type something new in to the autocomplete but don’t pick an answer,
+    // then the old Uuid will get submitted. Here we check that the school name for the provided Uuid matches the
+    // raw autocomplete string submitted. If they don’t match, wipe the UUID as it’s invalid - and instead we should
+    // run a string search for the given name.
+    if (autocompleteUuid && autocompleteRawValue){
+      let selectedSchool = schools.find(school => school.uuid == autocompleteUuid)
+      if (selectedSchool?.schoolName != autocompleteRawValue){
+        autocompleteUuid = undefined
+      }
+    }
+
+    // Used for no-js searching
+    // Or where a user types in to the autocomplete too quickly
+    let schoolSearchTerm = (!autocompleteUuid && autocompleteRawValue) || req.body?._schoolSearch || false
+
+    let searchResultRadios = req.body?._searchResultRadios
+    let schoolResultUuid = (searchResultRadios && searchResultRadios != 'searchAgain') ? searchResultRadios : false
+
+    // Uuid could come via two form inputs
+    let schoolUuid = autocompleteUuid || schoolResultUuid || false
+
+    // Search again
+    if (schoolSearchTerm && !schoolUuid){
+      let queryParams = utils.addQueryParam(referrer, `_schoolSearch=${schoolSearchTerm}`)
+      res.redirect(`${recordPath}/training-details/employing-school${queryParams}`)
+    }
+    // No answer given and no search term
+    else if (!schoolUuid){
       res.redirect(`${recordPath}/training-details/employing-school${referrer}`)
     }
     else {
@@ -184,11 +220,13 @@ module.exports = router => {
         console.log(`School not found - you probably need to update the seed records`)
       }
       else {
-        record.trainingDetails.employingSchool = selectedSchool
+        // Using _.set as lead school might not exist yet
+        _.set(record, 'trainingDetails.employingSchool', selectedSchool)
       }
 
       res.redirect(`${recordPath}/training-details/confirm${referrer}`)
     }
+
   })
 
   // =============================================================================
