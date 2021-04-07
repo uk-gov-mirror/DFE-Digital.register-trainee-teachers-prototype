@@ -15,6 +15,7 @@ const trainingRoutes = trainingRouteData.trainingRoutes
 // Cooerce falsy inputs to real true and false
 // Needed as Nunjucks doesn't treat all falsy values as false
 exports.falsify = (input) => {
+  if (input == undefined) return false
   if (_.isNumber(input)) return input
   else if (input == false) return false
   if (_.isString(input)){
@@ -503,6 +504,41 @@ exports.filterRecords = (records, data, filters = {}) => {
 }
 
 // -------------------------------------------------------------------
+// Schools
+// -------------------------------------------------------------------
+
+// This approximates a similar search as we do client side with Lunr
+exports.searchSchools = (schools = [], query = "") => {
+  if (!query) return []
+
+  // Strip most punctuation for fuzzier matching
+  const removePunctuation = input => input.replace(/['’‘.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
+
+  let queryParts = removePunctuation(query.toLowerCase()).split(" ")
+
+  let results = schools.filter(school => {
+
+    // All parts must match
+    return queryParts.every(part => {
+      let match = false
+      let simpleSchoolName = removePunctuation(school.schoolName).toLowerCase()
+
+      // 849382
+      if (school.urn.includes(part)) match = true
+      // Abbeywood School
+      if (simpleSchoolName.includes(part)) match = true
+      // Postcode with spaces
+      if (school.postcode && school.postcode.toLowerCase().includes(part)) match = true
+      // Postcode without spaces
+      if (school.postcode && school.postcode.toLowerCase().replace(" ", "").includes(part)) match = true
+      return match
+
+    })
+  })
+  return results
+}
+
+// -------------------------------------------------------------------
 // Routing
 // -------------------------------------------------------------------
 
@@ -512,6 +548,12 @@ exports.getReferrer = referrer => {
     return `?referrer=${referrer}`
   }
   else return ''
+}
+
+// Appends a query param to an optional existing one
+// Used so we can add query params whilst also providing a referrer
+exports.addQueryParam = (existing, param) => {
+  return (existing) ? `${existing}&${param}` : `?${param}`
 }
 
 // Return first part of url to use in redirects

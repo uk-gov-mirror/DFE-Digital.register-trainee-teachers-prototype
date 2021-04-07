@@ -36,33 +36,90 @@ module.exports = router => {
     }
   })
 
+  router.get(['/:recordtype/:uuid/training-details/lead-school','/:recordtype/training-details/lead-school'], function (req, res) {
+    let data = req.session.data
+    let record = data.record
+    let recordPath = utils.getRecordPath(req)
+    let referrer = utils.getReferrer(req.query.referrer)
+    let schoolSearchTerm = req.query?._schoolSearch
+
+    if (schoolSearchTerm){
+      let results = false
+      let resultsCount = 0
+      results = utils.searchSchools(schools, schoolSearchTerm)
+      resultsCount = results.length
+      results = results.slice(0, 15) // truncate results
+      res.render(`${req.params.recordtype}/training-details/lead-school-results`, { searchResults: results, resultsCount })
+    }
+    else {
+      res.render(`${req.params.recordtype}/training-details/lead-school`)
+    }
+
+  })
+
   router.post(['/:recordtype/:uuid/training-details/lead-school','/:recordtype/training-details/lead-school'], function (req, res) {
     let data = req.session.data
     let record = data.record
     let recordPath = utils.getRecordPath(req)
     let referrer = utils.getReferrer(req.query.referrer)
 
-    let schoolUuid = record?.trainingDetails?.leadSchool?.uuid
-    let leadSchoolIsEmployingSchool = (record?.trainingDetails?.leadSchoolIsEmployingSchool == "true") ? true : false
-    delete record.trainingDetails.leadSchoolIsEmployingSchool // Checkbox no longer needed
+    // Input added with js by the autocomplete
+    let autocompleteRawValue = req.body?._autocomplete_raw_value_school_picker
 
-    // No answer given / answer not understood
-    if (!schoolUuid){
+    // School selected via autocomplete
+    let autocompleteUuid = req.body?._autocomplete_result_uuid
+
+    // AutocompleteUuid isn’t always reliable
+    // If a user has made a valid selection then goes back to edit their answer, autocompleteUuid will be filled
+    // with their previous answer. If they then type something new in to the autocomplete but don’t pick an answer,
+    // then the old Uuid will get submitted. Here we check that the school name for the provided Uuid matches the
+    // raw autocomplete string submitted. If they don’t match, wipe the UUID as it’s invalid - and instead we should
+    // run a string search for the given name.
+    if (autocompleteUuid && autocompleteRawValue){
+      let selectedSchool = schools.find(school => school.uuid == autocompleteUuid)
+      if (selectedSchool?.schoolName != autocompleteRawValue){
+        autocompleteUuid = undefined
+      }
+    }
+
+    // Used for no-js searching
+    // Or where a user types in to the autocomplete too quickly
+    let schoolSearchTerm = (!autocompleteUuid && autocompleteRawValue) || req.body?._schoolSearch || false
+
+    let searchResultRadios = req.body?._searchResultRadios
+    let schoolResultUuid = (searchResultRadios && searchResultRadios != 'searchAgain') ? searchResultRadios : false
+
+    // Uuid could come via two form inputs
+    let schoolUuid = autocompleteUuid || schoolResultUuid || false
+
+    let leadSchoolIsEmployingSchool = (record?.trainingDetails?.leadSchoolIsEmployingSchool == "true") ? true : false
+    delete record?.trainingDetails.leadSchoolIsEmployingSchool // Checkbox no longer needed
+
+    // Search again
+    if (schoolSearchTerm && !schoolUuid){
+      let queryParams = utils.addQueryParam(referrer, `_schoolSearch=${schoolSearchTerm}`)
+      res.redirect(`${recordPath}/training-details/lead-school${queryParams}`)
+    }
+    // No answer given and no search term
+    else if (!schoolUuid){
       res.redirect(`${recordPath}/training-details/lead-school${referrer}`)
     }
     else {
       let selectedSchool = schools.find(school => school.uuid == schoolUuid)
+
       // Seed records might have schools that aren't in our schools list
       // This may happen if a user tries to edit an existing seed record
       if (!selectedSchool) {
         console.log(`School not found - you probably need to update the seed records`)
       }
       else {
-        record.trainingDetails.leadSchool = selectedSchool
+        // Using _.set as lead school might not exist yet
+        _.set(record, 'trainingDetails.leadSchool', selectedSchool)
       }
 
       // Some routes have a conditional next question
-      if (utils.requiresField(record, 'employingSchool')){
+      // We bypass this if we've already got an answer for employing school
+      if (utils.requiresField(record, 'employingSchool') && !record?.trainingDetails?.employingSchool){
 
         // If an employing school isn’t already set, users can tell us the employing school
         // is the same as the employing school
@@ -89,7 +146,10 @@ module.exports = router => {
     let recordPath = utils.getRecordPath(req)
     let referrer = utils.getReferrer(req.query.referrer)
 
-    let schoolUuid = record?.trainingDetails?.employingSchool?.uuid
+    let autocompleteUuid = req.body?._autocomplete_raw_value_school_picker && req.body?._autocomplete_result_uuid
+
+    let schoolUuid = autocompleteUuid
+
     if (!schoolUuid){
       res.redirect(`${recordPath}/training-details/employing-school${referrer}`)
     }

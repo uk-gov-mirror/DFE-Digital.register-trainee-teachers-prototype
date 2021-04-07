@@ -1,0 +1,105 @@
+{# We should *always* have a search query to be on this page #}
+{% set hasSearchQuery = query._schoolSearch | falsify %}
+
+{% set label = "Search for a school by it’s unique reference number (URN), name or postcode" %}
+
+{% set searchInput %}
+  {{ govukInput({
+    id: "schoolSearch",
+    name: "_schoolSearch",
+    label: {
+      text: label
+    },
+    value: query._schoolSearch,
+    classes: 'app-!-max-width-two-thirds'
+  }) }}
+{% endset %}
+
+
+{# No results #}
+{% if searchResults and searchResults | length == 0 %}
+  <h1 class="govuk-heading-l">No results</h1>
+  {% set insetHtml %}
+    <p class="govuk-body">
+      No results for <span class="govuk-!-font-weight-bold">{{query._schoolSearch}}</span>.
+    </p>
+  {% endset %}
+  {{ govukInsetText({
+    html: insetHtml
+  }) }}
+  {{searchInput | safe}}
+
+  {{ govukButton({
+    text: "Search again"
+  }) }}
+{% endif %}
+
+{# Some results #}
+{% if searchResults | length > 0 %}
+
+  {% set schools = [] %}
+
+  {% for school in searchResults %}
+    {% set schools = schools | push({
+      text: school.schoolName,
+      value: school.uuid,
+      hint: {
+        text: school | getSchoolHint
+      }
+    }) %}
+  {% endfor %}
+
+  {% set schools = schools | push({divider: 'or'}) %}
+
+  {# Advance to route selection page #}
+  {% set schools = schools | push({
+    value: "searchAgain",
+    text: "Search again",
+    conditional: {
+      html: searchInput
+    }
+  }) %}
+
+  {{ govukRadios({
+    idPrefix: "schoolSelection",
+    name: "_searchResultRadios",
+    isPageHeading: true,
+    fieldset: {
+      legend: {
+        text: "Select the lead school",
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    hint: {
+      text: "Results for ‘" + query._schoolSearch + "’"
+    },
+    items: schools
+  }) }}
+
+  {# We truncate results - show a message if this has happened #}
+  {% if resultsCount > 15 %}
+
+    {% set remainingCount = resultsCount - 15 %}
+
+    {% set insetTextHtml %}
+      {% if remainingCount == 0 %}
+        1 more school matches your search for ‘{{ query._schoolSearch}}’. Try narrowing down your search if the school you’re looking for is not listed.
+      {% else %}
+        {{remainingCount}} more schools match your search for ‘{{ query._schoolSearch}}’. Try narrowing down your search if the school you’re looking for is not listed.
+      {% endif %}
+    {% endset %}
+
+    {{ govukInsetText({
+      text: insetTextHtml
+    }) }}
+
+  {% endif %}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+  
+{% endif %}
+
+
+

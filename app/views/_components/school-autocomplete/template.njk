@@ -1,10 +1,10 @@
+{# Todo: these should probably be added with js #}
 <div class="govuk-form-group">
-  <label class="govuk-label" for="school-picker">Search for a school by it’s unique reference number (URN), name or postcode</label>
-  {# <div id="school-picker-hint" class="govuk-hint">Search by URN, school name or postcode</div> #}
+  <label class="govuk-label" for="school-picker">{{params.label.text}}</label>
   <div id="school-picker" class="app-!-autocomplete--max-width-two-thirds"></div>
 </div>
 
-<input name='{{params.name}}' type="hidden" id="school-picker-uuid-input" value='{{params.uuid}}'>
+<input name='{{params.name}}' type="hidden" id="school-picker-uuid-input">
 
 <script src="/public/javascripts/autocomplete.min.js"></script>
 <script src="https://unpkg.com/lunr/lunr.js"></script>
@@ -21,6 +21,13 @@
   var searchQuery = ''
   var searchCallback = function () {}
   var debug = ({{ data.settings.searchDebug or false }}) ? true : false
+
+  // Prefil existing UUID if available
+  // Doing it here rather than rendering ensures this field isn’t populated when js isn’t available
+  {% if params.uuid %}
+    var uuidElement = document.querySelector('#school-picker-uuid-input')
+    uuidElement.value = '{{ params.uuid }}'
+  {% endif %}
 
   // Results that are rendered by the autocomplete
   var searchResults = []
@@ -43,22 +50,25 @@
       return searchCallback(searchResults)
     }
 
-    var lunrSearchResults = searchIndex.query(function (q) {
-      let tokens = lunr.tokenizer(searchQuery)
-      let lastToken = tokens.pop()
-      q.term(tokens, {
-        presence: lunr.Query.presence.REQUIRED
-      })
-      q.term(lastToken, {
-        wildcard: lunr.Query.wildcard.TRAILING
-      })
-    }).slice(0, 15)
+    // Avoid searching when there is no query
+    if (searchQuery.length){
+      var lunrSearchResults = searchIndex.query(function (q) {
+        let tokens = lunr.tokenizer(searchQuery)
+        let lastToken = tokens.pop()
+        q.term(tokens, {
+          presence: lunr.Query.presence.REQUIRED
+        })
+        q.term(lastToken, {
+          wildcard: lunr.Query.wildcard.TRAILING
+        })
+      }).slice(0, 15)
 
-    searchResults = lunrSearchResults.map(function (result) {
-      let item = documentStore[result.ref]
-      item.score = result.score.toFixed(2)
-      return item
-    })
+      searchResults = lunrSearchResults.map(function (result) {
+        let item = documentStore[result.ref]
+        item.score = result.score.toFixed(2)
+        return item
+      })
+    }
 
     if (searchResults.length === 0) {
       statusMessage = 'No results found'
@@ -75,10 +85,13 @@
   }
 
   var updateInput = (result) => {
+    var element = document.querySelector('#school-picker-uuid-input')
+    // If they've picked something, save the UUID of the selection
     if (result){
-      var element = document.querySelector('#school-picker-uuid-input')
       element.value = result.uuid
     }
+    // Autocomplete closed without making a selection - clear any previous selection
+    else element.value = ""
   }
 
   var inputValue = (result) => {
@@ -105,10 +118,10 @@
     source: handleSearchQuery,
     onConfirm: updateInput,
     showAllValues: false,
-    autoselect: true,
+    autoselect: false,
     minLength: 2,
     defaultValue: '{{params.value}}',
-    name: 'autocomplete-raw-value',
+    name: '_autocomplete_raw_value_school_picker',
     templates: {
       inputValue,
       suggestion
@@ -117,5 +130,15 @@
   })
 
   fetchSearchIndex(function () { renderResults() })
+
+  // Try to catch people who press return prematurely and submit an incomplete form
+  $('#school-picker').keydown(function (e) {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+      console.log("preventing defaults")
+      return false;
+    }
+  });
+
 
 </script>

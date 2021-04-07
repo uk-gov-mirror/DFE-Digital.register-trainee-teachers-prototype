@@ -1,23 +1,47 @@
 <h1 class="govuk-heading-l">{{pageHeading}}</h1>
 
-{{ appSchoolAutocomplete({
-  name: "record[trainingDetails][leadSchool][uuid]",
-  value: record.trainingDetails.leadSchool.schoolName,
-  uuid: record.trainingDetails.leadSchool.uuid
-}) }}
+{% set label = "Search for a school by it’s unique reference number (URN), name or postcode" %}
 
-{# Show a checkbox only if employing school isn’t already set and we’re on a route that has employing school #}
-{% if record | requiresField("employingSchool") and not record.trainingDetails.employingSchool %}
-  {# No fieldset as this is a single checkbox item #}
-  {{ govukCheckboxes({
-    items: [
-      {
-        value: "true",
-        text: "This school is also the employing school"
-      }
-    ]
-  } | decorateAttributes(record, "record.trainingDetails.leadSchoolIsEmployingSchool")) }}
-{% endif %}
+{# Todo - this could probably be the default that the autocomplete progressively enhances #}
+<div class="app-no-js-only">
+  {{ govukInput({
+    id: "schoolSearch",
+    name: "_schoolSearch",
+    label: {
+      text: label
+    },
+    value: query._schoolSearch,
+    classes: 'app-!-max-width-two-thirds'
+  }) }}
+</div>
+
+<div class="app-js-only">
+  {{ appSchoolAutocomplete({
+    name: "_autocomplete_result_uuid",
+    value: record.trainingDetails.leadSchool.schoolName,
+    uuid: record.trainingDetails.leadSchool.uuid,
+    label: {
+      text: label
+    }
+  }) }}
+</div>
+
+{# Only show the checkbox where we're using the autocomplete and we've not already got results #}
+<div class="app-js-only">
+  {# Show a checkbox only if employing school isn’t already set and we’re on a route that has employing school #}
+  {% if record | requiresField("employingSchool") and not record.trainingDetails.employingSchool %}
+    {# No fieldset as this is a single checkbox item #}
+    {{ govukCheckboxes({
+      items: [
+        {
+          value: "true",
+          text: "This school is also the employing school"
+        }
+      ]
+    } | decorateAttributes(record, "record.trainingDetails.leadSchoolIsEmployingSchool")) }}
+  {% endif %}
+</div>
+
 
 {{ govukButton({
   text: "Continue"
