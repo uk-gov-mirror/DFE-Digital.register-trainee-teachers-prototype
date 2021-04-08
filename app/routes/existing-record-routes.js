@@ -286,13 +286,20 @@ module.exports = router => {
       res.redirect('/record/:uuid')
     }
     else {
-      let radioChoice = newRecord.withdrawalDateRadio
-      if (radioChoice == "Today") {
-        newRecord.withdrawalDate = filters.toDateArray(filters.today())
-      } 
-      if (radioChoice == "Yesterday") {
-        newRecord.withdrawalDate = filters.toDateArray(moment().subtract(1, "days"))
-      } 
+
+      if (utils.isDeferred(newRecord)){
+        newRecord.withdrawalDate = newRecord.deferredDate
+      }
+      else {
+        let radioChoice = newRecord.withdrawalDateRadio
+        if (radioChoice == "Today") {
+          newRecord.withdrawalDate = filters.toDateArray(filters.today())
+        } 
+        if (radioChoice == "Yesterday") {
+          newRecord.withdrawalDate = filters.toDateArray(moment().subtract(1, "days"))
+        }
+      }
+
       res.redirect('/record/' + req.params.uuid + '/withdraw/confirm')
     }
   })
