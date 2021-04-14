@@ -1,0 +1,41 @@
+// Records actionss bar
+
+.records-actions {
+  margin: 0 0 govuk-spacing(3) 0;
+  border-bottom: 1px solid govuk-colour("mid-grey");
+  
+  @include govuk-media-query($from: tablet, $until: desktop) {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+}
+
+.records-actions__col:nth-child(1) {
+  @include govuk-media-query($from: $govuk-page-width) {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+  @include govuk-media-query($from: tablet, $until: desktop) {
+    text-align: right;
+  }
+}
+
+.records-actions__col:nth-child(2) {
+  align-self: flex-end;
+  
+  .govuk-button {
+    margin: 0 0 govuk-spacing(3) 0;
+  }
+ 
+  @include govuk-media-query($until: tablet) {
+    .govuk-button {
+      margin: 0 0 govuk-spacing(4) 0;
+    }
+  }
+
+  @include govuk-media-query($from: desktop) {
+    display: none;
+  }
+}
