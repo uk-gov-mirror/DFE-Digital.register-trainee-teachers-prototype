@@ -102,8 +102,8 @@ module.exports = router => {
   router.get('/new-record/check-record', function (req, res) {
     const data = req.session.data
     let errors = req.query.errors
-    let newRecord = _.get(data, 'record') // copy record
-    let isComplete = utils.recordIsComplete(newRecord)
+    let record = _.get(data, 'record') // copy record
+    let isComplete = utils.recordIsComplete(record)
     let errorList = (errors) ? true : false
     res.render('new-record/check-record', {errorList, recordIsComplete: isComplete})
   })
@@ -112,9 +112,9 @@ module.exports = router => {
   router.get('/new-record/delete-draft/delete', (req, res) => {
     const data = req.session.data
     const records = data.records
-    let newRecord = data.record
-    if (newRecord.id){
-      let recordIndex = records.findIndex(record => record.id == newRecord.id)
+    let record = data.record
+    if (record.id){
+      let recordIndex = records.findIndex(record => record.id == record.id)
       _.pullAt(records, [recordIndex]) // delete item at index
     }
     utils.deleteTempData(data)
@@ -126,15 +126,15 @@ module.exports = router => {
   router.get('/new-record/save-as-draft', (req, res) => {
     const data = req.session.data
     // const records = data.records
-    let newRecord = data.record
+    let record = data.record
     // No data, return to page
-    if (!newRecord){
+    if (!record){
       res.redirect('/new-record/overview')
     }
     else {
-      newRecord.status = "Draft" // just in case
+      record.status = record.status || "Draft" // just in case
       utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord)
+      utils.updateRecord(data, record)
       // req.flash('success', 'Record saved as draft')
       res.redirect('/records')
     }
@@ -143,17 +143,17 @@ module.exports = router => {
   // Submit for TRN
   router.post('/new-record/save', (req, res) => {
     const data = req.session.data
-    let newRecord = _.get(data, 'record') // copy record
-    if (!utils.recordIsComplete(newRecord)){
+    let record = _.get(data, 'record') // copy record
+    if (!utils.recordIsComplete(record)){
       console.log('Record is incomplete, returning to check record')
       res.redirect('/new-record/check-record?errors=true')
     }
     else {
-      utils.registerForTRN(newRecord)
+      utils.registerForTRN(record)
       utils.deleteTempData(data)
-      utils.updateRecord(data, newRecord, false)
+      utils.updateRecord(data, record, false)
       // Temporarily store the id so that we can look it up on the submitted page
-      req.session.data.submittedRecordId = newRecord.id 
+      req.session.data.submittedRecordId = record.id 
       res.redirect('/new-record/submitted')
     }
   })

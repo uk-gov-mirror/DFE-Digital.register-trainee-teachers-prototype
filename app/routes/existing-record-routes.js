@@ -7,30 +7,7 @@ const utils = require('./../lib/utils')
 
 
 module.exports = router => {
-  // Set up data when viewing a record
-  router.get('/record/:uuid', function (req, res) {
-    const data = req.session.data
 
-    utils.deleteTempData(data)
-    const records = req.session.data.records
-    const record = records.find(record => record.id == req.params.uuid)
-    if (!record){
-      res.redirect('/records')
-    }
-    // Save record to session to be used by views
-    req.session.data.record = record
-
-    // Redirect to task list journey if still a draft
-    if (record.status == 'Draft'){
-      // req.flash('success', 'Restoring saved draft')
-      res.redirect('/new-record/overview')
-    }
-    // Only submitted records
-    else {
-      res.locals.record = record
-      res.render('record')
-    }
-  })
 
   // Manually advance an application from pending to trn received
   router.get('/record/:uuid/trn', (req, res) => {

@@ -107,7 +107,7 @@ exports.requiresSection = (record, sectionNames) => {
 // This whole filter is poor and should probably be removed later.
 exports.getSectionName = (record, section) => {
   if (section == 'trainingDetails'){
-    if (record.status && record.status != "Draft"){
+    if (record.status && !exports.isDraft(record)){
       return "Schools"
     }
     else {
@@ -180,16 +180,46 @@ exports.routeHasPublishCourses = function(record){
 // Records
 // -------------------------------------------------------------------
 
-exports.isAwarded = record =>{
-  return record.status == "QTS awarded" || record.status == "EYTS awarded"
+// Statuses
+exports.isDraft = record => {
+  return record.status == "Draft" || record.status == "Apply enrolled"
 }
 
-exports.isDeferred = record =>{
+exports.isNotDraft = record => {
+  return record.status != "Draft" && record.status != "Apply enrolled"
+}
+
+exports.isPendingTrn = record => {
+  return record.status == "Pending TRN"
+}
+
+exports.isTrnReceived = record => {
+  return record.status == "TRN received"
+}
+
+exports.isRecommended = record => {
+  return record.status.includes("recommended") //EYTS recommended and QTS recommended
+}
+
+exports.isAwarded = record => {
+  return record.status.includs("awarded") // EYTS awarded and QTS awarded
+}
+
+exports.isDeferred = record => {
   return record.status == "Deferred"
 }
 
-exports.isWithdrawn = record =>{
+exports.isWithdrawn = record => {
   return record.status == "Withdrawn"
+}
+
+// Source types
+exports.sourceIsApply = record => {
+  return record.source == "Apply"
+}
+
+exports.sourceIsManual = record => {
+  return record.source == "Manual"
 }
 
 // Check if all sections are complete
@@ -425,7 +455,7 @@ exports.registerForTRN = (record) => {
   if (!record) return false
 
   // Only draft records can be submitted for TRN
-  if (record.status != 'Draft'){
+  if (!exports.isDraft(record)){
     console.log(`Submit a group of records and request TRNs failed: ${record.id} (${record?.personalDetails?.shortName}) has the wrong status (${record.status})`)
     return false
   }
@@ -484,10 +514,10 @@ exports.filterRecords = (records, data, filters = {}) => {
   let enabledTrainingRoutes = data.settings.enabledTrainingRoutes
 
   // Only show records for currently enabled routes or draft records
-  filteredRecords = filteredRecords.filter(record => enabledTrainingRoutes.includes(record.route) || (record?.status === 'Draft'))
+  filteredRecords = filteredRecords.filter(record => enabledTrainingRoutes.includes(record.route) || (exports.isDraft(record)))
 
   if (!applyEnabled){
-    filteredRecords = filteredRecords.filter(record => record?.source != "Apply")
+    filteredRecords = filteredRecords.filter(record => exports.sourceIsManual(record))
   }
 
 

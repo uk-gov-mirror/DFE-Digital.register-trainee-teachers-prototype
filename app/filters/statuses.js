@@ -26,6 +26,7 @@ var filters = {}
 filters.getStatusText = (data) => {
   if (!data) return "Not started"
   if (data.status) return data.status
+  if (data?.source == "Apply") return "Review"
   else return "In progress"
 }
 
@@ -40,6 +41,8 @@ filters.getStatusClass = (status) => {
     // Application phases
     case 'Not started':
       return 'govuk-tag--grey'
+    case 'Review':
+      return 'govuk-tag--pink'
     case 'In progress':
       return 'govuk-tag--grey'
     case 'Completed':
@@ -80,7 +83,10 @@ filters.sectionIsInProgress = data =>{
 }
 
 filters.sectionIsCompleted = data =>{
-  return (data && data.status == "Completed")
+  let status = data?.status
+  // if (status == "Completed" || status == "Review") return true
+  if (status == "Completed") return true
+  else return false
 }
 
 filters.reviewIfInProgress = (url, data, path) => {
@@ -93,9 +99,10 @@ filters.reviewIfInProgress = (url, data, path) => {
   }
 }
 
-filters.getAmendsAllowed = status => {
+filters.canBeAmmended = status => {
   let statusesThatCanAmend = [
     'Draft',
+    'Apply enrolled',
     'Pending TRN',
     'TRN received',
     'Deferred'

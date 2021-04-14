@@ -8,6 +8,41 @@ const schools = require('./../data/gis-schools.js') // Loaded manually because t
 
 module.exports = router => {
 
+  // Load up data for a record
+  // This implimentation makes a copy of the record and stores it in a temporary location
+  // any edits happen on this temporary data - depending on the journey, some routes may then
+  // copy this temp record back to the main records list. This means we can support things like
+  // cancelling changes - as we just need to load the original record again.
+  // One downside is it means the prototype doesn’t support multiple records being opened
+  // at once.
+  router.get('/record/:uuid', function (req, res) {
+    const data = req.session.data
+
+    utils.deleteTempData(data)
+    const records = req.session.data.records
+    const record = records.find(record => record.id == req.params.uuid)
+    if (!record){
+      res.redirect('/records')
+    }
+    // Save record to session to be used by views
+    req.session.data.record = record
+
+    // Redirect to task draft journey if still a draft
+    if (utils.isDraft(record)){
+      // req.flash('success', 'Restoring saved draft')
+      if (utils.sourceIsApply(record)){
+        res.redirect('/new-record/apply-overview')
+      }
+      else res.redirect('/new-record/overview')
+    }
+    // Only submitted records
+    else {
+      res.locals.record = record
+      res.render('record')
+    }
+  })
+
+
   // =============================================================================
   // Training details - details specific to this trainee
   // =============================================================================
