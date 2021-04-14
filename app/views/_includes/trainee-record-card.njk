@@ -6,7 +6,7 @@
   {% if data.settings.showBulkLinks %}
     <div class="app-application-card_col">
       <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-        {% if record.status == 'TRN received' or (record.status == 'Draft' and record | recordIsComplete) %}
+        {% if record.status == 'TRN received' or (record | isDraft and record | recordIsComplete) %}
           <input type="checkbox" name="[bulk][filteredTrainees]" class="govuk-checkboxes__input" id="checkbox-{{record.id}}" value="{{record.id}}">
           <label class="govuk-label govuk-checkboxes__label" for="checkbox-{{record.id}}">
             <span class="govuk-visually-hidden">Select {{record.personalDetails.shortName}}</span>
@@ -25,7 +25,7 @@
             {{ record.personalDetails | getShortName }}
           {% endif %} 
         {% else %}
-          {% if record.status == "Draft" %}
+          {% if record | isDraft %}
             Draft record
           {% else %}
             Name not known {# Shouldn't be possible - non drafts should always have a name #}

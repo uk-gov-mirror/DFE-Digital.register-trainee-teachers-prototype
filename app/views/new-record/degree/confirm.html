@@ -13,6 +13,14 @@
   
   {% include "_includes/summary-cards/degree/details.html" %}
 
+  {% set checkboxText %}
+    {% if record | sourceIsManual %}
+      I have completed this section
+    {% else %}
+      I have reviewed this section
+    {% endif %}
+  {% endset %}
+
   {# Don't show checkbox if there are no degrees #}
   {% if degreeCount > 0 %}
     {{ govukCheckboxes({
@@ -21,7 +29,7 @@
       items: [
         {
           value: "Completed",
-          text: "I have completed this section",
+          text: checkboxText,
           checked: checked(record.degree.status, "Completed")
         }
       ]
