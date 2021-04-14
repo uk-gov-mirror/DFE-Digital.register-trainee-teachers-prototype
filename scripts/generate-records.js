@@ -253,24 +253,25 @@ const generateFakeApplicationsForProvider = (provider, year, count) => {
       applicationDate: faker.date.between(
         moment().subtract(30, 'days'),
         moment().subtract(60, 'days')
-      )
+      ),
+      status: 'Review'
     },
     personalDetails: {
-      status: 'Completed'
+      status: 'Review'
     },
     contactDetails: {
-      status: 'Completed'
+      status: 'Review'
     },
     diversity: {
-      status: 'Completed'
+      status: 'Review'
     },
     degree: {
-      status: 'Completed'
+      status: 'Review'
     },
     academicYear: currentYear,
-    programmeDetails: {
+    courseDetails: {
       isPublishCourse: true,
-      status: 'Completed'
+      status: 'Review'
     },
     placement: null,
     trainingDetails: null
