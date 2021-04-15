@@ -103,10 +103,13 @@
       <div class="moj-filter-layout__content" id="records-list">
 
         <div class="records-actions">
-          <div class="records-actions__col">    
-            <p class="govuk-body govuk-!-margin-bottom-3"><a href="#" class="govuk-link">Export these records</a></p>
+          <div class="records-actions__col">
+            {# Only sort if there are records #}    
+            {% if filteredRecords | length > 0 %}
+              <p class="govuk-body govuk-!-margin-bottom-3"><a href="#" class="govuk-link">Export these records</a></p>
+            {% endif %}
             {# Only sort if there's at least two items #}
-            {% if filteredRecords.length > 1 %}
+            {% if filteredRecords | length > 1 %}
               {% include "_includes/record-sort-order.njk" %}
             {% endif %}
           </div>
