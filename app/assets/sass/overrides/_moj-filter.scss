@@ -59,7 +59,7 @@
 }
 
 .moj-action-bar__filter {
-  @include govuk-media-query($until: tablet) {
+  @include govuk-media-query($until: 500px) {
     width: 100%;
   }
 }

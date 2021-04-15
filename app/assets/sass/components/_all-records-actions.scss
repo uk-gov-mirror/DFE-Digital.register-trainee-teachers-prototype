@@ -4,7 +4,7 @@
   margin: 0 0 govuk-spacing(3) 0;
   border-bottom: 1px solid govuk-colour("mid-grey");
   
-  @include govuk-media-query($from: tablet, $until: desktop) {
+  @include govuk-media-query($from: 501px, $until: desktop) {
     display: flex;
     justify-content: space-between;
     flex-direction: row-reverse;
@@ -17,7 +17,7 @@
     justify-content: space-between;
     flex-direction: row-reverse;
   }
-  @include govuk-media-query($from: tablet, $until: desktop) {
+  @include govuk-media-query($from: 501px, $until: desktop) {
     text-align: right;
   }
 }
@@ -29,7 +29,7 @@
     margin: 0 0 govuk-spacing(3) 0;
   }
  
-  @include govuk-media-query($until: tablet) {
+  @include govuk-media-query($until: 500px) {
     .govuk-button {
       margin: 0 0 govuk-spacing(4) 0;
     }
