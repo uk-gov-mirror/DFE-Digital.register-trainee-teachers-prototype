@@ -14,8 +14,6 @@
 {% block formContent %}
 {% set referrer = recordPath + "/apply-trainee-application" %}
 
-{{record | log}}
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
 
@@ -71,8 +69,18 @@
       html: insetTextHtml
     }) }} #}
 
+    {% set invalidAnswersText %}
+      <p class="govuk-body">This application contains 3 answers that you need to review and amend manually.</p> 
+      <p class="govuk-body">This is because applicants are allowed to provide free text responses and we were not able to map their response to a known value.</p>
+    {% endset %}
+
+    {{ govukInsetText({
+      html: invalidAnswersText
+    }) }}
+
   </div>
 </div>
+
 
 
 <h2 class="govuk-heading-m">Personal details</h2>

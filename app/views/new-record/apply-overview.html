@@ -19,7 +19,7 @@
   {% endif %}
 {% endset %}
 
-<span class="govuk-caption-l">{{'Apply enrolled' + draftRecordName}}</span>
+<span class="govuk-caption-l">{{'Apply draft' + draftRecordName}}</span>
 <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{pageHeading}}</h1>
 
 {# Text shown if user belongs to multiple providers #}
@@ -73,17 +73,17 @@
       href: traineeApplicationHref,
       id: "application-overview",
       tag: {
-        classes: record.applyData | getStatusText | getStatusClass,
-        text: record.applyData | getStatusText
+        classes: record.applyData | getStatusText('Review', 'Review') | getStatusClass,
+        text: record.applyData | getStatusText('Review', 'Review')
       }
     },
     {
       text: "Course details",
-      href: "course-details" | reviewIfInProgress(record.courseDetails),
+      href: "course-details" | reviewIfInProgress(record.courseDetails) | addReferrer(referrer),
       id: "course-details",
       tag: {
-        classes: record.courseDetails | getStatusText | getStatusClass,
-        text: record.courseDetails | getStatusText
+        classes: record.courseDetails | getStatusText('Review', 'Review') | getStatusClass,
+        text: record.courseDetails | getStatusText('Review', 'Review')
       }
     } if record | requiresSection("courseDetails")
   ]
