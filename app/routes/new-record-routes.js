@@ -48,7 +48,7 @@ module.exports = router => {
     else {
       // Coming from the check answers page
       if (referrer){
-        res.redirect(req.query.referrer)
+        res.redirect(utils.getReferrerDestination(req.query.referrer))
       }
       else if (record.route) {
         res.redirect(`/new-record/overview`)
@@ -88,7 +88,7 @@ module.exports = router => {
       
       // Coming from the check answers page
       if (referrer){
-        res.redirect(req.query.referrer)
+        res.redirect(utils.getReferrerDestination(req.query.referrer))
       }
       else {
         res.redirect(`/new-record/overview`)
@@ -144,9 +144,16 @@ module.exports = router => {
   router.post('/new-record/save', (req, res) => {
     const data = req.session.data
     let record = _.get(data, 'record') // copy record
+    let referrer = utils.getReferrer(req.query.referrer)
+
     if (!utils.recordIsComplete(record)){
       console.log('Record is incomplete, returning to check record')
-      res.redirect('/new-record/check-record?errors=true')
+      let returnQuery
+      if (referrer){
+        returnQuery = `${referrer}&errors=true`
+      }
+      else returnQuery = "?errors=true"
+      res.redirect(`/new-record/check-record${returnQuery}`)
     }
     else {
       utils.registerForTRN(record)

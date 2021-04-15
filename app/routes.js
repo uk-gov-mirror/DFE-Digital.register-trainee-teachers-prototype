@@ -15,9 +15,11 @@ const fs = require('fs');
 // =============================================================================
 router.all('*', function(req, res, next){
   const data = req.session.data
-  // referrer not really needed as this in query
-  // but too late now as it's used everywhere
-  res.locals.referrer = req.query.referrer
+  if (req.query?.referrer) {
+    // Referrer might be an array of urls. Split it up now so we’ve got more
+    // structured data to work with in our views
+    res.locals.referrer = req.query.referrer.split(',')
+  }
   res.locals.query = req.query
   res.locals.flash = req.flash('success') // pass through 'success' messages only
   res.locals.currentPageUrl = url.parse(req.url).pathname

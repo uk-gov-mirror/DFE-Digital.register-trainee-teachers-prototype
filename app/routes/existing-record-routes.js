@@ -296,7 +296,7 @@ module.exports = router => {
       req.flash('success', 'Trainee record updated')
 
       if (referrer){
-        res.redirect(req.query.referrer)
+        res.redirect(utils.getReferrerDestination(req.query.referrer))
       }
       else {
         // More likely we've come from this tab where most things are on

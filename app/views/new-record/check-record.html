@@ -2,17 +2,18 @@
 
 {% set pageHeading = "Review trainee record" %}
 
-{% set formAction = "./save" %}
+{% set formAction = "./save" | addReferrer(referrer) %}
 
 {% set hideReturnLink = true %}
 {% set showIncomplete = true %}
-{% set backLink = './overview' %}
+{% set backLink = referrer or './overview' %}
 {% set backText = 'Back to draft record' %}
 {% set gridColumn = 'govuk-grid-column-full' %}
 
 
 {% block formContent %}
-{% set referrer = recordPath + "/check-record" %}
+
+{% set referrer = referrer | pushReferrer(recordPath + "/check-record") %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">

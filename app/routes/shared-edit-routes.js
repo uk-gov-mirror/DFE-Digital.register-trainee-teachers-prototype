@@ -269,7 +269,7 @@ module.exports = router => {
         req.flash('success', 'Trainee record updated')
         // Referrer or non-referrer probably goes to the same place
         if (referrer){
-          res.redirect(req.query.referrer)
+          res.redirect(utils.getReferrerDestination(req.query.referrer))
         }
         else {
           res.redirect(`${recordPath}`)
@@ -280,7 +280,7 @@ module.exports = router => {
         record.courseDetails.status = "Completed"
         if (referrer){
           // Return to check-record page
-          res.redirect(req.query.referrer)
+          res.redirect(utils.getReferrerDestination(req.query.referrer))
         }
         else {
           res.redirect(`${recordPath}/overview`)
@@ -441,7 +441,7 @@ module.exports = router => {
         // records without a dregree anyway.
         utils.updateRecord(data, data.record)
       }
-      res.redirect(req.query.referrer)
+      res.redirect(utils.getReferrerDestination(req.query.referrer))
     }
     else {
       res.redirect(`${recordPath}/degree/confirm${referrer}`)
@@ -555,7 +555,7 @@ module.exports = router => {
     
         // send them back to the record
         if (referrer){
-          res.redirect(req.query.referrer)
+          res.redirect(utils.getReferrerDestination(req.query.referrer))
         }
         else {
           res.redirect(`${recordPath}`)
@@ -571,7 +571,7 @@ module.exports = router => {
         
         // send them to the confirmation
         if (referrer){
-          res.redirect(req.query.referrer)
+          res.redirect(utils.getReferrerDestination(req.query.referrer))
         }
         else {
           res.redirect(`${recordPath}/overview`)
@@ -632,7 +632,7 @@ module.exports = router => {
       res.redirect(`${recordPath}/placements/can-add-placement${referrer}`)
     } 
     else if (referrer){
-      res.redirect(req.query.referrer)
+      res.redirect(utils.getReferrerDestination(req.query.referrer))
     }
     else {
       res.redirect(`${recordPath}/placements/confirm${referrer}`)

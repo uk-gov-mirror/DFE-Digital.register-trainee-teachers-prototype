@@ -11,8 +11,6 @@
 
 {% set referrer = recordPath + "/apply-overview" %}
 
-
-{{record | log}}
 {% set draftRecordName %}
   {% if record.personalDetails.shortName %}
    for {{record.personalDetails.shortName}}
@@ -140,7 +138,7 @@
 
 {{ govukButton({
   text: "Review this record",
-  href: "check-record"
+  href: "check-record" | addReferrer(referrer)
 }) }}
 
 <p class="govuk-body"><a href="./save-as-draft" class="govuk-link govuk-link--no-visited-state">Return to this draft record later</a></p>

@@ -227,12 +227,33 @@ exports.recordIsComplete = record => {
   if (!record || !_.get(record, "route")) return false
 
   let requiredSections = _.get(trainingRoutes, `${record.route}.sections`)
+  let applyReviewSections = trainingRouteData.applyReviewSections
+
   if (!requiredSections) return false // something went wrong
 
-  let recordIsComplete = true
-  requiredSections.forEach(section => {
-    if (_.get(record, `${section}.status`) != "Completed"){
-      recordIsComplete = false
+  // All required sections must be marked completed
+  let recordIsComplete = requiredSections.every(section => {
+
+    let sectionStatus = record[section]?.status == "Completed"
+    console.log({sectionStatus})
+    // console.log(section)
+    // Default
+    if (exports.sourceIsManual(record)){
+      return sectionStatus
+    }
+
+    // Special handling for Apply drafts which *may* work differently
+    else if (exports.sourceIsApply(record)){
+
+      // Some sections are collected together with one checkbox for all
+      // If so, defer to that checkbox
+      if (applyReviewSections.includes(section)){
+        return (record.applyData.status == "Completed") || sectionStatus
+      }
+      else return sectionStatus
+    }
+    else {
+      console.log("Error, record type not recognised")
     }
   })
 
@@ -548,12 +569,47 @@ exports.filterRecords = (records, data, filters = {}) => {
 // Routing
 // -------------------------------------------------------------------
 
+// Adds referrer as query string if it exists
+exports.addReferrer = (url, referrer) => {
+  if (!referrer || referrer == 'undefined') return url
+  else {
+    return `${url}?referrer=${referrer}`
+  }
+}
+
+exports.orReferrer = (url, referrer) => {
+  console.log('Or referrer', referrer)
+  if (!referrer || referrer == 'undefined') return url
+  else {
+    return exports.getReferrerDestination(referrer)
+  }
+}
+
+exports.pushReferrer = (existingReferrer, newReferrer) => {
+  if (!existingReferrer) return newReferrer
+  else {
+    return [].concat(existingReferrer).concat(newReferrer)
+  }
+}
+
 // Append referrer to string if it exists
 exports.getReferrer = referrer => {
   if (referrer && referrer != 'undefined'){
     return `?referrer=${referrer}`
   }
   else return ''
+}
+
+// Referrer could be an array of urls. If so, return the last one
+// and put the remaining as the next referrer.
+// This lets us support multiple return destinations
+exports.getReferrerDestination = referrer => {
+  if (!referrer) return ''
+  else if (Array.isArray(referrer)){
+    let last = referrer.pop()
+    return `${last}?referrer=${referrer}`
+  }
+  else return referrer
 }
 
 // Return first part of url to use in redirects
