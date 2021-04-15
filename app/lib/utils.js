@@ -182,11 +182,11 @@ exports.routeHasPublishCourses = function(record){
 
 // Statuses
 exports.isDraft = record => {
-  return record.status == "Draft" || record.status == "Apply enrolled"
+  return record.status == "Draft" || record.status == "Apply draft"
 }
 
 exports.isNotDraft = record => {
-  return record.status != "Draft" && record.status != "Apply enrolled"
+  return record.status != "Draft" && record.status != "Apply draft"
 }
 
 exports.isPendingTrn = record => {

@@ -23,11 +23,10 @@ var filters = {}
 
 */
 
-filters.getStatusText = (data) => {
-  if (!data) return "Not started"
+filters.getStatusText = function(data = {}, defaultNotStarted, defaultInProgress) {
+  if (!data) return defaultNotStarted || "Not started"
   if (data.status) return data.status
-  if (data?.source == "Apply") return "Review"
-  else return "In progress"
+  else return defaultInProgress || "In progress"
 }
 
 filters.getStatusClass = (status) => {
@@ -51,7 +50,7 @@ filters.getStatusClass = (status) => {
     // Record statuses
     case 'Draft':
       return 'govuk-tag--grey'
-    case 'Apply enrolled': // same as draft
+    case 'Apply draft': // same as draft
       return 'govuk-tag--grey'
     case 'Pending TRN':
       return 'govuk-tag--turquoise'
@@ -99,10 +98,29 @@ filters.reviewIfInProgress = (url, data, path) => {
   }
 }
 
+// Insert a warning tag if the value of the data starts with **
+filters.checkForInvalid = (data) => {
+  const tagHtml = `
+    <div class="govuk-!-margin-bottom-2">
+      <strong class="govuk-tag govuk-tag--red">Invalid answer</strong>
+    </div>`
+
+  if (data?.html && data.html.startsWith('**')){
+    data.html = `${tagHtml}${data.html.substring(2)}`
+    return data
+  }
+  else if (data?.text && data.text.startsWith('**')){
+    data.html = `${tagHtml}${data.text.substring(2)}`
+    delete data.text
+    return data
+  }
+  else return data
+}
+
 filters.canBeAmmended = status => {
   let statusesThatCanAmend = [
     'Draft',
-    'Apply enrolled',
+    'Apply draft',
     'Pending TRN',
     'TRN received',
     'Deferred'

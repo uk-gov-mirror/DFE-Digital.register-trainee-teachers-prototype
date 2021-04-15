@@ -1,0 +1,150 @@
+{% extends "_templates/_new-record.html" %}
+
+{% set pageHeading = "Register a trainee" %}
+
+{% set hideReturnLink = true %}
+{% set backLink = '/records' %}
+{% set backText = "All records" %}
+
+
+{% block formContent %}
+
+{% set referrer = recordPath + "/apply-overview" %}
+
+
+{{record | log}}
+{% set draftRecordName %}
+  {% if record.personalDetails.shortName %}
+   for {{record.personalDetails.shortName}}
+  {% endif %}
+{% endset %}
+
+<span class="govuk-caption-l">{{'Apply enrolled' + draftRecordName}}</span>
+<h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{pageHeading}}</h1>
+
+{# Text shown if user belongs to multiple providers #}
+{% set providerText %}
+  {# Include a link if using blended model #}
+  {% if data.signedInProviders | length > 1 %}
+    Training with <a href="{{'./pick-provider' | addReferrer(referrer) }}" class="govuk-link">{{record.provider}}</a>
+  {# Don’t link if using hat model - they need to back out and pick a different provider to work as #}
+  {% else %}
+    Training with {{record.provider}}
+  {% endif %}
+{% endset %}
+
+{% set routeText %}
+  on the <a href="{{ './select-route' | addReferrer(referrer) }}" class="govuk-link">{{ record.route | lower or "route not set" }}</a> route.
+{% endset %}
+
+{# Don’t show anything if user doesn't have multiple providers #}
+{% if data.settings.userProviders | length > 1  %}
+  {% set insetTextHtml %}
+    {{providerText | safe}} {{routeText | safe}}
+  {% endset %}
+
+{% else %}
+  {% set insetTextHtml %}
+    Trainee {{routeText | safe}}
+  {% endset %}
+{% endif %}
+
+{# {{ govukInsetText({
+  html: insetTextHtml
+}) }} #}
+
+<h2 class="govuk-heading-m">Apply application</h2>
+<p class="govuk-body">Application submitted on {{ record.applyData.applicationDate | govukDate }}, and recruited in Manage on {{ record.applyData.recruitedDate | govukDate }}</p>
+{% set recordHasBeenChecked = record.applyData.traineeApplication.status == "Completed" %}
+
+{% if recordHasBeenChecked %}
+  {% set traineeApplicationHref = "apply-trainee-application" %}
+{% else %}
+  {% set traineeApplicationHref = "apply-trainee-application?record[applyData][traineeApplication][status]=In progress&clearQuery=true" %}
+{% endif %}
+
+{{traineeApplicationHref | log}}
+
+{{ appTaskList({
+  classes: "govuk-!-margin-bottom-8",
+  items: [
+    {
+      text: "Review the trainee’s application",
+      href: traineeApplicationHref,
+      id: "application-overview",
+      tag: {
+        classes: record.applyData | getStatusText | getStatusClass,
+        text: record.applyData | getStatusText
+      }
+    },
+    {
+      text: "Course details",
+      href: "course-details" | reviewIfInProgress(record.courseDetails),
+      id: "course-details",
+      tag: {
+        classes: record.courseDetails | getStatusText | getStatusClass,
+        text: record.courseDetails | getStatusText
+      }
+    } if record | requiresSection("courseDetails")
+  ]
+}) if not closed }}
+
+<h2 class="govuk-heading-m">About their teacher training</h2>
+
+{{ appTaskList({
+  classes: "govuk-!-margin-bottom-8",
+  items: [
+    {
+      text: record | getSectionName("trainingDetails"),
+      href: "training-details" | reviewIfInProgress(record.trainingDetails) | addReferrer(referrer),
+      hint: 'Start date, trainee ID, schools',
+      id: "training-details",
+      tag: {
+        classes: record.trainingDetails | getStatusText | getStatusClass,
+        text: record.trainingDetails | getStatusText
+      }
+    } if record | requiresSection("trainingDetails"),
+    {
+      text: "Schools",
+      href: "schools" | reviewIfInProgress(record.schools) | addReferrer(referrer),
+      id: "schools-details",
+      tag: {
+        classes: record.schools | getStatusText | getStatusClass,
+        text: record.schools | getStatusText
+      }
+    } if record | requiresSection("funding"),
+    {
+      text: "Funding",
+      href: "funding" | reviewIfInProgress(record.funding) | addReferrer(referrer),
+      hint: 'Bursaries and initiatives',
+      id: "funding-details",
+      tag: {
+        classes: record.funding | getStatusText | getStatusClass,
+        text: record.funding | getStatusText
+      }
+    } if record | requiresSection("funding"),
+    {
+      text: "Placement details",
+      _href: "placements/confirm" if (record.placement) else "placements/can-add-placement",
+      href: "placements/can-add-placement" | reviewIfInProgress(record.placement, "placements") | addReferrer(referrer),
+      id: "placement-details",
+      tag: {
+        classes: record.placement | getStatusText | getStatusClass,
+        text: record.placement | getStatusText
+      }
+    } if record | requiresSection("placement") 
+  ]
+}) if not closed }}
+
+<h2 class="govuk-heading-m">Review and submit</h2>
+
+{{ govukButton({
+  text: "Review this record",
+  href: "check-record"
+}) }}
+
+<p class="govuk-body"><a href="./save-as-draft" class="govuk-link govuk-link--no-visited-state">Return to this draft record later</a></p>
+
+<p class="govuk-body govuk-!-margin-top-8"><a href="./delete-draft/confirm" class="govuk-link app-destructive-link">Delete this draft</a></p>
+
+{% endblock %}

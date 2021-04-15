@@ -117,7 +117,7 @@
 
           <div class="app-application-cards">
 
-            {% set draftRecords = filteredRecords | where("status", ["Draft", "Apply enrolled"]) %}
+            {% set draftRecords = filteredRecords | where("status", ["Draft", "Apply draft"]) %}
 
             {% if (draftRecords | length) %}
               <form action="/bulk-action/new/direct" method="post" novalidate>
@@ -144,7 +144,7 @@
 
             {% endif %}
 
-            {% set nonDraftRecords = filteredRecords | removeWhere("status", ["Draft", "Apply enrolled"]) %}
+            {% set nonDraftRecords = filteredRecords | removeWhere("status", ["Draft", "Apply draft"]) %}
             {% if (nonDraftRecords | length) %} 
               <form action="/bulk-action/new/direct" method="post" novalidate>
                 <div class="govuk-grid-row">

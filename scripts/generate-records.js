@@ -246,7 +246,7 @@ const generateFakeApplicationsForProvider = (provider, year, count) => {
 
   stubApplication.applyEnrolled = {
     source: "Apply",
-    status: "Apply enrolled",
+    status: "Apply draft",
     updatedDate: applyStubUpdatedDate,
     applyData: {
       recruitedDate: applyStubUpdatedDate,
