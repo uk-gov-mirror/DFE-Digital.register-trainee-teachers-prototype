@@ -99,19 +99,14 @@ filters.reviewIfInProgress = (url, data, path) => {
 }
 
 // Insert a warning tag if the value of the data starts with **
-filters.checkForInvalid = (data) => {
+// Probably needs to be combined with the 'safe' filter to render correctly
+filters.highlightInvalid = (data) => {
   const tagHtml = `
     <div class="govuk-!-margin-bottom-2">
-      <strong class="govuk-tag govuk-tag--red">Invalid answer</strong>
+      <strong class="govuk-tag govuk-tag--red">Attention required</strong>
     </div>`
-
-  if (data?.html && data.html.startsWith('**')){
-    data.html = `${tagHtml}${data.html.substring(2)}`
-    return data
-  }
-  else if (data?.text && data.text.startsWith('**')){
-    data.html = `${tagHtml}${data.text.substring(2)}`
-    delete data.text
+  if (data && data.startsWith('**invalid**')){
+    data = `${tagHtml}${data.substring(11)}`
     return data
   }
   else return data

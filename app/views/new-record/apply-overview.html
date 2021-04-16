@@ -19,6 +19,8 @@
 
 <span class="govuk-caption-l">{{'Apply draft' + draftRecordName}}</span>
 <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{pageHeading}}</h1>
+<p class="govuk-body">{{ record.courseDetails | getCourseName }}</p>
+<p class="govuk-body">{{ record.courseDetails.summary }}</p>
 
 {# Text shown if user belongs to multiple providers #}
 {% set providerText %}
@@ -53,22 +55,13 @@
 
 <h2 class="govuk-heading-m">Apply application</h2>
 <p class="govuk-body">Application submitted on {{ record.applyData.applicationDate | govukDate }}, and recruited in Manage on {{ record.applyData.recruitedDate | govukDate }}</p>
-{% set recordHasBeenChecked = record.applyData.traineeApplication.status == "Completed" %}
-
-{% if recordHasBeenChecked %}
-  {% set traineeApplicationHref = "apply-trainee-application" %}
-{% else %}
-  {% set traineeApplicationHref = "apply-trainee-application?record[applyData][traineeApplication][status]=In progress&clearQuery=true" %}
-{% endif %}
-
-{{traineeApplicationHref | log}}
 
 {{ appTaskList({
   classes: "govuk-!-margin-bottom-8",
   items: [
     {
       text: "Review the trainee’s application",
-      href: traineeApplicationHref,
+      href: "apply-trainee-application" | addReferrer(referrer),
       id: "application-overview",
       tag: {
         classes: record.applyData | getStatusText('Review', 'Review') | getStatusClass,

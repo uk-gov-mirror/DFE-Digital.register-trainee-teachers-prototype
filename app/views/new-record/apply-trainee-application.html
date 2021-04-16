@@ -12,7 +12,8 @@
 
 
 {% block formContent %}
-{% set referrer = recordPath + "/apply-trainee-application" %}
+
+{% set referrer = referrer | pushReferrer(recordPath + "/apply-trainee-application") %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
@@ -69,14 +70,28 @@
       html: insetTextHtml
     }) }} #}
 
-    {% set invalidAnswersText %}
-      <p class="govuk-body">This application contains 3 answers that you need to review and amend manually.</p> 
-      <p class="govuk-body">This is because applicants are allowed to provide free text responses and we were not able to map their response to a known value.</p>
-    {% endset %}
 
-    {{ govukInsetText({
-      html: invalidAnswersText
-    }) }}
+    {% if record | hasInvalidAnswers %}
+
+      {% set invalidAnswerCount = record | countInvalidAnswers %}
+
+      {% set invalidAnswersText %}
+        <div class="govuk-!-margin-bottom-2">
+          {{govukTag({
+            text: "Attention required",
+            classes: 'govuk-tag--red'
+          })}}
+        </div>
+
+        <p class="govuk-body">This application contains {{invalidAnswerCount}} answers that you need to review and amend manually.</p> 
+        <p class="govuk-body">This is because applicants are allowed to provide free text responses and we were not able to map their response to a known value.</p>
+      {% endset %}
+
+      {{ govukInsetText({
+        html: invalidAnswersText
+      }) }}
+
+    {% endif %}
 
   </div>
 </div>

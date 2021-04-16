@@ -294,6 +294,21 @@ exports.hasOutstandingActions = function(record, data = false) {
   return hasOutstandingActions
 }
 
+// Invalid answers have `**invalid**` prepended to them
+// Count how many times this string exists in the record
+// As users edit these answers, this string should get removed
+// so the count should go down
+exports.countInvalidAnswers = record => {
+  let jsonRecord = JSON.stringify(record)
+  let invalidCount = (jsonRecord.match(/\*\*invalid\*\*/g) || []).length
+  return invalidCount
+}
+
+// Whether any data in the record is considered invalid
+exports.hasInvalidAnswers = record => {
+  return exports.countInvalidAnswers(record) > 0
+}
+
 // Look up a record using it’s UUID
 exports.getRecordById = (records, id) => {
   return records.find(record => record.id == id)

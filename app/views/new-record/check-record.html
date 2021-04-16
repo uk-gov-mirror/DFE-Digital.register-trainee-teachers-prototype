@@ -13,6 +13,7 @@
 
 {% block formContent %}
 
+
 {% set referrer = referrer | pushReferrer(recordPath + "/check-record") %}
 
 <div class="govuk-grid-row">
@@ -85,6 +86,12 @@
 
 <h2 class="govuk-heading-m">Personal details and education</h2>
 
+{# If we have a 'complete' on apply status we can ignore individual statuses
+on the sections themselves #}
+{% if record.applyData.status == "Completed" %}
+  {% set showIncomplete = false %}
+{% endif %}
+
 {% include "_includes/summary-cards/personal-details.html" %}
 
 {% include "_includes/summary-cards/contact-details.html" %}
@@ -96,6 +103,9 @@
 {% include "_includes/summary-cards/degree/details.html" %}
 
 {% include "_includes/summary-cards/undergraduate-qualification.html" %}
+
+{# Restore incomplete status #}
+{% set showIncomplete = true %}
 
 <h2 class="govuk-heading-m">About their teacher training</h2>
 
