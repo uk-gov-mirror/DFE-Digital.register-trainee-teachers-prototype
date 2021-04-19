@@ -103,7 +103,7 @@ module.exports = router => {
     let record = data.record
 
     if (utils.sourceIsApply(record) && data.settings.groupApplySections){
-      res.render('new-record/apply-overview-grouped-sections')
+      res.render('new-record/overview-apply-grouped-sections')
     }
     else res.render('new-record/overview')
   })
@@ -116,7 +116,11 @@ module.exports = router => {
     let record = _.get(data, 'record') // copy record
     let isComplete = utils.recordIsComplete(record)
     let errorList = (errors) ? true : false
-    res.render('new-record/check-record', {errorList, recordIsComplete: isComplete})
+    
+    if (utils.sourceIsApply(record) && data.settings.groupApplySections){
+      res.render('new-record/check-record-apply-grouped-sections', {errorList, recordIsComplete: isComplete})
+    }
+    else res.render('new-record/check-record', {errorList, recordIsComplete: isComplete})
   })
 
   // Delete draft
