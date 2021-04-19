@@ -21,19 +21,21 @@
     {% endif %}
   {% endset %}
 
-  {# Don't show checkbox if there are no degrees #}
-  {% if degreeCount > 0 %}
-    {{ govukCheckboxes({
-      idPrefix: "degree-section-complete",
-      name: "record[degree][status]",
-      items: [
-        {
-          value: "Completed",
-          text: checkboxText,
-          checked: checked(record.degree.status, "Completed")
-        }
-      ]
-      }) }}
+  {% if not data.settings.groupApplySections %}
+    {# Don't show checkbox if there are no degrees #}
+    {% if degreeCount > 0 %}
+      {{ govukCheckboxes({
+        idPrefix: "degree-section-complete",
+        name: "record[degree][status]",
+        items: [
+          {
+            value: "Completed",
+            text: checkboxText,
+            checked: checked(record.degree.status, "Completed")
+          }
+        ]
+        }) }}
+    {% endif %}
   {% endif %}
 
   {{ govukButton({

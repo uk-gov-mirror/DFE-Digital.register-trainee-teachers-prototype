@@ -1,0 +1,36 @@
+
+$invalid-colour: $govuk-brand-colour;
+// $invalid-colour: govuk-colour("pink");
+// $invalid-colour: $govuk-error-colour;
+
+.app-inset-text--invalid-answer {
+  border-color: $invalid-colour;  
+  // background-color: govuk-tint($invalid-colour, 95);
+}
+
+.app-inset-text--narrow {
+  border-width: 5px;
+}
+
+
+.app-tag--pink-inverted {
+  background: govuk-shade(govuk-colour("pink"), 10);
+  color: govuk-tint(govuk-colour("pink"), 90);
+}
+
+.app-invalid-answer__list a:link {
+  // color: govuk-colour("pink");
+  // color: $govuk-error-colour;
+  // color: $invalid-colour;
+  font-weight: 700;
+}
+
+.app-summary-list__value-inset {
+  border-left: 5px solid $invalid-colour;
+  padding-left: 15px
+}
+
+.app-summary-list__message--invalid {
+  color: $invalid-colour;
+  @include govuk-typography-weight-bold;
+}

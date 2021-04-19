@@ -18,17 +18,19 @@
     {% endif %}
   {% endset %}
 
-  {{ govukCheckboxes({
-  idPrefix: "waste",
-  name: "record[personalDetails][status]",
-  items: [
-    {
-      value: "Completed",
-      text: checkboxText,
-      checked: checked(record.personalDetails.status, "Completed")
-    }
-  ]
-  }) }}
+  {% if not data.settings.groupApplySections %}
+    {{ govukCheckboxes({
+      idPrefix: "waste",
+      name: "record[personalDetails][status]",
+      items: [
+        {
+          value: "Completed",
+          text: checkboxText,
+          checked: checked(record.personalDetails.status, "Completed")
+        }
+      ]
+      }) }}
+  {% endif %}
 
   {{ govukButton({
     text: "Continue"
