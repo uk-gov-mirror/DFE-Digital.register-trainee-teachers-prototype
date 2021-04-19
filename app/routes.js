@@ -42,6 +42,11 @@ router.all('*', function(req, res, next){
     res.locals.data.settings.userActiveProvider = data.settings.userActiveProvider
   }
   res.locals.data.providerRecords = data.providerRecords
+
+  // Delete cashes of invalid answers that should be flushed on each request
+  delete data?.record?.invalidAnswers
+  delete data?.temp
+
   next()
 })
 

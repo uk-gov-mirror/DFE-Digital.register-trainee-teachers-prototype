@@ -43,6 +43,15 @@
         items: [
           {
             value: 'true',
+            text: "Group apply sections together"
+          }
+        ]
+      } | decorateAttributes(data, "data.settings.groupApplySections")) }}
+
+      {{ govukCheckboxes({
+        items: [
+          {
+            value: 'true',
             text: "Show links to guidance"
           }
         ]

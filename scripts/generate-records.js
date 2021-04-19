@@ -119,7 +119,7 @@ const generateFakeApplication = (params = {}) => {
 
   // Postgraduate qualification
   if (requiredSections.includes('degree')) {
-    application.degree           = (params.degree === null) ? undefined : { ...generateDegree(application.isInternationalTrainee), ...params.degree } 
+    application.degree           = (params.degree === null) ? undefined : { ...generateDegree(application), ...params.degree } 
   }
 
   // Undergraduate Qualification

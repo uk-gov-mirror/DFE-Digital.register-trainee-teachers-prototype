@@ -97,6 +97,17 @@ module.exports = router => {
    
   })
 
+  // Swap between two different templates for this page
+  router.get('/new-record/overview', function (req, res) {
+    const data = req.session.data
+    let record = data.record
+
+    if (utils.sourceIsApply(record) && data.settings.groupApplySections){
+      res.render('new-record/apply-overview-grouped-sections')
+    }
+    else res.render('new-record/overview')
+  })
+
   // Task list confirmation page - pass errors to page
   // Todo: use flash messages or something to pass real errors in
   router.get('/new-record/check-record', function (req, res) {

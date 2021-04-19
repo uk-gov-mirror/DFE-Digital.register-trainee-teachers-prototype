@@ -29,11 +29,7 @@ module.exports = router => {
 
     // Redirect to task draft journey if still a draft
     if (utils.isDraft(record)){
-      // req.flash('success', 'Restoring saved draft')
-      if (utils.sourceIsApply(record)){
-        res.redirect('/new-record/apply-overview')
-      }
-      else res.redirect('/new-record/overview')
+      res.redirect('/new-record/overview')
     }
     // Only submitted records
     else {

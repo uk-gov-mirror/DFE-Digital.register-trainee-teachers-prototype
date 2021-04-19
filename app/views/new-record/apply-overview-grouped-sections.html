@@ -9,7 +9,9 @@
 
 {% block formContent %}
 
-{% set referrer = recordPath + "/apply-overview" %}
+{# {{getContext() | log}} #}
+
+{% set referrer = currentPageUrl %}
 
 {% set draftRecordName %}
   {% if record.personalDetails.shortName %}
@@ -19,8 +21,21 @@
 
 <span class="govuk-caption-l">{{'Apply draft' + draftRecordName}}</span>
 <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{pageHeading}}</h1>
-<p class="govuk-body">{{ record.courseDetails | getCourseName }}</p>
-<p class="govuk-body">{{ record.courseDetails.summary }}</p>
+
+{% set insetTextHtml %}
+  {% if record.courseDetails %}
+    <p class="govuk-body">Trainee enrolled on {{ record.courseDetails | getCourseName }}</p>
+    {# <p class="govuk-body">{{ record.courseDetails.qualificationsSummary }}</p> #}
+  {% else %}
+    No data to show
+  {% endif %}
+  
+{% endset %}
+{{record.courseDetails | log}}
+
+{{ govukInsetText({
+  html: insetTextHtml
+}) }}
 
 {# Text shown if user belongs to multiple providers #}
 {% set providerText %}

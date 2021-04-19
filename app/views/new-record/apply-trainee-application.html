@@ -2,11 +2,11 @@
 
 {% set pageHeading = "Trainee’s application" %}
 
-{% set formAction = "./apply-overview" %}
+{% set formAction = "./overview" %}
 
 {% set hideReturnLink = true %}
 {% set showIncomplete = false %}
-{% set backLink = './apply-overview' %}
+{% set backLink = './overview' %}
 {% set backText = 'Back to draft record' %}
 {% set gridColumn = 'govuk-grid-column-full' %}
 
@@ -14,6 +14,27 @@
 {% block formContent %}
 
 {% set referrer = referrer | pushReferrer(recordPath + "/apply-trainee-application") %}
+
+{# Summary cards need to be set *first* because in rendering the card we count
+the number of invalid answers, and then use this in a notification at the top
+of the page. #}
+{% set allSummaryCards %}
+  <h2 class="govuk-heading-m">Personal details</h2>
+
+  {% include "_includes/summary-cards/personal-details.html" %}
+
+  {% include "_includes/summary-cards/contact-details.html" %}
+
+  {% include "_includes/summary-cards/diversity.html" %}
+
+  <h2 class="govuk-heading-m">Education</h2>
+
+  {% include "_includes/summary-cards/gcse-details.html" %}
+
+  {% include "_includes/summary-cards/degree/details.html" %}
+
+  {% include "_includes/summary-cards/undergraduate-qualification.html" %}
+{% endset %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
@@ -65,57 +86,23 @@
       {% endset %}
     {% endif %}
 
-    {# Commented out as I don't think we need to confirm the route here? #}
+    {# Commented out as I don’t think we need to confirm the route here? #}
     {# {{ govukInsetText({
       html: insetTextHtml
     }) }} #}
 
-
+    {# This must come after the summary cards are rendered so that it can show
+    which fields have invalid answers and link to them #}
     {% if record | hasInvalidAnswers %}
-
-      {% set invalidAnswerCount = record | countInvalidAnswers %}
-
-      {% set invalidAnswersText %}
-        <div class="govuk-!-margin-bottom-2">
-          {{govukTag({
-            text: "Attention required",
-            classes: 'govuk-tag--red'
-          })}}
-        </div>
-
-        <p class="govuk-body">This application contains {{invalidAnswerCount}} answers that you need to review and amend manually.</p> 
-        <p class="govuk-body">This is because applicants are allowed to provide free text responses and we were not able to map their response to a known value.</p>
-      {% endset %}
-
-      {{ govukInsetText({
-        html: invalidAnswersText
-      }) }}
-
+      {% include "_includes/invalidAnswerMessage.njk" %}
     {% endif %}
 
   </div>
 </div>
 
 
-
-<h2 class="govuk-heading-m">Personal details</h2>
-
-{% include "_includes/summary-cards/personal-details.html" %}
-
-{% include "_includes/summary-cards/contact-details.html" %}
-
-{% include "_includes/summary-cards/diversity.html" %}
-
-<h2 class="govuk-heading-m">Education</h2>
-
-{% include "_includes/summary-cards/gcse-details.html" %}
-
-{% include "_includes/summary-cards/degree/details.html" %}
-
-{% include "_includes/summary-cards/undergraduate-qualification.html" %}
-
+{# Course not included because it seems 'different' than the rest of the application #}
 {# <h2 class="govuk-heading-m">Course</h2>
-
 {% include "_includes/summary-cards/course-details.html" %} #}
 
 {{ govukCheckboxes({
