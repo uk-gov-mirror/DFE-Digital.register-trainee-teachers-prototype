@@ -2,7 +2,7 @@
 
 {% set pageHeading = "Trainee’s application" %}
 
-{% set formAction = "./overview" %}
+{% set formAction = "./overview" | orReferrer(referrer) %}
 
 {% set hideReturnLink = true %}
 {% set showIncomplete = false %}
@@ -13,10 +13,13 @@
 
 {% block formContent %}
 
+{# Add an extra referrer as this is a compound referral path #}
 {% set referrer = referrer | pushReferrer(recordPath + "/apply-trainee-application") %}
 
+{% set hasInvalidAnswers = record | hasInvalidAnswers %}
+
 {# Summary cards need to be set *first* because in rendering the card we count
-the number of invalid answers, and then use this in a notification at the top
+the number of invalid answers, and then use this in a banner at the top
 of the page. #}
 {% set allSummaryCards %}
   <h2 class="govuk-heading-m">Personal details</h2>
@@ -59,64 +62,47 @@ of the page. #}
     <span class="govuk-caption-l">{{'Draft record' + draftRecordName}}</span>
     <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{pageHeading}}</h1>
 
-    {# Text shown if user belongs to multiple providers #}
-    {% set providerText %}
-      {# Include a link if using blended model #}
-      {% if data.signedInProviders | length > 1 %}
-        Training with <a href="{{'./pick-provider' | addReferrer(referrer) }}" class="govuk-link">{{record.provider}}</a>
-      {# Don’t link if using hat model - they need to back out and pick a different provider to work as #}
-      {% else %}
-        Training with {{record.provider}}
-      {% endif %}
-    {% endset %}
 
-    {% set routeText %}
-      on the <a href="{{ './select-route' | addReferrer(referrer) }}" class="govuk-link">{{ record.route | lower or "route not set" }}</a> route.
-    {% endset %}
-
-    {# Don’t show anything if user doesn't have multiple providers #}
-    {% if data.settings.userProviders | length > 1  %}
-      {% set insetTextHtml %}
-        {{providerText | safe}} {{routeText | safe}}
-      {% endset %}
-
-    {% else %}
-      {% set insetTextHtml %}
-        Trainee {{routeText | safe}}
-      {% endset %}
-    {% endif %}
-
-    {# Commented out as I don’t think we need to confirm the route here? #}
-    {# {{ govukInsetText({
-      html: insetTextHtml
-    }) }} #}
 
     {# This must come after the summary cards are rendered so that it can show
     which fields have invalid answers and link to them #}
-    {% if record | hasInvalidAnswers %}
+    {% if hasInvalidAnswers %}
+      {% set invalidAnswerType = "application" %}
       {% include "_includes/invalidAnswerMessage.njk" %}
     {% endif %}
+
+    {# Text shown if user belongs to multiple providers #}
+    {# {% include "_includes/providerAndRouteInsetText.njk" %} #}
 
   </div>
 </div>
 
+
 {{ allSummaryCards | safe }}
 
-{# Course not included because it seems 'different' than the rest of the application #}
-{# <h2 class="govuk-heading-m">Course</h2>
-{% include "_includes/summary-cards/course-details.html" %} #}
 
-{{ govukCheckboxes({
-  idPrefix: "apply-trainee-application-checkbox",
-  name: "record[applyData][status]",
-  items: [
-    {
-      value: "Completed",
-      text: "I have reviewed their application",
-      checked: checked(record.applyData.status, "Completed")
-    }
-  ]
+{% if hasInvalidAnswers %}
+
+  {{ govukInsetText({
+    text: "You need to ammend this record before you can mark it as reviewed."
   }) }}
+
+{% else %}
+
+  {{ govukCheckboxes({
+    idPrefix: "apply-trainee-application-checkbox",
+    name: "record[applyData][status]",
+    items: [
+      {
+        value: "Completed",
+        text: "I have reviewed their application",
+        checked: checked(record.applyData.status, "Completed")
+      }
+    ]
+  }) }}
+    
+{% endif %}
+
 
 {{ govukButton({
   text: "Continue"

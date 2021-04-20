@@ -1,10 +1,9 @@
 {% set invalidAnswerCount = record | countInvalidAnswers %}
 
-{% set invalidAnswersText %}
-
+{% set bannerHtml %}
   <h2 class="govuk-heading-m">Action required</h2>
 
-  <p class="govuk-body">This application contains {{invalidAnswerCount}} {{ 'answer' | pluralise(invalidAnswerCount)}} that you need to review and amend manually.</p> 
+  <p class="govuk-body">This {{ invalidAnswerType or "section" }} contains {{invalidAnswerCount}} {{ 'answer' | pluralise(invalidAnswerCount)}} that you need to review and amend manually.</p> 
   
   {% if data.record.invalidAnswers %}
     <ul class="govuk-list app-invalid-answer__list">
@@ -18,7 +17,9 @@
 
 {% endset %}
 
-{{ govukInsetText({
-  html: invalidAnswersText,
-  classes: 'app-inset-text--invalid-answer'
+{{ appBanner({
+  classes: "app-banner--invalid-answer",
+  html: bannerHtml,
+  type: incompleteType or "information",
+  icon: false
 }) }}

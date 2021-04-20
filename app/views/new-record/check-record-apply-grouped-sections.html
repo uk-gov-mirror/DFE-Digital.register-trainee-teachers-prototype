@@ -28,40 +28,7 @@
   {% endif %}
 {% endset %}
 
-{# Inset text about the provider and route #}
-{% set providerAndRouteInsetText %}
-  {# Text shown if user belongs to multiple providers #}
-  {% set providerText %}
-    {# Include a link if using blended model #}
-    {% if data.signedInProviders | length > 1 %}
-      Training with <a href="{{'./pick-provider' | addReferrer(referrer) }}" class="govuk-link">{{record.provider}}</a>
-    {# Don’t link if using hat model - they need to back out and pick a different provider to work as #}
-    {% else %}
-      Training with {{record.provider}}
-    {% endif %}
-  {% endset %}
 
-  {% set routeText %}
-    on the <a href="{{ './select-route' | addReferrer(referrer) }}" class="govuk-link">{{ record.route | lower or "route not set" }}</a> route.
-  {% endset %}
-
-  {# Don’t show anything if user doesn't have multiple providers #}
-  {% if data.settings.userProviders | length > 1  %}
-    {% set insetTextHtml %}
-      {{providerText | safe}} {{routeText | safe}}
-    {% endset %}
-
-  {% else %}
-    {% set insetTextHtml %}
-      Trainee {{routeText | safe}}
-    {% endset %}
-  {% endif %}
-
-  {# Probably don't want to let Apply people change route #}
-  {{ govukInsetText({
-    html: insetTextHtml
-  }) }}
-{% endset %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
@@ -91,7 +58,7 @@
 
     {# Not needed for apply? #}
     {# Inset text about the provider and route #}
-    {# {{ providerAndRouteInsetText | safe }} #}
+    {# {% include "_includes/providerAndRouteInsetText.njk" %} #}
 
   </div>
 </div>
