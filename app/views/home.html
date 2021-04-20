@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
+
 {% set navActive = "home" %}
+{% set applyDraftCount = "7" %}
+{% set recordsToBeReviewedCount = "21" %}
 
 {% block content %}
 
@@ -22,16 +25,16 @@
         <div class="govuk-grid-column-two-thirds-from-desktop">
           <h2 class="govuk-heading-m">Requires your attention</h2>
           <div class="app-attention-link">
-            <span class="app-attention-link__count">7</span>
+            <span class="app-attention-link__count">{{applyDraftCount}}</span>
             <div class="app-attention-link__content">
-              <a href="/test" class="govuk-link app-attention-link__text govuk-!-font-size-24">Apply drafts are ready to review</a>
+              <a href="/records?filterStatus=Draft" class="govuk-link app-attention-link__text govuk-!-font-size-24">Apply drafts are ready to review</a>
               <span class="app-attention-link__hint-text govuk-hint govuk-!-font-size-16">These are candidates who have recenlty applied to a course</span>
             </div>
           </div>
           <div class="app-attention-link">
-            <span class="app-attention-link__count">21</span>
+            <span class="app-attention-link__count">{{recordsToBeReviewedCount}}</span>
             <div class="app-attention-link__content">
-              <a href="/test" class="govuk-link app-attention-link__text govuk-!-font-size-24">Records need to be reviewed before the cycle ends</a>
+              <a href="#" class="govuk-link app-attention-link__text govuk-!-font-size-24">Records need to be reviewed before the cycle ends</a>
               <span class="app-attention-link__hint-text govuk-hint govuk-!-font-size-16">The cycle ends on August 27 2021</span>
             </div>
           </div>
