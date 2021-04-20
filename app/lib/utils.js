@@ -581,6 +581,8 @@ exports.filterRecords = (records, data, filters = {}) => {
 }
 
 /*
+Highlight invalid summary list rows
+
 This is filter patches in the ability to highlight rows on a summary list which
 contain invalid answers. 
 
@@ -742,7 +744,8 @@ exports.getReferrerDestination = referrer => {
   if (!referrer) return ''
   else if (Array.isArray(referrer)){
     let last = referrer.pop()
-    return `${last}?referrer=${referrer}`
+    if (referrer.length) return `${last}?referrer=${referrer}`
+    else return last
   }
   else return referrer
 }

@@ -1,20 +1,67 @@
 {% extends "_templates/_new-record.html" %}
 
 {% set pageHeading = "Review trainee record" %}
-
 {% set formAction = "./save" | addReferrer(referrer) %}
-
 {% set hideReturnLink = true %}
 {% set showIncomplete = true %}
 {% set backLink = referrer or './overview' %}
 {% set backText = 'Back to draft record' %}
 {% set gridColumn = 'govuk-grid-column-full' %}
 
+{# This template shares lots of similarities with `check-record-apply-grouped-sections` - changes here likely want to be mirrored there #}
 
 {% block formContent %}
 
-
+{# Add an extra referrer as this is a compound referral path #}
 {% set referrer = referrer | pushReferrer(recordPath + "/check-record") %}
+
+{# Warning if record not complete #}
+{% set recordIncompleteInsetTextWarning %}
+  {# Show a warning if the record isn’t ready to be submitted #}
+  {% if not recordIsComplete %}
+    {% set insetTextHtml %}
+      <p class="govuk-body">This record is not complete and cannot be submitted for TRN. If you do not have all the required information now, you can <a href="./save-as-draft" class="govuk-link">save as a draft record</a>.</p>
+    {% endset %}
+      {{ govukInsetText({
+        html: insetTextHtml
+      }) }}
+  {% endif %}
+{% endset %}
+
+{# Inset text about the provider and route #}
+{% set providerAndRouteInsetText %}
+  {# Text shown if user belongs to multiple providers #}
+  {% set providerText %}
+    {# Include a link if using blended model #}
+    {% if data.signedInProviders | length > 1 %}
+      Training with <a href="{{'./pick-provider' | addReferrer(referrer) }}" class="govuk-link">{{record.provider}}</a>
+    {# Don’t link if using hat model - they need to back out and pick a different provider to work as #}
+    {% else %}
+      Training with {{record.provider}}
+    {% endif %}
+  {% endset %}
+
+  {% set routeText %}
+    on the <a href="{{ './select-route' | addReferrer(referrer) }}" class="govuk-link">{{ record.route | lower or "route not set" }}</a> route.
+  {% endset %}
+
+  {# Don’t show anything if user doesn't have multiple providers #}
+  {% if data.settings.userProviders | length > 1  %}
+    {% set insetTextHtml %}
+      {{providerText | safe}} {{routeText | safe}}
+    {% endset %}
+
+  {% else %}
+    {% set insetTextHtml %}
+      Trainee {{routeText | safe}}
+    {% endset %}
+  {% endif %}
+
+  {# Probably don't want to let Apply people change route #}
+  {{ govukInsetText({
+    html: insetTextHtml
+  }) }}
+{% endset %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
@@ -40,57 +87,16 @@
     <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{pageHeading}}</h1>
 
     {# Show a warning if the record isn’t ready to be submitted #}
-    {% if not recordIsComplete %}
-      {% set insetTextHtml %}
-        <p class="govuk-body">This record is not complete and cannot be submitted for TRN. If you do not have all the required information now, you can <a href="./save-as-draft" class="govuk-link">save as a draft record</a>.</p>
-      {% endset %}
-        {{ govukInsetText({
-          html: insetTextHtml
-        }) }}
-    {% endif %}
+    {{ recordIncompleteInsetTextWarning | safe }}
 
-    {# Text shown if user belongs to multiple providers #}
-    {% set providerText %}
-      {# Include a link if using blended model #}
-      {% if data.signedInProviders | length > 1 %}
-        Training with <a href="{{'./pick-provider' | addReferrer(referrer) }}" class="govuk-link">{{record.provider}}</a>
-      {# Don’t link if using hat model - they need to back out and pick a different provider to work as #}
-      {% else %}
-        Training with {{record.provider}}
-      {% endif %}
-    {% endset %}
-
-    {% set routeText %}
-      on the <a href="{{ './select-route' | addReferrer(referrer) }}" class="govuk-link">{{ record.route | lower or "route not set" }}</a> route.
-    {% endset %}
-
-    {# Don’t show anything if user doesn't have multiple providers #}
-    {% if data.settings.userProviders | length > 1  %}
-      {% set insetTextHtml %}
-        {{providerText | safe}} {{routeText | safe}}
-      {% endset %}
-
-    {% else %}
-      {% set insetTextHtml %}
-        Trainee {{routeText | safe}}
-      {% endset %}
-    {% endif %}
-
-    {{ govukInsetText({
-      html: insetTextHtml
-    }) }}
+    {# Inset text about the provider and route #}
+    {{ providerAndRouteInsetText | safe }}
 
   </div>
 </div>
 
 
 <h2 class="govuk-heading-m">Personal details and education</h2>
-
-{# If we have a 'complete' on apply status we can ignore individual statuses
-on the sections themselves #}
-{% if record.applyData.status == "Completed" %}
-  {% set showIncomplete = false %}
-{% endif %}
 
 {% include "_includes/summary-cards/personal-details.html" %}
 
@@ -103,9 +109,6 @@ on the sections themselves #}
 {% include "_includes/summary-cards/degree/details.html" %}
 
 {% include "_includes/summary-cards/undergraduate-qualification.html" %}
-
-{# Restore incomplete status #}
-{% set showIncomplete = true %}
 
 <h2 class="govuk-heading-m">About their teacher training</h2>
 

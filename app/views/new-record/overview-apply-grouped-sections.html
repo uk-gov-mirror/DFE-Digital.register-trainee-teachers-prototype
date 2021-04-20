@@ -9,8 +9,7 @@
 
 {% block formContent %}
 
-{# {{getContext() | log}} #}
-
+{# Rendered from /new-record/overview #}
 {% set referrer = currentPageUrl %}
 
 {% set draftRecordName %}
@@ -25,13 +24,10 @@
 {% set insetTextHtml %}
   {% if record.courseDetails %}
     <p class="govuk-body">Trainee enrolled on {{ record.courseDetails | getCourseName }}</p>
-    {# <p class="govuk-body">{{ record.courseDetails.qualificationsSummary }}</p> #}
   {% else %}
     No data to show
   {% endif %}
-  
 {% endset %}
-{{record.courseDetails | log}}
 
 {{ govukInsetText({
   html: insetTextHtml

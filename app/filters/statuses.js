@@ -23,9 +23,9 @@ const _ = require('lodash')
 
 */
 
-filters.getStatusText = function(data = {}, defaultNotStarted, defaultInProgress) {
+filters.getStatusText = function(data, defaultNotStarted=false, defaultInProgress=false) {
   if (!data) return defaultNotStarted || "Not started"
-  if (data.status) return data.status
+  if (data?.status) return data.status
   else return defaultInProgress || "In progress"
 }
 
