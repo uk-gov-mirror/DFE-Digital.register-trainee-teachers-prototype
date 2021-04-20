@@ -68,7 +68,7 @@ of the page. #}
     which fields have invalid answers and link to them #}
     {% if hasInvalidAnswers %}
       {% set invalidAnswerType = "application" %}
-      {% include "_includes/invalidAnswerMessage.njk" %}
+      {% include "_includes/invalidAnswersBanner.njk" %}
     {% endif %}
 
     {# Text shown if user belongs to multiple providers #}
