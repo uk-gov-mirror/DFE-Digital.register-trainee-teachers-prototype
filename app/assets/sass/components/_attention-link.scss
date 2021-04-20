@@ -1,9 +1,8 @@
-// Links in the requires attention section
+// Items in the requires attention section
 
 .app-attention-link {
   display: flex;
   position: relative;
-  text-decoration: none;
 }
 
 .app-attention-link + .app-attention-link {
@@ -21,12 +20,10 @@
 .app-attention-link__text {
   display: inline-block;
   margin-bottom: govuk-spacing(1);
-  text-decoration: underline;
   font-weight: bold;
 }
 
 .app-attention-link__hint-text {
-  text-decoration: none;
   margin-bottom: 0;
 }
 
@@ -43,5 +40,4 @@
   color: govuk-colour('white');
   font-weight: bold;
   text-align: center;
-  text-decoration: none;
 }
