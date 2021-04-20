@@ -52,6 +52,15 @@
         items: [
           {
             value: 'true',
+            text: "Highlight invalid answers"
+          }
+        ]
+      } | decorateAttributes(data, "data.settings.highlightInvalidAnswers")) }}
+
+      {{ govukCheckboxes({
+        items: [
+          {
+            value: 'true',
             text: "Show links to guidance"
           }
         ]

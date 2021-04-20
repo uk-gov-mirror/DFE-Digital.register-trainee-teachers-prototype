@@ -1,5 +1,5 @@
 
-{% if data.temp.invalidString %}
+{% if data.temp.invalidString and data.settings.highlightInvalidAnswers | falsify %}
   {% set userValue = data.temp.invalidString | replace("**invalid**", "") %}
   {% set insetContent %}
 

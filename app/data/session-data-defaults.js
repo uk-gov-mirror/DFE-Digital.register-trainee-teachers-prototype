@@ -69,6 +69,9 @@ settings.enableApplyIntegration = 'true'
 // Enable apply integration
 settings.groupApplySections = 'true'
 
+// Enable apply integration
+settings.highlightInvalidAnswers = 'false'
+
 // Enable timeline on records
 settings.includeGuidance = false
 

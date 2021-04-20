@@ -16,7 +16,7 @@
 {# Add an extra referrer as this is a compound referral path #}
 {% set referrer = referrer | pushReferrer(recordPath + "/apply-trainee-application") %}
 
-{% set hasInvalidAnswers = record | hasInvalidAnswers %}
+{% set hasInvalidAnswers = record | hasInvalidAnswers and data.settings.highlightInvalidAnswers | falsify %}
 
 {# Summary cards need to be set *first* because in rendering the card we count
 the number of invalid answers, and then use this in a banner at the top

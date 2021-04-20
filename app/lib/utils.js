@@ -235,8 +235,7 @@ exports.recordIsComplete = record => {
   let recordIsComplete = requiredSections.every(section => {
 
     let sectionStatus = record[section]?.status == "Completed"
-    console.log({sectionStatus})
-    // console.log(section)
+    
     // Default
     if (exports.sourceIsManual(record)){
       return sectionStatus
@@ -611,6 +610,7 @@ exports.highlightInvalidRows = function(rows) {
   // We need to add to any existing answers from previous times
   // this filter has run on this page
   let invalidAnswers = ctx.data?.record?.invalidAnswers || []
+  let featureEnabled = ctx.data?.settings?.highlightInvalidAnswers == "true"
 
   if (rows) {
     rows.map(row => {
@@ -622,55 +622,63 @@ exports.highlightInvalidRows = function(rows) {
       // Probably might not work for dates / values that get transformed before display
       if (value && value.includes('**invalid**') ){
 
-        // Keys are stored two possible places
-        let key = row?.key?.html || row?.key?.text
-
-        // Generate an id so we can anchor to this row
-        let id = `summary-list--row-invalid-${invalidAnswers.length + 1}`
-
-        // GOVUK summary lists don’t support setting an id on rows
-        // so we wrap the key in a div with our own id
-        row.key.html = `<div id="${id}">${key}</div>`
-
-        // Store the row name so it can be used in a summary at 
-        // the top of the page
-        invalidAnswers.push({name: key, id})
-        
-        // Error message that gets shown
-        let messageContent = `${key} is not recognised`
-        let messageHtml = `<p class="govuk-body app-summary-list__message--invalid govuk-!-margin-bottom-2">${messageContent}</p>`
-
-        // Grab the existing action link and craft a new link
-        let linkHtml = '' // default to no link
-        let actionItems = row?.actions?.items
-
-        // If there’s more than one link (unlikely), do nothing
-        if (actionItems && actionItems.length == 1){
-          let href = row?.actions?.items[0].href
-          linkHtml = `<br><a class="govuk-link govuk-link--no-visited-state" href="${href}">
-          Review the trainee’s answer<span class="govuk-visually-hidden"> for ${key.toLowerCase()}</span>
-          </a>`
-          delete row.actions.items
-        }
-      
-        // Add a class to the row so we can target it
-        row.classes = `${row.classes} app-summary-list__row--invalid`
-
         // Strip **invalid** so it doesn’t display
         let userValue = value.replace("**invalid**", "")
 
-        // Wrap in a div for styling
-        let userValueHtml = `<div class="app-summary-list__user-value">${userValue}</div>`
+        if (featureEnabled){
 
-        // Entire thing is wrapped in a div so we can style a left border within the padding of the
-        // summary list value box
-        row.value.html = `<div class="app-summary-list__value-inset">${messageHtml}${userValueHtml}${linkHtml}</div>`
+          // Keys are stored two possible places
+          let key = row?.key?.html || row?.key?.text
+
+          // Generate an id so we can anchor to this row
+          let id = `summary-list--row-invalid-${invalidAnswers.length + 1}`
+
+          // GOVUK summary lists don’t support setting an id on rows
+          // so we wrap the key in a div with our own id
+          row.key.html = `<div id="${id}">${key}</div>`
+
+          // Store the row name so it can be used in a summary at 
+          // the top of the page
+          invalidAnswers.push({name: key, id})
+          
+          // Error message that gets shown
+          let messageContent = `${key} is not recognised`
+          let messageHtml = `<p class="govuk-body app-summary-list__message--invalid govuk-!-margin-bottom-2">${messageContent}</p>`
+
+          // Grab the existing action link and craft a new link
+          let linkHtml = '' // default to no link
+          let actionItems = row?.actions?.items
+
+          // If there’s more than one link (unlikely), do nothing
+          if (actionItems && actionItems.length == 1){
+            let href = row?.actions?.items[0].href
+            linkHtml = `<br><a class="govuk-link govuk-link--no-visited-state" href="${href}">
+            Review the trainee’s answer<span class="govuk-visually-hidden"> for ${key.toLowerCase()}</span>
+            </a>`
+            delete row.actions.items
+          }
+        
+          // Add a class to the row so we can target it
+          row.classes = `${row.classes} app-summary-list__row--invalid`
+
+          // Wrap in a div for styling
+          let userValueHtml = `<div class="app-summary-list__user-value">${userValue}</div>`
+
+          // Entire thing is wrapped in a div so we can style a left border within the padding of the
+          // summary list value box
+          row.value.html = `<div class="app-summary-list__value-inset">${messageHtml}${userValueHtml}${linkHtml}</div>`
+
+          // Key will get saved to key.html, so we don’t need  key.text any more
+          delete row.key?.text
+
+        }
+
+        else row.value.html = userValue
 
         // Source value might have been stored in text - delete just in case
         delete row.value?.text
 
-        // Key will get saved to key.html, so we don’t need  key.text any more
-        delete row.key?.text
+
 
       }
       return row
@@ -741,6 +749,9 @@ exports.getReferrer = referrer => {
 // and put the remaining as the next referrer.
 // This lets us support multiple return destinations
 exports.getReferrerDestination = referrer => {
+  if (typeof referrer == 'string'){
+    referrer = referrer.split(",")
+  }
   if (!referrer) return ''
   else if (Array.isArray(referrer)){
     let last = referrer.pop()
