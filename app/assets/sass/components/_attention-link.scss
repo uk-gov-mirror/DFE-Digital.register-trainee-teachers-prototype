@@ -1,0 +1,47 @@
+// Links in the requires attention section
+
+.app-attention-link {
+  display: flex;
+  position: relative;
+  text-decoration: none;
+}
+
+.app-attention-link + .app-attention-link {
+  margin-top: govuk-spacing(3);
+}
+
+.app-attention-link:last-child {
+  margin-bottom: govuk-spacing(3);
+}
+
+.app-attention-link__content {
+  flex: 1;
+}
+
+.app-attention-link__text {
+  display: inline-block;
+  margin-bottom: govuk-spacing(1);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.app-attention-link__hint-text {
+  text-decoration: none;
+  margin-bottom: 0;
+}
+
+.app-attention-link__count {
+  @include govuk-font($size: 24);
+  display: flex;
+  width: 40px;
+  height: 40px;
+  margin-right: govuk-spacing(3);
+  align-items: center; 
+  justify-content: center;
+  border-radius: 50%;
+  background-color: govuk-colour('blue');
+  color: govuk-colour('white');
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+}
