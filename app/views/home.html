@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 
 {% set navActive = "home" %}
-{% set applyDraftCount = "7" %}
-{% set recordsToBeReviewedCount = "21" %}
+{% set applyDraftCount = 8 %}
+{% set recordsToBeReviewedCount = 11 %}
+{% set combinedAlertCount = applyDraftCount + recordsToBeReviewedCount %}
 
 {% block content %}
 
@@ -45,24 +46,28 @@
 
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-    {% if data.settings.showRequiresAttentionSection %}
+    {% if data.settings.showRequiresAttentionSection and combinedAlertCount > 0 %}
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds-from-desktop">
           <h2 class="govuk-heading-m">Requires your attention</h2>
-          <div class="app-attention-link">
-            <span class="app-attention-link__count">{{applyDraftCount}}</span>
-            <div class="app-attention-link__content">
-              <a href="/records?filterStatus=Draft" class="govuk-link app-attention-link__text govuk-!-font-size-24">Apply drafts are ready to review</a>
-              <span class="app-attention-link__hint-text govuk-hint govuk-!-font-size-16">These are candidates who have recenlty applied to a course</span>
+          {% if applyDraftCount > 0 %}
+            <div class="app-action-required-item">
+              <span class="app-action-required-item__count">{{applyDraftCount}}</span>
+              <div class="app-action-required-item__content">
+                <a href="/records?filterStatus=Draft" class="govuk-link app-action-required-item__text">new Apply drafts are ready to review</a>
+                <span class="app-action-required-item__hint-text govuk-hint govuk-!-font-size-16">These are candidates who have recenlty applied to a course</span>
+              </div>
             </div>
-          </div>
-          <div class="app-attention-link">
-            <span class="app-attention-link__count">{{recordsToBeReviewedCount}}</span>
-            <div class="app-attention-link__content">
-              <a href="#" class="govuk-link app-attention-link__text govuk-!-font-size-24">Records need to be reviewed before the cycle ends</a>
-              <span class="app-attention-link__hint-text govuk-hint govuk-!-font-size-16">The cycle ends on August 27 2021</span>
+          {% endif %}
+          {% if recordsToBeReviewedCount > 0 %}
+            <div class="app-action-required-item">
+              <span class="app-action-required-item__count">{{recordsToBeReviewedCount}}</span>
+              <div class="app-action-required-item__content">
+                <a href="#" class="govuk-link app-action-required-item__text">records need to be reviewed before the cycle ends</a>
+                <span class="app-action-required-item__hint-text govuk-hint govuk-!-font-size-16">The cycle ends on August 27 2021</span>
+              </div>
             </div>
-          </div>
+          {% endif %}
         </div>
       </div>
       
