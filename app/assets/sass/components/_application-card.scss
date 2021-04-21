@@ -5,7 +5,7 @@
   
   @include govuk-media-query($from: 401px) {
     display: flex;
-    align-items: stretch;
+    // Ensure columns evenly distributed, with no gap at the start or end
     justify-content: space-between;
   }
 }
@@ -54,6 +54,7 @@
 
   @include govuk-media-query($from: 501px, $until: desktop) {
     display: flex;
+    // Ensure columns evenly distributed, with no gap at the start or end
     justify-content: space-between;
 
     div:nth-child(1) {
@@ -69,6 +70,7 @@
   
   @include govuk-media-query($from: $govuk-page-width) {
     display: flex;
+    // Ensure columns evenly distributed, with no gap at the start or end
     justify-content: space-between;
 
     div:nth-child(1) {
@@ -106,6 +108,7 @@
 }
 
 .app-application-card .govuk-tag {
+  // Stops elements in flex containers to try and fill available space
   align-self: flex-end;
 }
 
