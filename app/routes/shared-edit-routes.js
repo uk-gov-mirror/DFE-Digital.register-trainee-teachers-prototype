@@ -161,12 +161,17 @@ module.exports = router => {
       res.redirect("/records")
     }
     else {
+      // If it’s an Apply draft we let users pick from all providers
+      if (utils.sourceIsApply(record)) route = false
+
+      // Look up courses offered by this provider
       let providerCourses = utils.getProviderCourses(data.courses, record.provider, route, data)
 
       // Some courses for selected route
       if (providerCourses.length) {
         res.redirect(`${recordPath}/course-details/pick-course${referrer}`)
       }
+
       // If no courses, go straight to course details
       else {
         res.redirect(`${recordPath}/course-details/details${referrer}`)
@@ -183,6 +188,7 @@ module.exports = router => {
     let referrer = utils.getReferrer(req.query.referrer)
     let enabledRoutes = data.settings.enabledTrainingRoutes
     let route = record?.route
+    if (utils.sourceIsApply(record)) route = false
     let providerCourses = utils.getProviderCourses(data.courses, record.provider, route, data)
     let selectedCourse = _.get(data, 'record.selectedCourseTemp')
 
@@ -250,6 +256,13 @@ module.exports = router => {
     // Copy route up to higher level
     delete record.selectedCourseTemp
     delete record.selectedCourseAutocompleteTemp
+
+    // For apply records we let them pick a Publish course which 
+    // might have a different route
+    if (record.route != record.courseDetails.route){
+      console.log(`The selected Publish course’s route does not match the draft’s route. Draft route changed to ${record.courseDetails.route}`)
+      record.route = record.courseDetails.route
+    }
 
     let isAllocated = utils.hasAllocatedPlaces(record)
 

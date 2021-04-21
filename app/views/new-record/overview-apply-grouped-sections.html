@@ -65,13 +65,18 @@
 
 <h2 class="govuk-heading-m">About their teacher training</h2>
 
+{# Conditional hint text #}
+{# Todo: remove this when making schools a separate section #}
+{% set includesSchools = record | requiresField(["leadSchool", "employingSchool"]) %}
+
 {{ appTaskList({
   classes: "govuk-!-margin-bottom-8",
   items: [
     {
       text: record | getSectionName("trainingDetails"),
+      text: "Training details",
       href: "training-details" | reviewIfInProgress(record.trainingDetails) | addReferrer(referrer),
-      hint: 'Start date, trainee ID, schools',
+      hint: 'Start date, trainee ID, schools' if includesSchools else "Start date and trainee ID",
       id: "training-details",
       tag: {
         classes: record.trainingDetails | getStatusText | getStatusClass,
