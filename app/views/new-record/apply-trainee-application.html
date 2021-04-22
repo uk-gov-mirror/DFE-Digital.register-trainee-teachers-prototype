@@ -10,7 +10,6 @@
 {% set backText = 'Back to draft record' %}
 {% set gridColumn = 'govuk-grid-column-full' %}
 
-
 {% block formContent %}
 
 {# Add an extra referrer as this is a compound referral path #}
@@ -62,8 +61,6 @@ of the page. #}
     <span class="govuk-caption-l">{{'Draft record' + draftRecordName}}</span>
     <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{pageHeading}}</h1>
 
-
-
     {# This must come after the summary cards are rendered so that it can show
     which fields have invalid answers and link to them #}
     {% if hasInvalidAnswers %}
@@ -77,9 +74,7 @@ of the page. #}
   </div>
 </div>
 
-
 {{ allSummaryCards | safe }}
-
 
 {% if hasInvalidAnswers %}
 
@@ -100,9 +95,8 @@ of the page. #}
       }
     ]
   }) }}
-    
-{% endif %}
 
+{% endif %}
 
 {{ govukButton({
   text: "Continue"

@@ -1,11 +1,7 @@
-
 $invalid-colour: $govuk-brand-colour;
-// $invalid-colour: govuk-colour("pink");
-// $invalid-colour: $govuk-error-colour;
 
 .app-inset-text--invalid-answer {
   border-color: $invalid-colour;  
-  // background-color: govuk-tint($invalid-colour, 95);
 }
 
 .app-inset-text--narrow {
@@ -19,9 +15,6 @@ $invalid-colour: $govuk-brand-colour;
 }
 
 .app-invalid-answer__list a:link {
-  // color: govuk-colour("pink");
-  // color: $govuk-error-colour;
-  // color: $invalid-colour;
   font-weight: 700;
 }
 
