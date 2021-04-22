@@ -193,7 +193,7 @@ const generateFakeApplicationsForProvider = (provider, year, count) => {
   // Current year should be mostly trn recieved
   if (year == currentYear){
     targetCounts = {
-      draft: 0.05,
+      draft: 0.01,
       applyEnrolled: 0.05,
       pendingTrn: 0.05,
       trnReceived: 0.71,
