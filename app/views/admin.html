@@ -83,6 +83,15 @@
           }
         ]
       } | decorateAttributes(data, "data.settings.requireTraineeStartDate")) }}
+      
+      {{ govukCheckboxes({
+        items: [
+          {
+            value: 'true',
+            text: "Show requires attention section"
+          }
+        ]
+      } | decorateAttributes(data, "data.settings.showRequiresAttentionSection")) }}
 
       {{ govukInput({
         label: {
